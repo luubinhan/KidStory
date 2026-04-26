@@ -15,7 +15,7 @@ export default function DiscoverPage() {
   return (
     <div>
       <header className="sticky top-0 z-20 px-4 py-3 mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 bg-white border-b border-slate-200/60">
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 min-w-0">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -31,6 +31,12 @@ export default function DiscoverPage() {
               Learn English with fun stories and interactive pictures!
             </p>
           </div>
+          <Link
+            to="/games"
+            className="shrink-0 inline-flex items-center rounded-xl border-2 border-slate-100 bg-[#f4f4f4] px-3 py-2 text-sm font-semibold text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+          >
+            Games
+          </Link>
         </div>
         <div className="relative w-full sm:flex-1 sm:min-w-0 sm:max-w-md lg:max-w-xl">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
