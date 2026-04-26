@@ -252,12 +252,6 @@ export default function GameTopicPage() {
               ) : (
                 <p className="text-sm font-medium text-slate-600">You finished this topic!</p>
               )}
-              <Link
-                to="/games"
-                className="text-sm font-semibold text-yellow-800 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 rounded"
-              >
-                Choose another topic
-              </Link>
             </div>
           ) : null}
         </div>

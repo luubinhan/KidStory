@@ -15,7 +15,7 @@ export const preposition = {
       },
       {
         id: "preposition-2",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/inside.jpeg",
         textBefore: "Put your toys ",
         textAfter: " the box before dinner.",
         options: ["over", "inside", "across", "during"],
