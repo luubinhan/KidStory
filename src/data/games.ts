@@ -1,70 +1,12 @@
 import type { GameTopic } from "../types/game";
 
 const img = (seed: string) => `https://picsum.photos/seed/${encodeURIComponent(seed)}/480/360`;
+import { directions } from "./games/directions";
+import { preposition } from "./games/preposition";
 
 export const gameTopics: readonly GameTopic[] = [
-  {
-    id: "direction",
-    title: "Direction",
-    description: "Learn words like left, right, up, and down.",
-    questions: [
-      {
-        id: "direction-1",
-        image: img("kidstory-direction-1"),
-        textBefore: "Turn ",
-        textAfter: " at the corner to find the park.",
-        options: ["left", "slow", "happy", "soft"],
-        correctIndex: 0,
-      },
-      {
-        id: "direction-2",
-        image: img("kidstory-direction-2"),
-        textBefore: "The bird flew ",
-        textAfter: " into the sky.",
-        options: ["down", "up", "under", "inside"],
-        correctIndex: 1,
-      },
-      {
-        id: "direction-3",
-        image: img("kidstory-direction-3"),
-        textBefore: "Walk ",
-        textAfter: " along this path to the school gate.",
-        options: ["backward", "straight", "loud", "sweet"],
-        correctIndex: 1,
-      },
-    ],
-  },
-  {
-    id: "preposition",
-    title: "Preposition",
-    description: "Where things are: in, on, under, and more.",
-    questions: [
-      {
-        id: "preposition-1",
-        image: img("kidstory-prep-1"),
-        textBefore: "The cat is sleeping ",
-        textAfter: " the warm bed.",
-        options: ["on", "at", "by", "from"],
-        correctIndex: 0,
-      },
-      {
-        id: "preposition-2",
-        image: img("kidstory-prep-2"),
-        textBefore: "Put your toys ",
-        textAfter: " the box before dinner.",
-        options: ["over", "inside", "across", "during"],
-        correctIndex: 1,
-      },
-      {
-        id: "preposition-3",
-        image: img("kidstory-prep-3"),
-        textBefore: "We waited ",
-        textAfter: " the bus stop.",
-        options: ["in", "on", "at", "into"],
-        correctIndex: 2,
-      },
-    ],
-  },
+  directions,
+  preposition,
   {
     id: "job",
     title: "Job",

@@ -28,6 +28,16 @@ function ttsSentence(q: GameQuestion): string {
   return `${q.textBefore.trimEnd()} … ${q.textAfter.trimStart()}`;
 }
 
+/** Per-option candy colors (cycles if there are more than six choices). */
+const OPTION_PALETTE = [
+  "border-sky-400 bg-sky-100 text-sky-950 hover:border-sky-500 hover:bg-sky-50",
+  "border-violet-400 bg-violet-100 text-violet-950 hover:border-violet-500 hover:bg-violet-50",
+  "border-amber-400 bg-amber-100 text-amber-950 hover:border-amber-500 hover:bg-amber-50",
+  "border-fuchsia-400 bg-fuchsia-100 text-fuchsia-950 hover:border-fuchsia-500 hover:bg-fuchsia-50",
+  "border-lime-500 bg-lime-100 text-lime-950 hover:border-lime-600 hover:bg-lime-50",
+  "border-orange-400 bg-orange-100 text-orange-950 hover:border-orange-500 hover:bg-orange-50",
+] as const;
+
 export default function GameTopicPage() {
   const { topicId } = useParams<{ topicId: string }>();
   const topic = topicId ? getGameTopic(topicId) : undefined;
@@ -95,6 +105,18 @@ export default function GameTopicPage() {
     }
   }, [q, stopAudio]);
 
+  const playOptionWord = useCallback(
+    (word: string) => {
+      stopAudio();
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        const u = new SpeechSynthesisUtterance(word);
+        u.rate = 0.92;
+        window.speechSynthesis.speak(u);
+      }
+    },
+    [stopAudio],
+  );
+
   const onPick = (displayIndex: number) => {
     if (!q || pickedDisplayIndex !== null) return;
     setPickedDisplayIndex(displayIndex);
@@ -136,18 +158,15 @@ export default function GameTopicPage() {
           /
         </span>
         <span className="text-sm font-semibold text-slate-900">{topic.title}</span>
+        <span className="text-slate-300" aria-hidden>
+          /
+        </span>
+        <span className="text-sm font-semibold text-slate-900">Question {questionIndex + 1} of {questions.length}</span>
       </div>
-
-      <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-1">
-        {topic.title}
-      </h1>
-      <p className="text-sm text-slate-500 mb-6">
-        Question {questionIndex + 1} of {questions.length}
-      </p>
 
       {q ? (
         <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-100 mb-5">
+          <div className="aspect-[7/4] w-full overflow-hidden rounded-xl bg-slate-100 mb-5">
             <img
               src={q.image}
               alt=""
@@ -182,24 +201,40 @@ export default function GameTopicPage() {
               const picked = pickedDisplayIndex !== null;
               const isThis = pickedDisplayIndex === displayIdx;
               const correct = originalIdx === q.correctIndex;
-              let ring = "border-slate-200 bg-[#f4f4f4] hover:border-yellow-400";
+              const candy =
+                OPTION_PALETTE[displayIdx % OPTION_PALETTE.length]!;
+              let ring: string = candy;
               if (picked && isThis) {
                 ring = correct
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-rose-400 bg-rose-50";
+                  ? "border-emerald-500 bg-emerald-100 text-emerald-900"
+                  : "border-rose-500 bg-rose-100 text-rose-900";
               } else if (picked && correct) {
-                ring = "border-emerald-500 bg-emerald-50";
+                ring = "border-emerald-500 bg-emerald-100 text-emerald-900";
+              } else if (picked) {
+                ring = `${candy} opacity-55 saturate-75`;
               }
               return (
-                <button
+                <div
                   key={`${q.id}-${displayIdx}`}
-                  type="button"
-                  disabled={picked}
-                  onClick={() => onPick(displayIdx)}
-                  className={`rounded-xl border-2 px-4 py-3 text-left text-base font-semibold text-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
+                  className="flex min-w-0 gap-2 items-stretch"
                 >
-                  {label}
-                </button>
+                  <button
+                    type="button"
+                    disabled={picked}
+                    onClick={() => onPick(displayIdx)}
+                    className={`min-w-0 flex-1 rounded-xl cursor-pointer border-2 px-4 py-3 text-left text-base font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
+                  >
+                    {label}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => playOptionWord(label)}
+                    className="shrink-0 inline-flex w-[3.25rem] items-center justify-center self-stretch rounded-xl border-2 border-slate-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+                    aria-label={`Play “${label}”`}
+                  >
+                    <Volume2 className="h-5 w-5" aria-hidden />
+                  </button>
+                </div>
               );
             })}
           </div>
@@ -210,7 +245,7 @@ export default function GameTopicPage() {
                 <button
                   type="button"
                   onClick={goNext}
-                  className="inline-flex items-center rounded-xl border-2 border-slate-900 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+                  className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-900 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
                 >
                   Next question
                 </button>
