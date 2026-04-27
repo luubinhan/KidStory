@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type GameTopicBreadcrumbProps = {
   topicTitle: string;
@@ -26,7 +26,7 @@ export function GameTopicBreadcrumb({
       </span>
       <span className="text-sm font-semibold text-slate-900">{topicTitle}</span>
       <span className="text-slate-300" aria-hidden>
-        /
+        <ChevronRight className="h-4 w-4" aria-hidden />
       </span>
       <span className="text-sm font-semibold text-slate-900">
         Question {questionIndex + 1} of {questionCount}

@@ -36,6 +36,11 @@ export default function GameTopicPage() {
       ? q.options[optionOrder[pickedDisplayIndex]!]!
       : null;
 
+  const answerCorrect =
+    pickedDisplayIndex !== null && q
+      ? optionOrder[pickedDisplayIndex]! === q.correctIndex
+      : null;
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
       <GameTopicBreadcrumb
@@ -48,7 +53,12 @@ export default function GameTopicPage() {
         <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
           <GameQuestionImage src={q.image} />
 
-          <GameQuestionStem q={q} blankLabel={blankLabel} onPlaySentence={playAudio} />
+          <GameQuestionStem
+            q={q}
+            blankLabel={blankLabel}
+            answerCorrect={answerCorrect}
+            onPlaySentence={playAudio}
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {optionOrder.map((originalIdx, displayIdx) => (
