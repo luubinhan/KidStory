@@ -7,7 +7,7 @@ export const directions = {
     questions: [
       {
         id: "direction-1",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/left.jpeg",
         textBefore: "Turn ",
         textAfter: " at the corner to find the park.",
         options: ["left", "slow", "happy", "soft"],
@@ -15,7 +15,7 @@ export const directions = {
       },
       {
         id: "direction-2",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/up.jpeg",
         textBefore: "The bird flew ",
         textAfter: " into the sky.",
         options: ["down", "up", "under", "inside"],
@@ -23,7 +23,7 @@ export const directions = {
       },
       {
         id: "direction-3",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/straight.jpeg",
         textBefore: "Walk ",
         textAfter: " along this path to the school gate.",
         options: ["backward", "straight", "loud", "sweet"],
