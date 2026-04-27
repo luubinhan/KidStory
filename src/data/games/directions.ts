@@ -29,5 +29,13 @@ export const directions = {
         options: ["backward", "straight", "loud", "sweet"],
         correctIndex: 1,
       },
+      {
+        id: "direction-4",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/right.jpeg",
+        textBefore: "Turn ",
+        textAfter: " at the corner",
+        options: ["backward", "right", "loud", "sweet"],
+        correctIndex: 1,
+      },
     ],
   } satisfies GameTopic;

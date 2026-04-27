@@ -42,7 +42,7 @@ export default function GameTopicPage() {
       : null;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
+    <div className="max-w-3xl mx-auto px-4 py-2">
       <GameTopicBreadcrumb
         topicTitle={topic.title}
         questionIndex={questionIndex}
