@@ -28,11 +28,11 @@ The UI renders: `textBefore` + [blank] + `textAfter`; the learner picks one of `
 2. **Next `id`** — pattern `{topicId}-{n}` where `topicId` matches sibling questions (e.g. `preposition-4` after `preposition-3`). Increment `n` from the highest existing number.
 3. **Sentence** — **Short and simple**: common words, one clear idea, appropriate for young learners. The focus word must be the **only** grammatically correct choice in context.
 4. **Options** — Include the focus word once. Pick three distractors from the **same class** when possible (e.g. other prepositions for a preposition blank). Avoid duplicates; shuffle order and vary `correctIndex` across questions in the file.
-5. **`image`** — Must match the scene (under table → “under” image). Use the same base URL style as neighboring questions:
+5. **`image`** — Must match the scene (under table -> "under" image). Use an **existing** asset and the same base URL style as neighboring questions:
 
    `https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/<path-under-repo-root>`
 
-   Path is usually under `src/data/games/…` (e.g. `directions/on.jpeg`). If no asset exists, add the image under the appropriate `src/data/games/…` folder, commit it, and point the URL at that path—or tell the user to supply/add the image before merging.
+   Path is usually under `src/data/games/...` (e.g. `directions/on.jpeg`). If no matching asset exists, ask the user to provide/add one before merging.
 
 6. **Edit** — Append the new object to `questions` in the topic export; preserve `satisfies GameTopic` and existing formatting (trailing commas, two-space indent) to match the file.
 
@@ -46,7 +46,7 @@ If creating a new topic: add `src/data/games/<file>.ts` with `id`, `title`, `des
 - [ ] `textBefore` + focus + `textAfter` is one short, natural sentence
 - [ ] Four options, same rough difficulty / word class where it matters
 - [ ] `id` unique in file; `correctIndex` 0–3
-- [ ] Image URL path matches a real file (or file added in same change)
+- [ ] Image URL path matches a real existing file
 
 ## Example (focus word: `under`)
 
@@ -61,4 +61,4 @@ If creating a new topic: add `src/data/games/<file>.ts` with `id`, `title`, `des
 },
 ```
 
-(Replace `image` path with an existing asset or add `under.jpeg` beside other game images.)
+(Replace `image` path with an existing asset, such as `under.jpeg` beside other game images.)
