@@ -29,5 +29,13 @@ export const preposition = {
         options: ["in", "on", "at", "into"],
         correctIndex: 2,
       },
+      {
+        id: "preposition-4",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/under.jpeg",
+        textBefore: "The ball is on the floor ",
+        textAfter: " the chair.",
+        options: ["on", "in", "at", "under"],
+        correctIndex: 3,
+      },
     ],
   } satisfies GameTopic;
