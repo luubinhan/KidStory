@@ -23,7 +23,7 @@ export const preposition = {
       },
       {
         id: "preposition-3",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/directions/at.jpeg",
         textBefore: "We waited ",
         textAfter: " the bus stop.",
         options: ["in", "on", "at", "into"],
