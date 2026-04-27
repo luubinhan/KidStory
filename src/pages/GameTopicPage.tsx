@@ -188,7 +188,7 @@ export default function GameTopicPage() {
             <button
               type="button"
               onClick={() => void playAudio()}
-              className="shrink-0 inline-flex items-center justify-center rounded-xl border-2 border-slate-200 bg-[#f4f4f4] p-3 text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+              className="shrink-0 cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-slate-200 bg-[#f4f4f4] p-3 text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
               aria-label="Play sentence audio"
             >
               <Volume2 className="h-5 w-5" aria-hidden />
@@ -222,14 +222,14 @@ export default function GameTopicPage() {
                     type="button"
                     disabled={picked}
                     onClick={() => onPick(displayIdx)}
-                    className={`min-w-0 flex-1 rounded-xl cursor-pointer border-2 px-4 py-3 text-left text-base font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
+                    className={`min-w-0 cursor-pointer flex-1 rounded-xl cursor-pointer border-2 px-4 py-3 text-left text-base font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
                   >
                     {label}
                   </button>
                   <button
                     type="button"
                     onClick={() => playOptionWord(label)}
-                    className="shrink-0 inline-flex w-[3.25rem] items-center justify-center self-stretch rounded-xl border-2 border-slate-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+                    className="shrink-0 cursor-pointer inline-flex w-[3.25rem] items-center justify-center self-stretch rounded-xl border-2 border-slate-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
                     aria-label={`Play “${label}”`}
                   >
                     <Volume2 className="h-5 w-5" aria-hidden />
