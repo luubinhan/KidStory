@@ -8,9 +8,9 @@ export const pronouns = {
     {
       id: "pronouns-1",
       image:
-        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/jump.jpeg",
+        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/pronouns/we.jpeg",
       textBefore: "",
-      textAfter: " sing",
+      textAfter: " can sing",
       options: ["they", "you", "we", "he"],
       correctIndex: 2,
     },
