@@ -1,3 +1,5 @@
+import { CircleArrowRightIcon, TrophyIcon } from "lucide-react";
+
 type GameQuestionFooterProps = {
   isLast: boolean;
   onNext: () => void;
@@ -5,17 +7,17 @@ type GameQuestionFooterProps = {
 
 export function GameQuestionFooter({ isLast, onNext }: GameQuestionFooterProps) {
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-3">
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
       {!isLast ? (
         <button
           type="button"
           onClick={onNext}
-          className="block w-full cursor-pointer items-center rounded-xl border-2 border-slate-900 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+          className="cursor-pointer items-center rounded-full border-2 border-slate-900 bg-slate-900 text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
         >
-          Next question
+          <CircleArrowRightIcon className="h-12 w-12" aria-hidden />
         </button>
       ) : (
-        <p className="text-sm font-medium text-slate-600">You finished this topic!</p>
+        <p className="text-sm font-medium text-slate-600"><TrophyIcon className="h-12 w-12" aria-hidden /></p>
       )}
     </div>
   );

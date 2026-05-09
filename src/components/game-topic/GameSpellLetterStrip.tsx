@@ -57,7 +57,7 @@ function SortableLetterTile({
       type="button"
       ref={setNodeRef}
       style={style}
-      className={`flex min-h-[3rem] min-w-[2.75rem] cursor-grab touch-manipulation items-center justify-center rounded-xl border-2 px-3 py-2 text-xl font-bold shadow-sm active:cursor-grabbing ${borderClass} ${
+      className={`flex min-h-[3rem] min-w-[2.75rem] cursor-grab touch-manipulation items-center justify-center rounded-xl border-2 px-3 py-2 text-6xl font-bold shadow-sm active:cursor-grabbing ${borderClass} ${
         isDragging ? "z-10 opacity-90 shadow-lg" : ""
       } ${disabled ? "cursor-default opacity-60" : ""}`}
       {...attributes}
