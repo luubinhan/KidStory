@@ -102,7 +102,7 @@ export function GameSpellLetterStrip({
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
       <SortableContext items={itemIds} strategy={horizontalListSortingStrategy}>
-        <div className="flex flex-wrap gap-2 overflow-x-auto pb-1" role="list" aria-label="Letters to order">
+        <div className="flex flex-wrap gap-2 overflow-x-auto pb-1 justify-center" role="list" aria-label="Letters to order">
           {letterOrder.map((gramIdx, slot) => (
             <SortableLetterTile
               key={gramIdx}

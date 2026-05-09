@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { getGameTopic } from "../data/games";
+import { Confetti } from "../components/Confetti";
 import {
   GameOptionRow,
   GameQuestionFooter,
@@ -52,6 +53,7 @@ export default function GameTopicPage() {
 
     return (
       <div className="max-w-3xl mx-auto px-4 py-2">
+        {isSolved ? <Confetti /> : null}
         <GameTopicBreadcrumb
           topicTitle={topic.title}
           questionIndex={questionIndex}
@@ -78,7 +80,6 @@ export default function GameTopicPage() {
 
             {isSolved ? (
               <div className="mt-6 space-y-4">
-                <GameSpellCelebration />
                 <GameQuestionFooter isLast={isLast} onNext={goNext} />
               </div>
             ) : null}
