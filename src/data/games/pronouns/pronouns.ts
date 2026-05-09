@@ -1,4 +1,4 @@
-import type { GameTopic } from "../../types/game";
+import type { GameTopic } from "../../../types/game";
 
 export const pronouns = {
   id: "pronouns",
@@ -16,8 +16,6 @@ export const pronouns = {
     },
     {
       id: "pronouns-2",
-      image:
-        "",
       textBefore: "",
       textAfter: " can draw",
       options: ["we", "she", "they", "you"],

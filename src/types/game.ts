@@ -5,7 +5,7 @@
 export interface GameQuestion {
   id: string;
   /** Illustration URL (e.g. picsum seed or `/games/...` in public) */
-  image: string;
+  image?: string;
   textBefore: string;
   textAfter: string;
   options: readonly string[];

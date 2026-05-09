@@ -12,7 +12,7 @@ export function GameQuestionFooter({ isLast, onNext }: GameQuestionFooterProps) 
         <button
           type="button"
           onClick={onNext}
-          className="cursor-pointer items-center rounded-full border-2 border-slate-900 bg-slate-900 text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+          className="cursor-pointer items-center rounded-full border-2 border-blue-400 bg-blue-500 text-white hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
         >
           <CircleArrowRightIcon className="h-12 w-12" aria-hidden />
         </button>

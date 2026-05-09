@@ -61,14 +61,20 @@ export default function GameTopicPage() {
         />
 
         {q ? (
-          <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
-            <GameQuestionImage src={q.image} />
+          <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
+            {q.image ? <GameQuestionImage src={q.image} /> : null}
 
-            <div className="mb-5 flex flex-wrap items-start gap-2 gap-y-3">
-              <p className="text-lg md:text-xl text-slate-900 leading-relaxed flex-1 min-w-0">
-                Put the letters in the right order. Tap the speaker to hear the word.
-              </p>
-              <IconVolumeButton onClick={() => void playWord()} aria-label="Hear the word" />
+            <div className="flex flex-wrap items-start gap-2 gap-y-3 justify-center mb-12">
+              <div
+                className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95" 
+              > 
+                <IconVolumeButton
+                  className="h-full w-full cursor-pointer flex items-center justify-center"
+                  onClick={() => void playWord()} 
+                  aria-label="Hear the word"
+                />
+              </div>
+              
             </div>
 
             <GameSpellLetterStrip
@@ -118,7 +124,7 @@ export default function GameTopicPage() {
 
       {q ? (
         <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
-          <GameQuestionImage src={q.image} />
+          {q.image ? <GameQuestionImage src={q.image} /> : null}
 
           <GameQuestionStem
             q={q}

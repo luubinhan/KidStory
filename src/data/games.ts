@@ -7,7 +7,7 @@ import { BodyPart } from "./games/body-part/body-part";
 import { Clothes } from "./games/clothes/clothes";
 import { Food } from "./games/food/food";
 import { Actions } from "./games/actions/actions";
-import { pronouns } from "./games/pronouns";
+import { pronouns } from "./games/pronouns/pronouns";
 
 export const gameTopics: readonly GameTopic[] = [
   directions,
