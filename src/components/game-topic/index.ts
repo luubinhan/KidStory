@@ -4,4 +4,6 @@ export { GameQuestionImage } from "./GameQuestionImage";
 export { GameQuestionStem } from "./GameQuestionStem";
 export { GameOptionRow } from "./GameOptionRow";
 export { GameQuestionFooter } from "./GameQuestionFooter";
+export { GameSpellCelebration } from "./GameSpellCelebration";
+export { GameSpellLetterStrip } from "./GameSpellLetterStrip";
 export { IconVolumeButton } from "./IconVolumeButton";
