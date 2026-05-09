@@ -7,7 +7,7 @@ export const Actions = {
     questions: [
       {
         id: "actions-1",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/run.jpeg",
         textBefore: "I can ",
         textAfter: "",
         options: ["swim", "jump", "run", "fly"],
@@ -15,7 +15,7 @@ export const Actions = {
       },
       {
         id: "actions-2",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/swim.jpeg",
         textBefore: "Fish can ",
         textAfter: "",
         options: ["run", "fly", "jump", "swim"],
@@ -23,7 +23,7 @@ export const Actions = {
       },
       {
         id: "actions-3",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/fly.jpeg",
         textBefore: "A bird can ",
         textAfter: ".",
         options: ["fly", "run", "swim", "jump"],
@@ -31,7 +31,7 @@ export const Actions = {
       },
       {
         id: "actions-4",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/jump.jpeg",
         textBefore: "I can ",
         textAfter: "",
         options: ["run", "jump", "crawl", "sleep"],
@@ -39,7 +39,7 @@ export const Actions = {
       },
       {
         id: "actions-5",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/crawl.jpeg",
         textBefore: "A baby can ",
         textAfter: "",
         options: ["jump", "crawl", "run", "fly"],
@@ -47,7 +47,7 @@ export const Actions = {
       },
       {
         id: "actions-6",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/sleep.jpeg",
         textBefore: "At night we ",
         textAfter: "",
         options: ["run", "climb", "sleep", "swim"],
@@ -55,7 +55,7 @@ export const Actions = {
       },
       {
         id: "actions-7",
-        image: "",
+        image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/climb.jpeg",
         textBefore: "Monkeys can ",
         textAfter: "",
         options: ["run", "swim", "jump", "climb"],
