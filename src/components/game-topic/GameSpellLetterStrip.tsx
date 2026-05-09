@@ -57,7 +57,7 @@ function SortableLetterTile({
       type="button"
       ref={setNodeRef}
       style={style}
-      className={`flex min-h-[3rem] min-w-[2.75rem] cursor-grab touch-manipulation items-center justify-center rounded-xl border-2 px-3 py-2 text-6xl font-bold shadow-sm active:cursor-grabbing ${borderClass} ${
+      className={`flex min-h-[3rem] min-w-[2rem] cursor-grab touch-manipulation items-center justify-center shadow-sm px-1 py-2 text-8xl font-bold  active:cursor-grabbing ${borderClass} ${
         isDragging ? "z-10 opacity-90 shadow-lg" : ""
       } ${disabled ? "cursor-default opacity-60" : ""}`}
       {...attributes}
@@ -102,7 +102,7 @@ export function GameSpellLetterStrip({
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
       <SortableContext items={itemIds} strategy={horizontalListSortingStrategy}>
-        <div className="flex flex-wrap gap-2 overflow-x-auto pb-1 justify-center" role="list" aria-label="Letters to order">
+        <div className="rounded-xl flex  flex-wrap overflow-x-auto pb-1 justify-center" role="list" aria-label="Letters to order">
           {letterOrder.map((gramIdx, slot) => (
             <SortableLetterTile
               key={gramIdx}
