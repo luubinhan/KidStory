@@ -17,7 +17,7 @@ export const pronouns = {
     {
       id: "pronouns-2",
       image:
-        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/jump.jpeg",
+        "",
       textBefore: "",
       textAfter: " can draw",
       options: ["we", "she", "they", "you"],
@@ -26,7 +26,7 @@ export const pronouns = {
     {
       id: "pronouns-3",
       image:
-        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/run.jpeg",
+        "",
       textBefore: "",
       textAfter: " like ice cream",
       options: ["we", "he", "they", "she"],
@@ -35,7 +35,7 @@ export const pronouns = {
     {
       id: "pronouns-4",
       image:
-        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/run.jpeg",
+        "",
       textBefore: "",
       textAfter: " can swim",
       options: ["she", "he", "they", "you"],
@@ -44,7 +44,7 @@ export const pronouns = {
     {
       id: "pronouns-5",
       image:
-        "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/actions/jump.jpeg",
+        "",
       textBefore: "",
       textAfter: " can dance",
       options: ["he", "they", "she", "we"],
