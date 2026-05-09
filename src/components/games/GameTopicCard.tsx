@@ -24,16 +24,16 @@ export function GameTopicCard({ topic, index }: GameTopicCardProps) {
             {topic.questions.length} question{topic.questions.length === 1 ? "" : "s"}
           </p>
         )}
-        <div className="mt-auto flex flex-col gap-2">
+        <div className="mt-auto grid grid-cols-2 gap-2">
           <Link
             to={`/games/${topic.id}`}
-            className="rounded-xl border-2 border-slate-900 bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+            className="rounded-xl w-40 h-20 flex items-center justify-center border-2 border-slate-900 bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
           >
             Listen & pick
           </Link>
           <Link
             to={`/games/${topic.id}?mode=spell`}
-            className="rounded-xl border-2 border-yellow-500 bg-yellow-50 px-4 py-2.5 text-center text-sm font-semibold text-yellow-900 hover:bg-yellow-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+            className="rounded-xl w-40 h-20 flex items-center justify-center border-2 border-yellow-500 bg-yellow-50 px-4 py-2.5 text-center text-sm font-semibold text-yellow-900 hover:bg-yellow-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
           >
             Spell letters
           </Link>
