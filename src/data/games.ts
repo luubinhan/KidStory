@@ -6,6 +6,7 @@ import { Jobs } from "./games/job/job";
 import { BodyPart } from "./games/body-part/body-part";
 import { Clothes } from "./games/clothes/clothes";
 import { Food } from "./games/food/food";
+import { Actions } from "./games/actions/actions";
 
 export const gameTopics: readonly GameTopic[] = [
   directions,
@@ -14,6 +15,7 @@ export const gameTopics: readonly GameTopic[] = [
   BodyPart,
   Clothes,
   Food,
+  Actions,
 ];
 
 export function getGameTopic(id: string): GameTopic | undefined {

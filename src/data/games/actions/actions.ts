@@ -1,0 +1,65 @@
+import type { GameTopic } from "../../../types/game";
+
+export const Actions = {
+    id: "actions",
+    title: "Actions",
+    description: "What can you do?",
+    questions: [
+      {
+        id: "actions-1",
+        image: "",
+        textBefore: "I can ",
+        textAfter: "",
+        options: ["swim", "jump", "run", "fly"],
+        correctIndex: 2,
+      },
+      {
+        id: "actions-2",
+        image: "",
+        textBefore: "Fish can ",
+        textAfter: "",
+        options: ["run", "fly", "jump", "swim"],
+        correctIndex: 3,
+      },
+      {
+        id: "actions-3",
+        image: "",
+        textBefore: "A bird can ",
+        textAfter: ".",
+        options: ["fly", "run", "swim", "jump"],
+        correctIndex: 0,
+      },
+      {
+        id: "actions-4",
+        image: "",
+        textBefore: "I can ",
+        textAfter: "",
+        options: ["run", "jump", "crawl", "sleep"],
+        correctIndex: 1,
+      },
+      {
+        id: "actions-5",
+        image: "",
+        textBefore: "A baby can ",
+        textAfter: "",
+        options: ["jump", "crawl", "run", "fly"],
+        correctIndex: 1,
+      },
+      {
+        id: "actions-6",
+        image: "",
+        textBefore: "At night we ",
+        textAfter: "",
+        options: ["run", "climb", "sleep", "swim"],
+        correctIndex: 2,
+      },
+      {
+        id: "actions-7",
+        image: "",
+        textBefore: "Monkeys can ",
+        textAfter: "",
+        options: ["run", "swim", "jump", "climb"],
+        correctIndex: 3,
+      },
+    ],
+} satisfies GameTopic;
