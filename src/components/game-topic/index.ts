@@ -6,4 +6,5 @@ export { GameOptionRow } from "./GameOptionRow";
 export { GameQuestionFooter } from "./GameQuestionFooter";
 export { GameSpellCelebration } from "./GameSpellCelebration";
 export { GameSpellLetterStrip } from "./GameSpellLetterStrip";
+export { GameSentenceWordStrip } from "./GameSentenceWordStrip";
 export { IconVolumeButton } from "./IconVolumeButton";
