@@ -6,7 +6,7 @@ import {
   Minimize2,
 } from "lucide-react";
 import type { Book } from "../../types/book";
-import { SiteBrandHomeLink } from "../layout/SiteBrandHomeLink";
+import { SiteHeaderPrimaryNav } from "../layout/SiteHeaderPrimaryNav";
 
 type BookReaderHeaderProps = {
   book: Book;
@@ -32,9 +32,9 @@ export function BookReaderHeader({
   onShareFacebook,
 }: BookReaderHeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-100 bg-[#ffffff]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 border-b border-slate-200/60 bg-white">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-3 py-3 md:gap-4 md:px-4">
-        <SiteBrandHomeLink className="shrink-0" />
+        <SiteHeaderPrimaryNav animatedBrand={false} className="shrink-0" />
 
         <h1 className="min-w-0 flex-1 truncate text-center text-base font-bold text-slate-900 md:text-lg">
           {book.title}
