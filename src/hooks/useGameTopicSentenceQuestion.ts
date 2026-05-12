@@ -3,6 +3,9 @@ import { sentenceWordsFromQuestion } from "../lib/gameSentenceWords";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import type { GameQuestion, GameTopic } from "../types/game";
 
+/** Dedupes initial TTS when Strict Mode runs mount effects twice in dev. */
+let lastSentenceInitialAudioKey: string | null = null;
+
 export function useGameTopicSentenceQuestion(
   topic: GameTopic | undefined,
   topicId: string | undefined,
@@ -69,6 +72,14 @@ export function useGameTopicSentenceQuestion(
       window.speechSynthesis.speak(u);
     }
   }, [sentenceText, stopAudio]);
+
+  useEffect(() => {
+    if (!topicId || !q?.id || !sentenceText) return;
+    const key = `${topicId}:${q.id}`;
+    if (lastSentenceInitialAudioKey === key) return;
+    lastSentenceInitialAudioKey = key;
+    playSentence();
+  }, [topicId, q?.id, sentenceText, playSentence]);
 
   useEffect(() => {
     if (!isSolved || autoPlayedOnSolveRef.current || !sentenceText) return;
