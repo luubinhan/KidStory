@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ttsSentence } from "../lib/gameQuestionTts";
 import { shuffledOptionOrder } from "../lib/gameTopicShuffle";
+import { playGameQuestionStem } from "../lib/playGameQuestionStem";
 import type { GameQuestion, GameTopic } from "../types/game";
+
+/** Dedupes initial stem audio when Strict Mode runs mount effects twice in dev. */
+let lastMcInitialStemKey: string | null = null;
 
 export function useGameTopicQuestion(
   topic: GameTopic | undefined,
@@ -46,29 +49,16 @@ export function useGameTopicQuestion(
 
   const playAudio = useCallback(async () => {
     if (!q) return;
-    stopAudio();
-
-    if (q.audioUrl) {
-      try {
-        const el = new Audio(q.audioUrl);
-        audioRef.current = el;
-        await el.play();
-      } catch {
-        if (typeof window !== "undefined" && window.speechSynthesis) {
-          const u = new SpeechSynthesisUtterance(ttsSentence(q));
-          u.rate = 0.92;
-          window.speechSynthesis.speak(u);
-        }
-      }
-      return;
-    }
-
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      const u = new SpeechSynthesisUtterance(ttsSentence(q));
-      u.rate = 0.92;
-      window.speechSynthesis.speak(u);
-    }
+    await playGameQuestionStem(q, audioRef, stopAudio);
   }, [q, stopAudio]);
+
+  useEffect(() => {
+    if (!topicId || !q?.id) return;
+    const key = `mc:${topicId}:${q.id}`;
+    if (lastMcInitialStemKey === key) return;
+    lastMcInitialStemKey = key;
+    void playGameQuestionStem(q, audioRef, stopAudio);
+  }, [topicId, q, stopAudio]);
 
   const playOptionWord = useCallback(
     (word: string) => {

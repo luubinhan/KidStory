@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { playGameQuestionStem } from "../lib/playGameQuestionStem";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import type { GameQuestion, GameTopic } from "../types/game";
 
-/** Dedupes initial TTS when Strict Mode runs mount effects twice in dev. */
-let lastSpellInitialAudioKey: string | null = null;
+/** Dedupes initial stem TTS when Strict Mode runs mount effects twice in dev. */
+let lastSpellInitialStemKey: string | null = null;
 
 export function useGameTopicSpellQuestion(
   topic: GameTopic | undefined,
@@ -72,12 +73,12 @@ export function useGameTopicSpellQuestion(
   }, [targetWord, stopAudio]);
 
   useEffect(() => {
-    if (!topicId || !q?.id || !targetWord) return;
-    const key = `${topicId}:${q.id}`;
-    if (lastSpellInitialAudioKey === key) return;
-    lastSpellInitialAudioKey = key;
-    playWord();
-  }, [topicId, q?.id, targetWord, playWord]);
+    if (!topicId || !q?.id || !q) return;
+    const key = `spell:${topicId}:${q.id}`;
+    if (lastSpellInitialStemKey === key) return;
+    lastSpellInitialStemKey = key;
+    void playGameQuestionStem(q, audioRef, stopAudio);
+  }, [topicId, q, stopAudio]);
 
   useEffect(() => {
     if (!isSolved || autoPlayedOnSolveRef.current || !targetWord) return;

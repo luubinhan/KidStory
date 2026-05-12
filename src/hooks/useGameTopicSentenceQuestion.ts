@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { sentenceWordsFromQuestion } from "../lib/gameSentenceWords";
+import { playGameQuestionStem } from "../lib/playGameQuestionStem";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import type { GameQuestion, GameTopic } from "../types/game";
 
-/** Dedupes initial TTS when Strict Mode runs mount effects twice in dev. */
-let lastSentenceInitialAudioKey: string | null = null;
+/** Dedupes initial stem TTS when Strict Mode runs mount effects twice in dev. */
+let lastSentenceInitialStemKey: string | null = null;
 
 export function useGameTopicSentenceQuestion(
   topic: GameTopic | undefined,
@@ -74,12 +75,12 @@ export function useGameTopicSentenceQuestion(
   }, [sentenceText, stopAudio]);
 
   useEffect(() => {
-    if (!topicId || !q?.id || !sentenceText) return;
-    const key = `${topicId}:${q.id}`;
-    if (lastSentenceInitialAudioKey === key) return;
-    lastSentenceInitialAudioKey = key;
-    playSentence();
-  }, [topicId, q?.id, sentenceText, playSentence]);
+    if (!topicId || !q?.id || !q) return;
+    const key = `sentence:${topicId}:${q.id}`;
+    if (lastSentenceInitialStemKey === key) return;
+    lastSentenceInitialStemKey = key;
+    void playGameQuestionStem(q, audioRef, stopAudio);
+  }, [topicId, q, stopAudio]);
 
   useEffect(() => {
     if (!isSolved || autoPlayedOnSolveRef.current || !sentenceText) return;
