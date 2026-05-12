@@ -9,6 +9,7 @@ export function useGameTopicSpellQuestion(
   const [questionIndex, setQuestionIndex] = useState(0);
   const [letterOrder, setLetterOrder] = useState<number[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const autoPlayedOnSolveRef = useRef(false);
 
   const questions = topic?.questions ?? [];
   const q: GameQuestion | undefined = questions[questionIndex];
@@ -20,6 +21,10 @@ export function useGameTopicSpellQuestion(
   useEffect(() => {
     setQuestionIndex(0);
   }, [topicId]);
+
+  useEffect(() => {
+    autoPlayedOnSolveRef.current = false;
+  }, [q?.id, topicId]);
 
   useEffect(() => {
     if (!q) {
@@ -62,6 +67,12 @@ export function useGameTopicSpellQuestion(
       window.speechSynthesis.speak(u);
     }
   }, [targetWord, stopAudio]);
+
+  useEffect(() => {
+    if (!isSolved || autoPlayedOnSolveRef.current || !targetWord) return;
+    autoPlayedOnSolveRef.current = true;
+    playWord();
+  }, [isSolved, targetWord, playWord]);
 
   const goNext = useCallback(() => {
     if (!topic) return;
