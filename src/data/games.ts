@@ -11,15 +11,15 @@ import { TalentShow } from "./games/talent-show/talent-show";
 import { pronouns } from "./games/pronouns/pronouns";
 
 export const gameTopics: readonly GameTopic[] = [
-  directions,
-  preposition,
-  Jobs,
-  BodyPart,
-  Clothes,
-  Food,
   Actions,
   TalentShow,
   pronouns,
+  directions,
+  preposition,
+  // Jobs,
+  // BodyPart,
+  // Clothes,
+  // Food,
 ];
 
 export function getGameTopic(id: string): GameTopic | undefined {

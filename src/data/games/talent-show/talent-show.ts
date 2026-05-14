@@ -6,7 +6,7 @@ const IMG =
 export const TalentShow = {
     id: "talent-show",
     title: "The talent show",
-    description: "What can the animals do at the show?",
+    description: "What can you do?",
     questions: [
         {
             id: "talent-show-1",
