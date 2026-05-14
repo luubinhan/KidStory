@@ -16,7 +16,8 @@ export const pronouns = {
     },
     {
       id: "pronouns-2",
-      textBefore: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/pronouns/you.jpeg",
+      image: "https://raw.githubusercontent.com/luubinhan/KidStory/refs/heads/main/src/data/games/pronouns/you.jpeg",
+      textBefore: "",
       textAfter: " can draw",
       options: ["we", "she", "they", "you"],
       correctIndex: 3,
