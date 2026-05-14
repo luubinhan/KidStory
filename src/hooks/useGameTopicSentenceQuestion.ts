@@ -1,11 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { sentenceWordsFromQuestion } from "../lib/gameSentenceWords";
-import { playGameQuestionStem } from "../lib/playGameQuestionStem";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import type { GameQuestion, GameTopic } from "../types/game";
-
-/** Dedupes initial stem TTS when Strict Mode runs mount effects twice in dev. */
-let lastSentenceInitialStemKey: string | null = null;
 
 export function useGameTopicSentenceQuestion(
   topic: GameTopic | undefined,
@@ -13,8 +9,6 @@ export function useGameTopicSentenceQuestion(
 ) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [wordOrder, setWordOrder] = useState<number[]>([]);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const autoPlayedOnSolveRef = useRef(false);
 
   const questions = topic?.questions ?? [];
   const q: GameQuestion | undefined = questions[questionIndex];
@@ -25,10 +19,6 @@ export function useGameTopicSentenceQuestion(
   useEffect(() => {
     setQuestionIndex(0);
   }, [topicId]);
-
-  useEffect(() => {
-    autoPlayedOnSolveRef.current = false;
-  }, [q?.id, topicId]);
 
   useEffect(() => {
     if (!q) {
@@ -48,11 +38,6 @@ export function useGameTopicSentenceQuestion(
   }, [wordOrder, words, q]);
 
   const stopAudio = useCallback(() => {
-    const a = audioRef.current;
-    if (a) {
-      a.pause();
-      a.currentTime = 0;
-    }
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
@@ -73,20 +58,6 @@ export function useGameTopicSentenceQuestion(
       window.speechSynthesis.speak(u);
     }
   }, [sentenceText, stopAudio]);
-
-  useEffect(() => {
-    if (!topicId || !q?.id || !q) return;
-    const key = `sentence:${topicId}:${q.id}`;
-    if (lastSentenceInitialStemKey === key) return;
-    lastSentenceInitialStemKey = key;
-    void playGameQuestionStem(q, audioRef, stopAudio);
-  }, [topicId, q, stopAudio]);
-
-  useEffect(() => {
-    if (!isSolved || autoPlayedOnSolveRef.current || !sentenceText) return;
-    autoPlayedOnSolveRef.current = true;
-    playSentence();
-  }, [isSolved, sentenceText, playSentence]);
 
   const goNext = useCallback(() => {
     if (!topic) return;

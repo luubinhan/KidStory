@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   DndContext,
   closestCenter,
@@ -18,11 +18,18 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+/** Dedupes intro TTS when Strict Mode runs mount effects twice in dev. */
+let lastSentenceStripIntroDedupeKey: string | null = null;
+
 type GameSentenceWordStripProps = {
   words: readonly string[];
   wordOrder: number[];
   onWordOrderChange: (next: number[]) => void;
   disabled?: boolean;
+  /** When set with the callbacks below, speaks the full sentence on new question and once when solved. */
+  sentenceKey?: string;
+  isSolved?: boolean;
+  onPlaySentence?: () => void;
 };
 
 function SortableWordTile({
@@ -72,7 +79,31 @@ export function GameSentenceWordStrip({
   wordOrder,
   onWordOrderChange,
   disabled = false,
+  sentenceKey,
+  isSolved = false,
+  onPlaySentence,
 }: GameSentenceWordStripProps) {
+  const playedSolveForKeyRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    playedSolveForKeyRef.current = null;
+  }, [sentenceKey]);
+
+  useEffect(() => {
+    if (!sentenceKey || !onPlaySentence) return;
+    const dedupeKey = `sentence-strip-intro:${sentenceKey}`;
+    if (lastSentenceStripIntroDedupeKey === dedupeKey) return;
+    lastSentenceStripIntroDedupeKey = dedupeKey;
+    onPlaySentence();
+  }, [sentenceKey, onPlaySentence]);
+
+  useEffect(() => {
+    if (!sentenceKey || !onPlaySentence || !isSolved) return;
+    if (playedSolveForKeyRef.current === sentenceKey) return;
+    playedSolveForKeyRef.current = sentenceKey;
+    onPlaySentence();
+  }, [sentenceKey, isSolved, onPlaySentence]);
+
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
     useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 6 } }),

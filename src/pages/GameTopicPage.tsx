@@ -123,6 +123,9 @@ export default function GameTopicPage() {
                 wordOrder={wordOrder}
                 onWordOrderChange={setWordOrder}
                 disabled={isSolved}
+                sentenceKey={`${topicId}:${q.id}`}
+                isSolved={isSolved}
+                onPlaySentence={playSentence}
               />
 
               {isSolved ? (
