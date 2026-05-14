@@ -96,7 +96,7 @@ export default function GameTopicPage() {
               {q.image ? (
                 <div className="mb-12 relative">
                   <GameQuestionImage src={q.image} />
-                  <div className="absolute bottom-0 left-0 right-0 flex flex-wrap items-start gap-2 gap-y-2 justify-center py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100">
+                  <div className="absolute bottom-0 left-0 right-4 flex flex-wrap items-start gap-2 gap-y-2 justify-end py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100">
                     <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
                       <IconVolumeButton
                         className="h-full w-full cursor-pointer flex items-center justify-center"
@@ -153,11 +153,11 @@ export default function GameTopicPage() {
           />
 
           {q ? (
-            <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
+            <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-4 md:p-4 shadow-md">
               {q.image ? (
                 <div className="mb-12 relative">
                   <GameQuestionImage src={q.image} />
-                  <div className="absolute bottom-0 left-0 right-0 flex flex-wrap items-start gap-2 gap-y-2 justify-center py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100">
+                  <div className="absolute bottom-0 left-0 right-4 flex flex-wrap items-start gap-2 gap-y-2 justify-end py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100 ">
                     <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
                       <IconVolumeButton
                         className="h-full w-full cursor-pointer flex items-center justify-center"
