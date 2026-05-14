@@ -11,7 +11,7 @@ export const TalentShow = {
         {
             id: "talent-show-1",
             image: `${IMG}/climb.jpg`,
-            textBefore: "I can",
+            textBefore: "I can ",
             textAfter: "",
             options: ["swim", "fly", "climb", "jump"],
             correctIndex: 2,
@@ -19,7 +19,7 @@ export const TalentShow = {
         {
             id: "talent-show-2",
             image: `${IMG}/swim.jpg`,
-            textBefore: "She can",
+            textBefore: "She can ",
             textAfter: "",
             options: ["climb", "swim", "run", "fly"],
             correctIndex: 1,
@@ -27,7 +27,7 @@ export const TalentShow = {
         {
             id: "talent-show-3",
             image: `${IMG}/sing.jpg`,
-            textBefore: "She can",
+            textBefore: "She can ",
             textAfter: "",
             options: ["sing", "jump", "swim", "fly"],
             correctIndex: 0,
@@ -35,7 +35,7 @@ export const TalentShow = {
         {
             id: "talent-show-4",
             image: `${IMG}/fly.jpg`,
-            textBefore: "They can",
+            textBefore: "They can ",
             textAfter: "",
             options: ["run", "swim", "fly", "climb"],
             correctIndex: 2,
@@ -51,7 +51,7 @@ export const TalentShow = {
         {
             id: "talent-show-6",
             image: `${IMG}/run.jpg`,
-            textBefore: "You can",
+            textBefore: "You can ",
             textAfter: "",
             options: ["fly", "climb", "swim", "run"],
             correctIndex: 3,
