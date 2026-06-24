@@ -63,13 +63,23 @@ export function useGameTopicSpellQuestion(
   }, [stopAudio]);
 
   const playWord = useCallback(() => {
-    if (!targetWord) return;
+    const word = targetWord.trim();
+    if (!word) return;
     stopAudio();
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      const u = new SpeechSynthesisUtterance(targetWord);
+    const speak = () => {
+      if (typeof window === "undefined" || !window.speechSynthesis) return;
+      try {
+        window.speechSynthesis.resume();
+      } catch {
+        /* ignore — some engines throw if not paused */
+      }
+      const u = new SpeechSynthesisUtterance(word);
       u.rate = 0.92;
       window.speechSynthesis.speak(u);
-    }
+    };
+    // cancel() then speak() in the same synchronous turn often drops the new utterance on Chromium;
+    // queue after the current stack so the queue actually receives `word`.
+    queueMicrotask(speak);
   }, [targetWord, stopAudio]);
 
   useEffect(() => {
