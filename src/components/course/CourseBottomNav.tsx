@@ -12,7 +12,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { id: "study", label: "Học bài", icon: BookOpen, to: "/course" },
-  { id: "dictionary", label: "Từ điển", icon: Search, disabled: true },
+  { id: "dictionary", label: "Từ điển", icon: Search, to: "/dictionary" },
   { id: "games", label: "Trò chơi", icon: Gamepad2, to: "/games" },
   { id: "achievements", label: "Thành tích", icon: Trophy, disabled: true },
 ];
@@ -29,9 +29,11 @@ export function CourseBottomNav() {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =
-            item.id === "study"
-              ? pathname === "/course" || pathname.startsWith("/course/")
-              : false;
+            (item.id === "study" &&
+              (pathname === "/course" || pathname.startsWith("/course/"))) ||
+            (item.id === "dictionary" && pathname === "/dictionary") ||
+            (item.id === "games" &&
+              (pathname === "/games" || pathname.startsWith("/games/")));
 
           const content = (
             <>

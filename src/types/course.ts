@@ -22,3 +22,12 @@ export interface CourseProfile {
   xpMax: number;
   curriculumLabel: string;
 }
+
+export interface CourseDictionaryEntry {
+  id: string;
+  word: string;
+  translation: string;
+  emoji: string;
+  unitId: string;
+  unitNumber: number;
+}
