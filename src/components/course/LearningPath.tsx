@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import type { CourseUnit } from "../../types/course";
 import { LearningPathConnector } from "./LearningPathConnector";
 import { UnitCard } from "./UnitCard";
@@ -25,19 +26,32 @@ function DecorativeBackground() {
 }
 
 export function LearningPath({ units }: LearningPathProps) {
+  const currentUnitRef = useRef<HTMLDivElement>(null);
+  const currentIndex = units.findIndex((unit) => unit.status === "current");
+
+  useLayoutEffect(() => {
+    if (currentIndex === -1) return;
+    currentUnitRef.current?.scrollIntoView({ block: "start" });
+  }, [currentIndex]);
+
   return (
-    <section className="relative px-2 pb-8">
+    <section className="relative px-2 pb-8 pt-8">
       <DecorativeBackground />
       <LearningPathConnector unitCount={units.length} />
 
       <div className="relative flex flex-col gap-6">
         {units.map((unit, index) => (
-          <UnitCard
+          <div
             key={unit.id}
-            unit={unit}
-            index={index}
-            side={index % 2 === 0 ? "left" : "right"}
-          />
+            ref={index === currentIndex ? currentUnitRef : undefined}
+            className={index === currentIndex ? "scroll-mt-4" : undefined}
+          >
+            <UnitCard
+              unit={unit}
+              index={index}
+              side={index % 2 === 0 ? "left" : "right"}
+            />
+          </div>
         ))}
       </div>
     </section>
