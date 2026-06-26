@@ -45,3 +45,21 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #cbd5e1;
 }
+
+.course-flashcards .flashcard-wrapper {
+  width: 100%;
+  max-width: 24rem;
+  height: 14rem;
+  --front-bg: #ffffff;
+  --back-bg: #ffffff;
+  --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.course-flashcards .flashcard-array {
+  height: 14rem;
+}
+
+.course-flashcards .flashcard-array-wrapper {
+  width: 100%;
+  max-width: 24rem;
+}
