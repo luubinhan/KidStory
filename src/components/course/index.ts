@@ -8,3 +8,4 @@ export { DictionaryWordCard } from "./DictionaryWordCard";
 export { LearningPath } from "./LearningPath";
 export { LearningPathConnector } from "./LearningPathConnector";
 export { UnitCard } from "./UnitCard";
+export { UnitActivityList } from "./UnitActivityList";

@@ -7,4 +7,6 @@ export { GameQuestionFooter } from "./GameQuestionFooter";
 export { GameSpellCelebration } from "./GameSpellCelebration";
 export { GameSpellLetterStrip } from "./GameSpellLetterStrip";
 export { GameSentenceWordStrip } from "./GameSentenceWordStrip";
+export { GameTopicPracticeSession } from "./GameTopicPracticeSession";
+export type { GameTopicPracticeMode } from "./GameTopicPracticeSession";
 export { IconVolumeButton } from "./IconVolumeButton";

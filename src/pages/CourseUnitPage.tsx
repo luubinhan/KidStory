@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { getCourseUnitById } from "../data/course";
-import { CourseBottomNav } from "../components/course";
+import { CourseBottomNav, UnitActivityList } from "../components/course";
 import { cn } from "../lib/utils";
 
 const statusLabels = {
@@ -76,9 +76,7 @@ export default function CourseUnitPage() {
             {statusLabels[unit.status]}
           </span>
 
-          <p className="mt-6 text-sm text-slate-500">
-          The lesson content will be updated in the next version.
-          </p>
+          <UnitActivityList unit={unit} />
         </div>
       </div>
       <CourseBottomNav />
