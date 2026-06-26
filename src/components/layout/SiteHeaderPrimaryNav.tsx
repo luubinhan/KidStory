@@ -20,7 +20,7 @@ export function SiteHeaderPrimaryNav({ animatedBrand = true, className }: SiteHe
       </Link>
       <Link
         to="/course"
-        className="shrink-0 inline-flex items-center rounded-xl border-2 border-slate-100 bg-[#f4f4f4] px-3 py-2 text-sm font-semibold text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+        className="candy-glass-btn shrink-0 inline-flex items-center rounded-xl px-3 py-2 text-sm font-semibold"
       >
         Course
       </Link>
