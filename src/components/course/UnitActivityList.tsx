@@ -34,7 +34,6 @@ function ActivityCardContent({
       </div>
       <div className="min-w-0 flex-1">
         <p className="font-bold text-slate-800">{activity.label}</p>
-        <p className="text-sm text-slate-500">{activity.description}</p>
       </div>
       {!isLocked ? <ChevronRight className="size-5 shrink-0 text-slate-300" aria-hidden /> : null}
     </>
