@@ -61,7 +61,6 @@ export default function CourseUnitPage() {
                 Unit {unit.unitNumber}
               </p>
               <h1 className="text-2xl font-bold text-slate-800">{unit.title}</h1>
-              <p className="mt-1 text-slate-600">{unit.subtitle}</p>
             </div>
           </div>
 

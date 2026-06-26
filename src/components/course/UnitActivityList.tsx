@@ -45,7 +45,6 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
 
   return (
     <div className="mt-6 space-y-3">
-      <h2 className="text-sm font-bold uppercase tracking-wide text-slate-400">Practice activities</h2>
       <ul className="space-y-3">
         {courseActivities.map((activity, index) => {
           const href = `/course/${unit.id}/practice/${activity.id}`;

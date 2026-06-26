@@ -72,16 +72,14 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
             Unit {unit.unitNumber}
           </p>
           <p className="truncate text-sm font-bold text-slate-800">{unit.title}</p>
-          <p className="truncate text-xs text-slate-500">{unit.subtitle}</p>
         </div>
       </div>
 
       <div className="mt-3">
-        {isCompleted && unit.stars !== undefined ? <StarRating count={unit.stars} /> : null}
         {isCurrent ? (
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">
             <Play className="size-3 fill-white" aria-hidden />
-            Currently studying
+            Current
           </span>
         ) : null}
       </div>
