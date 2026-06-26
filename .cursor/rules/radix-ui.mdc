@@ -1,0 +1,47 @@
+---
+description: Use Radix UI primitives for React UI components
+globs: **/*.{tsx,jsx}
+alwaysApply: false
+---
+
+# Radix UI Components
+
+Use [@radix-ui/*](https://www.radix-ui.com/primitives) primitives for interactive UI in KidStory. Wrap them in [`src/components/ui/`](src/components/ui/) with Tailwind styling via `cn()`.
+
+Do **not** use `@luckyluu/wonder-ui`.
+
+## When to use
+
+- **New interactive UI** (progress, dialogs, tabs, etc.) → add a Radix primitive wrapper under `src/components/ui/`.
+- **Layout and page structure** → Tailwind utility classes alongside Radix wrappers.
+- **Existing custom components** → do not rewrite unless the task explicitly asks for it.
+
+## Pattern
+
+```tsx
+// src/components/ui/Progress.tsx
+import * as ProgressPrimitive from "@radix-ui/react-progress";
+import { cn } from "../../lib/utils";
+
+export function Progress({ value, max = 100, className }: ProgressProps) {
+  // Root + Indicator, styled with Tailwind
+}
+```
+
+```tsx
+// ✅ GOOD — Radix wrapper for UI primitives
+import { Progress } from "../ui";
+
+<Progress value={current + 1} max={total} aria-label={`Card ${current + 1} of ${total}`} />
+
+// ❌ BAD — reintroducing wonder-ui
+import { Stepper } from "@luckyluu/wonder-ui";
+```
+
+## Established components
+
+| Component | Package | Location |
+|-----------|---------|----------|
+| `Progress` | `@radix-ui/react-progress` | `src/components/ui/Progress.tsx` |
+
+Add new Radix wrappers to `src/components/ui/` and export from `src/components/ui/index.ts`.

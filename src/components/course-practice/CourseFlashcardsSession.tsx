@@ -1,7 +1,6 @@
 import { useMemo } from "react";
-import { Stepper } from "@luckyluu/wonder-ui";
-import type { StepperStep } from "@luckyluu/wonder-ui";
 import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import { Progress } from "../ui";
 import { FlashcardArray, useFlashcardArray } from "react-quizlet-flashcard";
 import "react-quizlet-flashcard/dist/index.css";
 import type { CourseDictionaryEntry } from "../../types/course";
@@ -22,15 +21,6 @@ function shuffleEntries(entries: readonly CourseDictionaryEntry[]): CourseDictio
 
 function buildSession(entries: readonly CourseDictionaryEntry[]) {
   const shuffled = shuffleEntries(entries);
-  const steps: StepperStep[] = shuffled.map((entry, index) => ({
-    id: `card-${index}`,
-    label: entry.word,
-    icon: (
-      <span aria-hidden className="text-base leading-none">
-        {entry.emoji}
-      </span>
-    ),
-  }));
   const deck = shuffled.map((entry) => ({
     front: {
       html: (
@@ -63,11 +53,11 @@ function buildSession(entries: readonly CourseDictionaryEntry[]) {
       ),
     },
   }));
-  return { deck, steps };
+  return { deck, cards: shuffled };
 }
 
 export function CourseFlashcardsSession({ entries }: CourseFlashcardsSessionProps) {
-  const { deck, steps } = useMemo(() => buildSession(entries), [entries]);
+  const { deck, cards } = useMemo(() => buildSession(entries), [entries]);
 
   const flipArrayHook = useFlashcardArray({
     deckLength: deck.length,
@@ -84,9 +74,22 @@ export function CourseFlashcardsSession({ entries }: CourseFlashcardsSessionProp
     );
   }
 
+  const current = cards[flipArrayHook.currentCard]!;
+
   return (
     <div className="course-flashcards space-y-4">
-      <Stepper steps={steps} currentStep={flipArrayHook.currentCard} />
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
+          <span aria-live="polite">
+            {flipArrayHook.currentCard + 1} / {deck.length}
+          </span>
+        </div>
+        <Progress
+          value={flipArrayHook.currentCard + 1}
+          max={deck.length}
+          aria-label={`Card ${flipArrayHook.currentCard + 1} of ${deck.length}`}
+        />
+      </div>
 
       <FlashcardArray
         deck={deck}

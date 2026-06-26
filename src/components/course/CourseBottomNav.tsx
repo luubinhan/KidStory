@@ -25,7 +25,7 @@ export function CourseBottomNav() {
       aria-label="Điều hướng chính"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-100 bg-white px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
     >
-      <div className="mx-auto flex max-w-lg items-stretch justify-around">
+      <div className="mx-auto grid w-full max-w-lg grid-cols-4">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -38,12 +38,14 @@ export function CourseBottomNav() {
           const content = (
             <>
               <Icon className="size-5 shrink-0" aria-hidden />
-              <span className="text-[11px] font-semibold">{item.label}</span>
+              <span className="text-center text-[11px] font-semibold leading-tight">
+                {item.label}
+              </span>
             </>
           );
 
           const className = cn(
-            "flex min-w-[4.5rem] flex-col items-center gap-1 rounded-2xl px-3 py-2 transition-colors",
+            "mx-auto flex w-full max-w-[5.5rem] flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 transition-colors",
             isActive && "bg-sky-500 text-white shadow-md shadow-sky-200",
             !isActive && !item.disabled && "text-slate-500 hover:text-sky-600",
             item.disabled && "cursor-not-allowed text-slate-300",
