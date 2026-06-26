@@ -2,12 +2,12 @@ import { Dumbbell, Lock, Palette, School, Users } from "lucide-react";
 import type { CourseProfile, CourseUnit } from "../types/course";
 
 export const courseProfile: CourseProfile = {
-  name: "Minh Anh",
+  name: "Khả Như",
   avatarEmoji: "👦",
-  level: 3,
+  level: 1,
   xpCurrent: 340,
   xpMax: 500,
-  curriculumLabel: "Global Success • Lớp 3",
+  curriculumLabel: "Grade 1",
 };
 
 export const courseUnits: readonly CourseUnit[] = [

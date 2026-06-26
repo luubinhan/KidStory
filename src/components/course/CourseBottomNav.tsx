@@ -11,10 +11,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { id: "study", label: "Học bài", icon: BookOpen, to: "/course" },
-  { id: "dictionary", label: "Từ điển", icon: Search, to: "/dictionary" },
-  { id: "games", label: "Trò chơi", icon: Gamepad2, to: "/games" },
-  { id: "achievements", label: "Thành tích", icon: Trophy, disabled: true },
+  { id: "study", label: "Study", icon: BookOpen, to: "/course" },
+  { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
+  { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
+  { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
 ];
 
 export function CourseBottomNav() {

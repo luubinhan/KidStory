@@ -81,7 +81,7 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         {isCurrent ? (
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">
             <Play className="size-3 fill-white" aria-hidden />
-            Đang học
+            Currently studying
           </span>
         ) : null}
       </div>

@@ -5,9 +5,9 @@ import { CourseBottomNav } from "../components/course";
 import { cn } from "../lib/utils";
 
 const statusLabels = {
-  completed: "Đã hoàn thành",
-  current: "Đang học",
-  locked: "Đã khóa",
+  completed: "Completed",
+  current: "Current",
+  locked: "Locked",
 } as const;
 
 export default function CourseUnitPage() {
@@ -23,10 +23,10 @@ export default function CourseUnitPage() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900"
           >
             <ArrowLeft className="size-4" aria-hidden />
-            Quay lại
+            Back
           </Link>
-          <h1 className="mt-6 text-xl font-bold text-slate-800">Không tìm thấy bài học</h1>
-          <p className="mt-2 text-slate-600">Bài học này chưa có trong hành trình.</p>
+          <h1 className="mt-6 text-xl font-bold text-slate-800">No lesson found.</h1>
+          <p className="mt-2 text-slate-600">This lesson wasn't included in the journey.</p>
         </div>
         <CourseBottomNav />
       </div>
@@ -43,7 +43,7 @@ export default function CourseUnitPage() {
           className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 rounded-lg"
         >
           <ArrowLeft className="size-4" aria-hidden />
-          Quay lại
+          Back
         </Link>
 
         <div className="mt-6 rounded-2xl border-2 border-white bg-white p-6 shadow-md">
@@ -77,7 +77,7 @@ export default function CourseUnitPage() {
           </span>
 
           <p className="mt-6 text-sm text-slate-500">
-            Nội dung bài học sẽ được bổ sung trong phiên bản tiếp theo.
+          The lesson content will be updated in the next version.
           </p>
         </div>
       </div>
