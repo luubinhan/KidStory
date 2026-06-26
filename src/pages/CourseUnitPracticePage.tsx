@@ -10,7 +10,10 @@ import {
   CourseMatchingSession,
   CoursePracticeHeader,
 } from "../components/course-practice";
-import { GameTopicPracticeSession } from "../components/game-topic/GameTopicPracticeSession";
+import {
+  GameTopicPracticeSession,
+  type GameTopicPracticeMode,
+} from "../components/game-topic/GameTopicPracticeSession";
 
 export default function CourseUnitPracticePage() {
   const { unitId, activityId } = useParams<{ unitId: string; activityId: string }>();
@@ -61,10 +64,12 @@ export default function CourseUnitPracticePage() {
 
   const dictionaryEntries = getDictionaryEntriesByUnitId(unit.id);
   const gameTopic = getGameTopic(unit.gameTopicId);
-  const isQuizActivity =
-    activity.id === "multiple-choice" || activity.id === "spell" || activity.id === "sentence";
+  const quizMode: GameTopicPracticeMode | undefined =
+    activity.id === "multiple-choice" || activity.id === "spell" || activity.id === "sentence"
+      ? activity.id
+      : undefined;
 
-  if (isQuizActivity && !gameTopic) {
+  if (quizMode && !gameTopic) {
     return (
       <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
         <div className="mx-auto max-w-lg px-4 py-6">
@@ -91,11 +96,11 @@ export default function CourseUnitPracticePage() {
           <CourseMatchingSession entries={dictionaryEntries} />
         ) : null}
 
-        {isQuizActivity && gameTopic ? (
+        {quizMode && gameTopic ? (
           <GameTopicPracticeSession
             topic={gameTopic}
             topicId={unit.gameTopicId}
-            mode={activity.id === "multiple-choice" ? "multiple-choice" : activity.id}
+            mode={quizMode}
           />
         ) : null}
       </div>
