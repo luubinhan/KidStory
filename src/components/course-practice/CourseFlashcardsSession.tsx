@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import { Stepper } from "@luckyluu/wonder-ui";
+import type { StepperStep } from "@luckyluu/wonder-ui";
 import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import { FlashcardArray, useFlashcardArray } from "react-quizlet-flashcard";
 import "react-quizlet-flashcard/dist/index.css";
@@ -18,8 +20,18 @@ function shuffleEntries(entries: readonly CourseDictionaryEntry[]): CourseDictio
   return copy;
 }
 
-function buildDeck(entries: readonly CourseDictionaryEntry[]) {
-  return shuffleEntries(entries).map((entry) => ({
+function buildSession(entries: readonly CourseDictionaryEntry[]) {
+  const shuffled = shuffleEntries(entries);
+  const steps: StepperStep[] = shuffled.map((entry, index) => ({
+    id: `card-${index}`,
+    label: entry.word,
+    icon: (
+      <span aria-hidden className="text-base leading-none">
+        {entry.emoji}
+      </span>
+    ),
+  }));
+  const deck = shuffled.map((entry) => ({
     front: {
       html: (
         <div className="flex h-full flex-col items-center justify-center p-6">
@@ -51,10 +63,11 @@ function buildDeck(entries: readonly CourseDictionaryEntry[]) {
       ),
     },
   }));
+  return { deck, steps };
 }
 
 export function CourseFlashcardsSession({ entries }: CourseFlashcardsSessionProps) {
-  const deck = useMemo(() => buildDeck(entries), [entries]);
+  const { deck, steps } = useMemo(() => buildSession(entries), [entries]);
 
   const flipArrayHook = useFlashcardArray({
     deckLength: deck.length,
@@ -73,9 +86,7 @@ export function CourseFlashcardsSession({ entries }: CourseFlashcardsSessionProp
 
   return (
     <div className="course-flashcards space-y-4">
-      <p className="text-center text-sm font-semibold text-slate-500">
-        Card {flipArrayHook.currentCard + 1} of {deck.length}
-      </p>
+      <Stepper steps={steps} currentStep={flipArrayHook.currentCard} />
 
       <FlashcardArray
         deck={deck}
