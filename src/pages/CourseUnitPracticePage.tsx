@@ -83,18 +83,24 @@ export default function CourseUnitPracticePage() {
     );
   }
 
+  const isMatching = activity.id === "matching";
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
-      <div className="mx-auto max-w-lg px-4 py-6">
+    <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+      <div
+        className={
+          isMatching
+            ? "flex w-full flex-1 flex-col px-4 py-4 sm:px-6 sm:py-6"
+            : "mx-auto w-full max-w-lg flex-1 px-4 py-6"
+        }
+      >
         <CoursePracticeHeader unit={unit} activity={activity} />
 
         {activity.id === "flashcards" ? (
           <CourseFlashcardsSession entries={dictionaryEntries} />
         ) : null}
 
-        {activity.id === "matching" ? (
-          <CourseMatchingSession entries={dictionaryEntries} />
-        ) : null}
+        {isMatching ? <CourseMatchingSession entries={dictionaryEntries} /> : null}
 
         {quizMode && gameTopic ? (
           <GameTopicPracticeSession

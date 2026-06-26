@@ -48,10 +48,8 @@ export function CourseBottomNav() {
 
           const className = cn(
             "mx-auto flex w-full max-w-[5.5rem] flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 transition-colors",
-            isStudyTab && isActive && "candy-glass-btn",
-            isStudyTab && !isActive && "candy-glass-btn--idle",
-            !isStudyTab && isActive && "bg-sky-500 text-white shadow-md shadow-sky-200",
-            !isStudyTab && !isActive && !item.disabled && "text-slate-500 hover:text-sky-600",
+            isActive && "candy-glass-btn",
+            !isActive && "candy-glass-btn--idle",
             item.disabled && "cursor-not-allowed text-slate-300",
           );
 

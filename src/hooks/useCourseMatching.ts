@@ -1,93 +1,147 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CourseDictionaryEntry } from "../types/course";
+import {
+  buildCardsFromEntries,
+  calcStars,
+  type MatchingCard,
+  type MatchingGamePhase,
+  type MatchingStars,
+} from "../types/matchingPairs";
 
-type MatchSide = "word" | "emoji";
+const FLIP_BACK_MS = 1200;
 
-type SelectedItem = {
-  side: MatchSide;
-  entryId: string;
-};
+function updateCard(cards: MatchingCard[], cardId: string, state: MatchingCard["state"]): MatchingCard[] {
+  return cards.map((card) => (card.id === cardId ? { ...card, state } : card));
+}
 
-function shuffleIds(ids: string[]): string[] {
-  const copy = [...ids];
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j]!, copy[i]!];
-  }
-  return copy;
+function updateCards(
+  cards: MatchingCard[],
+  cardIds: readonly string[],
+  state: MatchingCard["state"],
+): MatchingCard[] {
+  const idSet = new Set(cardIds);
+  return cards.map((card) => (idSet.has(card.id) ? { ...card, state } : card));
 }
 
 export function useCourseMatching(entries: readonly CourseDictionaryEntry[]) {
+  const pairCount = entries.length;
+
   const entryMap = useMemo(
     () => new Map(entries.map((entry) => [entry.id, entry])),
     [entries],
   );
 
-  const wordOrder = useMemo(() => shuffleIds(entries.map((entry) => entry.id)), [entries]);
-  const emojiOrder = useMemo(() => shuffleIds(entries.map((entry) => entry.id)), [entries]);
+  const [sessionKey, setSessionKey] = useState(0);
+  const [cards, setCards] = useState<MatchingCard[]>(() => buildCardsFromEntries(entries));
+  const [phase, setPhase] = useState<MatchingGamePhase>("idle");
+  const [firstCardId, setFirstCardId] = useState<string | null>(null);
+  const [moves, setMoves] = useState(0);
+  const [mismatchCardIds, setMismatchCardIds] = useState<readonly string[]>([]);
+  const [recentMatchPairIds, setRecentMatchPairIds] = useState<readonly string[]>([]);
 
-  const [matchedIds, setMatchedIds] = useState<ReadonlySet<string>>(() => new Set());
-  const [selected, setSelected] = useState<SelectedItem | null>(null);
-  const [wrongPair, setWrongPair] = useState<readonly [string, string] | null>(null);
+  const flipBackTimeoutRef = useRef<number | null>(null);
+  const matchGlowTimeoutRef = useRef<number | null>(null);
 
-  const isComplete = matchedIds.size === entries.length;
+  const matchedCount = useMemo(
+    () => cards.filter((card) => card.state === "matched").length / 2,
+    [cards],
+  );
 
-  const selectItem = useCallback(
-    (side: MatchSide, entryId: string) => {
-      if (matchedIds.has(entryId)) return;
+  const isComplete = pairCount > 0 && matchedCount === pairCount;
+  const stars: MatchingStars = isComplete ? calcStars(moves, pairCount) : 0;
 
-      if (!selected) {
-        setSelected({ side, entryId });
+  const clearTimers = useCallback(() => {
+    if (flipBackTimeoutRef.current !== null) {
+      window.clearTimeout(flipBackTimeoutRef.current);
+      flipBackTimeoutRef.current = null;
+    }
+    if (matchGlowTimeoutRef.current !== null) {
+      window.clearTimeout(matchGlowTimeoutRef.current);
+      matchGlowTimeoutRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    clearTimers();
+    setCards(buildCardsFromEntries(entries));
+    setPhase("idle");
+    setFirstCardId(null);
+    setMoves(0);
+    setMismatchCardIds([]);
+    setRecentMatchPairIds([]);
+  }, [entries, sessionKey, clearTimers]);
+
+  useEffect(() => () => clearTimers(), [clearTimers]);
+
+  const selectCard = useCallback(
+    (cardId: string) => {
+      if (phase === "resolving") return;
+
+      const card = cards.find((item) => item.id === cardId);
+      if (!card || card.state !== "hidden") return;
+
+      if (phase === "idle") {
+        setCards((prev) => updateCard(prev, cardId, "flipped"));
+        setFirstCardId(cardId);
+        setPhase("card1Selected");
         return;
       }
 
-      if (selected.side === side) {
-        setSelected({ side, entryId });
+      if (!firstCardId || firstCardId === cardId) return;
+
+      const firstCard = cards.find((item) => item.id === firstCardId);
+      if (!firstCard) return;
+
+      setMoves((prev) => prev + 1);
+      setCards((prev) => updateCard(updateCard(prev, firstCardId, "flipped"), cardId, "flipped"));
+      setPhase("resolving");
+
+      if (firstCard.pairId === card.pairId) {
+        setRecentMatchPairIds([firstCard.pairId]);
+
+        matchGlowTimeoutRef.current = window.setTimeout(() => {
+          setRecentMatchPairIds([]);
+          matchGlowTimeoutRef.current = null;
+        }, 500);
+
+        setCards((prev) =>
+          updateCards(prev, [firstCardId, cardId], "matched"),
+        );
+        setFirstCardId(null);
+        setPhase("idle");
         return;
       }
 
-      if (selected.entryId === entryId) {
-        setMatchedIds((prev) => new Set([...prev, entryId]));
-        setSelected(null);
-        setWrongPair(null);
-        return;
-      }
+      setMismatchCardIds([firstCardId, cardId]);
 
-      const wrongWordId = selected.side === "word" ? selected.entryId : entryId;
-      const wrongEmojiId = selected.side === "emoji" ? selected.entryId : entryId;
-      setWrongPair([wrongWordId, wrongEmojiId]);
-      setSelected(null);
-
-      window.setTimeout(() => {
-        setWrongPair(null);
-      }, 600);
+      flipBackTimeoutRef.current = window.setTimeout(() => {
+        setCards((prev) => updateCards(prev, [firstCardId, cardId], "hidden"));
+        setMismatchCardIds([]);
+        setFirstCardId(null);
+        setPhase("idle");
+        flipBackTimeoutRef.current = null;
+      }, FLIP_BACK_MS);
     },
-    [matchedIds, selected],
+    [cards, firstCardId, phase],
   );
 
-  const isSelected = useCallback(
-    (side: MatchSide, entryId: string) =>
-      selected?.side === side && selected.entryId === entryId,
-    [selected],
-  );
-
-  const isWrong = useCallback(
-    (side: MatchSide, entryId: string) => {
-      if (!wrongPair) return false;
-      const [wordId, emojiId] = wrongPair;
-      return side === "word" ? entryId === wordId : entryId === emojiId;
-    },
-    [wrongPair],
-  );
+  const replay = useCallback(() => {
+    clearTimers();
+    setSessionKey((prev) => prev + 1);
+  }, [clearTimers]);
 
   return {
     entryMap,
-    wordOrder,
-    emojiOrder,
-    matchedIds,
+    cards,
+    phase,
+    moves,
+    pairCount,
+    matchedCount,
     isComplete,
-    selectItem,
-    isSelected,
-    isWrong,
+    stars,
+    mismatchCardIds,
+    recentMatchPairIds,
+    selectCard,
+    replay,
   };
 }

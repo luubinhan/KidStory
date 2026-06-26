@@ -14,11 +14,11 @@ export function DictionarySearchField({ value, onChange }: DictionarySearchField
         </div>
         <input
           type="text"
-          placeholder="Tìm từ vựng..."
+          placeholder="Search..."
           className={`block w-full rounded-2xl border-2 border-white bg-white py-2.5 pl-10 text-base shadow-sm transition-all focus:border-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-100 ${value ? "pr-10" : "pr-3"}`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          aria-label="Tìm từ vựng"
+          aria-label="Search"
         />
         {value ? (
           <button

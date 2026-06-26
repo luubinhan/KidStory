@@ -19,9 +19,8 @@ export default function DictionaryPage() {
   );
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pt-4 pb-24">
       <div className="mx-auto max-w-lg">
-        <CoursePageHeader profile={courseProfile} />
         <DictionaryPageTitle />
         <DictionarySearchField value={searchQuery} onChange={setSearchQuery} />
         <DictionaryGrid
