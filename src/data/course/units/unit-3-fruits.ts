@@ -17,21 +17,21 @@ export const unit3Fruits = {
       word: "cherry",
       translation: "quả anh đào",
       imageUrl: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg",
-      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/c/che/cherr/cherry.mp3",
+      audio: "https://github.com/luubinhan/KidStory/blob/main/public/sounds/cherry.mp3",
     },
     {
       id: "orange",
       word: "orange",
       translation: "quả cam",
       imageUrl: "https://www.quanta.org/thumbs/thumb-orange-640x480-orange.jpg",
-      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/o/ora/orang/orange.mp3",
+      
     },
     {
       id: "pineapple",
       word: "pineapple",
       translation: "quả dứa",
       imageUrl: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1769956258594/edca6379.jpg",
-      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/p/pin/pinea/pineapple.mp3",
+     
     },
     {
       id: "banana",

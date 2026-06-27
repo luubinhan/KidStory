@@ -1185,11 +1185,6 @@ react-pageflip@^2.0.3:
   dependencies:
     page-flip latest
 
-react-quizlet-flashcard@^4.0.22:
-  version "4.0.22"
-  resolved "https://registry.npmjs.org/react-quizlet-flashcard/-/react-quizlet-flashcard-4.0.22.tgz"
-  integrity sha512-YbkAY4BWi8anBNinqjuLIK6cLddlFw6iRgzcoJEXgXBR3Of/cO0uxfPN9Pr3+fO0fUTk8d1hc/tXQAupL+LhcQ==
-
 react-refresh@^0.18.0:
   version "0.18.0"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.18.0.tgz"
