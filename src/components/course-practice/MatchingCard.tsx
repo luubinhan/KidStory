@@ -1,5 +1,6 @@
 import type { MatchingCard as MatchingCardData } from "../../types/matchingPairs";
 import { cn } from "../../lib/utils";
+import { CourseWordImage } from "../course/CourseWordImage";
 
 type MatchingCardProps = {
   card: MatchingCardData;
@@ -55,9 +56,7 @@ export function MatchingCard({
 
         <div className="matching-card-face matching-card-face--back" aria-hidden={!isRevealed}>
           {card.type === "image" ? (
-            <span className="text-4xl" aria-hidden>
-              {card.content}
-            </span>
+            <CourseWordImage imageUrl={card.content} fallbackClassName="size-14" />
           ) : (
             <span className="px-2 text-center text-lg font-bold font-kids text-slate-800">
               {card.content}

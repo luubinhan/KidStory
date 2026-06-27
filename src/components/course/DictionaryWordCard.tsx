@@ -1,6 +1,7 @@
 import { Volume2 } from "lucide-react";
 import type { CourseDictionaryEntry } from "../../types/course";
 import { cn, speak } from "../../lib/utils";
+import { CourseWordImage } from "./CourseWordImage";
 
 type DictionaryWordCardProps = {
   entry: CourseDictionaryEntry;
@@ -27,9 +28,7 @@ export function DictionaryWordCard({ entry, isSelected, onSelect }: DictionaryWo
           : "border-white hover:border-sky-200",
       )}
     >
-      <span className="text-3xl leading-none" aria-hidden>
-        {entry.emoji}
-      </span>
+      <CourseWordImage imageUrl={entry.imageUrl} />
       <span className="mt-2 text-sm font-bold text-sky-900">{entry.word}</span>
       <span className="mt-0.5 line-clamp-2 text-[11px] text-slate-500">{entry.translation}</span>
       <button
