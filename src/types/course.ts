@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import type { GameQuestion } from "./game";
 
-export type CourseUnitStatus = "completed" | "current" | "locked";
+export type CourseUnitStatus = "completed" | "current";
 
 export type CourseActivityId =
   | "flashcards"
@@ -30,6 +30,7 @@ export interface CourseUnit {
   status: CourseUnitStatus;
   stars?: number;
   icon: LucideIcon;
+  youtubeVideoId?: string;
   iconBgClass: string;
   iconColorClass: string;
   words: readonly CourseWord[];

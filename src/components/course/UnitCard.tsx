@@ -29,7 +29,6 @@ function StarRating({ count }: { count: number }) {
 
 export function UnitCard({ unit, index, side }: UnitCardProps) {
   const Icon = unit.icon;
-  const isLocked = unit.status === "locked";
   const isCurrent = unit.status === "current";
   const isCompleted = unit.status === "completed";
 
@@ -42,7 +41,6 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         "relative w-[11.5rem] rounded-2xl border-2 bg-white p-3.5 shadow-md",
         isCurrent && "border-sky-400 ring-2 ring-sky-200",
         isCompleted && "border-white",
-        isLocked && "border-slate-100 opacity-50",
       )}
     >
       {isCompleted ? (
@@ -93,16 +91,12 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         side === "left" ? "justify-start pl-2" : "justify-end pr-2",
       )}
     >
-      {isLocked ? (
-        <div className="pointer-events-none">{cardContent}</div>
-      ) : (
-        <Link
-          to={`/course/${unit.id}`}
-          className="rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
-        >
-          {cardContent}
-        </Link>
-      )}
+      <Link
+        to={`/course/${unit.id}`}
+        className="rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+      >
+        {cardContent}
+      </Link>
     </div>
   );
 }

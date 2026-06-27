@@ -7,7 +7,6 @@ import { cn } from "../lib/utils";
 const statusLabels = {
   completed: "Completed",
   current: "Current",
-  locked: "Locked",
 } as const;
 
 export default function CourseUnitPage() {
@@ -69,7 +68,6 @@ export default function CourseUnitPage() {
               "mt-5 inline-flex rounded-full px-3 py-1 text-xs font-bold",
               unit.status === "completed" && "bg-emerald-100 text-emerald-700",
               unit.status === "current" && "bg-sky-100 text-sky-700",
-              unit.status === "locked" && "bg-slate-100 text-slate-500",
             )}
           >
             {statusLabels[unit.status]}

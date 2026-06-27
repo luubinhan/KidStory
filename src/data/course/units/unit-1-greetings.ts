@@ -8,6 +8,7 @@ export const unit1Greetings = {
   subtitle: "",
   status: "current",
   icon: Sun,
+  youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [
