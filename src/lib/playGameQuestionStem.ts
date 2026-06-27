@@ -25,7 +25,14 @@ export async function playGameQuestionStem(
   }
 
   if (typeof window !== "undefined" && window.speechSynthesis) {
-    const u = new SpeechSynthesisUtterance(ttsSentence(q));
+    const stem = ttsSentence(q).trim();
+    const ttsText =
+      stem && stem !== "…"
+        ? stem
+        : (q.options[q.correctIndex] ?? "").trim();
+    if (!ttsText) return;
+
+    const u = new SpeechSynthesisUtterance(ttsText);
     u.rate = 0.92;
     window.speechSynthesis.speak(u);
   }

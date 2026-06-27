@@ -15,6 +15,7 @@ export interface CourseWord {
   word: string;
   translation: string;
   imageUrl: string;
+  audio?: string;
 }
 
 export interface CoursePracticeSentence {

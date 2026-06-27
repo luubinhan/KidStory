@@ -11,5 +11,6 @@ export function buildSpellQuestionsFromWords(
     textAfter: "",
     options: [entry.word] as readonly string[],
     correctIndex: 0,
+    ...(entry.audio ? { audioUrl: entry.audio } : {}),
   }));
 }

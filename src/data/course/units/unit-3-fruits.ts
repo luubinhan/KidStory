@@ -12,10 +12,34 @@ export const unit3Fruits = {
   iconBgClass: "bg-rose-100",
   iconColorClass: "text-rose-600",
   words: [
-    { id: "cherry", word: "cherry", translation: "quả anh đào", imageUrl: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg" },
-    { id: "orange", word: "orange", translation: "quả cam", imageUrl: "https://www.quanta.org/thumbs/thumb-orange-640x480-orange.jpg" },
-    { id: "pineapple", word: "pineapple", translation: "quả dứa", imageUrl: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1769956258594/edca6379.jpg" },
-    { id: "banana", word: "banana", translation: "quả chuối", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/1280px-Banana-Single.jpg" },
+    {
+      id: "cherry",
+      word: "cherry",
+      translation: "quả anh đào",
+      imageUrl: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg",
+      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/c/che/cherr/cherry.mp3",
+    },
+    {
+      id: "orange",
+      word: "orange",
+      translation: "quả cam",
+      imageUrl: "https://www.quanta.org/thumbs/thumb-orange-640x480-orange.jpg",
+      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/o/ora/orang/orange.mp3",
+    },
+    {
+      id: "pineapple",
+      word: "pineapple",
+      translation: "quả dứa",
+      imageUrl: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1769956258594/edca6379.jpg",
+      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/p/pin/pinea/pineapple.mp3",
+    },
+    {
+      id: "banana",
+      word: "banana",
+      translation: "quả chuối",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/1280px-Banana-Single.jpg",
+      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/b/ban/banan/banana.mp3",
+    },
   ],
   practiceSentences: [
     { id: "unit-3-s-1", text: "is it an orange" },

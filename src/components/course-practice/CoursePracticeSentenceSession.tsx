@@ -7,14 +7,15 @@ import {
 } from "../game-topic";
 import { useCoursePracticeSentenceQuestion } from "../../hooks/useCoursePracticeSentenceQuestion";
 import { playCelebrationSound } from "../../lib/gameCelebrationSound";
-import type { CoursePracticeSentence } from "../../types/course";
+import type { CoursePracticeSentence, CourseWord } from "../../types/course";
 
 type Props = {
   sentences: readonly CoursePracticeSentence[];
   sessionKey: string;
+  words: readonly CourseWord[];
 };
 
-export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) {
+export function CoursePracticeSentenceSession({ sentences, sessionKey, words: unitWords }: Props) {
   const celebratedRef = useRef(false);
   const {
     sentenceIndex,
@@ -27,7 +28,7 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) 
     isSolved,
     playSentence,
     goNext,
-  } = useCoursePracticeSentenceQuestion(sentences, sessionKey);
+  } = useCoursePracticeSentenceQuestion(sentences, sessionKey, unitWords);
 
   useEffect(() => {
     celebratedRef.current = false;

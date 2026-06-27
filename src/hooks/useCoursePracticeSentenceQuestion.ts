@@ -1,14 +1,18 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatPracticeSentence } from "../lib/courseSentenceDisplay";
+import { findWordAudioInSentence } from "../lib/courseWordAudio";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
-import type { CoursePracticeSentence } from "../types/course";
+import { playCourseAudio } from "../lib/playCourseAudio";
+import type { CoursePracticeSentence, CourseWord } from "../types/course";
 
 export function useCoursePracticeSentenceQuestion(
   sentences: readonly CoursePracticeSentence[],
   sessionKey: string,
+  unitWords: readonly CourseWord[],
 ) {
   const [sentenceIndex, setSentenceIndex] = useState(0);
   const [wordOrder, setWordOrder] = useState<number[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const sentence = sentences[sentenceIndex];
   const isLast = sentenceIndex >= sentences.length - 1;
@@ -40,15 +44,26 @@ export function useCoursePracticeSentenceQuestion(
 
   const displayText = sentence ? formatPracticeSentence(sentence.text) : "";
 
-  const playSentence = useCallback(() => {
-    if (!displayText) return;
+  const stopAudio = useCallback(() => {
+    const a = audioRef.current;
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
+    }
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(displayText);
-      u.rate = 0.92;
-      window.speechSynthesis.speak(u);
     }
-  }, [displayText]);
+  }, []);
+
+  useEffect(() => {
+    return () => stopAudio();
+  }, [stopAudio]);
+
+  const playSentence = useCallback(() => {
+    if (!displayText || !sentence) return;
+    const audioUrl = findWordAudioInSentence(sentence.text, unitWords);
+    void playCourseAudio(audioUrl, displayText, audioRef, stopAudio);
+  }, [displayText, sentence, unitWords, stopAudio]);
 
   const goNext = useCallback(() => {
     if (sentenceIndex < sentences.length - 1) {

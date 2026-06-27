@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { playCourseAudio } from "../lib/playCourseAudio";
 import { playGameQuestionStem } from "../lib/playGameQuestionStem";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import type { GameQuestion, GameTopic } from "../types/game";
@@ -65,22 +66,8 @@ export function useGameTopicSpellQuestion(
   const playWord = useCallback(() => {
     const word = targetWord.trim();
     if (!word) return;
-    stopAudio();
-    const speak = () => {
-      if (typeof window === "undefined" || !window.speechSynthesis) return;
-      try {
-        window.speechSynthesis.resume();
-      } catch {
-        /* ignore — some engines throw if not paused */
-      }
-      const u = new SpeechSynthesisUtterance(word);
-      u.rate = 0.92;
-      window.speechSynthesis.speak(u);
-    };
-    // cancel() then speak() in the same synchronous turn often drops the new utterance on Chromium;
-    // queue after the current stack so the queue actually receives `word`.
-    queueMicrotask(speak);
-  }, [targetWord, stopAudio]);
+    void playCourseAudio(q?.audioUrl, word, audioRef, stopAudio);
+  }, [targetWord, q?.audioUrl, stopAudio]);
 
   useEffect(() => {
     if (!topicId || !q?.id || !q) return;
