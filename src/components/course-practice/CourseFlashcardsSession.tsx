@@ -5,6 +5,7 @@ import { FlashcardArray, useFlashcardArray } from "react-quizlet-flashcard";
 import "react-quizlet-flashcard/dist/index.css";
 import type { CourseDictionaryEntry } from "../../types/course";
 import { speak } from "../../lib/utils";
+import { CourseWordImage } from "../course/CourseWordImage";
 
 type CourseFlashcardsSessionProps = {
   entries: readonly CourseDictionaryEntry[];
@@ -44,9 +45,7 @@ function buildSession(entries: readonly CourseDictionaryEntry[]) {
     back: {
       html: (
         <div className="flex h-full flex-col items-center justify-center p-6">
-          <span className="text-5xl leading-none" aria-hidden>
-            {entry.emoji}
-          </span>
+          <CourseWordImage imageUrl={entry.imageUrl} fallbackClassName="size-24" />
           <span className="mt-4 text-lg font-semibold text-slate-700">{entry.translation}</span>
           <span className="mt-4 text-xs text-slate-400">Tap to flip back</span>
         </div>

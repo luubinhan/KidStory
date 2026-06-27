@@ -3,17 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import { getCourseActivity, isCourseActivityId } from "../data/course-activities";
 import { getDictionaryEntriesByUnitId } from "../data/course-dictionary";
 import { getCourseUnitById } from "../data/course";
-import { getGameTopic } from "../data/games";
 import { CourseBottomNav } from "../components/course";
 import {
   CourseFlashcardsSession,
   CourseMatchingSession,
   CoursePracticeHeader,
+  CoursePracticeSentenceSession,
 } from "../components/course-practice";
-import {
-  GameTopicPracticeSession,
-  type GameTopicPracticeMode,
-} from "../components/game-topic/GameTopicPracticeSession";
+import { GameTopicPracticeSession } from "../components/game-topic/GameTopicPracticeSession";
+import { buildMcTopic, buildSpellTopic } from "../lib/courseUnitTopic";
 
 export default function CourseUnitPracticePage() {
   const { unitId, activityId } = useParams<{ unitId: string; activityId: string }>();
@@ -63,26 +61,6 @@ export default function CourseUnitPracticePage() {
   }
 
   const dictionaryEntries = getDictionaryEntriesByUnitId(unit.id);
-  const gameTopic = getGameTopic(unit.gameTopicId);
-  const quizMode: GameTopicPracticeMode | undefined =
-    activity.id === "multiple-choice" || activity.id === "spell" || activity.id === "sentence"
-      ? activity.id
-      : undefined;
-
-  if (quizMode && !gameTopic) {
-    return (
-      <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
-        <div className="mx-auto max-w-lg px-4 py-6">
-          <CoursePracticeHeader unit={unit} activity={activity} />
-          <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
-            Quiz content for this unit is not available yet.
-          </p>
-        </div>
-        <CourseBottomNav />
-      </div>
-    );
-  }
-
   const isMatching = activity.id === "matching";
 
   return (
@@ -102,11 +80,26 @@ export default function CourseUnitPracticePage() {
 
         {isMatching ? <CourseMatchingSession entries={dictionaryEntries} /> : null}
 
-        {quizMode && gameTopic ? (
+        {activity.id === "sentence" ? (
+          <CoursePracticeSentenceSession
+            sentences={unit.practiceSentences}
+            sessionKey={unit.id}
+          />
+        ) : null}
+
+        {activity.id === "multiple-choice" ? (
           <GameTopicPracticeSession
-            topic={gameTopic}
-            topicId={unit.gameTopicId}
-            mode={quizMode}
+            topic={buildMcTopic(unit)}
+            topicId={unit.id}
+            mode="multiple-choice"
+          />
+        ) : null}
+
+        {activity.id === "spell" ? (
+          <GameTopicPracticeSession
+            topic={buildSpellTopic(unit)}
+            topicId={unit.id}
+            mode="spell"
           />
         ) : null}
       </div>

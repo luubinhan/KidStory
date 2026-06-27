@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { GameQuestion } from "./game";
 
 export type CourseUnitStatus = "completed" | "current" | "locked";
 
@@ -9,6 +10,18 @@ export type CourseActivityId =
   | "sentence"
   | "matching";
 
+export interface CourseWord {
+  id: string;
+  word: string;
+  translation: string;
+  imageUrl: string;
+}
+
+export interface CoursePracticeSentence {
+  id: string;
+  text: string;
+}
+
 export interface CourseUnit {
   id: string;
   unitNumber: number;
@@ -16,10 +29,12 @@ export interface CourseUnit {
   subtitle: string;
   status: CourseUnitStatus;
   stars?: number;
-  gameTopicId: string;
   icon: LucideIcon;
   iconBgClass: string;
   iconColorClass: string;
+  words: readonly CourseWord[];
+  practiceSentences: readonly CoursePracticeSentence[];
+  multipleChoiceQuestions: readonly GameQuestion[];
 }
 
 export interface CourseActivity {
@@ -45,7 +60,7 @@ export interface CourseDictionaryEntry {
   id: string;
   word: string;
   translation: string;
-  emoji: string;
+  imageUrl: string;
   unitId: string;
   unitNumber: number;
 }
