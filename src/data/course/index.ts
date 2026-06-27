@@ -1,6 +1,7 @@
 import type { CourseProfile, CourseUnit } from "../../types/course";
 import { unit1Greetings } from "./units/unit-1-greetings";
 import { unit2Hello } from "./units/unit-2-hello";
+import { unit3Fruits } from "./units/unit-3-fruits";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -11,7 +12,11 @@ export const courseProfile: CourseProfile = {
   curriculumLabel: "Grade 1",
 };
 
-export const courseUnits: readonly CourseUnit[] = [unit1Greetings, unit2Hello];
+export const courseUnits: readonly CourseUnit[] = [
+  unit1Greetings,
+  unit2Hello,
+  unit3Fruits,
+];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {
   return courseUnits.find((unit) => unit.id === unitId);
