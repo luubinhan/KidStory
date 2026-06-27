@@ -8,7 +8,7 @@ export const unit3Fruits = {
   subtitle: "",
   status: "current",
   icon: Apple,
-  youtubeVideoId: "by1QAoRcc-U",
+  youtubeVideoId: "dDbNM3AhUOw",
   iconBgClass: "bg-rose-100",
   iconColorClass: "text-rose-600",
   words: [
