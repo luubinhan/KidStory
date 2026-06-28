@@ -69,7 +69,7 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
           <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">
             Unit {unit.unitNumber}
           </p>
-          <p className="truncate text-sm font-bold text-slate-800">{unit.title}</p>
+          <p className="text-sm font-bold text-slate-800">{unit.title}</p>
         </div>
       </div>
 
