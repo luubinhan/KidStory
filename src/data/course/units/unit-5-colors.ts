@@ -12,10 +12,10 @@ export const unit5Colors = {
   iconBgClass: "bg-indigo-100",
   iconColorClass: "text-indigo-600",
   words: [
-    { id: "red", word: "red", translation: "màu đỏ", imageUrl: "" },
-    { id: "black", word: "black", translation: "màu đen", imageUrl: "" },
-    { id: "blue", word: "blue", translation: "màu xanh dương", imageUrl: "" },
-    { id: "white", word: "white", translation: "màu trắng", imageUrl: "" },
+    { id: "red", word: "red", translation: "màu đỏ", imageUrl: "https://backdropshop.prasolutions.com.au/cdn/shop/products/SUPERIOR-PAPER-BACK-PAPER-SCARLET-2.75M-BY-11M_6f207131-d2e7-4533-a66c-f0c1be7eb516_large.jpg?v=1486453297" },
+    { id: "black", word: "black", translation: "màu đen", imageUrl: "https://www.equilter.com/images/products/MMJETBBK.jpg" },
+    { id: "blue", word: "blue", translation: "màu xanh dương", imageUrl: "https://backdropshop.prasolutions.com.au/cdn/shop/products/SUPERIOR-PAPER-BACK-PAPER-ROYAL-BLUE-1.35M-BY-11M-WITH-CORE_bb597a3b-ae74-498f-97d3-4d74acf77dfb_large.jpg?v=1486453270" },
+    { id: "white", word: "white", translation: "màu trắng", imageUrl: "https://www.ober-surfaces.com/cache/images/product/34173cb38f07f89ddbebc2ac9128303f-1301-oberflex_purepapercolor_clawed_white001_detail.jpg" },
   ],
   practiceSentences: [
     { id: "unit-5-s-1", text: "it's red" },
