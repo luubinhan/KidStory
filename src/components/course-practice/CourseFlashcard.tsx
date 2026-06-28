@@ -24,8 +24,8 @@ export function CourseFlashcard({ word, isFlipped, onFlip }: CourseFlashcardProp
               imageUrl={word.imageUrl}
               alt=""
               translation={word.translation}
-              className="size-32"
-              fallbackClassName="size-32"
+              className="size-64"
+              fallbackClassName="size-64"
             />
           ) : (
             <span className="text-9xl font-semibold text-slate-700">{word.translation}</span>
