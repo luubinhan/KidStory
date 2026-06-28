@@ -141,7 +141,6 @@ Edit `src/data/course/index.ts`:
 
 - Confirm no TypeScript errors in the new unit file.
 - Confirm import path and export name in `src/data/course/index.ts` are correct.
-- If available, run project checks (`npm run build` or existing test command).
 
 ## Example Input -> Output Mapping
 
