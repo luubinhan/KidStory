@@ -9,6 +9,7 @@ export type MatchingCard = {
   type: MatchingCardType;
   content: string;
   state: MatchingCardState;
+  translation: string;
 };
 
 export type MatchingGamePhase = "idle" | "card1Selected" | "resolving";
@@ -31,6 +32,7 @@ export function buildCardsFromEntries(entries: readonly CourseDictionaryEntry[])
       pairId: entry.id,
       type: "image" as const,
       content: entry.imageUrl,
+      translation: entry.translation,
       state: "hidden" as const,
     },
     {
@@ -38,6 +40,7 @@ export function buildCardsFromEntries(entries: readonly CourseDictionaryEntry[])
       pairId: entry.id,
       type: "word" as const,
       content: entry.word,
+      translation: entry.translation,
       state: "hidden" as const,
     },
   ]);

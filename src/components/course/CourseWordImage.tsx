@@ -2,6 +2,7 @@ import { cn } from "../../lib/utils";
 
 type CourseWordImageProps = {
   imageUrl: string;
+  translation: string;
   alt?: string;
   className?: string;
   fallbackClassName?: string;
@@ -12,17 +13,18 @@ export function CourseWordImage({
   alt = "",
   className,
   fallbackClassName,
+  translation = "?",
 }: CourseWordImageProps) {
   if (!imageUrl) {
     return (
       <span
         className={cn(
-          "flex size-16 items-center justify-center rounded-xl bg-slate-100 text-xs font-semibold text-slate-400",
+          "flex size-24 items-center justify-center rounded-xl font-semibold text-4xl",
           fallbackClassName,
         )}
         aria-hidden
       >
-        ?
+        {translation}
       </span>
     );
   }
