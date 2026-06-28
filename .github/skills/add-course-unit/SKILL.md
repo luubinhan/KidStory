@@ -115,7 +115,7 @@ export const unit3Fruits = {
 } satisfies CourseUnit;
 ```
 
-### Step 3: Build data consistently
+### Step 3: Create data consistently
 
 - Keep all `practiceSentences.text` lowercase to match existing units.
 - Use sentence ids in this pattern: `unit-<n>-s-<index>`.
@@ -136,11 +136,6 @@ Edit `src/data/course/index.ts`:
    ```typescript
    export const courseUnits: readonly CourseUnit[] = [unit1Greetings, unit2Hello, unit3Fruits];
    ```
-
-### Step 5: Validate
-
-- Confirm no TypeScript errors in the new unit file.
-- Confirm import path and export name in `src/data/course/index.ts` are correct.
 
 ## Example Input -> Output Mapping
 
