@@ -17,7 +17,7 @@ export const unit3Fruits = {
       word: "cherry",
       translation: "quả anh đào",
       imageUrl: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg",
-      audio: "https://github.com/luubinhan/KidStory/blob/main/public/sounds/cherry.mp3",
+      audio: "/sounds/cherry.mp3",
     },
     {
       id: "orange",

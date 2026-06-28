@@ -1,5 +1,6 @@
 import type { MutableRefObject } from "react";
 import type { GameQuestion } from "../types/game";
+import { resolveAudioSrc } from "./audioUrlCache";
 import { ttsSentence } from "./gameQuestionTts";
 
 /**
@@ -15,7 +16,8 @@ export async function playGameQuestionStem(
 
   if (q.audioUrl) {
     try {
-      const el = new Audio(q.audioUrl);
+      const src = await resolveAudioSrc(q.audioUrl);
+      const el = new Audio(src);
       audioRef.current = el;
       await el.play();
       return;
