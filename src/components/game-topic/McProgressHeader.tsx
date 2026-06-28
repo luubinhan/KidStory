@@ -11,7 +11,7 @@ export function McProgressHeader({ current, total }: McProgressHeaderProps) {
       <Progress
         value={current}
         max={total}
-        className="h-2.5 bg-amber-100"
+        className="h-2.5 bg-slate-200"
         indicatorClassName="bg-emerald-500"
         aria-label={`Question ${current} of ${total}`}
       />
