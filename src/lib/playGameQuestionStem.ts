@@ -1,4 +1,4 @@
-import type { MutableRefObject } from "react";
+import type { RefObject } from "react";
 import type { GameQuestion } from "../types/game";
 import { resolveAudioSrc } from "./audioUrlCache";
 import { ttsSentence } from "./gameQuestionTts";
@@ -9,7 +9,7 @@ import { ttsSentence } from "./gameQuestionTts";
  */
 export async function playGameQuestionStem(
   q: GameQuestion,
-  audioRef: MutableRefObject<HTMLAudioElement | null>,
+  audioRef: RefObject<HTMLAudioElement | null>,
   stopPrior: () => void,
 ): Promise<void> {
   stopPrior();
