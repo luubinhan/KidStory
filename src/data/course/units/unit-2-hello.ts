@@ -12,7 +12,7 @@ export const unit2Hello = {
   iconBgClass: "bg-sky-100",
   iconColorClass: "text-sky-600",
   words: [
-    { id: "student", word: "student", translation: "học sinh", imageUrl: "" },
+    { id: "student", word: "student", translation: "học sinh", imageUrl: "https://www.eurokidsindia.com/blog/wp-content/uploads/2024/10/Top10_Essential_Trait_GoodStudent.jpg-870x437.jpg" },
     { id: "fine", word: "fine", translation: "khỏe", imageUrl: "" },
   ],
   practiceSentences: [
