@@ -1,0 +1,70 @@
+import { Hash } from "lucide-react";
+import type { CourseUnit } from "../../../types/course";
+
+export const unit6WhatNumberIsIt = {
+  id: "unit-6",
+  unitNumber: 6,
+  title: "What number is it",
+  subtitle: "",
+  status: "current",
+  icon: Hash,
+  youtubeVideoId: "lIzEzQ_G96k",
+  iconBgClass: "bg-amber-100",
+  iconColorClass: "text-amber-600",
+  words: [
+    { id: "number", word: "number", translation: "số", imageUrl: "" },
+    { id: "seven", word: "seven", translation: "số bảy", imageUrl: "" },
+    { id: "ten", word: "ten", translation: "số mười", imageUrl: "" },
+    { id: "six", word: "six", translation: "số sáu", imageUrl: "" },
+    { id: "three", word: "three", translation: "số ba", imageUrl: "" },
+    { id: "one", word: "one", translation: "số một", imageUrl: "" },
+    { id: "two", word: "two", translation: "số hai", imageUrl: "" },
+    { id: "four", word: "four", translation: "số bốn", imageUrl: "" },
+    { id: "five", word: "five", translation: "số năm", imageUrl: "" },
+    { id: "eight", word: "eight", translation: "số tám", imageUrl: "" },
+    { id: "night", word: "night", translation: "đêm", imageUrl: "" },
+  ],
+  practiceSentences: [
+    { id: "unit-6-s-1", text: "what number is it" },
+    { id: "unit-6-s-2", text: "it's three" },
+    { id: "unit-6-s-3", text: "what number is this" },
+    { id: "unit-6-s-4", text: "this is seven" },
+  ],
+  multipleChoiceQuestions: [
+    {
+      id: "unit-6-mc-1",
+      textBefore: "What ",
+      textAfter: " is it?",
+      options: ["number", "color", "animal", "fruit"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-6-mc-2",
+      textBefore: "It's ",
+      textAfter: ".",
+      options: ["three", "one", "five", "ten"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-6-mc-3",
+      textBefore: "What number is ",
+      textAfter: "?",
+      options: ["this", "that", "three", "seven"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-6-mc-4",
+      textBefore: "This is ",
+      textAfter: ".",
+      options: ["seven", "six", "eight", "four"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-6-mc-5",
+      textBefore: "It is number ",
+      textAfter: ".",
+      options: ["ten", "five", "two", "one"],
+      correctIndex: 0,
+    },
+  ],
+} satisfies CourseUnit;
