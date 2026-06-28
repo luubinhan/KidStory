@@ -28,7 +28,7 @@ export function MatchingCard({
       disabled={disabled || card.state === "matched"}
       onClick={() => onSelect(card.id)}
       className={cn(
-        "matching-card aspect-[2/2] w-full min-w-[72px] rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
+        "matching-card cursor-pointer aspect-[2/2] w-full min-w-[72px] rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
         isAnimating && "pointer-events-none",
         card.state === "matched" && "pointer-events-none",
       )}

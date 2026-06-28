@@ -1,5 +1,6 @@
 import type { CourseDictionaryEntry } from "../../types/course";
 import { useCourseMatching } from "../../hooks/useCourseMatching";
+import { Progress } from "../ui";
 import { MatchingCard } from "./MatchingCard";
 import { MatchingEndScreen } from "./MatchingEndScreen";
 
@@ -45,9 +46,18 @@ export function CourseMatchingSession({ entries }: CourseMatchingSessionProps) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-3 sm:gap-4">
-      <p className="shrink-0 text-center text-sm font-semibold text-slate-500">
-        Matched {matchedCount} of {pairCount} · Moves: {moves}
-      </p>
+      <div className="shrink-0 space-y-2">
+        <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
+          <span aria-live="polite">
+            {matchedCount} / {pairCount}
+          </span>
+        </div>
+        <Progress
+          value={matchedCount}
+          max={pairCount}
+          aria-label={`Matched ${matchedCount} of ${pairCount}`}
+        />
+      </div>
 
       <div className="grid min-h-0 flex-1 grid-cols-5 content-start gap-2 sm:gap-3">
         {cards.map((card) => {
