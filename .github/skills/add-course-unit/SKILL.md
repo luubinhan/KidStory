@@ -1,7 +1,7 @@
 ---
 name: add-course-unit
 description: "Add a new KidStory course unit. Use when: creating a new unit in src/data/course/units, generating words/practice sentences/multiple-choice questions, and registering the unit in src/data/course/index.ts."
-argument-hint: "Unit title, words list, and practice sentences list"
+argument-hint: "title, words, sentences, youtubeVideoId"
 ---
 
 # Add a New KidStory Course Unit
@@ -14,12 +14,13 @@ argument-hint: "Unit title, words list, and practice sentences list"
 
 ## Input
 
-The user provides:
-1. **Words** - comma-separated list (for example: `cherry, orange, pineapple, banana`)
-2. **Practice sentences** - comma-separated list or numbered lines (for example: `is it an orange, yes it is, it's a cherry, it is pineapple, is it a melon, no it isn't`)
+The user must provide:
+1. **Title** - unit title (for example: `Fruits`)
+2. **Words** - comma-separated list (for example: `cherry, orange, pineapple, banana`)
+3. **Practice sentences** - comma-separated list or numbered lines (for example: `is it an orange, yes it is, it's a cherry, it is pineapple, is it a melon, no it isn't`)
+4. **youtubeVideoId** - YouTube video ID string (for example: `by1QAoRcc-U`)
 
 Optional input:
-- **Unit title** (if not provided, infer from dominant topic)
 - **Vietnamese translations** for words (if missing, generate simple learner-friendly translations)
 
 ## Procedure
@@ -57,7 +58,7 @@ export const unit3Fruits = {
   subtitle: "",
   status: "current",
   icon: Apple,
-  youtubeVideoId: "by1QAoRcc-U",
+  youtubeVideoId: "<provided-youtubeVideoId>",
   iconBgClass: "bg-rose-100",
   iconColorClass: "text-rose-600",
   words: [
@@ -145,8 +146,10 @@ Edit `src/data/course/index.ts`:
 ## Example Input -> Output Mapping
 
 Input:
+- Title: `Fruits`
 - Words: `cherry, orange, pineapple, banana`
 - Practice sentences: `is it an orange, yes it is, it's a cherry, it is pineapple, is it a melon, no it isn't`
+- youtubeVideoId: `by1QAoRcc-U`
 
 Output:
 - New unit file in `src/data/course/units/`
