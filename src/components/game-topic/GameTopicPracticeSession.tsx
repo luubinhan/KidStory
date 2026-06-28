@@ -70,7 +70,7 @@ export function GameTopicPracticeSession({
       sentence;
 
     return (
-      <div className="max-w-3xl mx-auto px-4 py-2">
+      <div className="max-w-3xl mx-auto py-2">
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}
@@ -133,7 +133,7 @@ export function GameTopicPracticeSession({
       spell;
 
     return (
-      <div className="max-w-3xl mx-auto px-4 py-2">
+      <div className="max-w-3xl mx-auto py-2">
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}
@@ -208,7 +208,7 @@ export function GameTopicPracticeSession({
     pickedDisplayIndex !== null && q ? optionOrder[pickedDisplayIndex]! === q.correctIndex : null;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-2">
+    <div className="max-w-3xl mx-auto py-2">
       {showGameBreadcrumb ? (
         <GameTopicBreadcrumb
           topicTitle={topic.title}

@@ -49,7 +49,7 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, words: un
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-2">
+    <div className="max-w-3xl mx-auto py-2">
       {isSolved ? <Confetti /> : null}
       {sentence ? (
         <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
