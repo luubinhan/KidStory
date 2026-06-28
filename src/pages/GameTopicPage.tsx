@@ -31,15 +31,25 @@ export default function GameTopicPage() {
       ? "sentence"
       : "multiple-choice";
 
+  const isMultipleChoice = mode === "multiple-choice";
+
   return (
-    <>
+    <div className={isMultipleChoice ? "flex min-h-screen flex-col" : undefined}>
       <AppPageHeader />
-      <GameTopicPracticeSession
-        topic={topic}
-        topicId={topicId}
-        mode={mode}
-        showGameBreadcrumb
-      />
-    </>
+      <div
+        className={
+          isMultipleChoice
+            ? "mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6"
+            : undefined
+        }
+      >
+        <GameTopicPracticeSession
+          topic={topic}
+          topicId={topicId}
+          mode={mode}
+          showGameBreadcrumb
+        />
+      </div>
+    </div>
   );
 }

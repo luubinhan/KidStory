@@ -3,6 +3,7 @@ export { GameTopicBreadcrumb } from "./GameTopicBreadcrumb";
 export { GameQuestionImage } from "./GameQuestionImage";
 export { GameQuestionStem } from "./GameQuestionStem";
 export { GameOptionRow } from "./GameOptionRow";
+export { McProgressHeader } from "./McProgressHeader";
 export { GameQuestionFooter } from "./GameQuestionFooter";
 export { GameSpellCelebration } from "./GameSpellCelebration";
 export { GameSpellLetterStrip } from "./GameSpellLetterStrip";

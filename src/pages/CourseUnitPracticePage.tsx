@@ -40,16 +40,17 @@ export default function CourseUnitPracticePage() {
 
   const dictionaryEntries = getDictionaryEntriesByUnitId(unit.id);
   const isMatching = activity.id === "matching";
+  const isMultipleChoice = activity.id === "multiple-choice";
+
+  const contentClassName = isMatching
+    ? "flex w-full flex-1 flex-col px-4 py-4 sm:px-6 sm:py-6"
+    : isMultipleChoice
+      ? "mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6"
+      : "mx-auto w-full max-w-lg flex-1 px-4 py-6";
 
   return (
     <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
-      <div
-        className={
-          isMatching
-            ? "flex w-full flex-1 flex-col px-4 py-4 sm:px-6 sm:py-6"
-            : "mx-auto w-full max-w-lg flex-1 px-4 py-6"
-        }
-      >
+      <div className={contentClassName}>
         <CoursePracticeHeader unit={unit} activity={activity} />
 
         {activity.id === "flashcards" ? (

@@ -9,6 +9,7 @@ import {
   GameSpellLetterStrip,
   GameTopicBreadcrumb,
   IconVolumeButton,
+  McProgressHeader,
 } from "./index";
 import { useGameTopicQuestion } from "../../hooks/useGameTopicQuestion";
 import { useGameTopicSentenceQuestion } from "../../hooks/useGameTopicSentenceQuestion";
@@ -208,7 +209,7 @@ export function GameTopicPracticeSession({
     pickedDisplayIndex !== null && q ? optionOrder[pickedDisplayIndex]! === q.correctIndex : null;
 
   return (
-    <div className="max-w-3xl mx-auto py-2">
+    <div className="flex min-h-0 flex-1 flex-col">
       {showGameBreadcrumb ? (
         <GameTopicBreadcrumb
           topicTitle={topic.title}
@@ -218,17 +219,20 @@ export function GameTopicPracticeSession({
       ) : null}
 
       {q ? (
-        <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
-          {q.image ? <GameQuestionImage src={q.image} /> : null}
+        <div className="flex min-h-0 flex-1 flex-col rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
+          <McProgressHeader current={questionIndex + 1} total={questions.length} />
 
-          <GameQuestionStem
-            q={q}
-            blankLabel={blankLabel}
-            answerCorrect={answerCorrect}
-            onPlaySentence={playAudio}
-          />
+          <div className="shrink-0 space-y-4">
+            {q.image ? <GameQuestionImage src={q.image} /> : null}
+            <GameQuestionStem
+              q={q}
+              blankLabel={blankLabel}
+              answerCorrect={answerCorrect}
+              onPlaySentence={playAudio}
+            />
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-4 flex min-h-0 flex-1 flex-col gap-3">
             {optionOrder.map((originalIdx, displayIdx) => (
               <GameOptionRow
                 key={`${q.id}-${displayIdx}`}
@@ -243,7 +247,11 @@ export function GameTopicPracticeSession({
             ))}
           </div>
 
-          {pickedDisplayIndex !== null ? <GameQuestionFooter isLast={isLast} onNext={goNext} /> : null}
+          {pickedDisplayIndex !== null ? (
+            <div className="mt-4 shrink-0">
+              <GameQuestionFooter isLast={isLast} onNext={goNext} />
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

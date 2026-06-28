@@ -17,17 +17,17 @@ export function GameQuestionStem({
 }: GameQuestionStemProps) {
   const blankTextClass =
     answerCorrect === null
-      ? "text-yellow-800"
+      ? "text-amber-700 border-amber-400"
       : answerCorrect
-        ? "text-green-700"
-        : "text-red-700";
+        ? "text-emerald-600 border-emerald-500"
+        : "text-rose-600 border-rose-500";
 
   return (
-    <div className="flex flex-wrap items-start gap-2 gap-y-3 mb-5">
-      <p className="text-lg md:text-xl text-slate-900 leading-relaxed flex-1 min-w-0">
+    <div className="flex items-start gap-3">
+      <p className="min-w-0 flex-1 text-xl font-bold leading-snug text-slate-900 md:text-2xl">
         <span>{q.textBefore}</span>
         <span
-          className={`inline-block min-w-[5ch] mx-1 border-b-2 border-dashed border-slate-400 align-baseline text-center font-semibold ${blankTextClass}`}
+          className={`mx-1 inline-block min-w-[5ch] border-b-2 border-dashed px-1 text-center align-baseline ${blankTextClass}`}
         >
           {blankLabel ?? "\u00a0"}
         </span>
