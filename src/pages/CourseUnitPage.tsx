@@ -63,16 +63,6 @@ export default function CourseUnitPage() {
             </div>
           </div>
 
-          <span
-            className={cn(
-              "mt-5 inline-flex rounded-full px-3 py-1 text-xs font-bold",
-              unit.status === "completed" && "bg-emerald-100 text-emerald-700",
-              unit.status === "current" && "bg-sky-100 text-sky-700",
-            )}
-          >
-            {statusLabels[unit.status]}
-          </span>
-
           <UnitActivityList unit={unit} />
         </div>
       </div>
