@@ -2,9 +2,9 @@ export {
   filterCourseDictionary,
   getDictionaryEntries,
   getDictionaryEntriesByUnitId,
-} from "./course/dictionary";
+} from "./course";
 
-import { getDictionaryEntries } from "./course/dictionary";
+import { getDictionaryEntries } from "./course";
 
 /** Flat dictionary list for DictionaryPage */
 export const courseDictionary = getDictionaryEntries();
