@@ -6,7 +6,6 @@ export const unit1Greetings = {
   unitNumber: 1,
   title: "Greetings",
   subtitle: "",
-  status: "current",
   icon: Sun,
   youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-amber-100",

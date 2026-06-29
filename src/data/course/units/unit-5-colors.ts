@@ -6,7 +6,6 @@ export const unit5Colors = {
   unitNumber: 5,
   title: "Colors",
   subtitle: "",
-  status: "current",
   icon: Palette,
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-indigo-100",

@@ -6,7 +6,6 @@ export const unit7IsHeATeacher = {
   unitNumber: 7,
   title: "Is he a teacher",
   subtitle: "",
-  status: "current",
   icon: BookOpen,
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-cyan-100",
