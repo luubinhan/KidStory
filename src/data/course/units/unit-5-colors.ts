@@ -16,6 +16,9 @@ export const unit5Colors = {
     { id: "black", word: "black", translation: "màu đen", imageUrl: "https://www.equilter.com/images/products/MMJETBBK.jpg" },
     { id: "blue", word: "blue", translation: "màu xanh dương", imageUrl: "https://backdropshop.prasolutions.com.au/cdn/shop/products/SUPERIOR-PAPER-BACK-PAPER-ROYAL-BLUE-1.35M-BY-11M-WITH-CORE_bb597a3b-ae74-498f-97d3-4d74acf77dfb_large.jpg?v=1486453270" },
     { id: "white", word: "white", translation: "màu trắng", imageUrl: "https://www.ober-surfaces.com/cache/images/product/34173cb38f07f89ddbebc2ac9128303f-1301-oberflex_purepapercolor_clawed_white001_detail.jpg" },
+    { id: "gray", word: "gray", translation: "màu xám", imageUrl: "https://s7d9.scene7.com/is/image/daltile/AO_MN44_24x24_Gray_Polished?$PRODUCTIMAGE$" },
+    { id: "white", word: "white", translation: "màu trắng", imageUrl: "https://www.ober-surfaces.com/cache/images/product/34173cb38f07f89ddbebc2ac9128303f-1301-oberflex_purepapercolor_clawed_white001_detail.jpg" },
+    { id: "purple", word: "purple", translation: "màu tím", imageUrl: "https://backdropshop.prasolutions.com.au/cdn/shop/products/SUPERIOR-PAPER-BACK-PAPER-DEEP-PURPLE-2.75M-BY-11M_91c0251c-92c2-4b6f-b17e-e3f329a82f03_grande.jpg?v=1486453308" },
   ],
   practiceSentences: [
     { id: "unit-5-s-1", text: "it's red" },
