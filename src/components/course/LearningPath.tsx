@@ -7,6 +7,8 @@ type LearningPathProps = {
   units: readonly CourseUnit[];
 };
 
+const UNIT_SEGMENT_HEIGHT_PX = 116;
+
 function DecorativeBackground() {
   return (
     <>
@@ -37,9 +39,12 @@ export function LearningPath({ units }: LearningPathProps) {
   return (
     <section className="relative px-2 pb-8 pt-8">
       <DecorativeBackground />
-      <LearningPathConnector unitCount={units.length} />
+      <LearningPathConnector
+        unitCount={units.length}
+        segmentHeight={UNIT_SEGMENT_HEIGHT_PX}
+      />
 
-      <div className="relative flex flex-col gap-6">
+      <div className="relative flex flex-col">
         {units.map((unit, index) => (
           <div
             key={unit.id}

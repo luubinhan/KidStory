@@ -1,9 +1,10 @@
 type LearningPathConnectorProps = {
   unitCount: number;
+  segmentHeight: number;
 };
 
-export function LearningPathConnector({ unitCount }: LearningPathConnectorProps) {
-  const height = unitCount * 140;
+export function LearningPathConnector({ unitCount, segmentHeight }: LearningPathConnectorProps) {
+  const height = unitCount * segmentHeight;
 
   return (
     <svg
