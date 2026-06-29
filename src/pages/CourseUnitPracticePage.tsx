@@ -9,6 +9,7 @@ import {
   CourseMatchingSession,
   CoursePracticeHeader,
   CoursePracticeSentenceSession,
+  CourseWriteSession,
 } from "../components/course-practice";
 import { GameTopicPracticeSession } from "../components/game-topic/GameTopicPracticeSession";
 import { buildMcTopic, buildSpellTopic } from "../lib/courseUnitTopic";
@@ -81,6 +82,10 @@ export default function CourseUnitPracticePage() {
             topicId={unit.id}
             mode="spell"
           />
+        ) : null}
+
+        {activity.id === "write" ? (
+          <CourseWriteSession words={unit.words} sessionKey={unit.id} />
         ) : null}
       </div>
       <CourseBottomNav />
