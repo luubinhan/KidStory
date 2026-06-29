@@ -64,7 +64,6 @@ export default function CourseUnitPracticePage() {
           <CoursePracticeSentenceSession
             sentences={unit.practiceSentences}
             sessionKey={unit.id}
-            words={unit.words}
           />
         ) : null}
 

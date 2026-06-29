@@ -1,14 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatPracticeSentence } from "../lib/courseSentenceDisplay";
-import { findWordAudioInSentence } from "../lib/courseWordAudio";
 import { shuffledIndices } from "../lib/gameTopicShuffle";
 import { playCourseAudio } from "../lib/playCourseAudio";
-import type { CoursePracticeSentence, CourseWord } from "../types/course";
+import type { CoursePracticeSentence } from "../types/course";
 
 export function useCoursePracticeSentenceQuestion(
   sentences: readonly CoursePracticeSentence[],
   sessionKey: string,
-  unitWords: readonly CourseWord[],
 ) {
   const [sentenceIndex, setSentenceIndex] = useState(0);
   const [wordOrder, setWordOrder] = useState<number[]>([]);
@@ -60,10 +58,9 @@ export function useCoursePracticeSentenceQuestion(
   }, [stopAudio]);
 
   const playSentence = useCallback(() => {
-    if (!displayText || !sentence) return;
-    const audioUrl = findWordAudioInSentence(sentence.text, unitWords);
-    void playCourseAudio(audioUrl, displayText, audioRef, stopAudio);
-  }, [displayText, sentence, unitWords, stopAudio]);
+    if (!displayText) return;
+    void playCourseAudio(undefined, displayText, audioRef, stopAudio);
+  }, [displayText, stopAudio]);
 
   const goNext = useCallback(() => {
     if (sentenceIndex < sentences.length - 1) {
