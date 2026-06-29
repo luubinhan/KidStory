@@ -19,11 +19,8 @@ export const unit8Clothes = {
     { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
     { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", imageUrl: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
     { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", imageUrl: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
-    { id: "black", word: "black", translation: "màu đen", imageUrl: "https://www.equilter.com/images/products/MMJETBBK.jpg" },
+    
     { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", imageUrl: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg" },
-    { id: "gray", word: "gray", translation: "màu xám", imageUrl: "https://s7d9.scene7.com/is/image/daltile/AO_MN44_24x24_Gray_Polished?$PRODUCTIMAGE$" },
-    { id: "white", word: "white", translation: "màu trắng", imageUrl: "https://www.ober-surfaces.com/cache/images/product/34173cb38f07f89ddbebc2ac9128303f-1301-oberflex_purepapercolor_clawed_white001_detail.jpg" },
-    { id: "purple", word: "purple", translation: "màu tím", imageUrl: "https://backdropshop.prasolutions.com.au/cdn/shop/products/SUPERIOR-PAPER-BACK-PAPER-DEEP-PURPLE-2.75M-BY-11M_91c0251c-92c2-4b6f-b17e-e3f329a82f03_grande.jpg?v=1486453308" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
