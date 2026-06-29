@@ -1,16 +1,17 @@
 import type { RefObject } from "react";
 import type { GameQuestion } from "../types/game";
 import { resolveAudioSrc } from "./audioUrlCache";
-import { ttsSentence } from "./gameQuestionTts";
+import { ttsFullSentence, ttsSentence } from "./gameQuestionTts";
 
 /**
- * Plays the question stem: optional `audioUrl`, otherwise TTS of the fill-in sentence
- * (`textBefore … textAfter`), matching the main quiz speaker behavior.
+ * Plays the question stem: optional `audioUrl`, otherwise TTS of the sentence.
+ * MC mode uses the full correct sentence; spell mode keeps the blank stem.
  */
 export async function playGameQuestionStem(
   q: GameQuestion,
   audioRef: RefObject<HTMLAudioElement | null>,
   stopPrior: () => void,
+  options?: { includeAnswer?: boolean },
 ): Promise<void> {
   stopPrior();
 
@@ -27,7 +28,7 @@ export async function playGameQuestionStem(
   }
 
   if (typeof window !== "undefined" && window.speechSynthesis) {
-    const stem = ttsSentence(q).trim();
+    const stem = (options?.includeAnswer ? ttsFullSentence(q) : ttsSentence(q)).trim();
     const u = new SpeechSynthesisUtterance(stem);
     u.rate = 0.92;
     window.speechSynthesis.speak(u);

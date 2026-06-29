@@ -49,7 +49,7 @@ export function useGameTopicQuestion(
 
   const playAudio = useCallback(async () => {
     if (!q) return;
-    await playGameQuestionStem(q, audioRef, stopAudio);
+    await playGameQuestionStem(q, audioRef, stopAudio, { includeAnswer: true });
   }, [q, stopAudio]);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function useGameTopicQuestion(
     const key = `mc:${topicId}:${q.id}`;
     if (lastMcInitialStemKey === key) return;
     lastMcInitialStemKey = key;
-    void playGameQuestionStem(q, audioRef, stopAudio);
+    void playGameQuestionStem(q, audioRef, stopAudio, { includeAnswer: true });
   }, [topicId, q, stopAudio]);
 
   const playOptionWord = useCallback(
