@@ -12,6 +12,8 @@ export interface GameQuestion {
   correctIndex: number;
   /** Optional narration under `public/` — use absolute path from site root */
   audioUrl?: string;
+  /** Course vocabulary hint when no illustration is available */
+  translation?: string;
 }
 
 export interface GameTopic {
