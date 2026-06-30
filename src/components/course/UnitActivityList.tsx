@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { ChevronRight, PlayCircle } from "lucide-react";
+import { PlayCircle } from "lucide-react";
 import { courseActivities } from "../../data/course-activities";
 import type { CourseUnit } from "../../types/course";
 import { cn } from "../../lib/utils";
@@ -28,10 +28,7 @@ function ActivityCardContent({
       >
         <Icon className={cn("size-6", activity.iconColorClass)} aria-hidden />
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="font-bold text-slate-800">{activity.label}</p>
-      </div>
-      <ChevronRight className="size-5 shrink-0 text-slate-300" aria-hidden />
+      <p className="font-bold text-slate-800">{activity.label}</p>
     </>
   );
 }
@@ -51,16 +48,17 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
 
   const cardClassName = (borderClass: string) =>
     cn(
-      "flex w-full items-center gap-4 rounded-2xl border-2 bg-white p-4 shadow-sm transition-all cursor-pointer",
+      "flex h-full w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 bg-white p-4 text-center shadow-sm transition-all cursor-pointer",
       cn("border-white", borderClass, "hover:shadow-md"),
     );
 
   return (
     <>
-      <div className="mt-6 space-y-3">
-        <ul className="space-y-3">
+      <div className="mt-6 flex justify-center items-center min-h-[70vh]">
+        <ul className="grid grid-flow-col auto-cols-[9rem] grid-rows-[9rem] justify-center gap-3 sm:gap-4">
           {hasLearnVideo ? (
             <motion.li
+              className="size-full"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0 }}
@@ -70,7 +68,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
                 onClick={() => setLearnVideoOpen(true)}
                 className={cn(
                   cardClassName(learnActivityStyles.borderClass),
-                  "text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2",
                 )}
               >
                 <div
@@ -84,10 +82,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
                     aria-hidden
                   />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-bold text-slate-800">{learnActivityStyles.label}</p>
-                </div>
-                <ChevronRight className="size-5 shrink-0 text-slate-300" aria-hidden />
+                <p className="font-bold text-slate-800">{learnActivityStyles.label}</p>
               </button>
             </motion.li>
           ) : null}
@@ -99,6 +94,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
             return (
               <motion.li
                 key={activity.id}
+                className="size-full"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: activityIndex * 0.05 }}

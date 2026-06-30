@@ -36,16 +36,9 @@ export default function CourseUnitPage() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
-      <div className="mx-auto max-w-lg px-4 py-6">
-        <Link
-          to="/course"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 rounded-lg"
-        >
-          <ArrowLeft className="size-4" aria-hidden />
-          Back
-        </Link>
-
-        <div className="mt-6 rounded-2xl border-2 border-white bg-white p-6 shadow-md">
+      <div className="mx-auto px-4 py-6">
+        <div className="mx-auto max-w-lg flex items-center justify-between gap-8">
+          
           <div className="flex items-start gap-4">
             <div
               className={cn(
@@ -62,9 +55,16 @@ export default function CourseUnitPage() {
               <h1 className="text-2xl font-bold text-slate-800">{unit.title}</h1>
             </div>
           </div>
-
-          <UnitActivityList unit={unit} />
+          <Link
+            to="/course"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 rounded-lg"
+          >
+            <ArrowLeft className="size-4" aria-hidden />
+            Back
+          </Link>
         </div>
+
+        <UnitActivityList unit={unit} />
       </div>
       <CourseBottomNav />
     </div>
