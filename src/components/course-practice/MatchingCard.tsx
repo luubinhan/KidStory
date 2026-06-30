@@ -58,7 +58,7 @@ export function MatchingCard({
           {card.type === "image" ? (
             <CourseWordImage imageUrl={card.content} translation={card.translation} fallbackClassName="size-14" />
           ) : (
-            <span className="px-2 text-center text-lg font-bold font-kids text-slate-800">
+            <span className="px-2 text-center text-4xl font-bold font-kids text-slate-800">
               {card.content}
             </span>
           )}

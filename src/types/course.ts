@@ -7,6 +7,7 @@ export type CourseActivityId =
   | "flashcards"
   | "multiple-choice"
   | "spell"
+  | "write"
   | "sentence"
   | "matching";
 

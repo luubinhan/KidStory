@@ -9,6 +9,7 @@ import {
   GameSpellLetterStrip,
   GameTopicBreadcrumb,
   IconVolumeButton,
+  McProgressHeader,
 } from "./index";
 import { useGameTopicQuestion } from "../../hooks/useGameTopicQuestion";
 import { useGameTopicSentenceQuestion } from "../../hooks/useGameTopicSentenceQuestion";
@@ -141,11 +142,12 @@ export function GameTopicPracticeSession({
             questionCount={questions.length}
           />
         ) : null}
+        <McProgressHeader current={questionIndex + 1} total={questions.length} />
         {isSolved ? <Confetti /> : null}
 
         {q ? (
-          <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-4 md:p-4 shadow-md">
-            {q.image ? (
+          <div className="rounded-2xl border-2 min-h-[65vh] flex flex-col justify-center border-slate-100 bg-white px-4 py-4 md:p-4 shadow-md">
+            {q.image?.trim() ? (
               <div className="mb-12 relative">
                 <GameQuestionImage src={q.image} />
                 <div className="absolute bottom-0 left-0 right-4 flex flex-wrap items-start gap-2 gap-y-2 justify-end py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100 ">
@@ -159,13 +161,18 @@ export function GameTopicPracticeSession({
                 </div>
               </div>
             ) : (
-              <div className="flex flex-wrap items-start gap-2 gap-y-3 justify-center mb-12">
-                <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
-                  <IconVolumeButton
-                    className="h-full w-full cursor-pointer flex items-center justify-center"
-                    onClick={() => void playWord()}
-                    aria-label="Hear the word"
-                  />
+              <div className="mb-12 space-y-4 text-center">
+                {q.translation ? (
+                  <p className="text-3xl font-bold text-slate-800">{q.translation}</p>
+                ) : null}
+                <div className="flex justify-center">
+                  <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
+                    <IconVolumeButton
+                      className="h-full w-full cursor-pointer flex items-center justify-center"
+                      onClick={() => void playWord()}
+                      aria-label="Hear the word"
+                    />
+                  </div>
                 </div>
               </div>
             )}
@@ -208,7 +215,7 @@ export function GameTopicPracticeSession({
     pickedDisplayIndex !== null && q ? optionOrder[pickedDisplayIndex]! === q.correctIndex : null;
 
   return (
-    <div className="max-w-3xl mx-auto py-2">
+    <div className="flex min-h-0 flex-1 flex-col">
       {showGameBreadcrumb ? (
         <GameTopicBreadcrumb
           topicTitle={topic.title}
@@ -217,18 +224,21 @@ export function GameTopicPracticeSession({
         />
       ) : null}
 
+      <McProgressHeader current={questionIndex + 1} total={questions.length} />
       {q ? (
-        <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 md:p-6 shadow-md">
-          {q.image ? <GameQuestionImage src={q.image} /> : null}
+        <div className="flex min-h-0 flex-1 flex-col rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
 
-          <GameQuestionStem
-            q={q}
-            blankLabel={blankLabel}
-            answerCorrect={answerCorrect}
-            onPlaySentence={playAudio}
-          />
+          <div className="shrink-0 space-y-4">
+            {q.image ? <GameQuestionImage src={q.image} /> : null}
+            <GameQuestionStem
+              q={q}
+              blankLabel={blankLabel}
+              answerCorrect={answerCorrect}
+              onPlaySentence={playAudio}
+            />
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-4 flex min-h-0 flex-1 flex-col gap-3">
             {optionOrder.map((originalIdx, displayIdx) => (
               <GameOptionRow
                 key={`${q.id}-${displayIdx}`}
@@ -243,7 +253,11 @@ export function GameTopicPracticeSession({
             ))}
           </div>
 
-          {pickedDisplayIndex !== null ? <GameQuestionFooter isLast={isLast} onNext={goNext} /> : null}
+          {pickedDisplayIndex !== null ? (
+            <div className="mt-4 shrink-0">
+              <GameQuestionFooter isLast={isLast} onNext={goNext} />
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

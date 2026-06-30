@@ -7,6 +7,7 @@ export function buildSpellQuestionsFromWords(
   return words.map((entry) => ({
     id: `spell-${entry.id}`,
     image: entry.imageUrl || undefined,
+    translation: entry.translation,
     textBefore: "",
     textAfter: "",
     options: [entry.word] as readonly string[],

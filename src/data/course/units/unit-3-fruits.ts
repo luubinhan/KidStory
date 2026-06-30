@@ -6,7 +6,6 @@ export const unit3Fruits = {
   unitNumber: 3,
   title: "Fruits",
   subtitle: "",
-  status: "current",
   icon: Apple,
   youtubeVideoId: "dDbNM3AhUOw",
   iconBgClass: "bg-rose-100",
@@ -17,20 +16,21 @@ export const unit3Fruits = {
       word: "cherry",
       translation: "quả anh đào",
       imageUrl: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg",
-      audio: "https://github.com/luubinhan/KidStory/blob/main/public/sounds/cherry.mp3",
+      audio: "/sounds/cherry.mp3",
     },
     {
       id: "orange",
       word: "orange",
       translation: "quả cam",
       imageUrl: "https://www.quanta.org/thumbs/thumb-orange-640x480-orange.jpg",
-      
+      audio: "/sounds/orange.mp3",
     },
     {
       id: "pineapple",
       word: "pineapple",
       translation: "quả dứa",
       imageUrl: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1769956258594/edca6379.jpg",
+      audio: "/sounds/pineapple.mp3",
      
     },
     {
@@ -38,7 +38,7 @@ export const unit3Fruits = {
       word: "banana",
       translation: "quả chuối",
       imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/1280px-Banana-Single.jpg",
-      audio: "https://dictionary.cambridge.org/vi/media/english/us_pron/b/ban/banan/banana.mp3",
+      audio: "/sounds/banana.mp3",
     },
   ],
   practiceSentences: [

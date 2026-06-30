@@ -6,7 +6,6 @@ export const unit2Hello = {
   unitNumber: 2,
   title: "Hello, How are you?",
   subtitle: "",
-  status: "current",
   icon: MessageCircle,
   youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-sky-100",

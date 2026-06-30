@@ -31,29 +31,29 @@ export function GameOptionRow({
   });
 
   return (
-    <div className="flex min-w-0 gap-2 items-stretch">
+    <div className="flex min-h-0 min-w-0 flex-1 items-stretch gap-2">
       <button
         type="button"
         disabled={picked}
         onClick={() => onPick(displayIdx)}
-        className={`min-w-0 cursor-pointer flex-1 rounded-xl cursor-pointer border-2 px-4 py-3 text-left text-base font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default inline-flex items-center justify-between gap-2 ${ring}`}
+        className={`inline-flex min-h-0 min-w-0 flex-1 cursor-pointer items-center justify-between gap-2 rounded-2xl border-2 px-5 py-4 text-left text-lg font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
       >
         <span className="min-w-0">{label}</span>
         {picked && isThis ? (
           correct ? (
-            <BadgeCheck className="h-6 w-6 shrink-0 text-emerald-700" aria-hidden />
+            <BadgeCheck className="size-6 shrink-0 text-emerald-700" aria-hidden />
           ) : (
-            <X className="h-6 w-6 shrink-0 text-rose-700" aria-hidden />
+            <X className="size-6 shrink-0 text-rose-700" aria-hidden />
           )
         ) : null}
       </button>
       <button
         type="button"
         onClick={() => onPlayWord(label)}
-        className="shrink-0 cursor-pointer inline-flex w-[3.25rem] items-center justify-center self-stretch rounded-xl border-2 border-slate-200 bg-white text-slate-700 hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 transition-colors"
+        className="inline-flex w-[3.25rem] shrink-0 cursor-pointer items-center justify-center self-stretch rounded-2xl border-2 border-slate-200 bg-white text-slate-700 transition-colors hover:border-yellow-400 hover:text-yellow-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
         aria-label={`Play “${label}”`}
       >
-        <Volume2 className="h-5 w-5" aria-hidden />
+        <Volume2 className="size-5" aria-hidden />
       </button>
     </div>
   );

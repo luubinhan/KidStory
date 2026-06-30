@@ -6,15 +6,19 @@ export const unit7IsHeATeacher = {
   unitNumber: 7,
   title: "Is he a teacher",
   subtitle: "",
-  status: "current",
   icon: BookOpen,
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-cyan-100",
   iconColorClass: "text-cyan-600",
   words: [
-    { id: "teacher", word: "teacher", translation: "giáo viên", imageUrl: "" },
-    { id: "doctor", word: "doctor", translation: "bác sĩ", imageUrl: "" },
-    { id: "nurse", word: "nurse", translation: "y tá", imageUrl: "" },
+    { id: "teacher", word: "teacher", translation: "giáo viên", imageUrl: "https://affinityworkforce.com/wp-content/uploads/2024/05/2149272223.jpg"
+      ,
+      audio: "/sounds/teacher.mp3",
+     },
+    { id: "doctor", word: "doctor", translation: "bác sĩ", imageUrl: "https://cdn.prod.website-files.com/66bd394eedeb9d6ee29898c6/682f5450a046c241920c1e6f_Three%20doctors%20standing%20side%20by%20side%2C%20crossing%20their%20arms.jpg",
+      audio: "/sounds/doctor.mp3",
+     },
+    { id: "nurse", word: "nurse", translation: "y tá", imageUrl: "https://cdn.prod.website-files.com/5babc11099f97ea5dbcf24d5/653ad10165a9716ee31bd67d_64de3ec56db3d89c7d78cab0_med-surg-nurse.jpeg", audio: "/sounds/nurse.mp3" },
   ],
   practiceSentences: [
     { id: "unit-7-s-1", text: "is he a teacher" },

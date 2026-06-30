@@ -6,7 +6,6 @@ export const unit4WhatIsThisThat = {
   unitNumber: 4,
   title: "What is this/that?",
   subtitle: "",
-  status: "current",
   icon: HelpCircle,
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-emerald-100",

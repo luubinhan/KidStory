@@ -1,0 +1,72 @@
+import { Shirt } from "lucide-react";
+import type { CourseUnit } from "../../../types/course";
+
+export const unit8Clothes = {
+  id: "unit-8",
+  unitNumber: 8,
+  title: "Clothes",
+  subtitle: "",
+  status: "current",
+  icon: Shirt,
+  youtubeVideoId: "n35adRLXj_Y",
+  iconBgClass: "bg-amber-100",
+  iconColorClass: "text-amber-600",
+  words: [
+    { id: "hat", word: "hat", audio: "/sounds/hat.mp3", translation: "mũ", imageUrl: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg" },
+    { id: "shorts", word: "shorts", audio: "/sounds/shorts.mp3", translation: "quần short", imageUrl: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp" },
+    { id: "dress", word: "dress", audio: "/sounds/dress.mp3", translation: "váy", imageUrl: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot" },
+    { id: "t-shirt", word: "t-shirt", audio: "/sounds/t_shirt.mp3", translation: "áo phông", imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png" },
+    { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
+    { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", imageUrl: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
+    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", imageUrl: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
+    
+    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", imageUrl: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg" },
+  ],
+  practiceSentences: [
+    { id: "unit-8-s-1", text: "these are shoes" },
+    { id: "unit-8-s-2", text: "this is a black hat" },
+    { id: "unit-8-s-3", text: "these are shorts" },
+    { id: "unit-8-s-4", text: "this is a t-shirt" },
+    { id: "unit-8-s-5", text: "this is a pink dress" },
+    { id: "unit-8-s-6", text: "these are pants" },
+    { id: "unit-8-s-7", text: "these are socks" },
+    { id: "unit-8-s-8", text: "this is a skirt" },
+  ],
+  multipleChoiceQuestions: [
+    {
+      id: "unit-8-mc-1",
+      textBefore: "This is a ",
+      textAfter: ".",
+      options: ["hat", "shirt", "shoe", "sock"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-8-mc-2",
+      textBefore: "These are ",
+      textAfter: ".",
+      options: ["shoes", "shorts", "pants", "socks"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-8-mc-3",
+      textBefore: "This is a black ",
+      textAfter: ".",
+      options: ["hat", "dress", "skirt", "shoe"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-8-mc-4",
+      textBefore: "This is a ",
+      textAfter: ".",
+      options: ["t-shirt", "socks", "pants", "shoes"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-8-mc-5",
+      textBefore: "These are ",
+      textAfter: ".",
+      options: ["pants", "dress", "skirt", "hat"],
+      correctIndex: 0,
+    },
+  ],
+} satisfies CourseUnit;

@@ -1,4 +1,5 @@
 import type { MutableRefObject } from "react";
+import { resolveAudioSrc } from "./audioUrlCache";
 
 export async function playCourseAudio(
   audioUrl: string | undefined,
@@ -10,7 +11,8 @@ export async function playCourseAudio(
 
   if (audioUrl) {
     try {
-      const el = new Audio(audioUrl);
+      const src = await resolveAudioSrc(audioUrl);
+      const el = new Audio(src);
       audioRef.current = el;
       await el.play();
       return;

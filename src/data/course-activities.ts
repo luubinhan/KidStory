@@ -1,4 +1,4 @@
-import { CaseSensitive, Layers, ListOrdered, Shuffle, SquareCheck } from "lucide-react";
+import { CaseSensitive, Layers, ListOrdered, PencilLine, Shuffle, SquareCheck } from "lucide-react";
 import type { CourseActivity } from "../types/course";
 
 export const courseActivities: readonly CourseActivity[] = [
@@ -37,6 +37,15 @@ export const courseActivities: readonly CourseActivity[] = [
     iconBgClass: "bg-amber-100",
     iconColorClass: "text-amber-700",
     borderClass: "border-amber-200 hover:border-amber-400",
+  },
+  {
+    id: "write",
+    label: "Write",
+    description: "Type the word you see or read.",
+    icon: PencilLine,
+    iconBgClass: "bg-teal-100",
+    iconColorClass: "text-teal-700",
+    borderClass: "border-teal-200 hover:border-teal-400",
   },
   {
     id: "matching",

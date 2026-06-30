@@ -33,7 +33,7 @@ export function CourseWordImage({
     <img
       src={imageUrl}
       alt={alt}
-      className={cn("size-16 rounded-xl object-cover", className)}
+      className={cn("size-32 rounded-xl object-cover", className)}
     />
   );
 }

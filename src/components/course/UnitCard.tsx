@@ -38,9 +38,9 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
       className={cn(
-        "relative w-[11.5rem] rounded-2xl border-2 bg-white p-3.5 shadow-md",
-        isCurrent && "border-sky-400 ring-2 ring-sky-200",
-        isCompleted && "border-white",
+        "relative w-[11.5rem] rounded-2xl p-3.5 ",
+        isCurrent && "border-sky-400 ring-2 ring-sky-200 bg-white shadow-md  border-2",
+        isCompleted && "border-white bg-white shadow-md  border-2",
       )}
     >
       {isCompleted ? (

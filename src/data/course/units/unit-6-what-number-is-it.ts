@@ -6,7 +6,6 @@ export const unit6WhatNumberIsIt = {
   unitNumber: 6,
   title: "What number is it",
   subtitle: "",
-  status: "current",
   icon: Hash,
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-amber-100",
