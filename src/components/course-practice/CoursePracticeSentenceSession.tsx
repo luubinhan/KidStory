@@ -4,6 +4,7 @@ import {
   GameQuestionFooter,
   GameSentenceWordStrip,
   IconVolumeButton,
+  McProgressHeader,
 } from "../game-topic";
 import { useCoursePracticeSentenceQuestion } from "../../hooks/useCoursePracticeSentenceQuestion";
 import { playCelebrationSound } from "../../lib/gameCelebrationSound";
@@ -50,11 +51,9 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) 
   return (
     <div className="max-w-3xl mx-auto py-2">
       {isSolved ? <Confetti /> : null}
+      <McProgressHeader current={sentenceIndex + 1} total={allSentences.length} />
       {sentence ? (
-        <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
-          <p className="mb-6 text-center text-sm font-semibold text-slate-400">
-            Sentence {sentenceIndex + 1} of {allSentences.length}
-          </p>
+        <div className="rounded-2xl min-h-[65vh] flex flex-col justify-center border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
           <div className="flex flex-wrap items-start gap-2 gap-y-3 justify-center mb-12">
             <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
               <IconVolumeButton
