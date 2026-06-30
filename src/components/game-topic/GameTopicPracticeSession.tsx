@@ -218,9 +218,9 @@ export function GameTopicPracticeSession({
         />
       ) : null}
 
+      <McProgressHeader current={questionIndex + 1} total={questions.length} />
       {q ? (
         <div className="flex min-h-0 flex-1 flex-col rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
-          <McProgressHeader current={questionIndex + 1} total={questions.length} />
 
           <div className="shrink-0 space-y-4">
             {q.image ? <GameQuestionImage src={q.image} /> : null}
