@@ -38,9 +38,9 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
       className={cn(
-        "relative w-[11.5rem] rounded-2xl p-3.5 ",
+        "relative w-[11.5rem] rounded-2xl p-3.5 backdrop-blur-sm bg-sky-100/20",
         isCurrent && "border-sky-400 ring-2 ring-sky-200 bg-white shadow-md  border-2",
-        isCompleted && "border-white bg-white shadow-md  border-2",
+        isCompleted && "backdrop-opacity-10 border-none border-2",
       )}
     >
       {isCompleted ? (
@@ -73,14 +73,15 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         </div>
       </div>
 
-      <div className="mt-3">
+      
         {isCurrent ? (
+          <div className="mt-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">
             <Play className="size-3 fill-white" aria-hidden />
             Current
           </span>
+          </div>
         ) : null}
-      </div>
     </motion.div>
   );
 

@@ -40,7 +40,7 @@ export interface CourseUnit {
   unitNumber: number;
   title: string;
   subtitle: string;
-  status: CourseUnitStatus;
+  status?: CourseUnitStatus;
   stars?: number;
   icon: LucideIcon;
   youtubeVideoId?: string;

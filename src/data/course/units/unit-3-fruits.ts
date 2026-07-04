@@ -6,6 +6,7 @@ export const unit3Fruits = {
   unitNumber: 3,
   title: "Fruits",
   subtitle: "",
+  status: "completed",
   icon: Apple,
   youtubeVideoId: "dDbNM3AhUOw",
   iconBgClass: "bg-rose-100",
