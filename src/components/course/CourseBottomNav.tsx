@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { id: "study", label: "Study", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
-  // { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
+  { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
 ];
 
 export function CourseBottomNav() {

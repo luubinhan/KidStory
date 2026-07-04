@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
-import type { CourseUnit } from "../../types/course";
+import type { CourseUnit, CourseUnitStatus } from "../../types/course";
+import { cn } from "../../lib/utils";
 import { LearningPathConnector } from "./LearningPathConnector";
 import { UnitCard } from "./UnitCard";
 
@@ -27,6 +28,30 @@ function DecorativeBackground() {
   );
 }
 
+function UnitPathCounter({
+  unitNumber,
+  status,
+}: {
+  unitNumber: number;
+  status: CourseUnitStatus;
+}) {
+  const isCurrent = status === "current";
+  const isCompleted = status === "completed";
+
+  return (
+    <div
+      className={cn(
+        "pointer-events-none absolute left-1/2 top-1/2 z-10 bg-white border-sky-200 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-sm font-bold shadow-sm",
+        isCompleted && "border-emerald-400 bg-emerald-500 text-white",
+        isCurrent && "animate-pulse border-sky-400 bg-sky-500 text-white ring-2 ring-sky-200",
+      )}
+      aria-hidden
+    >
+      {unitNumber}
+    </div>
+  );
+}
+
 export function LearningPath({ units }: LearningPathProps) {
   const currentUnitRef = useRef<HTMLDivElement>(null);
   const currentIndex = units.findIndex((unit) => unit.status === "current");
@@ -49,8 +74,13 @@ export function LearningPath({ units }: LearningPathProps) {
           <div
             key={unit.id}
             ref={index === currentIndex ? currentUnitRef : undefined}
-            className={index === currentIndex ? "scroll-mt-4" : undefined}
+            className={cn(
+              "relative",
+              index === currentIndex ? "scroll-mt-4" : undefined,
+            )}
+            style={{ minHeight: UNIT_SEGMENT_HEIGHT_PX }}
           >
+            <UnitPathCounter unitNumber={unit.unitNumber} status={unit.status} />
             <UnitCard
               unit={unit}
               index={index}
