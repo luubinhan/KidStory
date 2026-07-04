@@ -1,7 +1,9 @@
 import { Check, CircleArrowRightIcon } from "lucide-react";
-import type { KeyboardEvent } from "react";
+import { useEffect, useRef, type KeyboardEvent } from "react";
 import type { CourseTypedAnswerQuestion } from "../../types/course";
 import { useCourseTypedAnswerSession } from "../../hooks/useCourseTypedAnswerSession";
+import { playCelebrationSound } from "../../lib/gameCelebrationSound";
+import { Confetti } from "../Confetti";
 import { GameQuestionImage } from "../game-topic/GameQuestionImage";
 import { IconVolumeButton } from "../game-topic/IconVolumeButton";
 import { McProgressHeader } from "../game-topic/McProgressHeader";
@@ -32,6 +34,20 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
     playSentence,
   } = useCourseTypedAnswerSession(questions, sessionKey);
 
+  const celebratedRef = useRef(false);
+
+  useEffect(() => {
+    if (phase === "playing") {
+      celebratedRef.current = false;
+    }
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "summary" || celebratedRef.current) return;
+    celebratedRef.current = true;
+    playCelebrationSound();
+  }, [phase]);
+
   if (questions.length === 0) {
     return (
       <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
@@ -41,7 +57,12 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
   }
 
   if (phase === "summary") {
-    return <WriteEndScreen correctCount={correctCount} total={total} onReplay={replay} />;
+    return (
+      <div className="relative">
+        <Confetti />
+        <WriteEndScreen correctCount={correctCount} total={total} onReplay={replay} />
+      </div>
+    );
   }
 
   if (!question) return null;
