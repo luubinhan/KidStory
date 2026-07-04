@@ -20,7 +20,7 @@ export function CoinDisplay({ className, size = "md" }: CoinDisplayProps) {
       )}
       aria-label={`${isLoading ? 0 : coins} coins`}
     >
-      <Coins className={cn("shrink-0 text-amber-500", size === "sm" ? "size-3.5" : "size-4")} aria-hidden />
+      <img src="/assets/coin.png" alt={coins.toString()} className="h-[16px]" />
       <span>{isLoading ? "…" : coins}</span>
     </div>
   );
