@@ -1,5 +1,7 @@
 import { courseActivities } from "../data/course-activities";
 import { courseUnits } from "../data/course";
+import { getShopItemById } from "../data/shopItems";
+import type { ShopItemId } from "../types/shop";
 import type { CourseActivityId, CourseUnit, CourseUnitStatus } from "../types/course";
 import type {
   AchievementId,
@@ -22,7 +24,7 @@ export function getDefaultProgress(): UserProgressV1 {
     unitActivityCompletions: {},
     unitBonusClaimed: {},
     achievements: {},
-    inventory: [],
+    inventory: {},
   };
 }
 
@@ -148,7 +150,7 @@ export function onActivityComplete(
     unitActivityCompletions: { ...progress.unitActivityCompletions },
     unitBonusClaimed: { ...progress.unitBonusClaimed },
     achievements: { ...progress.achievements },
-    inventory: [...progress.inventory],
+    inventory: { ...progress.inventory },
   };
 
   let coinsEarned = COIN_PER_ACTIVITY;
@@ -176,9 +178,11 @@ export function onActivityComplete(
   ) {
     const unlockedAt = new Date().toISOString();
     next.achievements.treasure_mirror = { unlockedAt, rewardClaimed: true };
-    if (!next.inventory.includes("treasure_mirror")) {
-      next.inventory.push("treasure_mirror");
-    }
+    const current = next.inventory.treasure_mirror ?? 0;
+    next.inventory = {
+      ...next.inventory,
+      treasure_mirror: current + 1,
+    };
     achievementUnlocked = "treasure_mirror";
     achievementReward = COIN_TREASURE_MIRROR_REWARD;
     coinsEarned += achievementReward;
@@ -213,4 +217,46 @@ export function spendCoins(
 
 export function canAffordHint(progress: UserProgressV1): boolean {
   return progress.coins >= COIN_HINT_COST;
+}
+
+export function normalizeInventory(
+  inventory: string[] | Record<string, number>,
+): Record<string, number> {
+  if (Array.isArray(inventory)) {
+    const record: Record<string, number> = {};
+    for (const id of inventory) {
+      record[id] = (record[id] ?? 0) + 1;
+    }
+    return record;
+  }
+  return { ...inventory };
+}
+
+export function getItemQuantity(progress: UserProgressV1, itemId: ShopItemId): number {
+  return progress.inventory[itemId] ?? 0;
+}
+
+export function purchaseShopItem(
+  progress: UserProgressV1,
+  itemId: ShopItemId,
+):
+  | { success: true; progress: UserProgressV1 }
+  | { success: false; reason: "insufficient_coins" | "unknown_item" } {
+  const item = getShopItemById(itemId);
+  if (!item) return { success: false, reason: "unknown_item" };
+  if (progress.coins < item.price) return { success: false, reason: "insufficient_coins" };
+
+  const currentQty = progress.inventory[itemId] ?? 0;
+
+  return {
+    success: true,
+    progress: {
+      ...progress,
+      coins: progress.coins - item.price,
+      inventory: {
+        ...progress.inventory,
+        [itemId]: currentQty + 1,
+      },
+    },
+  };
 }

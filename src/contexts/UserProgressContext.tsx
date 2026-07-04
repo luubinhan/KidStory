@@ -15,13 +15,16 @@ import { activateUnblockAll, isUnblockAllActive } from "../lib/unblockAllUnits";
 import {
   canAffordHint,
   getDefaultProgress,
+  getItemQuantity,
   getUnitProgressInfo,
   getUnitStatus,
   isUnitUnlocked,
   onActivityComplete,
+  purchaseShopItem,
   spendCoins,
 } from "../lib/userProgressLogic";
 import type { CourseActivityId, CourseUnit } from "../types/course";
+import type { ShopItemId } from "../types/shop";
 import type { ActivityRewardResult, UserProgressV1 } from "../types/userProgress";
 import { COIN_HINT_COST } from "../types/userProgress";
 
@@ -35,6 +38,8 @@ type UserProgressContextValue = {
   ) => Promise<ActivityRewardResult | null>;
   useHint: () => Promise<boolean>;
   canUseHint: boolean;
+  buyShopItem: (itemId: ShopItemId) => Promise<boolean>;
+  getItemQuantity: (itemId: ShopItemId) => number;
   getUnitStatus: (unit: CourseUnit) => ReturnType<typeof getUnitStatus>;
   isUnitAccessible: (unit: CourseUnit) => boolean;
   getUnitProgress: (unit: CourseUnit) => ReturnType<typeof getUnitProgressInfo>;
@@ -103,6 +108,17 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
     return true;
   }, [persist]);
 
+  const buyShopItem = useCallback(
+    async (itemId: ShopItemId): Promise<boolean> => {
+      const result = purchaseShopItem(progressRef.current, itemId);
+      if (!result.success) return false;
+
+      await persist(result.progress);
+      return true;
+    },
+    [persist],
+  );
+
   const value = useMemo<UserProgressContextValue>(
     () => ({
       progress,
@@ -111,11 +127,13 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       completeActivity,
       useHint,
       canUseHint: canAffordHint(progress),
+      buyShopItem,
+      getItemQuantity: (itemId: ShopItemId) => getItemQuantity(progress, itemId),
       getUnitStatus: (unit) => getUnitStatus(unit, progress, progressOptions),
       isUnitAccessible: (unit) => isUnitUnlocked(unit, progress, progressOptions),
       getUnitProgress: (unit) => getUnitProgressInfo(unit, progress),
     }),
-    [progress, isLoading, completeActivity, useHint, progressOptions],
+    [progress, isLoading, completeActivity, useHint, buyShopItem, progressOptions],
   );
 
   return (

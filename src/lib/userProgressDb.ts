@@ -1,6 +1,6 @@
 import { openDB, type DBSchema, type IDBPDatabase } from "idb";
 import type { UserProgressV1 } from "../types/userProgress";
-import { getDefaultProgress } from "./userProgressLogic";
+import { getDefaultProgress, normalizeInventory } from "./userProgressLogic";
 
 const DB_NAME = "kidstory-user-progress";
 const DB_VERSION = 1;
@@ -32,7 +32,16 @@ function getDb(): Promise<IDBPDatabase<KidStoryProgressDB>> {
 export async function loadUserProgress(): Promise<UserProgressV1> {
   const db = await getDb();
   const stored = await db.get(STORE_NAME, PROGRESS_KEY);
-  return stored ?? getDefaultProgress();
+  if (!stored) return getDefaultProgress();
+
+  const inventory = normalizeInventory(
+    stored.inventory as string[] | Record<string, number>,
+  );
+
+  return {
+    ...stored,
+    inventory,
+  };
 }
 
 export async function saveUserProgress(progress: UserProgressV1): Promise<void> {

@@ -19,7 +19,7 @@ export type UserProgressV1 = {
   unitActivityCompletions: Record<string, CourseActivityId[]>;
   unitBonusClaimed: Record<string, boolean>;
   achievements: Partial<Record<AchievementId, AchievementRecord>>;
-  inventory: string[];
+  inventory: Record<string, number>;
 };
 
 export type ActivityRewardResult = {

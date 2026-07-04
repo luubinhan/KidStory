@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { UserProgressProvider } from "./contexts/UserProgressContext";
 import DiscoverPage from "./pages/DiscoverPage";
 import BookDetailPage from "./pages/BookDetailPage";
@@ -13,8 +13,7 @@ import CoursePage from "./pages/CoursePage";
 import CourseUnitPage from "./pages/CourseUnitPage";
 import CourseUnitPracticePage from "./pages/CourseUnitPracticePage";
 import DictionaryPage from "./pages/DictionaryPage";
-import AchievementsPage from "./pages/AchievementsPage";
-import ShopPage from "./pages/ShopPage";
+import AssetsPage from "./pages/AssetsPage";
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -29,8 +28,9 @@ export default function App() {
             <Route path="/course/:unitId" element={<CourseUnitPage />} />
             <Route path="/course/:unitId/practice/:activityId" element={<CourseUnitPracticePage />} />
             <Route path="/dictionary" element={<DictionaryPage />} />
-            <Route path="/achievements" element={<AchievementsPage />} />
-            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/assets" element={<AssetsPage />} />
+            <Route path="/achievements" element={<Navigate to="/assets" replace />} />
+            <Route path="/shop" element={<Navigate to="/assets" replace />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/games/:topicId" element={<GameTopicPage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />

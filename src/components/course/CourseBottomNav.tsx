@@ -1,4 +1,4 @@
-import { BookOpen, Gamepad2, Home, Search, Trophy } from "lucide-react";
+import { BookOpen, Home, Search, Boxes } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { id: "study", label: "Study", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
-  { id: "achievements", label: "Trophy", icon: Trophy, to: "/achievements" },
+  { id: "achievements", label: "Assets", icon: Boxes, to: "/assets" },
 ];
 
 export function CourseBottomNav() {
@@ -33,7 +33,7 @@ export function CourseBottomNav() {
             (item.id === "study" &&
               (pathname === "/course" || pathname.startsWith("/course/"))) ||
             (item.id === "dictionary" && pathname === "/dictionary") ||
-            (item.id === "achievements" && pathname === "/achievements") ||
+            (item.id === "achievements" && pathname === "/assets") ||
             (item.id === "games" &&
               (pathname === "/games" || pathname.startsWith("/games/")));
 
