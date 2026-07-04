@@ -22,10 +22,12 @@ export function ShopItemCard({
     <article
       className={cn(
         "flex flex-col rounded-2xl border-2 border-slate-200 bg-white p-3 shadow-sm transition-all",
-        !isOwned && "opacity-40 grayscale",
+        
       )}
     >
-      <div className="relative mx-auto aspect-square w-full max-w-[120px]">
+      <div className={cn("relative mx-auto aspect-square w-full max-w-[120px]",
+        !isOwned && "opacity-40 grayscale"
+      )}>
         <img
           src={item.imageUrl}
           alt={item.name}
@@ -44,13 +46,12 @@ export function ShopItemCard({
         <img src="/images/coin.png" alt="" className="size-3.5" aria-hidden />
         {item.price}
       </p>
-
       <button
         type="button"
         onClick={onBuy}
         disabled={!canAfford || isLoading}
         className={cn(
-          "mt-3 w-full rounded-xl py-2 text-xs font-bold transition-colors",
+          "mt-3 w-full cursor-pointer rounded-xl py-2 text-xs font-bold transition-colors",
           canAfford && !isLoading
             ? "bg-sky-500 text-white hover:bg-sky-600"
             : "cursor-not-allowed bg-slate-200 text-slate-400",
