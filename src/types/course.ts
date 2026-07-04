@@ -9,7 +9,18 @@ export type CourseActivityId =
   | "spell"
   | "write"
   | "sentence"
-  | "matching";
+  | "matching"
+  | "complete-sentence";
+
+export interface CourseTypedAnswerQuestion {
+  id: string;
+  prompt: string;
+  textBefore: string;
+  textAfter: string;
+  answer: string;
+  imageUrl: string;
+  audioUrl?: string;
+}
 
 export interface CourseWord {
   id: string;
@@ -38,6 +49,7 @@ export interface CourseUnit {
   words: readonly CourseWord[];
   practiceSentences: readonly CoursePracticeSentence[];
   multipleChoiceQuestions: readonly GameQuestion[];
+  typedAnswerQuestions: readonly CourseTypedAnswerQuestion[];
 }
 
 export interface CourseActivity {

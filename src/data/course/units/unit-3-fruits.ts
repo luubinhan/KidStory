@@ -86,4 +86,5 @@ export const unit3Fruits = {
       correctIndex: 0,
     },
   ],
+  typedAnswerQuestions: [],
 } satisfies CourseUnit;

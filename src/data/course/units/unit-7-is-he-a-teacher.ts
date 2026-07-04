@@ -65,4 +65,5 @@ export const unit7IsHeATeacher = {
       correctIndex: 0,
     },
   ],
+  typedAnswerQuestions: [],
 } satisfies CourseUnit;

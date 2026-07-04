@@ -64,4 +64,5 @@ export const unit5Colors = {
       correctIndex: 0,
     },
   ],
+  typedAnswerQuestions: [],
 } satisfies CourseUnit;

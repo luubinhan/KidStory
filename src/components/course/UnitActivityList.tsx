@@ -7,6 +7,13 @@ import type { CourseUnit } from "../../types/course";
 import { cn } from "../../lib/utils";
 import { UnitLearnVideoModal } from "./UnitLearnVideoModal";
 
+function getUnitActivities(unit: CourseUnit) {
+  return courseActivities.filter(
+    (activity) =>
+      activity.id !== "complete-sentence" || unit.typedAnswerQuestions.length > 0,
+  );
+}
+
 type UnitActivityListProps = {
   unit: CourseUnit;
 };
@@ -45,6 +52,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
   const [learnVideoOpen, setLearnVideoOpen] = useState(false);
   const hasLearnVideo = Boolean(unit.youtubeVideoId);
   const LearnIcon = learnActivityStyles.icon;
+  const visibleActivities = getUnitActivities(unit);
 
   const cardClassName = (borderClass: string) =>
     cn(
@@ -55,10 +63,10 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
   return (
     <>
       <div className="mt-6 flex justify-center items-center min-h-[70vh]">
-        <ul className="grid grid-flow-col auto-cols-[9rem] grid-rows-[9rem] justify-center gap-3 sm:gap-4">
+        <ul className="flex max-w-full flex-wrap justify-center gap-3 sm:gap-4">
           {hasLearnVideo ? (
             <motion.li
-              className="size-full"
+              className="size-[9rem]"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0 }}
@@ -87,14 +95,14 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
             </motion.li>
           ) : null}
 
-          {courseActivities.map((activity, index) => {
+          {visibleActivities.map((activity, index) => {
             const href = `/course/${unit.id}/practice/${activity.id}`;
             const activityIndex = hasLearnVideo ? index + 1 : index;
 
             return (
               <motion.li
                 key={activity.id}
-                className="size-full"
+                className="size-[9rem]"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: activityIndex * 0.05 }}

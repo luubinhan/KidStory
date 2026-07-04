@@ -67,4 +67,5 @@ export const unit6WhatNumberIsIt = {
       correctIndex: 0,
     },
   ],
+  typedAnswerQuestions: [],
 } satisfies CourseUnit;

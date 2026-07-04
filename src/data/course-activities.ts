@@ -1,4 +1,12 @@
-import { CaseSensitive, Layers, ListOrdered, PencilLine, Shuffle, SquareCheck } from "lucide-react";
+import {
+  CaseSensitive,
+  Layers,
+  ListOrdered,
+  MessageSquareText,
+  PencilLine,
+  Shuffle,
+  SquareCheck,
+} from "lucide-react";
 import type { CourseActivity } from "../types/course";
 
 export const courseActivities: readonly CourseActivity[] = [
@@ -55,6 +63,15 @@ export const courseActivities: readonly CourseActivity[] = [
     iconBgClass: "bg-rose-100",
     iconColorClass: "text-rose-600",
     borderClass: "border-rose-200 hover:border-rose-400",
+  },
+  {
+    id: "complete-sentence",
+    label: "Complete the sentence",
+    description: "Look at the picture and type the missing word.",
+    icon: MessageSquareText,
+    iconBgClass: "bg-orange-100",
+    iconColorClass: "text-orange-600",
+    borderClass: "border-orange-200 hover:border-orange-400",
   },
 ];
 

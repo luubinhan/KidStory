@@ -9,6 +9,7 @@ import {
   CourseMatchingSession,
   CoursePracticeHeader,
   CoursePracticeSentenceSession,
+  CourseTypedAnswerSession,
   CourseWriteSession,
 } from "../components/course-practice";
 import { GameTopicPracticeSession } from "../components/game-topic/GameTopicPracticeSession";
@@ -85,6 +86,13 @@ export default function CourseUnitPracticePage() {
 
         {activity.id === "write" ? (
           <CourseWriteSession words={unit.words} sessionKey={unit.id} />
+        ) : null}
+
+        {activity.id === "complete-sentence" ? (
+          <CourseTypedAnswerSession
+            questions={unit.typedAnswerQuestions}
+            sessionKey={unit.id}
+          />
         ) : null}
       </div>
       <CourseBottomNav />

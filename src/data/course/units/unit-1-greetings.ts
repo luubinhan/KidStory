@@ -60,4 +60,5 @@ export const unit1Greetings = {
       correctIndex: 0,
     },
   ],
+  typedAnswerQuestions: [],
 } satisfies CourseUnit;
