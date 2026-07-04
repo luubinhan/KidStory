@@ -1,51 +1,72 @@
-import { Check, Play, Star } from "lucide-react";
+import { Check, Lock, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import type { CourseUnit } from "../../types/course";
+import type { CourseUnit, CourseUnitStatus } from "../../types/course";
 import { cn } from "../../lib/utils";
 
 type UnitCardProps = {
   unit: CourseUnit;
   index: number;
   side: "left" | "right";
+  status: CourseUnitStatus;
+  completedCount: number;
+  totalCount: number;
 };
 
-function StarRating({ count }: { count: number }) {
+function UnitPathCounter({
+  unitNumber,
+  status,
+}: {
+  unitNumber: number;
+  status: CourseUnitStatus;
+}) {
+  const isCurrent = status === "current";
+  const isCompleted = status === "completed";
+  const isLocked = status === "locked";
+
   return (
-    <div className="flex items-center gap-0.5" aria-label={`${count} sao`}>
-      {Array.from({ length: 3 }, (_, i) => (
-        <Star
-          key={i}
-          className={cn(
-            "size-4",
-            i < count ? "fill-amber-400 text-amber-400" : "fill-slate-100 text-slate-200",
-          )}
-          aria-hidden
-        />
-      ))}
+    <div
+      className={cn(
+        "pointer-events-none absolute left-1/2 top-1/2 z-10 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 bg-white text-sm font-bold shadow-sm",
+        isCompleted && "border-emerald-400 bg-emerald-500 text-white",
+        isCurrent && "animate-pulse border-sky-400 bg-sky-500 text-white ring-2 ring-sky-200",
+        isLocked && "border-slate-200 bg-slate-100 text-slate-400",
+        !isCompleted && !isCurrent && !isLocked && "border-sky-200 text-slate-600",
+      )}
+      aria-hidden
+    >
+      {isLocked ? <Lock className="size-3.5" /> : unitNumber}
     </div>
   );
 }
 
-export function UnitCard({ unit, index, side }: UnitCardProps) {
+export function UnitCard({ unit, index, side, status, completedCount, totalCount }: UnitCardProps) {
   const Icon = unit.icon;
-  const isCurrent = unit.status === "current";
-  const isCompleted = unit.status === "completed";
+  const isCurrent = status === "current";
+  const isCompleted = status === "completed";
+  const isLocked = status === "locked";
 
   const cardContent = (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{ opacity: isLocked ? 0.55 : 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
       className={cn(
         "relative w-[11.5rem] rounded-2xl p-3.5 backdrop-blur-sm bg-sky-100/20",
-        isCurrent && "border-sky-400 ring-2 ring-sky-200 bg-white shadow-md  border-2",
+        isCurrent && "border-sky-400 ring-2 ring-sky-200 bg-white shadow-md border-2",
         isCompleted && "backdrop-opacity-10 border-none border-2",
+        isLocked && "grayscale",
       )}
     >
       {isCompleted ? (
         <span className="absolute -right-1.5 -top-1.5 flex size-6 items-center justify-center rounded-full bg-emerald-500 text-white shadow">
           <Check className="size-3.5" strokeWidth={3} aria-hidden />
+        </span>
+      ) : null}
+
+      {isLocked ? (
+        <span className="absolute -right-1.5 -top-1.5 flex size-6 items-center justify-center rounded-full bg-slate-400 text-white shadow">
+          <Lock className="size-3" aria-hidden />
         </span>
       ) : null}
 
@@ -73,15 +94,22 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         </div>
       </div>
 
-      
-        {isCurrent ? (
-          <div className="mt-3">
+      {!isLocked ? (
+        <p className="mt-2 text-[10px] font-semibold text-slate-500">
+          {completedCount}/{totalCount} activities
+        </p>
+      ) : (
+        <p className="mt-2 text-[10px] font-semibold text-slate-400">Locked</p>
+      )}
+
+      {isCurrent ? (
+        <div className="mt-2">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">
             <Play className="size-3 fill-white" aria-hidden />
             Current
           </span>
-          </div>
-        ) : null}
+        </div>
+      ) : null}
     </motion.div>
   );
 
@@ -92,12 +120,20 @@ export function UnitCard({ unit, index, side }: UnitCardProps) {
         side === "left" ? "justify-start pl-2" : "justify-end pr-2",
       )}
     >
-      <Link
-        to={`/course/${unit.id}`}
-        className="rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
-      >
-        {cardContent}
-      </Link>
+      <UnitPathCounter unitNumber={unit.unitNumber} status={status} />
+
+      {isLocked ? (
+        <div className="rounded-2xl" aria-disabled="true">
+          {cardContent}
+        </div>
+      ) : (
+        <Link
+          to={`/course/${unit.id}`}
+          className="rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+        >
+          {cardContent}
+        </Link>
+      )}
     </div>
   );
 }

@@ -2,6 +2,8 @@ import { Check, CircleArrowRightIcon } from "lucide-react";
 import type { KeyboardEvent } from "react";
 import type { CourseWord } from "../../types/course";
 import { useCourseWriteSession } from "../../hooks/useCourseWriteSession";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
+import { useQuestionHint } from "../../hooks/useQuestionHint";
 import { GameQuestionImage } from "../game-topic/GameQuestionImage";
 import { IconVolumeButton } from "../game-topic/IconVolumeButton";
 import { McProgressHeader } from "../game-topic/McProgressHeader";
@@ -11,9 +13,10 @@ import { WriteEndScreen } from "./WriteEndScreen";
 type CourseWriteSessionProps = {
   words: readonly CourseWord[];
   sessionKey: string;
+  unitId: string;
 };
 
-export function CourseWriteSession({ words, sessionKey }: CourseWriteSessionProps) {
+export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSessionProps) {
   const {
     phase,
     word,
@@ -31,6 +34,14 @@ export function CourseWriteSession({ words, sessionKey }: CourseWriteSessionProp
     playWord,
   } = useCourseWriteSession(words, sessionKey);
 
+  const { rewardToast, onReplay } = useActivityCompletion(unitId, "write", phase === "summary");
+  const { hintRevealed, hintControl } = useQuestionHint(word?.id ?? `write-${questionIndex}`);
+
+  const handleReplay = () => {
+    onReplay();
+    replay();
+  };
+
   if (words.length === 0) {
     return (
       <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
@@ -40,7 +51,12 @@ export function CourseWriteSession({ words, sessionKey }: CourseWriteSessionProp
   }
 
   if (phase === "summary") {
-    return <WriteEndScreen correctCount={correctCount} total={total} onReplay={replay} />;
+    return (
+      <>
+        {rewardToast}
+        <WriteEndScreen correctCount={correctCount} total={total} onReplay={handleReplay} />
+      </>
+    );
   }
 
   if (!word) return null;
@@ -56,7 +72,7 @@ export function CourseWriteSession({ words, sessionKey }: CourseWriteSessionProp
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <McProgressHeader current={questionIndex + 1} total={total} />
+      <McProgressHeader current={questionIndex + 1} total={total} trailing={hintControl} />
 
       <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
         {hasImage ? (
@@ -86,6 +102,12 @@ export function CourseWriteSession({ words, sessionKey }: CourseWriteSessionProp
             </div>
           </div>
         )}
+
+        {hintRevealed ? (
+          <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+            Hint: {word.word}
+          </p>
+        ) : null}
 
         <label htmlFor="write-answer" className="sr-only">
           Type the English word

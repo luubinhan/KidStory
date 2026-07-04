@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import type { GameQuestion } from "./game";
 
-export type CourseUnitStatus = "completed" | "current";
+export type CourseUnitStatus = "locked" | "available" | "current" | "completed";
 
 export type CourseActivityId =
   | "flashcards"

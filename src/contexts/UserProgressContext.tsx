@@ -1,0 +1,116 @@
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { getCourseUnitById } from "../data/course";
+import { loadUserProgress, saveUserProgress } from "../lib/userProgressDb";
+import {
+  canAffordHint,
+  getDefaultProgress,
+  getUnitProgressInfo,
+  getUnitStatus,
+  isUnitUnlocked,
+  onActivityComplete,
+  spendCoins,
+} from "../lib/userProgressLogic";
+import type { CourseActivityId, CourseUnit } from "../types/course";
+import type { ActivityRewardResult, UserProgressV1 } from "../types/userProgress";
+import { COIN_HINT_COST } from "../types/userProgress";
+
+type UserProgressContextValue = {
+  progress: UserProgressV1;
+  isLoading: boolean;
+  coins: number;
+  completeActivity: (
+    unitId: string,
+    activityId: CourseActivityId,
+  ) => Promise<ActivityRewardResult | null>;
+  useHint: () => Promise<boolean>;
+  canUseHint: boolean;
+  getUnitStatus: (unit: CourseUnit) => ReturnType<typeof getUnitStatus>;
+  isUnitAccessible: (unit: CourseUnit) => boolean;
+  getUnitProgress: (unit: CourseUnit) => ReturnType<typeof getUnitProgressInfo>;
+};
+
+const UserProgressContext = createContext<UserProgressContextValue | null>(null);
+
+export function UserProgressProvider({ children }: { children: ReactNode }) {
+  const [progress, setProgress] = useState<UserProgressV1>(getDefaultProgress);
+  const [isLoading, setIsLoading] = useState(true);
+  const progressRef = useRef(progress);
+  progressRef.current = progress;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    loadUserProgress()
+      .then((loaded) => {
+        if (!cancelled) setProgress(loaded);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const persist = useCallback(async (next: UserProgressV1) => {
+    setProgress(next);
+    await saveUserProgress(next);
+  }, []);
+
+  const completeActivity = useCallback(
+    async (unitId: string, activityId: CourseActivityId): Promise<ActivityRewardResult | null> => {
+      const unit = getCourseUnitById(unitId);
+      if (!unit) return null;
+
+      const result = onActivityComplete(progressRef.current, unit, activityId);
+      await persist(result.progress);
+      return result;
+    },
+    [persist],
+  );
+
+  const useHint = useCallback(async (): Promise<boolean> => {
+    const result = spendCoins(progressRef.current, COIN_HINT_COST);
+    if (!result.success) return false;
+
+    await persist(result.progress);
+    return true;
+  }, [persist]);
+
+  const value = useMemo<UserProgressContextValue>(
+    () => ({
+      progress,
+      isLoading,
+      coins: progress.coins,
+      completeActivity,
+      useHint,
+      canUseHint: canAffordHint(progress),
+      getUnitStatus: (unit) => getUnitStatus(unit, progress),
+      isUnitAccessible: (unit) => isUnitUnlocked(unit, progress),
+      getUnitProgress: (unit) => getUnitProgressInfo(unit, progress),
+    }),
+    [progress, isLoading, completeActivity, useHint],
+  );
+
+  return (
+    <UserProgressContext.Provider value={value}>{children}</UserProgressContext.Provider>
+  );
+}
+
+export function useUserProgress(): UserProgressContextValue {
+  const ctx = useContext(UserProgressContext);
+  if (!ctx) {
+    throw new Error("useUserProgress must be used within UserProgressProvider");
+  }
+  return ctx;
+}

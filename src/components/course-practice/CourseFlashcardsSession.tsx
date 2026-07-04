@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Progress } from "../ui";
 import type { CourseWord } from "../../types/course";
 import { useCourseFlashcards } from "../../hooks/useCourseFlashcards";
+import { useUserProgress } from "../../contexts/UserProgressContext";
+import { formatActivityReward, RewardToast } from "../progress/RewardToast";
 import { CourseFlashcard } from "./CourseFlashcard";
 
 type CourseFlashcardsSessionProps = {
@@ -12,6 +15,9 @@ type CourseFlashcardsSessionProps = {
 };
 
 export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFlashcardsSessionProps) {
+  const { completeActivity } = useUserProgress();
+  const navigate = useNavigate();
+  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
   const {
     deck,
     cardIndex,
@@ -23,6 +29,23 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
     canGoPrev,
     canGoNext,
   } = useCourseFlashcards(words, sessionKey);
+
+  const handleBackToUnit = async () => {
+    const result = await completeActivity(unitId, "flashcards");
+    if (result) {
+      setRewardMessage(
+        formatActivityReward(
+          result.coinsEarned,
+          result.unitBonusEarned,
+          result.achievementUnlocked,
+          result.achievementReward,
+        ),
+      );
+      setTimeout(() => navigate(`/course/${unitId}`), 800);
+      return;
+    }
+    navigate(`/course/${unitId}`);
+  };
 
   if (words.length === 0) {
     return (
@@ -38,6 +61,7 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
 
   return (
     <div className="course-flashcards space-y-4">
+      <RewardToast message={rewardMessage} onDone={() => setRewardMessage(null)} />
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
           <span aria-live="polite">
@@ -54,7 +78,6 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
       <CourseFlashcard word={currentWord} isFlipped={isFlipped} onFlip={flip} />
 
       <div className="flex items-center justify-center gap-3">
-       
         {canGoNext ? (
           <>
             <button
@@ -76,13 +99,13 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
             </button>
           </>
         ) : (
-          <Link
-            to={`/course/${unitId}`}
+          <button
+            type="button"
+            onClick={() => void handleBackToUnit()}
             className="candy-glass-btn inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
           >
             Back to unit
-         
-          </Link>
+          </button>
         )}
       </div>
     </div>

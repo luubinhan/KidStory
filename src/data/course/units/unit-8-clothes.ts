@@ -6,7 +6,6 @@ export const unit8Clothes = {
   unitNumber: 8,
   title: "Clothes",
   subtitle: "",
-  status: "current",
   icon: Shirt,
   youtubeVideoId: "n35adRLXj_Y",
   iconBgClass: "bg-amber-100",

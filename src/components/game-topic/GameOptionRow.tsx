@@ -9,6 +9,7 @@ type GameOptionRowProps = {
   pickedDisplayIndex: number | null;
   onPick: (displayIdx: number) => void;
   onPlayWord: (word: string) => void;
+  hintRevealed?: boolean;
 };
 
 export function GameOptionRow({
@@ -19,6 +20,7 @@ export function GameOptionRow({
   pickedDisplayIndex,
   onPick,
   onPlayWord,
+  hintRevealed = false,
 }: GameOptionRowProps) {
   const picked = pickedDisplayIndex !== null;
   const isThis = pickedDisplayIndex === displayIdx;
@@ -30,13 +32,15 @@ export function GameOptionRow({
     pickedDisplayIndex,
   });
 
+  const hintHighlight = hintRevealed && correct && !picked;
+
   return (
     <div className="flex min-h-0 min-w-0 flex-1 items-stretch gap-2">
       <button
         type="button"
         disabled={picked}
         onClick={() => onPick(displayIdx)}
-        className={`inline-flex min-h-0 min-w-0 flex-1 cursor-pointer items-center justify-between gap-2 rounded-2xl border-2 px-5 py-4 text-left text-lg font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring}`}
+        className={`inline-flex min-h-0 min-w-0 flex-1 cursor-pointer items-center justify-between gap-2 rounded-2xl border-2 px-5 py-4 text-left text-lg font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:cursor-default ${ring} ${hintHighlight ? "border-amber-400 bg-amber-50 ring-2 ring-amber-200" : ""}`}
       >
         <span className="min-w-0">{label}</span>
         {picked && isThis ? (

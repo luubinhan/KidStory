@@ -1,14 +1,16 @@
 import type { CourseDictionaryEntry } from "../../types/course";
 import { useCourseMatching } from "../../hooks/useCourseMatching";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
 import { Progress } from "../ui";
 import { MatchingCard } from "./MatchingCard";
 import { MatchingEndScreen } from "./MatchingEndScreen";
 
 type CourseMatchingSessionProps = {
   entries: readonly CourseDictionaryEntry[];
+  unitId: string;
 };
 
-export function CourseMatchingSession({ entries }: CourseMatchingSessionProps) {
+export function CourseMatchingSession({ entries, unitId }: CourseMatchingSessionProps) {
   const {
     entryMap,
     cards,
@@ -24,6 +26,13 @@ export function CourseMatchingSession({ entries }: CourseMatchingSessionProps) {
     replay,
   } = useCourseMatching(entries);
 
+  const { rewardToast, onReplay } = useActivityCompletion(unitId, "matching", isComplete);
+
+  const handleReplay = () => {
+    onReplay();
+    replay();
+  };
+
   if (entries.length === 0) {
     return (
       <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
@@ -35,7 +44,8 @@ export function CourseMatchingSession({ entries }: CourseMatchingSessionProps) {
   if (isComplete) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <MatchingEndScreen stars={stars} moves={moves} pairCount={pairCount} onReplay={replay} />
+        {rewardToast}
+        <MatchingEndScreen stars={stars} moves={moves} pairCount={pairCount} onReplay={handleReplay} />
       </div>
     );
   }

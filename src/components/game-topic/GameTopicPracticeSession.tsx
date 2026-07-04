@@ -14,7 +14,10 @@ import {
 import { useGameTopicQuestion } from "../../hooks/useGameTopicQuestion";
 import { useGameTopicSentenceQuestion } from "../../hooks/useGameTopicSentenceQuestion";
 import { useGameTopicSpellQuestion } from "../../hooks/useGameTopicSpellQuestion";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
+import { useQuestionHint } from "../../hooks/useQuestionHint";
 import { playCelebrationSound } from "../../lib/gameCelebrationSound";
+import type { CourseActivityId } from "../../types/course";
 import type { GameTopic } from "../../types/game";
 
 export type GameTopicPracticeMode = "multiple-choice" | "spell" | "sentence";
@@ -24,6 +27,8 @@ type GameTopicPracticeSessionProps = {
   topicId: string;
   mode: GameTopicPracticeMode;
   showGameBreadcrumb?: boolean;
+  unitId?: string;
+  activityId?: CourseActivityId;
 };
 
 export function GameTopicPracticeSession({
@@ -31,6 +36,8 @@ export function GameTopicPracticeSession({
   topicId,
   mode,
   showGameBreadcrumb = false,
+  unitId,
+  activityId,
 }: GameTopicPracticeSessionProps) {
   const mcActive = mode === "multiple-choice";
   const spellMode = mode === "spell";
@@ -41,6 +48,28 @@ export function GameTopicPracticeSession({
   const sentence = useGameTopicSentenceQuestion(
     sentenceMode ? topic : undefined,
     sentenceMode ? topicId : undefined,
+  );
+
+  const mcIsComplete =
+    mcActive &&
+    Boolean(unitId && activityId && mc.isLast && mc.pickedDisplayIndex !== null);
+  const spellIsComplete =
+    spellMode && Boolean(unitId && activityId && spell.isLast && spell.isSolved);
+
+  const completionActivityId = mcIsComplete || spellIsComplete ? activityId : undefined;
+  const isSessionComplete = mcIsComplete || spellIsComplete;
+
+  const { rewardToast } = useActivityCompletion(unitId, completionActivityId, isSessionComplete);
+
+  const hintQuestionKey = mcActive
+    ? (mc.q?.id ?? `mc-${mc.questionIndex}`)
+    : spellMode
+      ? (spell.q?.id ?? `spell-${spell.questionIndex}`)
+      : "no-hint";
+
+  const hintEnabled = Boolean(unitId && (mcActive || spellMode));
+  const { hintRevealed, hintControl } = useQuestionHint(
+    hintEnabled ? hintQuestionKey : "hint-disabled",
   );
 
   const celebratedSpellRef = useRef(false);
@@ -132,9 +161,11 @@ export function GameTopicPracticeSession({
   if (spellMode) {
     const { q, questions, questionIndex, isLast, graphemes, letterOrder, setLetterOrder, isSolved, playWord, goNext } =
       spell;
+    const targetWord = q ? q.options[q.correctIndex]! : "";
 
     return (
       <div className="max-w-3xl mx-auto py-2">
+        {rewardToast}
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}
@@ -142,7 +173,11 @@ export function GameTopicPracticeSession({
             questionCount={questions.length}
           />
         ) : null}
-        <McProgressHeader current={questionIndex + 1} total={questions.length} />
+        <McProgressHeader
+          current={questionIndex + 1}
+          total={questions.length}
+          trailing={hintEnabled ? hintControl : undefined}
+        />
         {isSolved ? <Confetti /> : null}
 
         {q ? (
@@ -176,6 +211,12 @@ export function GameTopicPracticeSession({
                 </div>
               </div>
             )}
+
+            {hintRevealed ? (
+              <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+                Hint: {targetWord}
+              </p>
+            ) : null}
 
             <GameSpellLetterStrip
               graphemes={graphemes}
@@ -214,8 +255,11 @@ export function GameTopicPracticeSession({
   const answerCorrect =
     pickedDisplayIndex !== null && q ? optionOrder[pickedDisplayIndex]! === q.correctIndex : null;
 
+  const correctAnswer = q ? q.options[q.correctIndex]! : "";
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
+      {rewardToast}
       {showGameBreadcrumb ? (
         <GameTopicBreadcrumb
           topicTitle={topic.title}
@@ -224,10 +268,13 @@ export function GameTopicPracticeSession({
         />
       ) : null}
 
-      <McProgressHeader current={questionIndex + 1} total={questions.length} />
+      <McProgressHeader
+        current={questionIndex + 1}
+        total={questions.length}
+        trailing={hintEnabled ? hintControl : undefined}
+      />
       {q ? (
         <div className="flex min-h-0 flex-1 flex-col rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
-
           <div className="shrink-0 space-y-4">
             {q.image ? <GameQuestionImage src={q.image} /> : null}
             <GameQuestionStem
@@ -236,6 +283,11 @@ export function GameTopicPracticeSession({
               answerCorrect={answerCorrect}
               onPlaySentence={playAudio}
             />
+            {hintRevealed ? (
+              <p className="rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+                Hint: {correctAnswer}
+              </p>
+            ) : null}
           </div>
 
           <div className="mt-4 flex min-h-0 flex-1 flex-col gap-3">
@@ -249,6 +301,7 @@ export function GameTopicPracticeSession({
                 pickedDisplayIndex={pickedDisplayIndex}
                 onPick={onPick}
                 onPlayWord={playOptionWord}
+                hintRevealed={hintRevealed}
               />
             ))}
           </div>

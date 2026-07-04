@@ -2,6 +2,8 @@ import { Check, CircleArrowRightIcon } from "lucide-react";
 import { useEffect, useRef, type KeyboardEvent } from "react";
 import type { CourseTypedAnswerQuestion } from "../../types/course";
 import { useCourseTypedAnswerSession } from "../../hooks/useCourseTypedAnswerSession";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
+import { useQuestionHint } from "../../hooks/useQuestionHint";
 import { playCelebrationSound } from "../../lib/gameCelebrationSound";
 import { Confetti } from "../Confetti";
 import { GameQuestionImage } from "../game-topic/GameQuestionImage";
@@ -13,9 +15,14 @@ import { WriteEndScreen } from "./WriteEndScreen";
 type CourseTypedAnswerSessionProps = {
   questions: readonly CourseTypedAnswerQuestion[];
   sessionKey: string;
+  unitId: string;
 };
 
-export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedAnswerSessionProps) {
+export function CourseTypedAnswerSession({
+  questions,
+  sessionKey,
+  unitId,
+}: CourseTypedAnswerSessionProps) {
   const {
     phase,
     question,
@@ -34,6 +41,13 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
     playSentence,
   } = useCourseTypedAnswerSession(questions, sessionKey);
 
+  const { rewardToast, onReplay } = useActivityCompletion(
+    unitId,
+    "complete-sentence",
+    phase === "summary",
+  );
+  const { hintRevealed, hintControl } = useQuestionHint(question?.id ?? `typed-${questionIndex}`);
+
   const celebratedRef = useRef(false);
 
   useEffect(() => {
@@ -48,6 +62,11 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
     playCelebrationSound();
   }, [phase]);
 
+  const handleReplay = () => {
+    onReplay();
+    replay();
+  };
+
   if (questions.length === 0) {
     return (
       <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
@@ -59,8 +78,9 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
   if (phase === "summary") {
     return (
       <div className="relative">
+        {rewardToast}
         <Confetti />
-        <WriteEndScreen correctCount={correctCount} total={total} onReplay={replay} />
+        <WriteEndScreen correctCount={correctCount} total={total} onReplay={handleReplay} />
       </div>
     );
   }
@@ -86,7 +106,7 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <McProgressHeader current={questionIndex + 1} total={total} />
+      <McProgressHeader current={questionIndex + 1} total={total} trailing={hintControl} />
 
       <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
         <div className="mb-4 flex items-center justify-center gap-3">
@@ -107,7 +127,13 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center items-baseline gap-x-1 text-xl font-bold text-slate-900 md:text-2xl">
+        {hintRevealed ? (
+          <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+            Hint: {question.answer}
+          </p>
+        ) : null}
+
+        <div className="flex flex-wrap items-baseline justify-center gap-x-1 text-xl font-bold text-slate-900 md:text-2xl">
           <span>{question.textBefore}</span>
           <label htmlFor="typed-answer-input" className="sr-only">
             Type the missing word
@@ -135,13 +161,13 @@ export function CourseTypedAnswerSession({ questions, sessionKey }: CourseTypedA
         </div>
 
         {submitted && result === "incorrect" ? (
-          <p className="mt-3 text-sm text-center font-semibold text-slate-600">
+          <p className="mt-3 text-center text-sm font-semibold text-slate-600">
             Correct answer: <span className="text-emerald-700">{question.answer}</span>
           </p>
         ) : null}
 
         {submitted && result === "correct" ? (
-          <p className="mt-3 flex justify-center items-center gap-2 text-sm font-semibold text-emerald-600">
+          <p className="mt-3 flex items-center justify-center gap-2 text-sm font-semibold text-emerald-600">
             <Check className="size-4" aria-hidden />
             Correct!
           </p>

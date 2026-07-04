@@ -1,8 +1,9 @@
 import { ArrowLeft } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { getCourseActivity, isCourseActivityId } from "../data/course-activities";
 import { getDictionaryEntriesByUnitId } from "../data/course-dictionary";
 import { getCourseUnitById } from "../data/course";
+import { useUserProgress } from "../contexts/UserProgressContext";
 import { CourseBottomNav } from "../components/course";
 import {
   CourseFlashcardsSession,
@@ -17,6 +18,7 @@ import { buildMcTopic, buildSpellTopic } from "../lib/courseUnitTopic";
 
 export default function CourseUnitPracticePage() {
   const { unitId, activityId } = useParams<{ unitId: string; activityId: string }>();
+  const { isUnitAccessible, isLoading } = useUserProgress();
   const unit = unitId ? getCourseUnitById(unitId) : undefined;
   const activity =
     activityId && isCourseActivityId(activityId) ? getCourseActivity(activityId) : undefined;
@@ -40,6 +42,10 @@ export default function CourseUnitPracticePage() {
     );
   }
 
+  if (!isLoading && !isUnitAccessible(unit)) {
+    return <Navigate to="/course" replace />;
+  }
+
   const dictionaryEntries = getDictionaryEntriesByUnitId(unit.id);
   const isMatching = activity.id === "matching";
   const isMultipleChoice = activity.id === "multiple-choice";
@@ -59,12 +65,13 @@ export default function CourseUnitPracticePage() {
           <CourseFlashcardsSession words={unit.words} sessionKey={unit.id} unitId={unit.id} />
         ) : null}
 
-        {isMatching ? <CourseMatchingSession entries={dictionaryEntries} /> : null}
+        {isMatching ? <CourseMatchingSession entries={dictionaryEntries} unitId={unit.id} /> : null}
 
         {activity.id === "sentence" ? (
           <CoursePracticeSentenceSession
             sentences={unit.practiceSentences}
             sessionKey={unit.id}
+            unitId={unit.id}
           />
         ) : null}
 
@@ -73,6 +80,8 @@ export default function CourseUnitPracticePage() {
             topic={buildMcTopic(unit)}
             topicId={unit.id}
             mode="multiple-choice"
+            unitId={unit.id}
+            activityId="multiple-choice"
           />
         ) : null}
 
@@ -81,17 +90,20 @@ export default function CourseUnitPracticePage() {
             topic={buildSpellTopic(unit)}
             topicId={unit.id}
             mode="spell"
+            unitId={unit.id}
+            activityId="spell"
           />
         ) : null}
 
         {activity.id === "write" ? (
-          <CourseWriteSession words={unit.words} sessionKey={unit.id} />
+          <CourseWriteSession words={unit.words} sessionKey={unit.id} unitId={unit.id} />
         ) : null}
 
         {activity.id === "complete-sentence" ? (
           <CourseTypedAnswerSession
             questions={unit.typedAnswerQuestions}
             sessionKey={unit.id}
+            unitId={unit.id}
           />
         ) : null}
       </div>

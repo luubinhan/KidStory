@@ -7,15 +7,18 @@ import {
   McProgressHeader,
 } from "../game-topic";
 import { useCoursePracticeSentenceQuestion } from "../../hooks/useCoursePracticeSentenceQuestion";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
+import { useQuestionHint } from "../../hooks/useQuestionHint";
 import { playCelebrationSound } from "../../lib/gameCelebrationSound";
 import type { CoursePracticeSentence } from "../../types/course";
 
 type Props = {
   sentences: readonly CoursePracticeSentence[];
   sessionKey: string;
+  unitId: string;
 };
 
-export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) {
+export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }: Props) {
   const celebratedRef = useRef(false);
   const {
     sentenceIndex,
@@ -29,6 +32,10 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) 
     playSentence,
     goNext,
   } = useCoursePracticeSentenceQuestion(sentences, sessionKey);
+
+  const isSessionComplete = isLast && isSolved;
+  const { rewardToast } = useActivityCompletion(unitId, "sentence", isSessionComplete);
+  const { hintRevealed, hintControl } = useQuestionHint(sentence?.id ?? `sentence-${sentenceIndex}`);
 
   useEffect(() => {
     celebratedRef.current = false;
@@ -50,8 +57,13 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) 
 
   return (
     <div className="max-w-3xl mx-auto py-2">
+      {rewardToast}
       {isSolved ? <Confetti /> : null}
-      <McProgressHeader current={sentenceIndex + 1} total={allSentences.length} />
+      <McProgressHeader
+        current={sentenceIndex + 1}
+        total={allSentences.length}
+        trailing={hintControl}
+      />
       {sentence ? (
         <div className="rounded-2xl min-h-[65vh] flex flex-col justify-center border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
           <div className="flex flex-wrap items-start gap-2 gap-y-3 justify-center mb-12">
@@ -63,6 +75,13 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey }: Props) 
               />
             </div>
           </div>
+
+          {hintRevealed ? (
+            <p className="mb-6 rounded-xl bg-amber-50 px-4 py-3 text-center text-sm font-bold text-amber-800">
+              Hint: {sentence.text}
+            </p>
+          ) : null}
+
           <GameSentenceWordStrip
             words={words}
             wordOrder={wordOrder}

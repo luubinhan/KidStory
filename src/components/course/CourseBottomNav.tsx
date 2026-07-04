@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { id: "study", label: "Study", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
-  { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
+  { id: "achievements", label: "Trophy", icon: Trophy, to: "/achievements" },
 ];
 
 export function CourseBottomNav() {
@@ -33,6 +33,7 @@ export function CourseBottomNav() {
             (item.id === "study" &&
               (pathname === "/course" || pathname.startsWith("/course/"))) ||
             (item.id === "dictionary" && pathname === "/dictionary") ||
+            (item.id === "achievements" && pathname === "/achievements") ||
             (item.id === "games" &&
               (pathname === "/games" || pathname.startsWith("/games/")));
 
