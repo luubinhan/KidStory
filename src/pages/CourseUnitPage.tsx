@@ -50,7 +50,7 @@ export default function CourseUnitPage() {
           <CoinDisplay />
         </div>
 
-        <div className="mx-auto max-w-lg mt-4 flex items-start gap-4">
+        <div className="mx-auto max-w-lg mt-24 flex items-center justify-center flex-col text-center gap-4">
           <div
             className={cn(
               "flex size-14 shrink-0 items-center justify-center rounded-full",

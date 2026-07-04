@@ -62,7 +62,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
 
   return (
     <>
-      <div className="mt-6 flex justify-center items-center min-h-[70vh]">
+      <div className="mt-8 flex justify-center items-center min-h-[30vh]">
         <ul className="flex max-w-full flex-wrap justify-center gap-3 sm:gap-4">
           {hasLearnVideo ? (
             <motion.li
