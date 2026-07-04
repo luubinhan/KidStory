@@ -7,6 +7,10 @@ import { cn } from "../lib/utils";
 import { ArrowLeft, Map } from "lucide-react";
 import { Link } from "react-router-dom";
 
+const pageShellClass = "relative min-h-screen pb-24";
+const fallbackBgClass = "bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80";
+const imageBgClass = "bg-center bg-top bg-no-repeat bg-cover";
+
 export default function CourseUnitPage() {
   const { unitId } = useParams<{ unitId: string }>();
   const unit = unitId ? getCourseUnitById(unitId) : undefined;
@@ -14,7 +18,7 @@ export default function CourseUnitPage() {
 
   if (!unit) {
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+      <div className={cn(pageShellClass, fallbackBgClass)}>
         <div className="mx-auto max-w-lg px-4 py-8">
           <Link
             to="/course"
@@ -38,7 +42,17 @@ export default function CourseUnitPage() {
   const Icon = unit.icon;
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+    <div
+      className={cn(
+        pageShellClass,
+        unit.backgroundUrl ? imageBgClass : fallbackBgClass,
+      )}
+      style={
+        unit.backgroundUrl
+          ? { backgroundImage: `url(${unit.backgroundUrl})` }
+          : undefined
+      }
+    >
       <div className="mx-auto px-4 py-6">
         <div className="mx-auto max-w-lg flex items-center justify-between gap-4">
           <Link

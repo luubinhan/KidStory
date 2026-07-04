@@ -9,6 +9,7 @@ export const unit3Fruits = {
   icon: Apple,
   youtubeVideoId: "dDbNM3AhUOw",
   iconBgClass: "bg-rose-100",
+  backgroundUrl: "/images/bg-unit-3.png",
   iconColorClass: "text-rose-600",
   words: [
     {

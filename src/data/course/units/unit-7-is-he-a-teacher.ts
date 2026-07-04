@@ -9,6 +9,7 @@ export const unit7IsHeATeacher = {
   icon: BookOpen,
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-cyan-100",
+  backgroundUrl: "/images/bg-unit-7.png",
   iconColorClass: "text-cyan-600",
   words: [
     { id: "teacher", word: "teacher", translation: "giáo viên", imageUrl: "https://affinityworkforce.com/wp-content/uploads/2024/05/2149272223.jpg"

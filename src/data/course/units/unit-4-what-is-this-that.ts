@@ -7,6 +7,7 @@ export const unit4WhatIsThisThat = {
   title: "What is this/that?",
   subtitle: "",
   icon: HelpCircle,
+  backgroundUrl: "/images/bg-unit-4.png",
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-emerald-100",
   iconColorClass: "text-emerald-600",

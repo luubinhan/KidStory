@@ -46,6 +46,7 @@ export interface CourseUnit {
   youtubeVideoId?: string;
   iconBgClass: string;
   iconColorClass: string;
+  backgroundUrl?: string;
   words: readonly CourseWord[];
   practiceSentences: readonly CoursePracticeSentence[];
   multipleChoiceQuestions: readonly GameQuestion[];

@@ -7,6 +7,7 @@ export const unit5Colors = {
   title: "Colors",
   subtitle: "",
   icon: Palette,
+  backgroundUrl: "/images/bg-unit-5.png",
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-indigo-100",
   iconColorClass: "text-indigo-600",

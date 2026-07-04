@@ -7,6 +7,7 @@ export const unit8Clothes = {
   title: "Clothes",
   subtitle: "",
   icon: Shirt,
+  backgroundUrl: "/images/bg-unit-3.png",
   youtubeVideoId: "n35adRLXj_Y",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",

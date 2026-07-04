@@ -7,6 +7,7 @@ export const unit6WhatNumberIsIt = {
   title: "What number is it",
   subtitle: "",
   icon: Hash,
+  backgroundUrl: "/images/bg-unit-6.png",
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",

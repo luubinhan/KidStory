@@ -7,6 +7,7 @@ export const unit1Greetings = {
   title: "Greetings",
   subtitle: "",
   icon: Sun,
+  backgroundUrl: "/images/bg-unit-1.png",
   youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
