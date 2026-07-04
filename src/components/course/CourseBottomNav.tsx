@@ -1,4 +1,4 @@
-import { BookOpen, Gamepad2, Search, Trophy } from "lucide-react";
+import { BookOpen, Gamepad2, Home, Search, Trophy } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
@@ -11,10 +11,11 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
+  { id: "home", label: "Home", icon: Home, to: "/" },
   { id: "study", label: "Study", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
-  { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
-  { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
+  // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
+  // { id: "achievements", label: "Trophy", icon: Trophy, disabled: true },
 ];
 
 export function CourseBottomNav() {
@@ -25,7 +26,7 @@ export function CourseBottomNav() {
       aria-label="Điều hướng chính"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-100 bg-white px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
     >
-      <div className="mx-auto grid w-full max-w-lg grid-cols-4">
+      <div className="mx-auto flex gap-4 justify-center w-full max-w-lg ">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -43,8 +44,6 @@ export function CourseBottomNav() {
               </span>
             </>
           );
-
-          const isStudyTab = item.id === "study";
 
           const className = cn(
             "mx-auto flex w-full max-w-[5.5rem] flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 transition-colors",
