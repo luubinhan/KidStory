@@ -56,7 +56,7 @@ export default function CourseUnitPracticePage() {
         <CoursePracticeHeader unit={unit} activity={activity} />
 
         {activity.id === "flashcards" ? (
-          <CourseFlashcardsSession words={unit.words} sessionKey={unit.id} />
+          <CourseFlashcardsSession words={unit.words} sessionKey={unit.id} unitId={unit.id} />
         ) : null}
 
         {isMatching ? <CourseMatchingSession entries={dictionaryEntries} /> : null}

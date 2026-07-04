@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Progress } from "../ui";
 import type { CourseWord } from "../../types/course";
 import { useCourseFlashcards } from "../../hooks/useCourseFlashcards";
@@ -7,9 +8,10 @@ import { CourseFlashcard } from "./CourseFlashcard";
 type CourseFlashcardsSessionProps = {
   words: readonly CourseWord[];
   sessionKey: string;
+  unitId: string;
 };
 
-export function CourseFlashcardsSession({ words, sessionKey }: CourseFlashcardsSessionProps) {
+export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFlashcardsSessionProps) {
   const {
     deck,
     cardIndex,
@@ -52,24 +54,36 @@ export function CourseFlashcardsSession({ words, sessionKey }: CourseFlashcardsS
       <CourseFlashcard word={currentWord} isFlipped={isFlipped} onFlip={flip} />
 
       <div className="flex items-center justify-center gap-3">
-        <button
-          type="button"
-          onClick={goPrev}
-          disabled={!canGoPrev}
-          className="candy-glass-btn--idle inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
-        >
-          <ChevronLeft className="size-4" aria-hidden />
-          Previous
-        </button>
-        <button
-          type="button"
-          onClick={goNext}
-          disabled={!canGoNext}
-          className="candy-glass-btn inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
-        >
-          Next
-          <ChevronRight className="size-4" aria-hidden />
-        </button>
+       
+        {canGoNext ? (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              disabled={!canGoPrev}
+              className="candy-glass-btn--idle inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
+            >
+              <ChevronLeft className="size-4" aria-hidden />
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="candy-glass-btn inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
+            >
+              Next
+              <ChevronRight className="size-4" aria-hidden />
+            </button>
+          </>
+        ) : (
+          <Link
+            to={`/course/${unitId}`}
+            className="candy-glass-btn inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
+          >
+            Back to unit
+         
+          </Link>
+        )}
       </div>
     </div>
   );
