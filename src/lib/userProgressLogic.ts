@@ -63,7 +63,16 @@ export function getUnitByNumber(unitNumber: number): CourseUnit | undefined {
   return courseUnits.find((unit) => unit.unitNumber === unitNumber);
 }
 
-export function isUnitUnlocked(unit: CourseUnit, progress: UserProgressV1): boolean {
+export type ProgressOptions = {
+  allUnitsUnlocked?: boolean;
+};
+
+export function isUnitUnlocked(
+  unit: CourseUnit,
+  progress: UserProgressV1,
+  options?: ProgressOptions,
+): boolean {
+  if (options?.allUnitsUnlocked) return true;
   if (unit.unitNumber === 1) return true;
 
   const previousUnit = getUnitByNumber(unit.unitNumber - 1);
@@ -76,12 +85,15 @@ export function getUnitsAtLeastHalfComplete(progress: UserProgressV1): number {
   return courseUnits.filter((unit) => getUnitProgressInfo(unit, progress).isAtLeastHalf).length;
 }
 
-export function deriveUnitStatuses(progress: UserProgressV1): Map<string, CourseUnitStatus> {
+export function deriveUnitStatuses(
+  progress: UserProgressV1,
+  options?: ProgressOptions,
+): Map<string, CourseUnitStatus> {
   const statuses = new Map<string, CourseUnitStatus>();
   let currentAssigned = false;
 
   for (const unit of courseUnits) {
-    if (!isUnitUnlocked(unit, progress)) {
+    if (!isUnitUnlocked(unit, progress, options)) {
       statuses.set(unit.id, "locked");
       continue;
     }
@@ -103,13 +115,17 @@ export function deriveUnitStatuses(progress: UserProgressV1): Map<string, Course
   return statuses;
 }
 
-export function getUnitStatus(unit: CourseUnit, progress: UserProgressV1): CourseUnitStatus {
-  if (!isUnitUnlocked(unit, progress)) return "locked";
+export function getUnitStatus(
+  unit: CourseUnit,
+  progress: UserProgressV1,
+  options?: ProgressOptions,
+): CourseUnitStatus {
+  if (!isUnitUnlocked(unit, progress, options)) return "locked";
 
   const { isFullyComplete } = getUnitProgressInfo(unit, progress);
   if (isFullyComplete) return "completed";
 
-  const statuses = deriveUnitStatuses(progress);
+  const statuses = deriveUnitStatuses(progress, options);
   return statuses.get(unit.id) ?? "current";
 }
 

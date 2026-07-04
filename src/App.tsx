@@ -20,24 +20,24 @@ const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export default function App() {
   return (
-    <UserProgressProvider>
-      <Router basename={routerBasename}>
-      <div className="min-h-screen bg-[#f5f5f5] font-sans text-slate-900">
-        <Routes>
-          <Route path="/" element={<DiscoverPage />} />
-          <Route path="/course" element={<CoursePage />} />
-          <Route path="/course/:unitId" element={<CourseUnitPage />} />
-          <Route path="/course/:unitId/practice/:activityId" element={<CourseUnitPracticePage />} />
-          <Route path="/dictionary" element={<DictionaryPage />} />
-          <Route path="/achievements" element={<AchievementsPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/games" element={<GamesPage />} />
-          <Route path="/games/:topicId" element={<GameTopicPage />} />
-          <Route path="/book/:id" element={<BookDetailPage />} />
-        </Routes>
-      </div>
+    <Router basename={routerBasename}>
+      <UserProgressProvider>
+        <div className="min-h-screen bg-[#f5f5f5] font-sans text-slate-900">
+          <Routes>
+            <Route path="/" element={<DiscoverPage />} />
+            <Route path="/course" element={<CoursePage />} />
+            <Route path="/course/:unitId" element={<CourseUnitPage />} />
+            <Route path="/course/:unitId/practice/:activityId" element={<CourseUnitPracticePage />} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
+            <Route path="/achievements" element={<AchievementsPage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games/:topicId" element={<GameTopicPage />} />
+            <Route path="/book/:id" element={<BookDetailPage />} />
+          </Routes>
+        </div>
+      </UserProgressProvider>
     </Router>
-    </UserProgressProvider>
   );
 }
 

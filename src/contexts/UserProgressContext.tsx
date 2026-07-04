@@ -8,8 +8,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getCourseUnitById } from "../data/course";
 import { loadUserProgress, saveUserProgress } from "../lib/userProgressDb";
+import { activateUnblockAll, isUnblockAllActive } from "../lib/unblockAllUnits";
 import {
   canAffordHint,
   getDefaultProgress,
@@ -41,10 +43,24 @@ type UserProgressContextValue = {
 const UserProgressContext = createContext<UserProgressContextValue | null>(null);
 
 export function UserProgressProvider({ children }: { children: ReactNode }) {
+  const [searchParams] = useSearchParams();
   const [progress, setProgress] = useState<UserProgressV1>(getDefaultProgress);
   const [isLoading, setIsLoading] = useState(true);
+  const [allUnitsUnlocked, setAllUnitsUnlocked] = useState(isUnblockAllActive);
   const progressRef = useRef(progress);
   progressRef.current = progress;
+
+  useEffect(() => {
+    if (searchParams.get("unblock") === "all") {
+      activateUnblockAll();
+      setAllUnitsUnlocked(true);
+    }
+  }, [searchParams]);
+
+  const progressOptions = useMemo(
+    () => (allUnitsUnlocked ? { allUnitsUnlocked: true as const } : undefined),
+    [allUnitsUnlocked],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -95,11 +111,11 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       completeActivity,
       useHint,
       canUseHint: canAffordHint(progress),
-      getUnitStatus: (unit) => getUnitStatus(unit, progress),
-      isUnitAccessible: (unit) => isUnitUnlocked(unit, progress),
+      getUnitStatus: (unit) => getUnitStatus(unit, progress, progressOptions),
+      isUnitAccessible: (unit) => isUnitUnlocked(unit, progress, progressOptions),
       getUnitProgress: (unit) => getUnitProgressInfo(unit, progress),
     }),
-    [progress, isLoading, completeActivity, useHint],
+    [progress, isLoading, completeActivity, useHint, progressOptions],
   );
 
   return (
