@@ -12,6 +12,7 @@ import type {
 import {
   COIN_HINT_COST,
   COIN_PER_ACTIVITY,
+  COIN_REWARD_BY_ACTIVITY,
   COIN_TREASURE_MIRROR_REWARD,
   COIN_UNIT_BONUS,
   DIAMOND_REWARD_BY_ACTIVITY,
@@ -155,7 +156,8 @@ export function onActivityComplete(
     inventory: { ...progress.inventory },
   };
 
-  let coinsEarned = COIN_PER_ACTIVITY;
+  const activityCoinReward = COIN_REWARD_BY_ACTIVITY[activityId] ?? COIN_PER_ACTIVITY;
+  let coinsEarned = activityCoinReward;
   let unitBonusEarned = 0;
   let achievementUnlocked: AchievementId | null = null;
   let achievementReward = 0;
@@ -198,7 +200,7 @@ export function onActivityComplete(
     progress: next,
     coinsEarned,
     diamondsEarned: diamondReward,
-    activityBonus: COIN_PER_ACTIVITY,
+    activityBonus: activityCoinReward,
     unitBonusEarned,
     achievementUnlocked,
     achievementReward,

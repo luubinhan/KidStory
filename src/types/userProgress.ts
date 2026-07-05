@@ -6,6 +6,11 @@ export const COIN_TREASURE_MIRROR_REWARD = 1000;
 export const COIN_HINT_COST = 1;
 export const TREASURE_MIRROR_UNITS_REQUIRED = 5;
 
+export const COIN_REWARD_BY_ACTIVITY: Partial<Record<CourseActivityId, number>> = {
+  write: 50,
+  "complete-sentence": 50,
+};
+
 export const DIAMOND_REWARD_BY_ACTIVITY: Partial<Record<CourseActivityId, number>> = {
   write: 50,
   "complete-sentence": 50,
