@@ -16,4 +16,8 @@ export type ShopItem = {
   name: string;
   price: number;
   imageUrl: string;
+  position: {
+    x: number | string;
+    y: number | string;
+  };
 };

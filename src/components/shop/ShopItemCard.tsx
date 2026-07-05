@@ -21,9 +21,12 @@ export function ShopItemCard({
   return (
     <article
       className={cn(
-        "flex flex-col rounded-2xl border-2 border-slate-200 bg-white p-3 shadow-sm transition-all",
-        
+        "rounded-full p-3 w-[20vw] h-[14vw] backdrop-blur-sm transition-all absolute text-center",        
       )}
+      style={{
+        top: item.position.y,
+        left: item.position.x,
+      }}
     >
       <div className={cn("relative mx-auto aspect-square w-full max-w-[120px]",
         !isOwned && "opacity-40 grayscale"
@@ -39,25 +42,22 @@ export function ShopItemCard({
           </span>
         )}
       </div>
-
-      <h2 className="mt-2 text-center text-sm font-bold text-slate-800">{item.name}</h2>
-
-      <p className="mt-1 flex items-center justify-center gap-1 text-xs font-semibold text-amber-700">
-        <img src="images/coin.png" alt="" className="size-3.5" aria-hidden />
-        {item.price}
-      </p>
       <button
         type="button"
         onClick={onBuy}
         disabled={!canAfford || isLoading}
         className={cn(
-          "mt-3 w-full cursor-pointer rounded-xl py-2 text-xs font-bold transition-colors",
+          "mt-3  cursor-pointer rounded-xl py-2 px-6 text-xs font-bold transition-colors",
           canAfford && !isLoading
             ? "bg-sky-500 text-white hover:bg-sky-600"
             : "cursor-not-allowed bg-slate-200 text-slate-400",
         )}
       >
-        Own
+        <span className="flex items-center justify-center gap-1">
+          {item.name}
+          <img src="images/coin.png" alt="" className="size-3.5" aria-hidden />
+          {item.price}
+        </span>
       </button>
     </article>
   );
