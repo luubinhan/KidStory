@@ -173,8 +173,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
   },
   {
     id: "dog", name: "Dog", price: 10, imageUrl: "/images/shop/dog.png", position: {
-      y: '129dvw',
-      x: '62dvw',
+      y: '133dvw',
+      x: '64dvw',
     }
   },
   {

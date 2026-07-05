@@ -21,7 +21,8 @@ export function ShopItemCard({
   return (
     <article
       className={cn(
-        "rounded-full p-3 w-[20vw] h-[14vw] backdrop-blur-sm transition-all absolute text-center",        
+        "rounded-full p-3 w-[20vw] h-[14vw] transition-all absolute text-center",    
+        !isOwned && "backdrop-blur-sm "    
       )}
       style={{
         top: item.position.y,
@@ -29,13 +30,15 @@ export function ShopItemCard({
       }}
     >
       <div className={cn("relative mx-auto aspect-square w-full max-w-[120px]",
-        !isOwned && "opacity-40 grayscale"
       )}>
-        <img
-          src={item.imageUrl}
-          alt={item.name}
-          className="size-full rounded-xl object-contain"
-        />
+        {!isOwned && (
+          <img
+            src={item.imageUrl}
+            alt={item.name}
+            className="size-full rounded-xl object-contain"
+          />
+        )}
+        
         {isOwned && (
           <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-sky-600 text-xs font-bold text-white">
             {quantity}
@@ -47,18 +50,21 @@ export function ShopItemCard({
         onClick={onBuy}
         disabled={!canAfford || isLoading}
         className={cn(
-          "mt-3  cursor-pointer rounded-xl py-2 px-6 text-xs font-bold transition-colors",
+          "mt-3 cursor-pointer rounded-xl py-2 px-6 text-lg font-bold transition-colors",
           canAfford && !isLoading
             ? "bg-sky-500 text-white hover:bg-sky-600"
             : "cursor-not-allowed bg-slate-200 text-slate-400",
+          isOwned && "bg-transparent opacity-80 hover:opacity-100 hover:bg-transparent"
         )}
       >
         <span className="flex items-center justify-center gap-1">
-          {item.name}
+          {!isOwned && (
+            <>{item.name}</>
+          )}
           <img
             src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
             alt=""
-            className="size-3.5"
+            className="w-8"
             aria-hidden
           />
           {item.price}
@@ -67,7 +73,7 @@ export function ShopItemCard({
               <img
                 src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
                 alt=""
-                className="size-3.5"
+                className="w-6"
                 aria-hidden
               />
               {item.diamondPrice}
