@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { Confetti } from "../Confetti";
+import { useCallback, useEffect, useState } from "react";
 import {
   GameOptionRow,
   GameQuestionFooter,
@@ -16,7 +15,7 @@ import { useGameTopicSentenceQuestion } from "../../hooks/useGameTopicSentenceQu
 import { useGameTopicSpellQuestion } from "../../hooks/useGameTopicSpellQuestion";
 import { useActivityCompletion } from "../../hooks/useActivityCompletion";
 import { useQuestionHint } from "../../hooks/useQuestionHint";
-import { playCelebrationSound } from "../../lib/gameCelebrationSound";
+import { PracticeSummaryEndScreen } from "../course-practice/PracticeSummaryEndScreen";
 import type { CourseActivityId } from "../../types/course";
 import type { GameTopic } from "../../types/game";
 
@@ -43,23 +42,36 @@ export function GameTopicPracticeSession({
   const spellMode = mode === "spell";
   const sentenceMode = mode === "sentence";
 
-  const mc = useGameTopicQuestion(mcActive ? topic : undefined, mcActive ? topicId : undefined);
-  const spell = useGameTopicSpellQuestion(spellMode ? topic : undefined, spellMode ? topicId : undefined);
+  const [sessionCounter, setSessionCounter] = useState(0);
+  const [phase, setPhase] = useState<"playing" | "summary">("playing");
+  const activeTopicId = `${topicId}-${sessionCounter}`;
+  const tracksCompletion = Boolean(unitId && activityId && (mcActive || spellMode));
+
+  const mc = useGameTopicQuestion(mcActive ? topic : undefined, mcActive ? activeTopicId : undefined);
+  const spell = useGameTopicSpellQuestion(
+    spellMode ? topic : undefined,
+    spellMode ? activeTopicId : undefined,
+  );
   const sentence = useGameTopicSentenceQuestion(
     sentenceMode ? topic : undefined,
-    sentenceMode ? topicId : undefined,
+    sentenceMode ? activeTopicId : undefined,
   );
 
-  const mcIsComplete =
-    mcActive &&
-    Boolean(unitId && activityId && mc.isLast && mc.pickedDisplayIndex !== null);
-  const spellIsComplete =
-    spellMode && Boolean(unitId && activityId && spell.isLast && spell.isSolved);
+  const { reward, onReplay } = useActivityCompletion(
+    unitId,
+    activityId,
+    tracksCompletion && phase === "summary",
+  );
 
-  const completionActivityId = mcIsComplete || spellIsComplete ? activityId : undefined;
-  const isSessionComplete = mcIsComplete || spellIsComplete;
+  useEffect(() => {
+    setPhase("playing");
+  }, [activeTopicId, mode]);
 
-  const { rewardToast } = useActivityCompletion(unitId, completionActivityId, isSessionComplete);
+  const handleReplay = useCallback(() => {
+    onReplay();
+    setSessionCounter((c) => c + 1);
+    setPhase("playing");
+  }, [onReplay]);
 
   const hintQuestionKey = mcActive
     ? (mc.q?.id ?? `mc-${mc.questionIndex}`)
@@ -72,28 +84,9 @@ export function GameTopicPracticeSession({
     hintEnabled ? hintQuestionKey : "hint-disabled",
   );
 
-  const celebratedSpellRef = useRef(false);
-  const celebratedSentenceRef = useRef(false);
-
-  useEffect(() => {
-    celebratedSpellRef.current = false;
-  }, [spell.q?.id]);
-
-  useEffect(() => {
-    celebratedSentenceRef.current = false;
-  }, [sentence.q?.id]);
-
-  useEffect(() => {
-    if (!spellMode || !spell.isSolved || celebratedSpellRef.current) return;
-    celebratedSpellRef.current = true;
-    playCelebrationSound();
-  }, [spellMode, spell.isSolved]);
-
-  useEffect(() => {
-    if (!sentenceMode || !sentence.isSolved || celebratedSentenceRef.current) return;
-    celebratedSentenceRef.current = true;
-    playCelebrationSound();
-  }, [sentenceMode, sentence.isSolved]);
+  const finishToSummary = useCallback(() => {
+    setPhase("summary");
+  }, []);
 
   if (sentenceMode) {
     const { q, questions, questionIndex, isLast, words, wordOrder, setWordOrder, isSolved, playSentence, goNext } =
@@ -108,7 +101,6 @@ export function GameTopicPracticeSession({
             questionCount={questions.length}
           />
         ) : null}
-        {isSolved ? <Confetti /> : null}
 
         {q ? (
           <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
@@ -163,9 +155,26 @@ export function GameTopicPracticeSession({
       spell;
     const targetWord = q ? q.options[q.correctIndex]! : "";
 
+    const handleSpellNext = () => {
+      if (isLast && tracksCompletion) {
+        finishToSummary();
+        return;
+      }
+      goNext();
+    };
+
+    if (phase === "summary" && tracksCompletion) {
+      return (
+        <PracticeSummaryEndScreen
+          reward={reward}
+          subtitle={`You completed ${questions.length} questions`}
+          onReplay={handleReplay}
+        />
+      );
+    }
+
     return (
       <div className="max-w-3xl mx-auto py-2">
-        {rewardToast}
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}
@@ -178,7 +187,6 @@ export function GameTopicPracticeSession({
           total={questions.length}
           trailing={hintEnabled ? hintControl : undefined}
         />
-        {isSolved ? <Confetti /> : null}
 
         {q ? (
           <div className="rounded-2xl border-2 min-h-[65vh] flex flex-col justify-center border-slate-100 bg-white px-4 py-4 md:p-4 shadow-md">
@@ -227,7 +235,11 @@ export function GameTopicPracticeSession({
 
             {isSolved ? (
               <div className="mt-6 space-y-4">
-                <GameQuestionFooter isLast={isLast} onNext={goNext} />
+                <GameQuestionFooter
+                  isLast={isLast}
+                  onNext={handleSpellNext}
+                  lastAction={tracksCompletion ? "next" : "home"}
+                />
               </div>
             ) : null}
           </div>
@@ -249,6 +261,24 @@ export function GameTopicPracticeSession({
     goNext,
   } = mc;
 
+  const handleMcNext = () => {
+    if (isLast && tracksCompletion) {
+      finishToSummary();
+      return;
+    }
+    goNext();
+  };
+
+  if (phase === "summary" && tracksCompletion) {
+    return (
+      <PracticeSummaryEndScreen
+        reward={reward}
+        subtitle={`You completed ${questions.length} questions`}
+        onReplay={handleReplay}
+      />
+    );
+  }
+
   const blankLabel =
     pickedDisplayIndex !== null && q ? q.options[optionOrder[pickedDisplayIndex]!]! : null;
 
@@ -259,7 +289,6 @@ export function GameTopicPracticeSession({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      {rewardToast}
       {showGameBreadcrumb ? (
         <GameTopicBreadcrumb
           topicTitle={topic.title}
@@ -308,7 +337,11 @@ export function GameTopicPracticeSession({
 
           {pickedDisplayIndex !== null ? (
             <div className="mt-4 shrink-0">
-              <GameQuestionFooter isLast={isLast} onNext={goNext} />
+              <GameQuestionFooter
+                isLast={isLast}
+                onNext={handleMcNext}
+                lastAction={tracksCompletion ? "next" : "home"}
+              />
             </div>
           ) : null}
         </div>

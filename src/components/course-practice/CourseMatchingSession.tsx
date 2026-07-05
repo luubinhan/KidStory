@@ -26,7 +26,7 @@ export function CourseMatchingSession({ entries, unitId }: CourseMatchingSession
     replay,
   } = useCourseMatching(entries);
 
-  const { rewardToast, onReplay } = useActivityCompletion(unitId, "matching", isComplete);
+  const { reward, onReplay } = useActivityCompletion(unitId, "matching", isComplete);
 
   const handleReplay = () => {
     onReplay();
@@ -44,8 +44,13 @@ export function CourseMatchingSession({ entries, unitId }: CourseMatchingSession
   if (isComplete) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        {rewardToast}
-        <MatchingEndScreen stars={stars} moves={moves} pairCount={pairCount} onReplay={handleReplay} />
+        <MatchingEndScreen
+          stars={stars}
+          moves={moves}
+          pairCount={pairCount}
+          reward={reward}
+          onReplay={handleReplay}
+        />
       </div>
     );
   }

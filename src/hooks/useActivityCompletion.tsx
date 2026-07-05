@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useUserProgress } from "../contexts/UserProgressContext";
 import type { CourseActivityId } from "../types/course";
-import { formatActivityReward, RewardToast } from "../components/progress/RewardToast";
+import type { ActivityRewardResult } from "../types/userProgress";
 
 export function useActivityCompletion(
   unitId: string | undefined,
@@ -9,7 +9,7 @@ export function useActivityCompletion(
   isComplete: boolean,
 ) {
   const { completeActivity } = useUserProgress();
-  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
+  const [reward, setReward] = useState<ActivityRewardResult | null>(null);
   const sessionKeyRef = useRef(0);
   const awardedRef = useRef<Set<number>>(new Set());
 
@@ -23,43 +23,22 @@ export function useActivityCompletion(
 
     void completeActivity(unitId, activityId).then((result) => {
       if (!result) return;
-      setRewardMessage(
-        formatActivityReward(
-          result.coinsEarned,
-          result.unitBonusEarned,
-          result.achievementUnlocked,
-          result.achievementReward,
-          result.diamondsEarned,
-        ),
-      );
+      setReward(result);
     });
   }, [isComplete, unitId, activityId, completeActivity]);
 
   const onReplay = useCallback(() => {
     sessionKeyRef.current += 1;
-    setRewardMessage(null);
+    setReward(null);
   }, []);
 
-  const rewardToast = (
-    <RewardToast message={rewardMessage} onDone={() => setRewardMessage(null)} />
-  );
-
-  return { rewardToast, onReplay, rewardMessage };
+  return { reward, onReplay };
 }
 
 export async function completeActivityOnce(
   completeActivity: ReturnType<typeof useUserProgress>["completeActivity"],
   unitId: string,
   activityId: CourseActivityId,
-): Promise<string | null> {
-  const result = await completeActivity(unitId, activityId);
-  if (!result) return null;
-
-  return formatActivityReward(
-    result.coinsEarned,
-    result.unitBonusEarned,
-    result.achievementUnlocked,
-    result.achievementReward,
-    result.diamondsEarned,
-  );
+): Promise<ActivityRewardResult | null> {
+  return completeActivity(unitId, activityId);
 }

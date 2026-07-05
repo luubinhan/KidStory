@@ -1,14 +1,17 @@
 import { RotateCcw } from "lucide-react";
+import { ActivityEndShell } from "../progress/ActivityEndShell";
+import type { ActivityRewardResult } from "../../types/userProgress";
 
 type WriteEndScreenProps = {
   correctCount: number;
   total: number;
+  reward: ActivityRewardResult | null;
   onReplay: () => void;
 };
 
-export function WriteEndScreen({ correctCount, total, onReplay }: WriteEndScreenProps) {
+export function WriteEndScreen({ correctCount, total, reward, onReplay }: WriteEndScreenProps) {
   return (
-    <div className="rounded-2xl border-2 border-white bg-white p-6 text-center shadow-md">
+    <ActivityEndShell reward={reward}>
       <h2 className="text-2xl font-bold text-slate-800">All done!</h2>
       <p className="mt-2 text-lg font-semibold text-slate-600">
         You got {correctCount}/{total} correct
@@ -21,6 +24,6 @@ export function WriteEndScreen({ correctCount, total, onReplay }: WriteEndScreen
         <RotateCcw className="size-4" aria-hidden />
         Play again
       </button>
-    </div>
+    </ActivityEndShell>
   );
 }

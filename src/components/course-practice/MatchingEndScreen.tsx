@@ -1,12 +1,14 @@
 import { RotateCcw, Star } from "lucide-react";
-import { Confetti } from "../Confetti";
+import { ActivityEndShell } from "../progress/ActivityEndShell";
 import type { MatchingStars } from "../../types/matchingPairs";
+import type { ActivityRewardResult } from "../../types/userProgress";
 import { cn } from "../../lib/utils";
 
 type MatchingEndScreenProps = {
   stars: MatchingStars;
   moves: number;
   pairCount: number;
+  reward: ActivityRewardResult | null;
   onReplay: () => void;
 };
 
@@ -29,30 +31,32 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
-export function MatchingEndScreen({ stars, moves, pairCount, onReplay }: MatchingEndScreenProps) {
+export function MatchingEndScreen({
+  stars,
+  moves,
+  pairCount,
+  reward,
+  onReplay,
+}: MatchingEndScreenProps) {
   return (
-    <div className="relative space-y-6">
-      <Confetti />
+    <ActivityEndShell reward={reward} className="space-y-6">
+      <h2 className="text-2xl font-bold text-slate-800">Great job!</h2>
+      <p className="mt-2 text-sm font-semibold text-slate-500">
+        You matched all {pairCount} pairs in {moves} {moves === 1 ? "move" : "moves"}.
+      </p>
 
-      <div className="rounded-2xl border-2 border-white bg-white p-6 text-center shadow-md">
-        <h2 className="text-2xl font-bold text-slate-800">Great job!</h2>
-        <p className="mt-2 text-sm font-semibold text-slate-500">
-          You matched all {pairCount} pairs in {moves} {moves === 1 ? "move" : "moves"}.
-        </p>
-
-        <div className="mt-6">
-          <StarRating count={stars} />
-        </div>
-
-        <button
-          type="button"
-          onClick={onReplay}
-          className="candy-glass-btn candy-glass-btn--idle mt-8 inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-bold"
-        >
-          <RotateCcw className="size-4" aria-hidden />
-          Play again
-        </button>
+      <div className="mt-6">
+        <StarRating count={stars} />
       </div>
-    </div>
+
+      <button
+        type="button"
+        onClick={onReplay}
+        className="candy-glass-btn candy-glass-btn--idle mt-8 inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-bold"
+      >
+        <RotateCcw className="size-4" aria-hidden />
+        Play again
+      </button>
+    </ActivityEndShell>
   );
 }

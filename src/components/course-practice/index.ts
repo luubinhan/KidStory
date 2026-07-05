@@ -5,3 +5,4 @@ export { CoursePracticeSentenceSession } from "./CoursePracticeSentenceSession";
 export { CourseTypedAnswerSession } from "./CourseTypedAnswerSession";
 export { CourseWriteSession } from "./CourseWriteSession";
 export { WriteEndScreen } from "./WriteEndScreen";
+export { PracticeSummaryEndScreen } from "./PracticeSummaryEndScreen";

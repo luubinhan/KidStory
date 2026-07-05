@@ -1,16 +1,15 @@
-import { useEffect, useRef } from "react";
-import { Confetti } from "../Confetti";
+import { useCallback, useEffect, useState } from "react";
+import type { CoursePracticeSentence } from "../../types/course";
+import { useCoursePracticeSentenceQuestion } from "../../hooks/useCoursePracticeSentenceQuestion";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
+import { useQuestionHint } from "../../hooks/useQuestionHint";
 import {
   GameQuestionFooter,
   GameSentenceWordStrip,
   IconVolumeButton,
   McProgressHeader,
 } from "../game-topic";
-import { useCoursePracticeSentenceQuestion } from "../../hooks/useCoursePracticeSentenceQuestion";
-import { useActivityCompletion } from "../../hooks/useActivityCompletion";
-import { useQuestionHint } from "../../hooks/useQuestionHint";
-import { playCelebrationSound } from "../../lib/gameCelebrationSound";
-import type { CoursePracticeSentence } from "../../types/course";
+import { PracticeSummaryEndScreen } from "./PracticeSummaryEndScreen";
 
 type Props = {
   sentences: readonly CoursePracticeSentence[];
@@ -19,7 +18,10 @@ type Props = {
 };
 
 export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }: Props) {
-  const celebratedRef = useRef(false);
+  const [sessionCounter, setSessionCounter] = useState(0);
+  const [phase, setPhase] = useState<"playing" | "summary">("playing");
+  const activeSessionKey = `${sessionKey}-sentence-${sessionCounter}`;
+
   const {
     sentenceIndex,
     sentence,
@@ -31,21 +33,28 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
     isSolved,
     playSentence,
     goNext,
-  } = useCoursePracticeSentenceQuestion(sentences, sessionKey);
+  } = useCoursePracticeSentenceQuestion(sentences, activeSessionKey);
 
-  const isSessionComplete = isLast && isSolved;
-  const { rewardToast } = useActivityCompletion(unitId, "sentence", isSessionComplete);
+  const { reward, onReplay } = useActivityCompletion(unitId, "sentence", phase === "summary");
   const { hintRevealed, hintControl } = useQuestionHint(sentence?.id ?? `sentence-${sentenceIndex}`);
 
   useEffect(() => {
-    celebratedRef.current = false;
-  }, [sentence?.id]);
+    setPhase("playing");
+  }, [activeSessionKey]);
 
-  useEffect(() => {
-    if (!isSolved || celebratedRef.current) return;
-    celebratedRef.current = true;
-    playCelebrationSound();
-  }, [isSolved]);
+  const handleNext = useCallback(() => {
+    if (isLast) {
+      setPhase("summary");
+      return;
+    }
+    goNext();
+  }, [isLast, goNext]);
+
+  const handleReplay = useCallback(() => {
+    onReplay();
+    setSessionCounter((c) => c + 1);
+    setPhase("playing");
+  }, [onReplay]);
 
   if (sentences.length === 0) {
     return (
@@ -55,10 +64,18 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
     );
   }
 
+  if (phase === "summary") {
+    return (
+      <PracticeSummaryEndScreen
+        reward={reward}
+        subtitle={`You completed ${allSentences.length} sentences`}
+        onReplay={handleReplay}
+      />
+    );
+  }
+
   return (
     <div className="max-w-3xl mx-auto py-2">
-      {rewardToast}
-      {isSolved ? <Confetti /> : null}
       <McProgressHeader
         current={sentenceIndex + 1}
         total={allSentences.length}
@@ -87,13 +104,13 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
             wordOrder={wordOrder}
             onWordOrderChange={setWordOrder}
             disabled={isSolved}
-            sentenceKey={`${sessionKey}:${sentence.id}`}
+            sentenceKey={`${activeSessionKey}:${sentence.id}`}
             isSolved={isSolved}
             onPlaySentence={playSentence}
           />
           {isSolved ? (
             <div className="mt-6 space-y-4">
-              <GameQuestionFooter isLast={isLast} onNext={goNext} />
+              <GameQuestionFooter isLast={isLast} onNext={handleNext} lastAction="next" />
             </div>
           ) : null}
         </div>

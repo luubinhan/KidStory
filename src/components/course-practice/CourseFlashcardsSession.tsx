@@ -4,9 +4,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Progress } from "../ui";
 import type { CourseWord } from "../../types/course";
 import { useCourseFlashcards } from "../../hooks/useCourseFlashcards";
-import { useUserProgress } from "../../contexts/UserProgressContext";
-import { formatActivityReward, RewardToast } from "../progress/RewardToast";
+import { useActivityCompletion } from "../../hooks/useActivityCompletion";
 import { CourseFlashcard } from "./CourseFlashcard";
+import { PracticeSummaryEndScreen } from "./PracticeSummaryEndScreen";
 
 type CourseFlashcardsSessionProps = {
   words: readonly CourseWord[];
@@ -15,9 +15,11 @@ type CourseFlashcardsSessionProps = {
 };
 
 export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFlashcardsSessionProps) {
-  const { completeActivity } = useUserProgress();
   const navigate = useNavigate();
-  const [rewardMessage, setRewardMessage] = useState<string | null>(null);
+  const [sessionCounter, setSessionCounter] = useState(0);
+  const [phase, setPhase] = useState<"playing" | "summary">("playing");
+  const activeSessionKey = `${sessionKey}-flashcards-${sessionCounter}`;
+
   const {
     deck,
     cardIndex,
@@ -28,23 +30,21 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
     goNext,
     canGoPrev,
     canGoNext,
-  } = useCourseFlashcards(words, sessionKey);
+  } = useCourseFlashcards(words, activeSessionKey);
 
-  const handleBackToUnit = async () => {
-    const result = await completeActivity(unitId, "flashcards");
-    if (result) {
-      setRewardMessage(
-        formatActivityReward(
-          result.coinsEarned,
-          result.unitBonusEarned,
-          result.achievementUnlocked,
-          result.achievementReward,
-          result.diamondsEarned,
-        ),
-      );
-      setTimeout(() => navigate(`/course/${unitId}`), 800);
-      return;
-    }
+  const { reward, onReplay } = useActivityCompletion(unitId, "flashcards", phase === "summary");
+
+  const handleFinish = () => {
+    setPhase("summary");
+  };
+
+  const handleReplay = () => {
+    onReplay();
+    setSessionCounter((c) => c + 1);
+    setPhase("playing");
+  };
+
+  const handleBackToUnit = () => {
     navigate(`/course/${unitId}`);
   };
 
@@ -56,13 +56,24 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
     );
   }
 
+  if (phase === "summary") {
+    return (
+      <PracticeSummaryEndScreen
+        reward={reward}
+        subtitle={`You reviewed ${deck.length} cards`}
+        onReplay={handleReplay}
+        onContinue={handleBackToUnit}
+        continueLabel="Back to unit"
+      />
+    );
+  }
+
   if (!currentWord) {
     return null;
   }
 
   return (
     <div className="course-flashcards space-y-4">
-      <RewardToast message={rewardMessage} onDone={() => setRewardMessage(null)} />
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
           <span aria-live="polite">
@@ -102,10 +113,10 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
         ) : (
           <button
             type="button"
-            onClick={() => void handleBackToUnit()}
+            onClick={handleFinish}
             className="candy-glass-btn inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold"
           >
-            Back to unit
+            Finish
           </button>
         )}
       </div>

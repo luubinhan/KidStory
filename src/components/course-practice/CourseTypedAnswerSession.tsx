@@ -4,8 +4,6 @@ import type { CourseTypedAnswerQuestion } from "../../types/course";
 import { useCourseTypedAnswerSession } from "../../hooks/useCourseTypedAnswerSession";
 import { useActivityCompletion } from "../../hooks/useActivityCompletion";
 import { useQuestionHint } from "../../hooks/useQuestionHint";
-import { playCelebrationSound } from "../../lib/gameCelebrationSound";
-import { Confetti } from "../Confetti";
 import { GameQuestionImage } from "../game-topic/GameQuestionImage";
 import { IconVolumeButton } from "../game-topic/IconVolumeButton";
 import { McProgressHeader } from "../game-topic/McProgressHeader";
@@ -41,26 +39,12 @@ export function CourseTypedAnswerSession({
     playSentence,
   } = useCourseTypedAnswerSession(questions, sessionKey);
 
-  const { rewardToast, onReplay } = useActivityCompletion(
+  const { reward, onReplay } = useActivityCompletion(
     unitId,
     "complete-sentence",
     phase === "summary",
   );
   const { hintRevealed, hintControl } = useQuestionHint(question?.id ?? `typed-${questionIndex}`);
-
-  const celebratedRef = useRef(false);
-
-  useEffect(() => {
-    if (phase === "playing") {
-      celebratedRef.current = false;
-    }
-  }, [phase]);
-
-  useEffect(() => {
-    if (phase !== "summary" || celebratedRef.current) return;
-    celebratedRef.current = true;
-    playCelebrationSound();
-  }, [phase]);
 
   const handleReplay = () => {
     onReplay();
@@ -77,11 +61,12 @@ export function CourseTypedAnswerSession({
 
   if (phase === "summary") {
     return (
-      <div className="relative">
-        {rewardToast}
-        <Confetti />
-        <WriteEndScreen correctCount={correctCount} total={total} onReplay={handleReplay} />
-      </div>
+      <WriteEndScreen
+        correctCount={correctCount}
+        total={total}
+        reward={reward}
+        onReplay={handleReplay}
+      />
     );
   }
 

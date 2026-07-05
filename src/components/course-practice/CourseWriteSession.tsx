@@ -34,7 +34,7 @@ export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSes
     playWord,
   } = useCourseWriteSession(words, sessionKey);
 
-  const { rewardToast, onReplay } = useActivityCompletion(unitId, "write", phase === "summary");
+  const { reward, onReplay } = useActivityCompletion(unitId, "write", phase === "summary");
   const { hintRevealed, hintControl } = useQuestionHint(word?.id ?? `write-${questionIndex}`);
 
   const handleReplay = () => {
@@ -52,10 +52,12 @@ export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSes
 
   if (phase === "summary") {
     return (
-      <>
-        {rewardToast}
-        <WriteEndScreen correctCount={correctCount} total={total} onReplay={handleReplay} />
-      </>
+      <WriteEndScreen
+        correctCount={correctCount}
+        total={total}
+        reward={reward}
+        onReplay={handleReplay}
+      />
     );
   }
 
