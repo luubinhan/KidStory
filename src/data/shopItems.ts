@@ -7,8 +7,98 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "/images/shop/chicken.png",
     position: {
-      x: '40dvw',
       y: '60dvw',
+      x: '40dvw',
+    }
+  },
+  {
+    id: "fish-ponds",
+    name: "Fish ponds",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '76dvw',
+      x: '40dvw',
+    }
+  },
+  {
+    id: "goat",
+    name: "Goat",
+    price: 10,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '78dvw',
+      x: '76dvw',
+    }
+  },
+  {
+    id: "rice-field",
+    name: "Rice field",
+    price: 100,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '79dvw',
+      x: '4dvw',
+    }
+  },
+  {
+    id: "mango-gardens",
+    name: "Mango gardens",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '97dvw',
+      x: '1dvw',
+    }
+  },
+  {
+    id: "carrot-gardens",
+    name: "Carrot gardens",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '93dvw',
+      x: '20dvw',
+    }
+  },
+  {
+    id: "tomato-gardens",
+    name: "Tomato gardens",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '93dvw',
+      x: '41dvw',
+    }
+  },
+  {
+    id: "watermelon-gardens",
+    name: "Watermelon gardens",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '93dvw',
+      x: '64dvw',
+    }
+  },
+  {
+    id: "durian-gardens",
+    name: "Durian gardens",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '110dvw',
+      x: '29dvw',
+    }
+  },
+  {
+    id: "flower-gardens",
+    name: "Flower gardens",
+    price: 10,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '112dvw',
+      x: '62dvw',
     }
   },
   {
@@ -17,38 +107,78 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "/images/shop/chicken.png",
     position: {
-      x: '76dvw',
       y: '61dvw',
+      x: '76dvw',
+    }
+  },
+  {
+    id: "banana",
+    name: "Banana",
+    price: 10,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '59dvw',
+      x: '1dvw',
+    }
+  },
+  {
+    id: "truck",
+    name: "Truck",
+    price: 20,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '45dvw',
+      x: '12dvw',
+    }
+  },
+  {
+    id: "house",
+    name: "House",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '38dvw',
+      x: '38dvw',
+    }
+  },
+  {
+    id: "rice-threshing-machine",
+    name: "Rice threshing machine",
+    price: 50,
+    imageUrl: "/images/shop/chicken.png",
+    position: {
+      y: '26dvw',
+      x: '77dvw',
     }
   },
   {
     id: "sheep", name: "Sheep", price: 10, imageUrl: "/images/shop/sheep.png", position: {
-      x: '22dvw',
       y: '128dvw',
+      x: '22dvw',
     }
   },
   {
     id: "cow", name: "Cow", price: 10, imageUrl: "/images/shop/cow.png", position: {
-      x: '1dvw',
       y: '123dvw',
+      x: '1dvw',
     }
   },
   {
     id: "pig", name: "Pig", price: 10, imageUrl: "/images/shop/pig.png", position: {
-      x: '43dvw',
       y: '129dvw',
+      x: '43dvw',
     }
   },
   {
     id: "dog", name: "Dog", price: 10, imageUrl: "/images/shop/dog.png", position: {
-      x: '62dvw',
       y: '129dvw',
+      x: '62dvw',
     }
   },
   {
     id: "cat", name: "Cat", price: 10, imageUrl: "/images/shop/cat.png", position: {
-      x: '78dvw',
       y: '129dvw',
+      x: '78dvw',
     }
   },
   {
@@ -57,8 +187,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "/images/shop/windmill.png",
     position: {
-      x: '8dvw',
       y: '7dvw',
+      x: '8dvw',
     },
   },
   {
@@ -67,8 +197,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "/images/shop/feed_mill.png",
     position: {
-      x: '40dvw',
       y: '6dvw',
+      x: '40dvw',
     },
   },
   {
@@ -77,8 +207,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "/images/shop/bread_oven.png",
     position: {
-      x: '71dvw',
       y: '7dvw',
+      x: '71dvw',
     },
   },
   {
@@ -87,8 +217,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "/images/shop/yogurt_machine.png",
     position: {
-      x: '7dvw',
       y: '26dvw',
+      x: '7dvw',
     },
   },
   {
@@ -97,8 +227,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "/images/shop/juice_factory.png",
     position: {
-      x: '48dvw',
       y: '24dvw',
+      x: '48dvw',
     },
   },
 ] as const;
