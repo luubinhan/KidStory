@@ -1,6 +1,7 @@
-import { Settings, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import type { CourseProfile } from "../../types/course";
 import { cn } from "../../lib/utils";
+import { SettingsTrigger } from "../settings/SettingsTrigger";
 
 type CoursePageHeaderProps = {
   profile: CourseProfile;
@@ -50,13 +51,7 @@ export function CoursePageHeader({ profile, className }: CoursePageHeaderProps) 
           </div>
         </div>
 
-        <button
-          type="button"
-          className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-600 transition-colors hover:bg-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
-          aria-label="Cài đặt"
-        >
-          <Settings className="size-5" aria-hidden />
-        </button>
+        <SettingsTrigger />
       </div>
     </header>
   );

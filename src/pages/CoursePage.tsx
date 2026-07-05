@@ -5,6 +5,7 @@ import {
   LearningPath,
 } from "../components/course";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
+import { SettingsTrigger } from "../components/settings/SettingsTrigger";
 
 export default function CoursePage() {
   return (
@@ -13,7 +14,10 @@ export default function CoursePage() {
         <div style={{ marginBottom: '345px' }}>
           <div className="flex items-center justify-between gap-4 px-4">
             <CoursePageTitle curriculumLabel={courseProfile.curriculumLabel} />
-            <CurrencyDisplay className="mt-2 shrink-0" />
+            <div className="mt-2 flex shrink-0 items-center gap-2">
+              <CurrencyDisplay />
+              <SettingsTrigger />
+            </div>
           </div>
         </div>
         <LearningPath units={courseUnits} />

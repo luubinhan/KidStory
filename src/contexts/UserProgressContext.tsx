@@ -33,6 +33,7 @@ type UserProgressContextValue = {
   isLoading: boolean;
   coins: number;
   diamonds: number;
+  reloadProgress: () => Promise<void>;
   completeActivity: (
     unitId: string,
     activityId: CourseActivityId,
@@ -84,6 +85,11 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const reloadProgress = useCallback(async () => {
+    const loaded = await loadUserProgress();
+    setProgress(loaded);
+  }, []);
+
   const persist = useCallback(async (next: UserProgressV1) => {
     setProgress(next);
     await saveUserProgress(next);
@@ -126,6 +132,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       isLoading,
       coins: progress.coins,
       diamonds: progress.diamonds,
+      reloadProgress,
       completeActivity,
       useHint,
       canUseHint: canAffordHint(progress),
@@ -135,7 +142,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       isUnitAccessible: (unit) => isUnitUnlocked(unit, progress, progressOptions),
       getUnitProgress: (unit) => getUnitProgressInfo(unit, progress),
     }),
-    [progress, isLoading, completeActivity, useHint, buyShopItem, progressOptions],
+    [progress, isLoading, reloadProgress, completeActivity, useHint, buyShopItem, progressOptions],
   );
 
   return (
