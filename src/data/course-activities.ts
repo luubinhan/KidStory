@@ -7,7 +7,15 @@ import {
   Shuffle,
   SquareCheck,
 } from "lucide-react";
-import type { CourseActivity } from "../types/course";
+import type { CourseActivity, CourseActivityId } from "../types/course";
+
+const ACTIVITY_BACKGROUND_OVERRIDES: Partial<Record<CourseActivityId, string>> = {
+  flashcards: "/map/flashcard.png",
+};
+
+export function getCourseActivityBackgroundUrl(id: CourseActivityId): string {
+  return ACTIVITY_BACKGROUND_OVERRIDES[id] ?? `/map/${id}.png`;
+}
 
 export const courseActivities: readonly CourseActivity[] = [
   {

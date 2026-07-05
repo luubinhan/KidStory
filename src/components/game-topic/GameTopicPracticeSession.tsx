@@ -189,59 +189,61 @@ export function GameTopicPracticeSession({
         />
 
         {q ? (
-          <div className="rounded-2xl border-2 min-h-[65vh] flex flex-col justify-center border-slate-100 bg-white px-4 py-4 md:p-4 shadow-md">
-            {q.image?.trim() ? (
-              <div className="mb-12 relative">
-                <GameQuestionImage src={q.image} />
-                <div className="absolute bottom-0 left-0 right-4 flex flex-wrap items-start gap-2 gap-y-2 justify-end py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100 ">
-                  <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
-                    <IconVolumeButton
-                      className="h-full w-full cursor-pointer flex items-center justify-center"
-                      onClick={() => void playWord()}
-                      aria-label="Hear the word"
-                    />
+          <div className="min-h-[65vh] flex flex-col justify-center  px-4 py-4 md:p-4 bg-[url('/images/bg-card.png')] bg-contain bg-no-repeat">
+            <div className="backdrop-blur-xs">
+              {q.image?.trim() ? (
+                <div className="mb-12 relative">
+                  <GameQuestionImage src={q.image} />
+                  <div className="absolute bottom-0 left-0 right-4 flex flex-wrap items-start gap-2 gap-y-2 justify-end py-4 bg-linear-to-t from-zinc-40/100 to-olive-0/100 ">
+                    <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
+                      <IconVolumeButton
+                        className="h-full w-full cursor-pointer flex items-center justify-center"
+                        onClick={() => void playWord()}
+                        aria-label="Hear the word"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="mb-12 space-y-4 text-center">
-                {q.translation ? (
-                  <p className="text-3xl font-bold text-slate-800">{q.translation}</p>
-                ) : null}
-                <div className="flex justify-center">
-                  <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
-                    <IconVolumeButton
-                      className="h-full w-full cursor-pointer flex items-center justify-center"
-                      onClick={() => void playWord()}
-                      aria-label="Hear the word"
-                    />
+              ) : (
+                <div className="mb-12 space-y-4 text-center">
+                  {q.translation ? (
+                    <p className="text-3xl font-bold text-slate-800">{q.translation}</p>
+                  ) : null}
+                  <div className="flex justify-center">
+                    <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
+                      <IconVolumeButton
+                        className="h-full w-full cursor-pointer flex items-center justify-center"
+                        onClick={() => void playWord()}
+                        aria-label="Hear the word"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {hintRevealed ? (
-              <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
-                Hint: {targetWord}
-              </p>
-            ) : null}
+              {hintRevealed ? (
+                <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+                  Hint: {targetWord}
+                </p>
+              ) : null}
 
-            <GameSpellLetterStrip
-              graphemes={graphemes}
-              letterOrder={letterOrder}
-              onLetterOrderChange={setLetterOrder}
-              disabled={isSolved}
-            />
+              <GameSpellLetterStrip
+                graphemes={graphemes}
+                letterOrder={letterOrder}
+                onLetterOrderChange={setLetterOrder}
+                disabled={isSolved}
+              />
 
-            {isSolved ? (
-              <div className="mt-6 space-y-4">
-                <GameQuestionFooter
-                  isLast={isLast}
-                  onNext={handleSpellNext}
-                  lastAction={tracksCompletion ? "next" : "home"}
-                />
-              </div>
-            ) : null}
+              {isSolved ? (
+                <div className="mt-6 space-y-4">
+                  <GameQuestionFooter
+                    isLast={isLast}
+                    onNext={handleSpellNext}
+                    lastAction={tracksCompletion ? "next" : "home"}
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
         ) : null}
       </div>

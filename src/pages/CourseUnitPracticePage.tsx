@@ -1,6 +1,10 @@
 import { ArrowLeft } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { getCourseActivity, isCourseActivityId } from "../data/course-activities";
+import {
+  getCourseActivity,
+  getCourseActivityBackgroundUrl,
+  isCourseActivityId,
+} from "../data/course-activities";
 import { getDictionaryEntriesByUnitId } from "../data/course-dictionary";
 import { getCourseUnitById } from "../data/course";
 import { useUserProgress } from "../contexts/UserProgressContext";
@@ -15,6 +19,11 @@ import {
 } from "../components/course-practice";
 import { GameTopicPracticeSession } from "../components/game-topic/GameTopicPracticeSession";
 import { buildMcTopic, buildSpellTopic } from "../lib/courseUnitTopic";
+import { cn } from "../lib/utils";
+
+const pageShellClass = "relative flex min-h-screen flex-col pb-24";
+const fallbackBgClass = "bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80";
+const imageBgClass = "bg-center bg-top bg-no-repeat bg-cover";
 
 export default function CourseUnitPracticePage() {
   const { unitId, activityId } = useParams<{ unitId: string; activityId: string }>();
@@ -53,11 +62,16 @@ export default function CourseUnitPracticePage() {
   const contentClassName = isMatching
     ? "flex w-full flex-1 flex-col px-4 py-4 sm:px-6 sm:py-6"
     : isMultipleChoice
-      ? "mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6"
-      : "mx-auto w-full max-w-lg flex-1 px-4 py-6";
+      ? "mx-auto flex w-full max-w-lg flex-1 flex-col px-4 pb-6"
+      : "mx-auto w-full max-w-lg flex-1 px-4 pb-6";
+
+  const backgroundUrl = getCourseActivityBackgroundUrl(activity.id);
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+    <div
+      className={cn(pageShellClass, imageBgClass, fallbackBgClass)}
+      style={{ backgroundImage: `url(${backgroundUrl})` }}
+    >
       <div className={contentClassName}>
         <CoursePracticeHeader unit={unit} activity={activity} />
 
