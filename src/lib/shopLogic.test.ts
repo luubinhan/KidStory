@@ -58,11 +58,40 @@ if (secondBuy.success) {
   assert(getItemQuantity(secondBuy.progress, "chicken") === 2, "quantity incremented to 2");
 }
 
-const building = { ...defaultProgress, coins: 200 };
+const building = { ...defaultProgress, coins: 200, diamonds: 50 };
 const buildingBuy = purchaseShopItem(building, "windmill");
 assert(buildingBuy.success, "100-coin building purchase succeeds");
 if (buildingBuy.success) {
   assert(buildingBuy.progress.coins === 100, "100 coins deducted for windmill");
+}
+
+const noDiamonds = { ...defaultProgress, coins: 200, diamonds: 0 };
+const noDiamondsBuy = purchaseShopItem(noDiamonds, "windmill");
+assert(!noDiamondsBuy.success, "windmill fails without diamonds");
+if (noDiamondsBuy.success === false) {
+  assert(noDiamondsBuy.reason === "insufficient_diamonds", "failure reason is insufficient_diamonds");
+}
+
+const noCoins = { ...defaultProgress, coins: 50, diamonds: 100 };
+const noCoinsBuy = purchaseShopItem(noCoins, "windmill");
+assert(!noCoinsBuy.success, "windmill fails without enough coins");
+if (noCoinsBuy.success === false) {
+  assert(noCoinsBuy.reason === "insufficient_coins", "failure reason is insufficient_coins");
+}
+
+const canBuyBuilding = { ...defaultProgress, coins: 200, diamonds: 50 };
+const buildingDualBuy = purchaseShopItem(canBuyBuilding, "windmill");
+assert(buildingDualBuy.success, "windmill succeeds with coins and diamonds");
+if (buildingDualBuy.success) {
+  assert(buildingDualBuy.progress.coins === 100, "100 coins deducted for windmill dual buy");
+  assert(buildingDualBuy.progress.diamonds === 0, "50 diamonds deducted for windmill");
+  assert(getItemQuantity(buildingDualBuy.progress, "windmill") === 1, "windmill quantity is 1");
+}
+
+const coinsOnlyBuy = purchaseShopItem({ ...defaultProgress, coins: 50 }, "chicken");
+assert(coinsOnlyBuy.success, "chicken still coins-only purchase works");
+if (coinsOnlyBuy.success) {
+  assert(coinsOnlyBuy.progress.diamonds === 0, "chicken purchase does not spend diamonds");
 }
 
 const unknown = purchaseShopItem(rich, "not_real" as ShopItemId);

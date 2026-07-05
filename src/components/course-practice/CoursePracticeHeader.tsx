@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import type { CourseActivity, CourseUnit } from "../../types/course";
-import { CoinDisplay } from "../progress/CoinDisplay";
+import { CurrencyDisplay } from "../progress/CurrencyDisplay";
 
 type CoursePracticeHeaderProps = {
   unit: CourseUnit;
@@ -20,7 +20,7 @@ export function CoursePracticeHeader({ unit, activity, questionLabel }: CoursePr
           <ChevronLeft className="size-4" aria-hidden />
           Back to unit {unit.unitNumber} · {unit.title}
         </Link>
-        <CoinDisplay size="sm" />
+        <CurrencyDisplay size="sm" />
       </div>
       {questionLabel && (
         <p className="mt-1 text-sm font-semibold text-slate-500">{questionLabel}</p>

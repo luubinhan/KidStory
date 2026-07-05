@@ -14,6 +14,7 @@ import {
   COIN_PER_ACTIVITY,
   COIN_TREASURE_MIRROR_REWARD,
   COIN_UNIT_BONUS,
+  DIAMOND_REWARD_BY_ACTIVITY,
   TREASURE_MIRROR_UNITS_REQUIRED,
 } from "../types/userProgress";
 
@@ -21,6 +22,7 @@ export function getDefaultProgress(): UserProgressV1 {
   return {
     version: 1,
     coins: 0,
+    diamonds: 0,
     unitActivityCompletions: {},
     unitBonusClaimed: {},
     achievements: {},
@@ -188,11 +190,14 @@ export function onActivityComplete(
     coinsEarned += achievementReward;
   }
 
+  const diamondReward = DIAMOND_REWARD_BY_ACTIVITY[activityId] ?? 0;
+  next.diamonds = progress.diamonds + diamondReward;
   next.coins += coinsEarned;
 
   return {
     progress: next,
     coinsEarned,
+    diamondsEarned: diamondReward,
     activityBonus: COIN_PER_ACTIVITY,
     unitBonusEarned,
     achievementUnlocked,
@@ -236,15 +241,30 @@ export function getItemQuantity(progress: UserProgressV1, itemId: ShopItemId): n
   return progress.inventory[itemId] ?? 0;
 }
 
+export function canAffordShopItem(progress: UserProgressV1, itemId: ShopItemId): boolean {
+  const item = getShopItemById(itemId);
+  if (!item) return false;
+  if (progress.coins < item.price) return false;
+  const diamondCost = item.diamondPrice ?? 0;
+  return progress.diamonds >= diamondCost;
+}
+
 export function purchaseShopItem(
   progress: UserProgressV1,
   itemId: ShopItemId,
 ):
   | { success: true; progress: UserProgressV1 }
-  | { success: false; reason: "insufficient_coins" | "unknown_item" } {
+  | { success: false; reason: "insufficient_coins" | "insufficient_diamonds" | "unknown_item" } {
   const item = getShopItemById(itemId);
   if (!item) return { success: false, reason: "unknown_item" };
-  if (progress.coins < item.price) return { success: false, reason: "insufficient_coins" };
+
+  const diamondCost = item.diamondPrice ?? 0;
+  if (progress.diamonds < diamondCost) {
+    return { success: false, reason: "insufficient_diamonds" };
+  }
+  if (progress.coins < item.price) {
+    return { success: false, reason: "insufficient_coins" };
+  }
 
   const currentQty = progress.inventory[itemId] ?? 0;
 
@@ -253,6 +273,7 @@ export function purchaseShopItem(
     progress: {
       ...progress,
       coins: progress.coins - item.price,
+      diamonds: progress.diamonds - diamondCost,
       inventory: {
         ...progress.inventory,
         [itemId]: currentQty + 1,

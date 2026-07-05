@@ -44,8 +44,13 @@ export function formatActivityReward(
   unitBonusEarned: number,
   achievementUnlocked: string | null,
   achievementReward: number,
+  diamondsEarned: number,
 ): string {
   const parts: string[] = [`+${coinsEarned - unitBonusEarned - achievementReward} coin`];
+
+  if (diamondsEarned > 0) {
+    parts.push(`+${diamondsEarned} diamond`);
+  }
 
   if (unitBonusEarned > 0) {
     parts.push(`+${unitBonusEarned} unit bonus`);

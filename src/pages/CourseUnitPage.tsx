@@ -2,7 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { getCourseUnitById } from "../data/course";
 import { useUserProgress } from "../contexts/UserProgressContext";
 import { CourseBottomNav, UnitActivityList } from "../components/course";
-import { CoinDisplay } from "../components/progress/CoinDisplay";
+import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { cn } from "../lib/utils";
 import { ArrowLeft, Map } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -61,7 +61,7 @@ export default function CourseUnitPage() {
           >
             <Map className="size-5" aria-hidden />
           </Link>
-          <CoinDisplay />
+          <CurrencyDisplay />
         </div>
 
         <div className="mx-auto max-w-lg mt-24 flex items-center justify-center flex-col text-center gap-4">

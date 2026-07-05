@@ -4,7 +4,7 @@ import {
   CoursePageTitle,
   LearningPath,
 } from "../components/course";
-import { CoinDisplay } from "../components/progress/CoinDisplay";
+import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 
 export default function CoursePage() {
   return (
@@ -13,7 +13,7 @@ export default function CoursePage() {
         <div style={{ marginBottom: '345px' }}>
           <div className="flex items-center justify-between gap-4 px-4">
             <CoursePageTitle curriculumLabel={courseProfile.curriculumLabel} />
-            <CoinDisplay className="mt-2 shrink-0" />
+            <CurrencyDisplay className="mt-2 shrink-0" />
           </div>
         </div>
         <LearningPath units={courseUnits} />

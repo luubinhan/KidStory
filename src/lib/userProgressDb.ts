@@ -40,6 +40,7 @@ export async function loadUserProgress(): Promise<UserProgressV1> {
 
   return {
     ...stored,
+    diamonds: stored.diamonds ?? 0,
     inventory,
   };
 }

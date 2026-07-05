@@ -39,6 +39,7 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
           result.unitBonusEarned,
           result.achievementUnlocked,
           result.achievementReward,
+          result.diamondsEarned,
         ),
       );
       setTimeout(() => navigate(`/course/${unitId}`), 800);

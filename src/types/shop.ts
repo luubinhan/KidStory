@@ -29,6 +29,7 @@ export type ShopItem = {
   id: ShopItemId;
   name: string;
   price: number;
+  diamondPrice?: number;
   imageUrl: string;
   position: {
     x: number | string;

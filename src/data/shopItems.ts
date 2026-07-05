@@ -135,6 +135,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "house",
     name: "House",
     price: 50,
+    diamondPrice: 50,
     imageUrl: "/images/shop/chicken.png",
     position: {
       y: '38dvw',
@@ -145,6 +146,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "rice-threshing-machine",
     name: "Rice threshing machine",
     price: 50,
+    diamondPrice: 50,
     imageUrl: "/images/shop/chicken.png",
     position: {
       y: '26dvw',
@@ -185,6 +187,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "windmill",
     name: "Windmill",
     price: 100,
+    diamondPrice: 50,
     imageUrl: "/images/shop/windmill.png",
     position: {
       y: '7dvw',
@@ -195,6 +198,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "feed_mill",
     name: "Food Factory",
     price: 100,
+    diamondPrice: 50,
     imageUrl: "/images/shop/feed_mill.png",
     position: {
       y: '6dvw',
@@ -205,6 +209,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "bread_oven",
     name: "Bread Oven",
     price: 100,
+    diamondPrice: 50,
     imageUrl: "/images/shop/bread_oven.png",
     position: {
       y: '7dvw',
@@ -215,6 +220,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "yogurt_machine",
     name: "Yogurt maker",
     price: 100,
+    diamondPrice: 50,
     imageUrl: "/images/shop/yogurt_machine.png",
     position: {
       y: '26dvw',
@@ -225,6 +231,7 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     id: "juice_factory",
     name: "Juice factory",
     price: 100,
+    diamondPrice: 50,
     imageUrl: "/images/shop/juice_factory.png",
     position: {
       y: '24dvw',

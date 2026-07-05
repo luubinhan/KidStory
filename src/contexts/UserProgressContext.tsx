@@ -32,6 +32,7 @@ type UserProgressContextValue = {
   progress: UserProgressV1;
   isLoading: boolean;
   coins: number;
+  diamonds: number;
   completeActivity: (
     unitId: string,
     activityId: CourseActivityId,
@@ -124,6 +125,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       progress,
       isLoading,
       coins: progress.coins,
+      diamonds: progress.diamonds,
       completeActivity,
       useHint,
       canUseHint: canAffordHint(progress),

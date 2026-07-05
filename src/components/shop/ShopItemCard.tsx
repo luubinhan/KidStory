@@ -62,6 +62,17 @@ export function ShopItemCard({
             aria-hidden
           />
           {item.price}
+          {item.diamondPrice != null && item.diamondPrice > 0 ? (
+            <>
+              <img
+                src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
+                alt=""
+                className="size-3.5"
+                aria-hidden
+              />
+              {item.diamondPrice}
+            </>
+          ) : null}
         </span>
       </button>
     </article>

@@ -29,6 +29,7 @@ export function useActivityCompletion(
           result.unitBonusEarned,
           result.achievementUnlocked,
           result.achievementReward,
+          result.diamondsEarned,
         ),
       );
     });
@@ -59,5 +60,6 @@ export async function completeActivityOnce(
     result.unitBonusEarned,
     result.achievementUnlocked,
     result.achievementReward,
+    result.diamondsEarned,
   );
 }
