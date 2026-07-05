@@ -56,7 +56,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
 
   const cardClassName = (borderClass: string) =>
     cn(
-      "flex h-full w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 bg-white p-4 text-center shadow-sm transition-all cursor-pointer",
+      "flex h-full backdrop-brightness-120 hover:scale-110 w-full flex-col items-center justify-center gap-2 rounded-2xl backdrop-blur-xs p-4 text-center shadow-sm transition-all cursor-pointer",
       cn("border-white", borderClass, "hover:shadow-md"),
     );
 

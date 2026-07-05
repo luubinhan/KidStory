@@ -75,7 +75,7 @@ export default function CourseUnitPage() {
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-              Unit {unit.unitNumber}
+              #{unit.unitNumber}
             </p>
             <h1 className="text-2xl font-bold text-slate-800">{unit.title}</h1>
           </div>
