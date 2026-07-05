@@ -43,7 +43,7 @@ export function ShopItemCard({
       <h2 className="mt-2 text-center text-sm font-bold text-slate-800">{item.name}</h2>
 
       <p className="mt-1 flex items-center justify-center gap-1 text-xs font-semibold text-amber-700">
-        <img src="/images/coin.png" alt="" className="size-3.5" aria-hidden />
+        <img src="images/coin.png" alt="" className="size-3.5" aria-hidden />
         {item.price}
       </p>
       <button
@@ -57,7 +57,7 @@ export function ShopItemCard({
             : "cursor-not-allowed bg-slate-200 text-slate-400",
         )}
       >
-        Mua
+        Own
       </button>
     </article>
   );
