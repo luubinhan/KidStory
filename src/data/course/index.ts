@@ -14,7 +14,7 @@ export const courseProfile: CourseProfile = {
   level: 1,
   xpCurrent: 340,
   xpMax: 500,
-  curriculumLabel: "Grade 1",
+  curriculumLabel: "Wonder Farm",
 };
 
 export const courseUnits: readonly CourseUnit[] = [
