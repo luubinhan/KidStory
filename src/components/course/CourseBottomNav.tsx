@@ -12,7 +12,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { id: "home", label: "Home", icon: Home, to: "/" },
-  { id: "study", label: "Study", icon: BookOpen, to: "/course" },
+  { id: "study", label: "Explore", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
   { id: "achievements", label: "Assets", icon: Boxes, to: "/assets" },
