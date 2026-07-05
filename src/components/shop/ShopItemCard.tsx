@@ -55,7 +55,12 @@ export function ShopItemCard({
       >
         <span className="flex items-center justify-center gap-1">
           {item.name}
-          <img src="images/coin.png" alt="" className="size-3.5" aria-hidden />
+          <img
+            src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
+            alt=""
+            className="size-3.5"
+            aria-hidden
+          />
           {item.price}
         </span>
       </button>
