@@ -38,7 +38,7 @@ export function UnitLearnVideoModal({ videoId, title, onClose }: UnitLearnVideoM
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            className="cursor-pointer rounded-lg p-1 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
             aria-label="Close video"
           >
             <X className="size-5" aria-hidden />

@@ -74,10 +74,7 @@ export default function CourseUnitPage() {
             <Icon className={cn("size-7", unit.iconColorClass)} aria-hidden />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-              #{unit.unitNumber}
-            </p>
-            <h1 className="text-2xl font-bold text-slate-800">{unit.title}</h1>
+            <h1 className="text-2xl font-bold text-slate-800">#{unit.unitNumber} {unit.title}</h1>
           </div>
         </div>
 

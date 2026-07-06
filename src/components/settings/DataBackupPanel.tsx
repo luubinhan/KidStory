@@ -75,24 +75,28 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
         </p>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-8 justify-center">
         <button
           type="button"
           onClick={() => void handleExport()}
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-sky-700 disabled:opacity-50"
+          className="cursor-pointer aspect-square flex flex-col items-center gap-4 justify-center rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-sky-700 disabled:opacity-50"
         >
-          <Download className="size-4" aria-hidden />
-          Xuất backup
+          <Download className="size-10" aria-hidden />
+          <div className="text-lg">
+            Export backup
+          </div>
         </button>
         <button
           type="button"
           onClick={handleImportClick}
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-xl border border-sky-200 bg-white px-4 py-2.5 text-sm font-semibold text-sky-700 transition-colors hover:bg-sky-50 disabled:opacity-50"
+          className="cursor-pointer aspect-square flex flex-col items-center gap-4 justify-center rounded-xl border border-sky-200 bg-white px-4 py-2.5 text-sm font-semibold text-sky-700 transition-colors hover:bg-sky-50 disabled:opacity-50"
         >
-          <Upload className="size-4" aria-hidden />
-          Import backup
+          <Upload className="size-10" aria-hidden />
+          <div className="text-lg">
+            Import backup
+          </div>
         </button>
         <input
           ref={fileInputRef}

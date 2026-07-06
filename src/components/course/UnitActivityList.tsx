@@ -33,7 +33,7 @@ function ActivityRewardPreview({
 
   return (
     <p
-      className="flex items-center justify-center gap-1 text-[0.65rem] font-semibold text-slate-500"
+      className="flex items-center justify-center gap-1 text-md font-semibold text-white mt-auto"
       aria-label={`Earn ${rewardLabel} on completion`}
     >
       <img src={coinImageSrc} alt="" className="h-4" aria-hidden />
