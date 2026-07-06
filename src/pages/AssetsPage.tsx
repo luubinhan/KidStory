@@ -11,7 +11,7 @@ export default function AssetsPage() {
   const { progress, isLoading, buyShopItem, getItemQuantity } = useUserProgress();
 
   return (
-    <div className="relative min-h-[calc(100vw*3/2)] bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24 bg-center bg-top bg-[url(/map/assets.png)] bg-size-[100vw_auto]">
+    <div className="relative min-h-[calc(100vw*3/2)] bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24 bg-center bg-top bg-[url(/map/assets.webp)] bg-size-[100vw_auto]">
       <div className="mx-auto max-w-lg px-4 py-6">
         <div className="flex items-center justify-between gap-4">
           <Link
