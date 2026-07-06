@@ -1,4 +1,5 @@
 import type { MatchingCard as MatchingCardData } from "../../types/matchingPairs";
+import { ASSETS } from "../../constants/images";
 import { cn } from "../../lib/utils";
 import { CourseWordImage } from "../course/CourseWordImage";
 
@@ -50,7 +51,11 @@ export function MatchingCard({
           isRecentMatch && "matching-card-inner--match",
         )}
       >
-        <div className="matching-card-face matching-card-face--front bg-[url('/images/back-card.png')] bg-cover bg-center" aria-hidden={isRevealed}>
+        <div
+          className="matching-card-face matching-card-face--front bg-cover bg-center"
+          style={{ backgroundImage: `url(${ASSETS["back-card"]})` }}
+          aria-hidden={isRevealed}
+        >
           
         </div>
 

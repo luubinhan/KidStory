@@ -15,4 +15,15 @@ export const IMAGES_ACTIVITIES = {
 export const ASSETS = {
   coin: "https://luubinhan.github.io/KidStory/images/coin.png",
   diamond: "https://luubinhan.github.io/KidStory/images/diamond.png",
+  'back-card': "https://luubinhan.github.io/KidStory/images/back-card.png",
+}
+
+export const BG_UNITS = {
+  'bg-unit-1': "/images/bg-unit-1.png",
+  'bg-unit-2': "/images/bg-unit-2.png",
+  'bg-unit-3': "/images/bg-unit-3.png",
+  'bg-unit-4': "/images/bg-unit-4.png",
+  'bg-unit-5': "/images/bg-unit-5.png",
+  'bg-unit-6': "/images/bg-unit-6.png",
+  'bg-unit-7': "/images/bg-unit-7.png",
 }
