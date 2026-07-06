@@ -77,8 +77,6 @@
   justify-content: center;
   padding: 1.5rem;
   border-radius: 1rem;
-  background: #ffffff;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   backface-visibility: hidden;
 }
 
@@ -235,16 +233,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  border: 2px solid rgb(226 232 240);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.matching-card-face--front {
-  background: linear-gradient(145deg, #38bdf8 0%, #0284c7 55%, #0369a1 100%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.35),
-    0 4px 10px rgb(14 165 233 / 0.25);
 }
 
 .matching-card-face--back {

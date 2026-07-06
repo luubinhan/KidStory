@@ -18,7 +18,7 @@ export function CourseFlashcard({ word, isFlipped, onFlip }: CourseFlashcardProp
       aria-label={isFlipped ? "Flip to front" : "Flip to see the word"}
     >
       <div className={`course-flashcard-inner${isFlipped ? " is-flipped" : ""}`}>
-        <div className="course-flashcard-face course-flashcard-front">
+        <div className="course-flashcard-face course-flashcard-front backdrop-blur-xs bg-gradient-to-b from-gray-100/70 to-gray-100/10">
           {showImage ? (
             <CourseWordImage
               imageUrl={word.imageUrl}
@@ -32,7 +32,7 @@ export function CourseFlashcard({ word, isFlipped, onFlip }: CourseFlashcardProp
           )}
           <span className="mt-24 text-xs text-slate-400">Tap to flip</span>
         </div>
-        <div className="course-flashcard-face course-flashcard-back">
+        <div className="course-flashcard-face course-flashcard-back backdrop-blur-xs bg-gradient-to-b from-gray-100/70 to-gray-100/10">
           <span className="text-9xl font-bold text-sky-900">{word.word}</span>
           <span className="mt-24 text-xs text-slate-400">Tap to flip back</span>
         </div>

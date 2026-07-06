@@ -50,8 +50,8 @@ export function MatchingCard({
           isRecentMatch && "matching-card-inner--match",
         )}
       >
-        <div className="matching-card-face matching-card-face--front" aria-hidden={isRevealed}>
-          <span className="text-2xl text-sky-200/90">?</span>
+        <div className="matching-card-face matching-card-face--front bg-[url('/images/back-card.png')] bg-cover bg-center" aria-hidden={isRevealed}>
+          
         </div>
 
         <div className="matching-card-face matching-card-face--back" aria-hidden={!isRevealed}>

@@ -12,10 +12,10 @@ export const unit1Greetings = {
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [
-    { id: "morning", word: "morning", translation: "buổi sáng", imageUrl: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757666648691/202ddad3.jpg" },
-    { id: "afternoon", word: "afternoon", translation: "buổi chiều", imageUrl: "https://i0.wp.com/pediaa.com/wp-content/uploads/2021/09/Afternoon.jpg?w=640&ssl=1" },
-    { id: "evening", word: "evening", translation: "buổi tối", imageUrl: "https://i0.wp.com/thinkzelo.com/wp-content/uploads/2019/02/kazuend-32601-1-750x500.jpg?resize=750%2C500&ssl=1" },
-    { id: "night", word: "night", translation: "ban đêm", imageUrl: "https://vinsweb.org/wp-content/uploads/2020/04/AtHome-NightSky-1080x810-1.jpg" },
+    { id: "morning", word: "morning", translation: "buổi sáng" },
+    { id: "afternoon", word: "afternoon", translation: "buổi chiều"},
+    { id: "evening", word: "evening", translation: "buổi tối"},
+    { id: "night", word: "night", translation: "ban đêm"},
   ],
   practiceSentences: [
     { id: "unit-1-s-1", text: "hello" },

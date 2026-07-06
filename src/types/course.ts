@@ -26,7 +26,7 @@ export interface CourseWord {
   id: string;
   word: string;
   translation: string;
-  imageUrl: string;
+  imageUrl?: string;
   audio?: string;
 }
 

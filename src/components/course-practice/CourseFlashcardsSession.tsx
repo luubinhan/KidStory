@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Progress } from "../ui";
@@ -48,6 +48,23 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
     navigate(`/course/${unitId}`);
   };
 
+  useEffect(() => {
+    if (phase !== "playing") return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && canGoPrev) {
+        e.preventDefault();
+        goPrev();
+      } else if (e.key === "ArrowRight" && canGoNext) {
+        e.preventDefault();
+        goNext();
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [phase, canGoPrev, canGoNext, goPrev, goNext]);
+
   if (words.length === 0) {
     return (
       <p className="rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
@@ -75,11 +92,6 @@ export function CourseFlashcardsSession({ words, sessionKey, unitId }: CourseFla
   return (
     <div className="course-flashcards space-y-4">
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
-          <span aria-live="polite">
-            {cardIndex + 1} / {deck.length}
-          </span>
-        </div>
         <Progress
           value={cardIndex + 1}
           max={deck.length}

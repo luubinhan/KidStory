@@ -1,9 +1,10 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { CourseDictionaryEntry } from "../../types/course";
 import { useCourseMatching } from "../../hooks/useCourseMatching";
 import { useActivityCompletion } from "../../hooks/useActivityCompletion";
-import { Progress } from "../ui";
 import { MatchingCard } from "./MatchingCard";
-import { MatchingEndScreen } from "./MatchingEndScreen";
+import { PracticeSummaryEndScreen } from "./PracticeSummaryEndScreen";
 
 type CourseMatchingSessionProps = {
   entries: readonly CourseDictionaryEntry[];
@@ -11,26 +12,48 @@ type CourseMatchingSessionProps = {
 };
 
 export function CourseMatchingSession({ entries, unitId }: CourseMatchingSessionProps) {
+  const navigate = useNavigate();
+  const [sessionPhase, setSessionPhase] = useState<"playing" | "summary">("playing");
+  const completionHandledRef = useRef(false);
+
   const {
     entryMap,
     cards,
     phase,
-    moves,
     pairCount,
-    matchedCount,
     isComplete,
-    stars,
     mismatchCardIds,
     recentMatchPairIds,
     selectCard,
     replay,
   } = useCourseMatching(entries);
 
-  const { reward, onReplay } = useActivityCompletion(unitId, "matching", isComplete);
+  useEffect(() => {
+    if (!isComplete) {
+      completionHandledRef.current = false;
+      return;
+    }
+    if (completionHandledRef.current) return;
+    completionHandledRef.current = true;
+
+    const id = window.setTimeout(() => setSessionPhase("summary"), 600);
+    return () => window.clearTimeout(id);
+  }, [isComplete]);
+
+  const { reward, onReplay } = useActivityCompletion(
+    unitId,
+    "matching",
+    sessionPhase === "summary",
+  );
 
   const handleReplay = () => {
     onReplay();
     replay();
+    setSessionPhase("playing");
+  };
+
+  const handleBackToUnit = () => {
+    navigate(`/course/${unitId}`);
   };
 
   if (entries.length === 0) {
@@ -41,15 +64,16 @@ export function CourseMatchingSession({ entries, unitId }: CourseMatchingSession
     );
   }
 
-  if (isComplete) {
+  if (sessionPhase === "summary") {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <MatchingEndScreen
-          stars={stars}
-          moves={moves}
-          pairCount={pairCount}
+        <PracticeSummaryEndScreen
+          title="Great job!"
+          subtitle={`You matched all ${pairCount} pairs`}
           reward={reward}
           onReplay={handleReplay}
+          onContinue={handleBackToUnit}
+          continueLabel="Back to unit"
         />
       </div>
     );
@@ -61,19 +85,6 @@ export function CourseMatchingSession({ entries, unitId }: CourseMatchingSession
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-3 sm:gap-4">
-      <div className="shrink-0 space-y-2">
-        <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
-          <span aria-live="polite">
-            {matchedCount} / {pairCount}
-          </span>
-        </div>
-        <Progress
-          value={matchedCount}
-          max={pairCount}
-          aria-label={`Matched ${matchedCount} of ${pairCount}`}
-        />
-      </div>
-
       <div className="grid min-h-0 flex-1 grid-cols-5 content-start gap-2 sm:gap-3">
         {cards.map((card) => {
           const entry = entryMap.get(card.pairId);

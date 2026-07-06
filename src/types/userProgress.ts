@@ -8,6 +8,7 @@ export const TREASURE_MIRROR_UNITS_REQUIRED = 5;
 
 export const COIN_REWARD_BY_ACTIVITY: Partial<Record<CourseActivityId, number>> = {
   write: 50,
+  matching: 20,
   "complete-sentence": 50,
 };
 
