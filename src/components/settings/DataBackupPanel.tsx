@@ -9,7 +9,7 @@ import {
 import { downloadBlob } from "../../lib/downloadBlob";
 
 const IMPORT_CONFIRM_MESSAGE =
-  "Import sẽ thay thế toàn bộ dữ liệu hiện tại. Bạn có chắc muốn tiếp tục?";
+  "Import will replace all current data. Are you sure you want to continue?";
 
 type DataBackupPanelProps = {
   compact?: boolean;
@@ -30,9 +30,9 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
     try {
       const blob = await exportDatabase();
       downloadBlob(blob, formatBackupFilename());
-      setStatus({ type: "success", message: "Đã xuất file backup." });
+      setStatus({ type: "success", message: "Exported backup successfully." });
     } catch {
-      setStatus({ type: "error", message: "Xuất file thất bại. Thử lại." });
+      setStatus({ type: "error", message: "Export failed. Try again." });
     } finally {
       setBusy(false);
     }
@@ -54,12 +54,12 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
     try {
       await importDatabase(file);
       await reloadProgress();
-      setStatus({ type: "success", message: "Đã import dữ liệu thành công." });
+      setStatus({ type: "success", message: "Imported data successfully." });
     } catch (err) {
       const message =
         err instanceof Error && err.message.includes("Expected database")
-          ? "File không hợp lệ."
-          : "Import thất bại. Thử lại.";
+          ? "Invalid file."
+          : "Import failed. Try again.";
       setStatus({ type: "error", message });
     } finally {
       setBusy(false);
@@ -70,8 +70,7 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
     <div className={compact ? "space-y-3" : "space-y-4"}>
       {!compact && (
         <p className="text-sm text-slate-600">
-          Sao lưu tiến độ học (coins, diamonds, unit, inventory) ra file để chuyển sang thiết bị
-          hoặc trình duyệt khác.
+          Backup your data to ensure you can restore it later.
         </p>
       )}
 

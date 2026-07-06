@@ -239,7 +239,8 @@
 
 .matching-card-face--back {
   transform: rotateY(180deg);
-  background: white;
+  background: url('https://luubinhan.github.io/KidStory/images/paper-pattern.jpg') center center;
+  background-size: 1%;
   box-shadow: 0 4px 10px rgb(15 23 42 / 0.08);
 }
 

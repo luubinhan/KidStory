@@ -114,36 +114,37 @@ export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSes
         <label htmlFor="write-answer" className="sr-only">
           Type the English word
         </label>
-        <input
-          id="write-answer"
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          disabled={submitted}
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck={false}
-          className={cn(
-            "w-full rounded-xl border-2 px-4 py-3 text-lg font-semibold text-slate-800 outline-none transition-colors",
-            "focus:border-sky-400 focus:ring-2 focus:ring-sky-200",
-            submitted && result === "correct" && "border-emerald-500 bg-emerald-50",
-            submitted && result === "incorrect" && "border-rose-500 bg-rose-50",
-            !submitted && "border-slate-200 bg-white",
-          )}
-          placeholder="Type the word…"
-        />
+        <div className="relative">
+          <input
+            id="write-answer"
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            disabled={submitted}
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
+            className={cn(
+              "w-full rounded-xl border-2 px-4 py-3 text-lg font-semibold text-slate-800 outline-none transition-colors",
+              "focus:border-sky-400 focus:ring-2 focus:ring-sky-200",
+              submitted && result === "correct" && "border-emerald-500 bg-emerald-50 pr-12",
+              submitted && result === "incorrect" && "border-rose-500 bg-rose-50",
+              !submitted && "border-slate-200 bg-white",
+            )}
+            placeholder="Type the word…"
+          />
+          {submitted && result === "correct" ? (
+            <Check
+              className="pointer-events-none absolute right-4 top-1/2 size-6 -translate-y-1/2 text-emerald-600"
+              aria-hidden
+            />
+          ) : null}
+        </div>
 
         {submitted && result === "incorrect" ? (
           <p className="mt-3 bg-amber-200/80 px-4 py-2 rounded-xl text-2xl font-semibold text-slate-600">
             Correct answer: <span className="text-emerald-700">{word.word}</span>
-          </p>
-        ) : null}
-
-        {submitted && result === "correct" ? (
-          <p className="mt-3 flex items-center bg-emerald-200/80 px-4 py-2 rounded-xl gap-2 text-2xl font-semibold text-emerald-600">
-            <Check className="size-4" aria-hidden />
-            Correct!
           </p>
         ) : null}
 

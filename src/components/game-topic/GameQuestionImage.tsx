@@ -4,7 +4,7 @@ type GameQuestionImageProps = {
 
 export function GameQuestionImage({ src }: GameQuestionImageProps) {
   return (
-    <div className="mt-4 aspect-[7/4] w-full mask-[url('https://luubinhan.github.io/KidStory/images/mask.svg')] size-64 overflow-hidden mb-5 flex items-center justify-center rounded-xl backdrop-brightness-90"
+    <div className="mt-4 aspect-[7/4] w-full opacity-80 mask-[url('https://luubinhan.github.io/KidStory/images/mask.svg')] size-64 overflow-hidden mb-5 flex items-center justify-center rounded-xl backdrop-brightness-90"
       style={{
         backgroundImage: `url(${src})`,
         backgroundSize: "cover",

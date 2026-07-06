@@ -1,4 +1,4 @@
-import { Volume2 } from "lucide-react";
+import { ConciergeBell } from "lucide-react";
 
 type IconVolumeButtonProps = {
   onClick: () => void;
@@ -21,7 +21,7 @@ export function IconVolumeButton({
       }
       aria-label={ariaLabel}
     >
-      <Volume2 className="h-5 w-5" aria-hidden />
+      <ConciergeBell className="h-5 w-5" aria-hidden />
     </button>
   );
 }

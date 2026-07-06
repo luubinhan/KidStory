@@ -1,3 +1,4 @@
+import { ShoppingCart } from "lucide-react";
 import { ASSETS } from "../../constants/images";
 import type { ShopItem } from "../../types/shop";
 import { cn } from "../../lib/utils";
@@ -59,9 +60,7 @@ export function ShopItemCard({
         )}
       >
         <span className="flex items-center justify-center gap-1">
-          {!isOwned && (
-            <>{item.name}</>
-          )}
+          <ShoppingCart className="w-6 h-6" />
           <img
             src={ASSETS.coin}
             alt=""
