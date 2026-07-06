@@ -23,8 +23,10 @@ export function PracticeSummaryEndScreen({
 }: PracticeSummaryEndScreenProps) {
   return (
     <ActivityEndShell reward={reward}>
-      <h2 className="text-2xl font-bold text-slate-800">{title}</h2>
-      {subtitle ? <p className="mt-2 text-lg font-semibold text-slate-600">{subtitle}</p> : null}
+      <div className="py-6 px-12 text-center backdrop-blur-xs rounded-full">
+        <h2 className="text-2xl font-bold text-white">{title}</h2>
+        {subtitle ? <p className="mt-2 text-lg font-semibold text-white">{subtitle}</p> : null}
+      </div>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         {onReplay ? (

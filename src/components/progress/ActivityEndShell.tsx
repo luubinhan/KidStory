@@ -22,7 +22,7 @@ export function ActivityEndShell({ reward, children, className }: ActivityEndShe
   return (
     <div className={`relative ${className ?? ""}`}>
       {reward ? <Confetti /> : null}
-      <div className="rounded-2xl border-2 border-white bg-white p-6 text-center shadow-md">
+      <div className="p-6 text-center">
         {reward ? (
           <ActivityRewardSection
             coinsEarned={reward.coinsEarned}

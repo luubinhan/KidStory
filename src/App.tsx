@@ -5,6 +5,7 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { UserProgressProvider } from "./contexts/UserProgressContext";
+import { CourseFeedbackFab } from "./components/course";
 import DiscoverPage from "./pages/DiscoverPage";
 import BookDetailPage from "./pages/BookDetailPage";
 import GamesPage from "./pages/GamesPage";
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/games/:topicId" element={<GameTopicPage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
+          <CourseFeedbackFab />
         </div>
       </UserProgressProvider>
     </Router>

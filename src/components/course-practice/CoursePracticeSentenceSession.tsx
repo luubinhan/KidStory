@@ -75,7 +75,7 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-2">
+    <div className="max-w-4xl mx-auto py-2">
       <McProgressHeader
         current={sentenceIndex + 1}
         total={allSentences.length}

@@ -1,4 +1,5 @@
 export { CourseBottomNav } from "./CourseBottomNav";
+export { CourseFeedbackFab } from "./CourseFeedbackFab";
 export { CoursePageHeader } from "./CoursePageHeader";
 export { CoursePageTitle } from "./CoursePageTitle";
 export { DictionaryGrid } from "./DictionaryGrid";

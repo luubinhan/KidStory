@@ -135,13 +135,13 @@ export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSes
         />
 
         {submitted && result === "incorrect" ? (
-          <p className="mt-3 text-sm font-semibold text-slate-600">
+          <p className="mt-3 bg-amber-200/80 px-4 py-2 rounded-xl text-2xl font-semibold text-slate-600">
             Correct answer: <span className="text-emerald-700">{word.word}</span>
           </p>
         ) : null}
 
         {submitted && result === "correct" ? (
-          <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-emerald-600">
+          <p className="mt-3 flex items-center bg-emerald-200/80 px-4 py-2 rounded-xl gap-2 text-2xl font-semibold text-emerald-600">
             <Check className="size-4" aria-hidden />
             Correct!
           </p>

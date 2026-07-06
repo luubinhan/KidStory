@@ -93,7 +93,7 @@ export function GameTopicPracticeSession({
       sentence;
 
     return (
-      <div className="max-w-3xl mx-auto py-2">
+      <div className="max-w-4xl mx-auto py-2">
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}
@@ -174,7 +174,7 @@ export function GameTopicPracticeSession({
     }
 
     return (
-      <div className="max-w-3xl mx-auto py-2">
+      <div className="max-w-4xl mx-auto py-2">
         {showGameBreadcrumb ? (
           <GameTopicBreadcrumb
             topicTitle={topic.title}

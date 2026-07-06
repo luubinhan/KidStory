@@ -19,7 +19,7 @@ function StarRating({ count }: { count: number }) {
         <Star
           key={i}
           className={cn(
-            "size-10 transition-transform duration-300",
+            "size-10 transition-transform duration-300 border-2 border-white bg-white rounded-full",
             i < count ? "fill-amber-400 text-amber-400" : "fill-slate-100 text-slate-200",
             i < count && "matching-star-reveal",
           )}
@@ -40,13 +40,15 @@ export function MatchingEndScreen({
 }: MatchingEndScreenProps) {
   return (
     <ActivityEndShell reward={reward} className="space-y-6">
-      <h2 className="text-2xl font-bold text-slate-800">Great job!</h2>
-      <p className="mt-2 text-sm font-semibold text-slate-500">
-        You matched all {pairCount} pairs in {moves} {moves === 1 ? "move" : "moves"}.
-      </p>
+      <div className="py-6 px-12 text-center backdrop-blur-xs rounded-full">
+        <h2 className="text-2xl font-bold text-white">Great job!</h2>
+        <p className="mt-2 text-sm font-semibold text-white">
+          You matched all {pairCount} pairs in {moves} {moves === 1 ? "move" : "moves"}.
+        </p>
 
-      <div className="mt-6">
-        <StarRating count={stars} />
+        <div className="mt-6">
+          <StarRating count={stars} />
+        </div>
       </div>
 
       <button

@@ -12,10 +12,12 @@ type WriteEndScreenProps = {
 export function WriteEndScreen({ correctCount, total, reward, onReplay }: WriteEndScreenProps) {
   return (
     <ActivityEndShell reward={reward}>
-      <h2 className="text-2xl font-bold text-slate-800">All done!</h2>
-      <p className="mt-2 text-lg font-semibold text-slate-600">
-        You got {correctCount}/{total} correct
-      </p>
+      <div className="py-6 px-12 text-center backdrop-blur-xs rounded-full">
+        <h2 className="text-2xl font-bold text-white">All done!</h2>
+        <p className="mt-2 text-lg font-semibold text-white">
+          You got {correctCount}/{total} correct
+        </p>
+      </div>
       <button
         type="button"
         onClick={onReplay}

@@ -19,27 +19,27 @@ export function ActivityRewardSection({
 
   return (
     <div className="mb-6 space-y-4" role="status" aria-live="polite">
-      <div className="mx-auto h-36 w-36">
-        <Lottie animationData={animationData} loop={false} className="h-full w-full" />
+      <div className="mx-auto h-64 w-64">
+        <Lottie animationData={animationData} loop={true} className="h-full w-full" />
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-800">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-2xl font-bold text-amber-800">
           <img
             src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
             alt=""
-            className="h-4 w-4"
+            className="h-8"
             aria-hidden
           />
           +{activityCoins}
         </span>
 
         {diamondsEarned > 0 ? (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1 text-sm font-bold text-sky-800">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1 text-2xl font-bold text-sky-800">
             <img
               src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
               alt=""
-              className="h-4 w-4"
+              className="h-8"
               aria-hidden
             />
             +{diamondsEarned}
