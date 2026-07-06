@@ -60,7 +60,7 @@ export default function CourseUnitPracticePage() {
   const isMultipleChoice = activity.id === "multiple-choice";
 
   const contentClassName = isMatching
-    ? "flex w-full flex-1 flex-col px-4 py-4 sm:px-6 sm:py-6"
+    ? "flex w-full flex-1 flex-col px-4 pb-4 sm:px-6 sm:pb-6"
     : isMultipleChoice
       ? "mx-auto flex w-full max-w-lg flex-1 flex-col px-4 pb-6"
       : "mx-auto w-full max-w-lg flex-1 px-4 pb-6";

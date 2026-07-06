@@ -1,0 +1,47 @@
+---
+description: Conventions for course units, activities, and vocabulary data
+globs: src/data/course/**/*.ts,src/data/course-activities.ts,src/types/course.ts
+alwaysApply: false
+---
+
+# Course data
+
+## Unit files
+
+- Location: `src/data/course/units/unit-N-<slug>.ts`
+- Export with `satisfies CourseUnit`; register in `src/data/course/index.ts`
+- IDs: `unit-N`, words `{wordId}`, sentences `unit-N-s-N`, MC questions `unit-N-mc-N`
+
+## Unit fields
+
+```ts
+export const unitNGreetings = {
+  id: "unit-1",
+  unitNumber: 1,
+  title: "Greetings",
+  icon: Sun,                    // lucide-react
+  iconBgClass: "bg-amber-100",
+  iconColorClass: "text-amber-600",
+  words: [...],                 // CourseWord[]
+  practiceSentences: [...],     // for "sentence" activity
+  multipleChoiceQuestions: [...], // GameQuestion shape, 4 options
+  typedAnswerQuestions: [...],  // for "complete-sentence" activity
+} satisfies CourseUnit;
+```
+
+## Activities
+
+Activity IDs and metadata live in `src/data/course-activities.ts`. Background images: `/map/<activityId>.png` (override in `getCourseActivityBackgroundUrl`).
+
+| Activity ID | Data source |
+|-------------|-------------|
+| `flashcards`, `write`, `matching` | `unit.words` |
+| `sentence` | `unit.practiceSentences` |
+| `multiple-choice`, `spell` | built from unit via `buildMcTopic` / `buildSpellTopic` |
+| `complete-sentence` | `unit.typedAnswerQuestions` |
+
+## Question content
+
+- MC: reuse `GameQuestion` — short sentences, exactly four options, `correctIndex` 0-based
+- Typed answer: `CourseTypedAnswerQuestion` with `prompt`, `textBefore`, `textAfter`, `answer`, `imageUrl`
+- Include Vietnamese `translation` on `CourseWord` entries

@@ -189,8 +189,8 @@ export function GameTopicPracticeSession({
         />
 
         {q ? (
-          <div className="min-h-[65vh] flex flex-col justify-center  px-4 py-4 md:p-4 bg-[url('/images/bg-card.png')] bg-contain bg-no-repeat">
-            <div className="backdrop-blur-xs">
+          <div className="min-h-[65vh] flex flex-col justify-center  px-4 py-4 md:p-4 bg-[url('/images/bg-card.png')] bg-cover bg-no-repeat">
+            <div className="p-8">
               {q.image?.trim() ? (
                 <div className="mb-12 relative">
                   <GameQuestionImage src={q.image} />
@@ -305,47 +305,49 @@ export function GameTopicPracticeSession({
         trailing={hintEnabled ? hintControl : undefined}
       />
       {q ? (
-        <div className="flex min-h-0 flex-1 flex-col rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
-          <div className="shrink-0 space-y-4">
-            {q.image ? <GameQuestionImage src={q.image} /> : null}
-            <GameQuestionStem
-              q={q}
-              blankLabel={blankLabel}
-              answerCorrect={answerCorrect}
-              onPlaySentence={playAudio}
-            />
-            {hintRevealed ? (
-              <p className="rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
-                Hint: {correctAnswer}
-              </p>
+        <div className="flex min-h-0 flex-1 flex-col bg-[url('/images/bg-card.png')] bg-cover bg-no-repeat p-8 pt-12 shadow-lg">
+          <div className="backdrop-blur-xs">
+            <div className="shrink-0 space-y-4">
+              {q.image ? <GameQuestionImage src={q.image} /> : null}
+              <GameQuestionStem
+                q={q}
+                blankLabel={blankLabel}
+                answerCorrect={answerCorrect}
+                onPlaySentence={playAudio}
+              />
+              {hintRevealed ? (
+                <p className="rounded-xl bg-amber-50 px-4 py-2 text-center text-sm font-bold text-amber-800">
+                  Hint: {correctAnswer}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="mt-4 flex min-h-0 flex-1 flex-col gap-3">
+              {optionOrder.map((originalIdx, displayIdx) => (
+                <GameOptionRow
+                  key={`${q.id}-${displayIdx}`}
+                  displayIdx={displayIdx}
+                  originalIdx={originalIdx}
+                  correctIndex={q.correctIndex}
+                  label={q.options[originalIdx]!}
+                  pickedDisplayIndex={pickedDisplayIndex}
+                  onPick={onPick}
+                  onPlayWord={playOptionWord}
+                  hintRevealed={hintRevealed}
+                />
+              ))}
+            </div>
+
+            {pickedDisplayIndex !== null ? (
+              <div className="mt-4 shrink-0">
+                <GameQuestionFooter
+                  isLast={isLast}
+                  onNext={handleMcNext}
+                  lastAction={tracksCompletion ? "next" : "home"}
+                />
+              </div>
             ) : null}
           </div>
-
-          <div className="mt-4 flex min-h-0 flex-1 flex-col gap-3">
-            {optionOrder.map((originalIdx, displayIdx) => (
-              <GameOptionRow
-                key={`${q.id}-${displayIdx}`}
-                displayIdx={displayIdx}
-                originalIdx={originalIdx}
-                correctIndex={q.correctIndex}
-                label={q.options[originalIdx]!}
-                pickedDisplayIndex={pickedDisplayIndex}
-                onPick={onPick}
-                onPlayWord={playOptionWord}
-                hintRevealed={hintRevealed}
-              />
-            ))}
-          </div>
-
-          {pickedDisplayIndex !== null ? (
-            <div className="mt-4 shrink-0">
-              <GameQuestionFooter
-                isLast={isLast}
-                onNext={handleMcNext}
-                lastAction={tracksCompletion ? "next" : "home"}
-              />
-            </div>
-          ) : null}
         </div>
       ) : null}
     </div>

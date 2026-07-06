@@ -17,7 +17,7 @@ export function GameQuestionStem({
 }: GameQuestionStemProps) {
   const blankTextClass =
     answerCorrect === null
-      ? "text-amber-700 border-amber-400"
+      ? "text-amber-700 border-amber-900"
       : answerCorrect
         ? "text-emerald-600 border-emerald-500"
         : "text-rose-600 border-rose-500";

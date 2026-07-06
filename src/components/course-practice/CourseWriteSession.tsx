@@ -76,7 +76,7 @@ export function CourseWriteSession({ words, sessionKey, unitId }: CourseWriteSes
     <div className="flex min-h-0 flex-1 flex-col">
       <McProgressHeader current={questionIndex + 1} total={total} trailing={hintControl} />
 
-      <div className="rounded-2xl border-2 border-slate-100 bg-white p-4 shadow-md md:p-6">
+      <div className="bg-[url('/images/bg-card.png')] bg-cover bg-no-repeat p-8">
         {hasImage ? (
           <div className="relative mb-6">
             <GameQuestionImage src={word.imageUrl} />

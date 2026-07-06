@@ -1,0 +1,37 @@
+---
+description: Patterns for course practice and game topic session components
+globs: src/components/course-practice/**/*.tsx,src/components/game-topic/**/*.tsx,src/hooks/useCourse*.ts,src/hooks/useGameTopic*.ts,src/hooks/useActivityCompletion.ts,src/hooks/useQuestionHint.tsx
+alwaysApply: false
+---
+
+# Practice sessions
+
+## Architecture
+
+- **Page** (`CourseUnitPracticePage`) picks session by `activityId` and passes `unitId` + content
+- **Session component** renders one activity UI; logic lives in a matching `use*Session` hook
+- **Completion** — call `useActivityCompletion(unitId, activityId, isComplete)`; wire `onReplay` to hook's replay
+
+```tsx
+const { reward, onReplay } = useActivityCompletion(unitId, "write", phase === "summary");
+const { hintRevealed, hintControl } = useQuestionHint(questionId);
+```
+
+## Reuse game UI
+
+Course MC/spell delegate to `GameTopicPracticeSession` with `buildMcTopic(unit)` or `buildSpellTopic(unit)`. Share:
+
+- `McProgressHeader`, `GameQuestionImage`, `GameQuestionStem`, `IconVolumeButton`
+- End screens: `WriteEndScreen`, `MatchingEndScreen`, `ActivityEndShell`
+
+## Session hook pattern
+
+Hooks accept content + `sessionKey` (usually `unit.id`) for reset. Return: phase, current item, input state, submit/advance/replay, and audio helpers.
+
+## Empty content
+
+When a unit has no items for an activity, render a friendly empty state (see `CourseWriteSession`) — do not crash or navigate away silently.
+
+## Styling
+
+Practice pages use map background images via `getCourseActivityBackgroundUrl`. Content width typically `max-w-lg`; matching activity uses full-width layout.

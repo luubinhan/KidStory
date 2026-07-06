@@ -1,0 +1,34 @@
+---
+description: Core KidStory project conventions for all work
+alwaysApply: true
+---
+
+# KidStory core rules
+
+English-learning SPA for children: storybooks, course units, vocabulary games, progress/rewards.
+
+## Stack
+
+React 19, TypeScript, Vite, Tailwind v4, react-router-dom, Dexie (IndexedDB). See `AGENTS.md` for routes and folder map.
+
+## Do
+
+- Keep changes focused; match surrounding style (`satisfies` on data exports, two-space indent)
+- Put session logic in `src/hooks/`; pages in `src/pages/`; pure logic in `src/lib/`
+- Use `cn()` from `src/lib/utils.ts` for Tailwind class merging
+- Use `useUserProgress()` for unlock state, rewards, hints, and shop
+- Run `npm run lint` before finishing; run `npx tsx src/lib/<file>.test.ts` when changing tested lib code
+
+## Don't
+
+- Reintroduce `@luckyluu/wonder-ui` — use Radix wrappers in `src/components/ui/` (see `radix-ui.mdc`)
+- Add Jest/Vitest — tests are standalone `npx tsx` scripts with `assert()`
+- Rewrite unrelated components or expand scope beyond the task
+
+## Quick paths
+
+- Routes: `src/App.tsx`
+- Course registry: `src/data/course/index.ts`
+- Game topics: `src/data/games.ts`
+- Books: `src/data/books.ts`
+- Practice router: `src/pages/CourseUnitPracticePage.tsx`
