@@ -16,6 +16,16 @@ export const DIAMOND_REWARD_BY_ACTIVITY: Partial<Record<CourseActivityId, number
   "complete-sentence": 50,
 };
 
+export function getActivityRewardAmounts(activityId: CourseActivityId): {
+  coins: number;
+  diamonds: number;
+} {
+  return {
+    coins: COIN_REWARD_BY_ACTIVITY[activityId] ?? COIN_PER_ACTIVITY,
+    diamonds: DIAMOND_REWARD_BY_ACTIVITY[activityId] ?? 0,
+  };
+}
+
 export type AchievementId = "treasure_mirror";
 
 export type AchievementRecord = {

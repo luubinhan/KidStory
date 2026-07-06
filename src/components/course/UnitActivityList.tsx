@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { PlayCircle } from "lucide-react";
 import { courseActivities } from "../../data/course-activities";
 import type { CourseUnit } from "../../types/course";
+import { getActivityRewardAmounts } from "../../types/userProgress";
 import { cn } from "../../lib/utils";
 import { UnitLearnVideoModal } from "./UnitLearnVideoModal";
 
@@ -17,6 +18,36 @@ function getUnitActivities(unit: CourseUnit) {
 type UnitActivityListProps = {
   unit: CourseUnit;
 };
+
+const coinImageSrc = import.meta.env.DEV ? "/images/coin.png" : "images/coin.png";
+const diamondImageSrc = import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png";
+
+function ActivityRewardPreview({
+  activity,
+}: {
+  activity: (typeof courseActivities)[number];
+}) {
+  const { coins, diamonds } = getActivityRewardAmounts(activity.id);
+  const rewardLabel =
+    diamonds > 0 ? `${coins} coin + ${diamonds} diamond` : `${coins} coin`;
+
+  return (
+    <p
+      className="flex items-center justify-center gap-1 text-[0.65rem] font-semibold text-slate-500"
+      aria-label={`Earn ${rewardLabel} on completion`}
+    >
+      <img src={coinImageSrc} alt="" className="h-4" aria-hidden />
+      <span>{coins}</span>
+      {diamonds > 0 ? (
+        <>
+          <span aria-hidden>+</span>
+          <img src={diamondImageSrc} alt="" className="h-4" aria-hidden />
+          <span>{diamonds}</span>
+        </>
+      ) : null}
+    </p>
+  );
+}
 
 function ActivityCardContent({
   activity,
@@ -36,6 +67,7 @@ function ActivityCardContent({
         <Icon className={cn("size-6", activity.iconColorClass)} aria-hidden />
       </div>
       <p className="font-bold text-slate-800">{activity.label}</p>
+      <ActivityRewardPreview activity={activity} />
     </>
   );
 }
