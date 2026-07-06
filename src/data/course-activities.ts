@@ -8,9 +8,10 @@ import {
   SquareCheck,
 } from "lucide-react";
 import type { CourseActivity, CourseActivityId } from "../types/course";
+import { IMAGES_ACTIVITIES } from "../constants/images";
 
 const ACTIVITY_BACKGROUND_OVERRIDES: Partial<Record<CourseActivityId, string>> = {
-  flashcards: "/map/flashcard.png",
+  ...IMAGES_ACTIVITIES,
 };
 
 export function getCourseActivityBackgroundUrl(id: CourseActivityId): string {

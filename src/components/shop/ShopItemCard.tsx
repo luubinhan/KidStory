@@ -1,3 +1,4 @@
+import { ASSETS } from "../../constants/images";
 import type { ShopItem } from "../../types/shop";
 import { cn } from "../../lib/utils";
 
@@ -62,7 +63,7 @@ export function ShopItemCard({
             <>{item.name}</>
           )}
           <img
-            src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
+            src={ASSETS.coin}
             alt=""
             className="w-8"
             aria-hidden
@@ -71,7 +72,7 @@ export function ShopItemCard({
           {item.diamondPrice != null && item.diamondPrice > 0 ? (
             <>
               <img
-                src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
+                src={ASSETS.diamond}
                 alt=""
                 className="w-6"
                 aria-hidden

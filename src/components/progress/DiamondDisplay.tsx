@@ -1,3 +1,4 @@
+import { ASSETS } from "../../constants/images";
 import { useUserProgress } from "../../contexts/UserProgressContext";
 import { cn } from "../../lib/utils";
 
@@ -20,7 +21,7 @@ export function DiamondDisplay({ className, size = "md" }: DiamondDisplayProps) 
       aria-label={`${isLoading ? 0 : diamonds} diamonds`}
     >
       <img
-        src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
+        src={ASSETS.diamond}
         alt=""
         className="h-[16px]"
         aria-hidden

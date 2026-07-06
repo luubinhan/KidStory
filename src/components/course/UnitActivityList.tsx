@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { PlayCircle } from "lucide-react";
+import { ASSETS } from "../../constants/images";
 import { courseActivities } from "../../data/course-activities";
 import type { CourseUnit } from "../../types/course";
 import { getActivityRewardAmounts } from "../../types/userProgress";
@@ -19,9 +20,6 @@ type UnitActivityListProps = {
   unit: CourseUnit;
 };
 
-const coinImageSrc = import.meta.env.DEV ? "/images/coin.png" : "images/coin.png";
-const diamondImageSrc = import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png";
-
 function ActivityRewardPreview({
   activity,
 }: {
@@ -36,12 +34,12 @@ function ActivityRewardPreview({
       className="flex items-center justify-center gap-1 text-md font-semibold text-white mt-auto"
       aria-label={`Earn ${rewardLabel} on completion`}
     >
-      <img src={coinImageSrc} alt="" className="h-4" aria-hidden />
+      <img src={ASSETS.coin} alt="" className="h-4" aria-hidden />
       <span>{coins}</span>
       {diamonds > 0 ? (
         <>
           <span aria-hidden>+</span>
-          <img src={diamondImageSrc} alt="" className="h-4" aria-hidden />
+          <img src={ASSETS.diamond} alt="" className="h-4" aria-hidden />
           <span>{diamonds}</span>
         </>
       ) : null}

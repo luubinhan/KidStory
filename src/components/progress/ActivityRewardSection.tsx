@@ -1,6 +1,7 @@
 import Lottie from "lottie-react";
 import treasureCoinAnimation from "../../assets/treasure-coin.json";
 import treasureDiamondCoinAnimation from "../../assets/treasure-diamond-coin.json";
+import { ASSETS } from "../../constants/images";
 import type { ActivityRewardResult } from "../../types/userProgress";
 
 type ActivityRewardSectionProps = Pick<
@@ -26,7 +27,7 @@ export function ActivityRewardSection({
       <div className="flex flex-wrap items-center justify-center gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-2xl font-bold text-amber-800">
           <img
-            src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
+            src={ASSETS.coin}
             alt=""
             className="h-8"
             aria-hidden
@@ -37,7 +38,7 @@ export function ActivityRewardSection({
         {diamondsEarned > 0 ? (
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1 text-2xl font-bold text-sky-800">
             <img
-              src={import.meta.env.DEV ? "/images/diamond.png" : "images/diamond.png"}
+              src={ASSETS.diamond}
               alt=""
               className="h-8"
               aria-hidden

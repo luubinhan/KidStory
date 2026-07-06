@@ -1,4 +1,5 @@
 import { Coins } from "lucide-react";
+import { ASSETS } from "../../constants/images";
 import { useUserProgress } from "../../contexts/UserProgressContext";
 import { cn } from "../../lib/utils";
 
@@ -21,7 +22,7 @@ export function CoinDisplay({ className, size = "md" }: CoinDisplayProps) {
       aria-label={`${isLoading ? 0 : coins} coins`}
     >
       <img
-        src={import.meta.env.DEV ? "/images/coin.png" : "images/coin.png"}
+        src={ASSETS.coin}
         alt={coins.toString()}
         className="h-[16px]"
       />
