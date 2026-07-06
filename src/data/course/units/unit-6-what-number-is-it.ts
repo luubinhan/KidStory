@@ -1,4 +1,5 @@
 import { Hash } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit6WhatNumberIsIt = {
@@ -7,7 +8,7 @@ export const unit6WhatNumberIsIt = {
   title: "What number is it",
   subtitle: "",
   icon: Hash,
-  backgroundUrl: "/images/bg-unit-6.png",
+  backgroundUrl: BG_UNITS["bg-unit-6"],
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",

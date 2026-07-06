@@ -1,4 +1,5 @@
 import { HelpCircle } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit4WhatIsThisThat = {
@@ -7,7 +8,7 @@ export const unit4WhatIsThisThat = {
   title: "What is this/that?",
   subtitle: "",
   icon: HelpCircle,
-  backgroundUrl: "/images/bg-unit-4.png",
+  backgroundUrl: BG_UNITS["bg-unit-4"],
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-emerald-100",
   iconColorClass: "text-emerald-600",

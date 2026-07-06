@@ -1,4 +1,5 @@
 import { Sun } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit1Greetings = {
@@ -7,7 +8,7 @@ export const unit1Greetings = {
   title: "Greetings",
   subtitle: "",
   icon: Sun,
-  backgroundUrl: "/images/bg-unit-1.png",
+  backgroundUrl: BG_UNITS["bg-unit-1"],
   youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",

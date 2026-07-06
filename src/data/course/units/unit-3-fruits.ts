@@ -1,4 +1,5 @@
 import { Apple } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit3Fruits = {
@@ -9,7 +10,7 @@ export const unit3Fruits = {
   icon: Apple,
   youtubeVideoId: "dDbNM3AhUOw",
   iconBgClass: "bg-rose-100",
-  backgroundUrl: "/images/bg-unit-3.png",
+  backgroundUrl: BG_UNITS["bg-unit-3"],
   iconColorClass: "text-rose-600",
   words: [
     {

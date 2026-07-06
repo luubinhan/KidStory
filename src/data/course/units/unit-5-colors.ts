@@ -1,4 +1,5 @@
 import { Palette } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit5Colors = {
@@ -7,7 +8,7 @@ export const unit5Colors = {
   title: "Colors",
   subtitle: "",
   icon: Palette,
-  backgroundUrl: "/images/bg-unit-5.png",
+  backgroundUrl: BG_UNITS["bg-unit-5"],
   youtubeVideoId: "7qiVlIpkIU8",
   iconBgClass: "bg-indigo-100",
   iconColorClass: "text-indigo-600",

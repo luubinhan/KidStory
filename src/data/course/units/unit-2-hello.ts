@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit2Hello = {
@@ -10,7 +11,7 @@ export const unit2Hello = {
   youtubeVideoId: "by1QAoRcc-U",
   iconBgClass: "bg-sky-100",
   iconColorClass: "text-sky-600",
-  backgroundUrl: "/images/bg-unit-2.png",
+  backgroundUrl: BG_UNITS["bg-unit-2"],
   words: [
     { id: "student", word: "student", translation: "học sinh", imageUrl: "https://www.eurokidsindia.com/blog/wp-content/uploads/2024/10/Top10_Essential_Trait_GoodStudent.jpg-870x437.jpg" },
     { id: "fine", word: "fine", translation: "khỏe", imageUrl: "" },

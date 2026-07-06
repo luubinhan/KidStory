@@ -1,4 +1,5 @@
 import { BookOpen } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit7IsHeATeacher = {
@@ -9,7 +10,7 @@ export const unit7IsHeATeacher = {
   icon: BookOpen,
   youtubeVideoId: "lIzEzQ_G96k",
   iconBgClass: "bg-cyan-100",
-  backgroundUrl: "/images/bg-unit-7.png",
+  backgroundUrl: BG_UNITS["bg-unit-7"],
   iconColorClass: "text-cyan-600",
   words: [
     { id: "teacher", word: "teacher", translation: "giáo viên", imageUrl: "https://affinityworkforce.com/wp-content/uploads/2024/05/2149272223.jpg"

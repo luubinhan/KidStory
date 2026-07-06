@@ -1,4 +1,5 @@
 import { Shirt } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit8Clothes = {
@@ -7,7 +8,7 @@ export const unit8Clothes = {
   title: "Clothes",
   subtitle: "",
   icon: Shirt,
-  backgroundUrl: "/images/bg-unit-3.png",
+  backgroundUrl: BG_UNITS["bg-unit-3"],
   youtubeVideoId: "n35adRLXj_Y",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
