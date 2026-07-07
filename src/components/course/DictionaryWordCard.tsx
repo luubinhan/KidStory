@@ -29,7 +29,7 @@ export function DictionaryWordCard({ entry, isSelected, onSelect }: DictionaryWo
       )}
     >
       <CourseWordImage imageUrl={entry.imageUrl} translation={entry.translation} />
-      <span className="mt-2 text-sm font-bold text-sky-900">{entry.word}</span>
+      <span className="mt-2 text-4xl font-bold text-sky-900">{entry.word}</span>
       <span className="mt-0.5 line-clamp-2 text-[11px] text-slate-500">{entry.translation}</span>
       <button
         type="button"

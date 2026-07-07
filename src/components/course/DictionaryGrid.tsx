@@ -27,7 +27,7 @@ export function DictionaryGrid({
   }
 
   return (
-    <div className="grid grid-cols-3 gap-3 px-4 pb-8">
+    <div className="grid grid-cols-2 gap-3 px-4 pb-8">
       {entries.map((entry) => (
         <DictionaryWordCard
           key={entry.id}
