@@ -13,17 +13,17 @@ export const IMAGES_ACTIVITIES = {
 } satisfies CourseActivityImages;
 
 export const ASSETS = {
-  coin: "https://luubinhan.github.io/KidStory/images/coin.png",
-  diamond: "https://luubinhan.github.io/KidStory/images/diamond.png",
-  'back-card': "https://luubinhan.github.io/KidStory/images/back-card.png",
+  coin: "https://luubinhan.github.io/KidStory/images/coin.webp",
+  diamond: "https://luubinhan.github.io/KidStory/images/diamond.webp",
+  'back-card': "https://luubinhan.github.io/KidStory/images/back-card.webp",
 }
 
 export const BG_UNITS = {
-  'bg-unit-1': "https://luubinhan.github.io/KidStory/images/bg-unit-1.png",
-  'bg-unit-2': "https://luubinhan.github.io/KidStory/images/bg-unit-2.png",
-  'bg-unit-3': "https://luubinhan.github.io/KidStory/images/bg-unit-3.png",
-  'bg-unit-4': "https://luubinhan.github.io/KidStory/images/bg-unit-4.png",
-  'bg-unit-5': "https://luubinhan.github.io/KidStory/images/bg-unit-5.png",
-  'bg-unit-6': "https://luubinhan.github.io/KidStory/images/bg-unit-6.png",
-  'bg-unit-7': "https://luubinhan.github.io/KidStory/images/bg-unit-7.png",
+  'bg-unit-1': "https://luubinhan.github.io/KidStory/images/bg-unit-1.webp",
+  'bg-unit-2': "https://luubinhan.github.io/KidStory/images/bg-unit-2.webp",
+  'bg-unit-3': "https://luubinhan.github.io/KidStory/images/bg-unit-3.webp",
+  'bg-unit-4': "https://luubinhan.github.io/KidStory/images/bg-unit-4.webp",
+  'bg-unit-5': "https://luubinhan.github.io/KidStory/images/bg-unit-5.webp",
+  'bg-unit-6': "https://luubinhan.github.io/KidStory/images/bg-unit-6.webp",
+  'bg-unit-7': "https://luubinhan.github.io/KidStory/images/bg-unit-7.webp",
 }
