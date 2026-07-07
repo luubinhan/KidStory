@@ -138,8 +138,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '38dvw',
-      x: '38dvw',
+      y: '41dvw',
+      x: '40dvw',
     }
   },
   {
@@ -173,13 +173,13 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
   },
   {
     id: "dog", name: "Dog", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '133dvw',
+      y: '132dvw',
       x: '64dvw',
     }
   },
   {
     id: "cat", name: "Cat", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '129dvw',
+      y: '132dvw',
       x: '78dvw',
     }
   },
