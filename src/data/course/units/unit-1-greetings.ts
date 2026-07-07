@@ -16,14 +16,12 @@ export const unit1Greetings = {
     { id: "morning", word: "morning", translation: "buổi sáng" },
     { id: "afternoon", word: "afternoon", translation: "buổi chiều"},
     { id: "evening", word: "evening", translation: "buổi tối"},
-    { id: "night", word: "night", translation: "ban đêm"},
   ],
   practiceSentences: [
     { id: "unit-1-s-1", text: "hello" },
     { id: "unit-1-s-2", text: "good morning" },
     { id: "unit-1-s-3", text: "good afternoon" },
     { id: "unit-1-s-4", text: "good evening" },
-    { id: "unit-1-s-5", text: "good night" },
   ],
   multipleChoiceQuestions: [
     {
