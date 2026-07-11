@@ -26,4 +26,5 @@ export const BG_UNITS = {
   'bg-unit-5': "https://luubinhan.github.io/KidStory/images/bg-unit-5.webp",
   'bg-unit-6': "https://luubinhan.github.io/KidStory/images/bg-unit-6.webp",
   'bg-unit-7': "https://luubinhan.github.io/KidStory/images/bg-unit-7.webp",
+  'bg-unit-9': "https://luubinhan.github.io/KidStory/images/bg-unit-9.webp",
 }

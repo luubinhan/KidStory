@@ -1,5 +1,6 @@
 import { CloudSun } from "lucide-react";
 import type { CourseUnit } from "../../../types/course";
+import { BG_UNITS } from "@/src/constants/images";
 
 export const unit9WeatherWords = {
   id: "unit-9",
@@ -11,6 +12,7 @@ export const unit9WeatherWords = {
   youtubeVideoId: "QweyFFeqTgA",
   iconBgClass: "bg-sky-100",
   iconColorClass: "text-sky-600",
+  backgroundUrl: BG_UNITS["bg-unit-9"],
   words: [
     { id: "sunny", word: "sunny", translation: "trời nắng", imageUrl: "" },
     { id: "windy", word: "windy", translation: "trời nhiều gió", imageUrl: "" },
