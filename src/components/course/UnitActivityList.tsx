@@ -86,7 +86,7 @@ export function UnitActivityList({ unit }: UnitActivityListProps) {
 
   const cardClassName = (borderClass: string) =>
     cn(
-      "flex h-full backdrop-brightness-120 inset-ring-2 inset-ring-amber-500/20 hover:scale-110 w-full flex-col items-center justify-center gap-2 rounded-2xl backdrop-blur-xs p-4 text-center shadow-sm transition-all cursor-pointer",
+      "flex h-full backdrop-blur-lg bg-sky-100/20 shadow-sm inset-shadow-xs inset-shadow-white/80 transition-all hover:scale-110 w-full flex-col items-center justify-center gap-2 rounded-2xl p-4 text-center cursor-pointer",
       cn("border-white", borderClass, "hover:shadow-lg hover:inset-shadow-sm hover:inset-shadow-sky-700/50"),
     );
 
