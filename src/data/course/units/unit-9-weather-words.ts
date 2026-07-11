@@ -28,7 +28,7 @@ export const unit9WeatherWords = {
     { id: "unit-9-s-2", text: "it's sunny" },
     { id: "unit-9-s-3", text: "it's rainy" },
     { id: "unit-9-s-4", text: "wear a coat" },
-    { id: "unit-9-s-5", text: "it's" },
+    { id: "unit-9-s-5", text: "it's cloudy" },
     { id: "unit-9-s-6", text: "it's windy" },
   ],
   multipleChoiceQuestions: [

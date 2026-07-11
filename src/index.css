@@ -88,13 +88,12 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  border: 2px solid rgb(255 255 255 / 0.55);
   background: linear-gradient(180deg, #7dd3fc 0%, #38bdf8 45%, #0284c7 100%);
   color: white;
   text-shadow: 0 1px 1px rgb(3 105 161 / 0.45);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.65),
-    inset 0 -2px 0 rgb(2 132 199 / 0.35),
+    inset 0 1px 1px rgb(255 255 255 / 0.7),
+    inset 0 -1px 0 rgb(2 132 199 / 0.5),
     0 4px 0 #0369a1,
     0 8px 16px rgb(14 165 233 / 0.35);
   transition:
@@ -107,10 +106,13 @@
   content: "";
   position: absolute;
   inset: 0.35rem 0.75rem auto;
-  height: 45%;
+  height: 56%;
   border-radius: 9999px;
   background: linear-gradient(180deg, rgb(255 255 255 / 0.55) 0%, rgb(255 255 255 / 0) 100%);
   pointer-events: none;
+  left: 1px;
+  top: 2px;
+  right: 1px;
 }
 
 .candy-glass-btn:hover {
@@ -118,7 +120,7 @@
   transform: translateY(-1px);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.7),
-    inset 0 -2px 0 rgb(2 132 199 / 0.35),
+    inset 0 -2px 1px rgb(2 132 199 / 0.35),
     0 5px 0 #0369a1,
     0 10px 20px rgb(14 165 233 / 0.4);
 }
@@ -158,12 +160,12 @@
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  border: 2px solid rgb(186 230 253 / 0.8);
-  background: linear-gradient(180deg, rgb(224 242 254 / 0.95) 0%, rgb(186 230 253 / 0.75) 100%);
+  border: 1px solid rgba(162, 215, 244, 0.8);
+  background: linear-gradient(180deg, rgb(224 242 254 / 0.95) 0%, rgba(160, 221, 254, 0.75) 100%);
   color: #0369a1;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.85),
-    0 2px 6px rgb(14 165 233 / 0.12);
+    inset 0 1px 1px rgb(255 255 255 / 0.7),
+    inset 0 -1px 1px rgba(240, 250, 255, 0.5);
   transition:
     transform 150ms ease,
     box-shadow 150ms ease,
@@ -175,10 +177,13 @@
   content: "";
   position: absolute;
   inset: 0.25rem 0.5rem auto;
-  height: 40%;
+  height: 56%;
   border-radius: 9999px;
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.7) 0%, rgb(255 255 255 / 0) 100%);
+  background: linear-gradient(180deg, rgb(255 255 255 / .55) 10%, rgb(255 255 255 / 0) 100%);
   pointer-events: none;
+  left: 1px;
+  top: 2px;
+  right: 1px;
 }
 
 .candy-glass-btn--idle:hover {

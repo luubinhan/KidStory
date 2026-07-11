@@ -1,4 +1,4 @@
-import { BookOpen, Home, Search, Boxes } from "lucide-react";
+import { BookOpen, Map, Search, Boxes } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
@@ -11,7 +11,7 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home, to: "/" },
+  { id: "home", label: "Home", icon: Map, to: "/course" },
   { id: "study", label: "Explore", icon: BookOpen, to: "/course" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
@@ -24,7 +24,7 @@ export function CourseBottomNav() {
   return (
     <nav
       aria-label="Điều hướng chính"
-      className="fixed inset-x-0 bottom-0 z-30 backdrop-brightness-110 backdrop-blur-sm bg-sky-100/20 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
+      className="fixed inset-x-0 bottom-0 z-30 backdrop-blur-lg bg-sky-100/20 shadow-sm inset-shadow-xs inset-shadow-white/80 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
     >
       <div className="mx-auto flex gap-4 justify-center w-full max-w-lg ">
         {navItems.map((item) => {

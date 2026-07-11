@@ -4,7 +4,7 @@ import { useUserProgress } from "../contexts/UserProgressContext";
 import { CourseBottomNav, UnitActivityList } from "../components/course";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { cn } from "../lib/utils";
-import { ArrowLeft, Map } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const pageShellClass = "relative min-h-screen pb-24";
@@ -55,12 +55,7 @@ export default function CourseUnitPage() {
     >
       <div className="mx-auto px-4 py-6">
         <div className="mx-auto max-w-lg flex items-center justify-between gap-4">
-          <Link
-            to="/course"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 rounded-lg"
-          >
-            <Map className="size-5" aria-hidden />
-          </Link>
+          <div />
           <CurrencyDisplay />
         </div>
 
