@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { CourseBottomNav } from "../components/course";
 import { ShopItemCard } from "../components/shop/ShopItemCard";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
@@ -14,13 +12,7 @@ export default function AssetsPage() {
     <div className="relative min-h-[calc(100vw*3/2)] bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24 bg-center bg-top bg-[url(/map/assets.webp)] bg-size-[100vw_auto]">
       <div className="mx-auto max-w-lg px-4 py-6">
         <div className="flex items-center justify-between gap-4">
-          <Link
-            to="/course"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900"
-          >
-            <ArrowLeft className="size-4" aria-hidden />
-            Explore
-          </Link>
+          <div />
           <CurrencyDisplay />
         </div>
 
