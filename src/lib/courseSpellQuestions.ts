@@ -6,7 +6,7 @@ export function buildSpellQuestionsFromWords(
 ): GameQuestion[] {
   return words.map((entry) => ({
     id: `spell-${entry.id}`,
-    image: entry.imageUrl || undefined,
+    image: entry.image,
     translation: entry.translation,
     textBefore: "",
     textAfter: "",

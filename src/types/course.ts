@@ -18,7 +18,7 @@ export interface CourseTypedAnswerQuestion {
   textBefore: string;
   textAfter: string;
   answer: string;
-  imageUrl: string;
+  image: string;
   audioUrl?: string;
 }
 
@@ -26,7 +26,7 @@ export interface CourseWord {
   id: string;
   word: string;
   translation: string;
-  imageUrl?: string;
+  image?: string;
   audio?: string;
 }
 
@@ -76,7 +76,7 @@ export interface CourseDictionaryEntry {
   id: string;
   word: string;
   translation: string;
-  imageUrl: string;
+  image: string;
   unitId: string;
   unitNumber: number;
 }

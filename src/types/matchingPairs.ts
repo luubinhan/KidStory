@@ -31,7 +31,7 @@ export function buildCardsFromEntries(entries: readonly CourseDictionaryEntry[])
       id: `${entry.id}-image`,
       pairId: entry.id,
       type: "image" as const,
-      content: entry.imageUrl,
+      content: entry.image,
       translation: entry.translation,
       state: "hidden" as const,
     },

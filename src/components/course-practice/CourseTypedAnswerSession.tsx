@@ -101,7 +101,7 @@ export function CourseTypedAnswerSession({
           </div>
 
           <div className="relative mb-6">
-            <GameQuestionImage src={question.imageUrl} />
+            <GameQuestionImage src={question.image} />
             <div className="absolute bottom-0 left-0 right-4 flex justify-end py-4">
               <div className="h-20 w-20 rounded-3xl border-b-8 border-green-700 bg-green-500 font-kids text-6xl text-white">
                 <IconVolumeButton

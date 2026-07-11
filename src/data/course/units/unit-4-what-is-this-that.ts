@@ -13,10 +13,10 @@ export const unit4WhatIsThisThat = {
   iconBgClass: "bg-emerald-100",
   iconColorClass: "text-emerald-600",
   words: [
-    { id: "dog", word: "dog", translation: "con chó", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg" },
-    { id: "cow", word: "cow", translation: "con bò", imageUrl: "https://assets.farmsanctuary.org/content/uploads/2025/02/05152106/2023_06-09_FSNY_Aggie_cow_LH_4179-1600x1065.jpg" },
-    { id: "duck", word: "duck", translation: "con vịt", imageUrl: "https://media.4-paws.org/e/b/a/f/ebafc46d9fcca9f374d5990f8f9c832fdb04bb05/VIER%20PFOTEN_2019-07-18_013-2890x2000-1920x1329.webp" },
-    { id: "cat", word: "cat", translation: "con mèo", imageUrl: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187.jpg?w=1436&h=958" },
+    { id: "dog", word: "dog", translation: "con chó", image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg" },
+    { id: "cow", word: "cow", translation: "con bò", image: "https://assets.farmsanctuary.org/content/uploads/2025/02/05152106/2023_06-09_FSNY_Aggie_cow_LH_4179-1600x1065.jpg" },
+    { id: "duck", word: "duck", translation: "con vịt", image: "https://media.4-paws.org/e/b/a/f/ebafc46d9fcca9f374d5990f8f9c832fdb04bb05/VIER%20PFOTEN_2019-07-18_013-2890x2000-1920x1329.webp" },
+    { id: "cat", word: "cat", translation: "con mèo", image: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187.jpg?w=1436&h=958" },
   ],
   practiceSentences: [
     { id: "unit-4-s-1", text: "what is this" },

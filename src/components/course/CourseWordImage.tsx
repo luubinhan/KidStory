@@ -1,7 +1,7 @@
 import { cn } from "../../lib/utils";
 
 type CourseWordImageProps = {
-  imageUrl: string;
+  image: string;
   translation: string;
   alt?: string;
   className?: string;
@@ -9,13 +9,13 @@ type CourseWordImageProps = {
 };
 
 export function CourseWordImage({
-  imageUrl,
+  image,
   alt = "",
   className,
   fallbackClassName,
   translation = "?",
 }: CourseWordImageProps) {
-  if (!imageUrl) {
+  if (!image) {
     return (
       <span
         className={cn(
@@ -31,7 +31,7 @@ export function CourseWordImage({
 
   return (
     <img
-      src={imageUrl}
+      src={image}
       alt={alt}
       className={cn("size-32 rounded-xl object-cover", className)}
     />

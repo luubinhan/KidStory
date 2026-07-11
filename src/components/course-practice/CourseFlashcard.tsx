@@ -8,7 +8,7 @@ type CourseFlashcardProps = {
 };
 
 export function CourseFlashcard({ word, isFlipped, onFlip }: CourseFlashcardProps) {
-  const showImage = Boolean(word.imageUrl);
+  const showImage = Boolean(word.image);
 
   return (
     <button
@@ -21,7 +21,7 @@ export function CourseFlashcard({ word, isFlipped, onFlip }: CourseFlashcardProp
         <div className="course-flashcard-face course-flashcard-front backdrop-blur-xs bg-gradient-to-b from-gray-100/70 to-gray-100/10 border-1 border-gray-100/70 inset-ring-2 inset-ring-amber-500/20 ">
           {showImage ? (
             <CourseWordImage
-              imageUrl={word.imageUrl}
+              image={word.image ?? ""}
               alt=""
               translation={word.translation}
               className="size-64"

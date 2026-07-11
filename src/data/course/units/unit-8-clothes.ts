@@ -13,15 +13,15 @@ export const unit8Clothes = {
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [
-    { id: "hat", word: "hat", audio: "/sounds/hat.mp3", translation: "mũ", imageUrl: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg" },
-    { id: "shorts", word: "shorts", audio: "/sounds/shorts.mp3", translation: "quần short", imageUrl: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp" },
-    { id: "dress", word: "dress", audio: "/sounds/dress.mp3", translation: "váy", imageUrl: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot" },
-    { id: "t-shirt", word: "t-shirt", audio: "/sounds/t_shirt.mp3", translation: "áo phông", imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png" },
-    { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
-    { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", imageUrl: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
-    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", imageUrl: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
+    { id: "hat", word: "hat", audio: "/sounds/hat.mp3", translation: "mũ", image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg" },
+    { id: "shorts", word: "shorts", audio: "/sounds/shorts.mp3", translation: "quần short", image: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp" },
+    { id: "dress", word: "dress", audio: "/sounds/dress.mp3", translation: "váy", image: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot" },
+    { id: "t-shirt", word: "t-shirt", audio: "/sounds/t_shirt.mp3", translation: "áo phông", image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png" },
+    { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
+    { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", image: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
+    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
     
-    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", imageUrl: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg" },
+    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
@@ -77,7 +77,7 @@ export const unit8Clothes = {
       textBefore: "This is a ",
       textAfter: ".",
       answer: "hat",
-      imageUrl: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg",
+      image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg",
       audioUrl: "/sounds/hat.mp3",
     },
     {
@@ -86,7 +86,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "shorts",
-      imageUrl: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp",
+      image: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp",
       audioUrl: "/sounds/shorts.mp3",
     },
     {
@@ -95,7 +95,7 @@ export const unit8Clothes = {
       textBefore: "This is a ",
       textAfter: ".",
       answer: "dress",
-      imageUrl: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot",
+      image: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot",
       audioUrl: "/sounds/dress.mp3",
     },
     {
@@ -104,7 +104,7 @@ export const unit8Clothes = {
       textBefore: "This is a ",
       textAfter: ".",
       answer: "t-shirt",
-      imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png",
+      image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png",
       audioUrl: "/sounds/t_shirt.mp3",
     },
     {
@@ -113,7 +113,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "pants",
-      imageUrl: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg",
+      image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg",
       audioUrl: "/sounds/pants.mp3",
     },
     {
@@ -122,7 +122,7 @@ export const unit8Clothes = {
       textBefore: "This is a ",
       textAfter: ".",
       answer: "skirt",
-      imageUrl: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png",
+      image: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png",
       audioUrl: "/sounds/skirt.mp3",
     },
     {
@@ -131,7 +131,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "socks",
-      imageUrl: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990",
+      image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990",
       audioUrl: "/sounds/sock.mp3",
     },
     {
@@ -140,7 +140,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "shoes",
-      imageUrl: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg",
+      image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg",
       audioUrl: "/sounds/shoe.mp3",
     },
   ],

@@ -42,7 +42,7 @@ export function getDictionaryEntries(
       id: word.id,
       word: word.word,
       translation: word.translation,
-      imageUrl: word.imageUrl,
+      image: word.image ?? "",
       unitId: unit.id,
       unitNumber: unit.unitNumber,
     })),
