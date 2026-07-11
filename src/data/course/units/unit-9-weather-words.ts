@@ -20,8 +20,8 @@ export const unit9WeatherWords = {
     { id: "rainy", word: "rainy", translation: "trời mưa", image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757669960035/c46cc657.jpg" },
     { id: "cloudy", word: "cloudy", translation: "trời nhiều mây", image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757657325749/9ae87f0a.jpg" },
     { id: "stormy", word: "stormy", translation: "trời giông bão", image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757669304302/d2719759.jpg" },
-    { id: "gloves", word: "gloves", translation: "găng tay", image: "https://cdn11.bigcommerce.com/s-rmuu4bbtny/images/stencil/1280x1280/products/418/5541/81Po83AqiUL._SL1500___49628.1743020070.jpg?c=2&format=webp" },
-    { id: "coat", word: "coat", translation: "áo khoác", image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757657854449/8529762c.jpg" },
+    { id: "gloves", word: "gloves", translation: "găng tay", image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1769874045804/cfda3e52.jpg" },
+    { id: "coat", word: "coat", translation: "áo khoác", image: "https://canifa.com/blog/wp-content/uploads/2024/10/coat-va-jacket-khac-nhau-nhu-the-nao-2.jpg.webp" },
   ],
   practiceSentences: [
     { id: "unit-9-s-1", text: "how's the weather" },
