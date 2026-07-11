@@ -7,6 +7,7 @@ import { unit5Colors } from "./units/unit-5-colors";
 import { unit6WhatNumberIsIt } from "./units/unit-6-what-number-is-it";
 import { unit7IsHeATeacher } from "./units/unit-7-is-he-a-teacher";
 import { unit8Clothes } from "./units/unit-8-clothes";
+import { unit9WeatherWords } from "./units/unit-9-weather-words";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -26,6 +27,7 @@ export const courseUnits: readonly CourseUnit[] = [
   unit6WhatNumberIsIt,
   unit7IsHeATeacher,
   unit8Clothes,
+  unit9WeatherWords,
 ];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {

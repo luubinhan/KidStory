@@ -1,0 +1,70 @@
+import { CloudSun } from "lucide-react";
+import type { CourseUnit } from "../../../types/course";
+
+export const unit9WeatherWords = {
+  id: "unit-9",
+  unitNumber: 9,
+  title: "Weather words",
+  subtitle: "",
+  status: "current",
+  icon: CloudSun,
+  youtubeVideoId: "QweyFFeqTgA",
+  iconBgClass: "bg-sky-100",
+  iconColorClass: "text-sky-600",
+  words: [
+    { id: "sunny", word: "sunny", translation: "trời nắng", imageUrl: "" },
+    { id: "windy", word: "windy", translation: "trời nhiều gió", imageUrl: "" },
+    { id: "snowy", word: "snowy", translation: "trời có tuyết", imageUrl: "" },
+    { id: "rainy", word: "rainy", translation: "trời mưa", imageUrl: "" },
+    { id: "cloudy", word: "cloudy", translation: "trời nhiều mây", imageUrl: "" },
+    { id: "stormy", word: "stormy", translation: "trời giông bão", imageUrl: "" },
+    { id: "gloves", word: "gloves", translation: "găng tay", imageUrl: "" },
+    { id: "coat", word: "coat", translation: "áo khoác", imageUrl: "" },
+  ],
+  practiceSentences: [
+    { id: "unit-9-s-1", text: "how's the weather" },
+    { id: "unit-9-s-2", text: "it's sunny" },
+    { id: "unit-9-s-3", text: "it's rainy" },
+    { id: "unit-9-s-4", text: "wear a coat" },
+    { id: "unit-9-s-5", text: "it's" },
+    { id: "unit-9-s-6", text: "it's windy" },
+  ],
+  multipleChoiceQuestions: [
+    {
+      id: "unit-9-mc-1",
+      textBefore: "How's the ",
+      textAfter: "?",
+      options: ["weather", "banana", "teacher", "book"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-9-mc-2",
+      textBefore: "It's ",
+      textAfter: ".",
+      options: ["sunny", "rainy", "stormy", "cloudy"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-9-mc-3",
+      textBefore: "It's ",
+      textAfter: ".",
+      options: ["rainy", "sunny", "windy", "snowy"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-9-mc-4",
+      textBefore: "Wear a ",
+      textAfter: ".",
+      options: ["coat", "gloves", "desk", "pencil"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-9-mc-5",
+      textBefore: "It's ",
+      textAfter: ".",
+      options: ["windy", "coat", "gloves", "school"],
+      correctIndex: 0,
+    },
+  ],
+  typedAnswerQuestions: [],
+} satisfies CourseUnit;
