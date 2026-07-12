@@ -46,7 +46,7 @@ export function ShopItemCard({
         onClick={onBuy}
         disabled={!canAfford || isLoading}
         className={cn(
-          "mt-3 cursor-pointer rounded-xl py-2 px-6 text-lg font-bold transition-colors",
+          "mt-3 cursor-pointer candy-glass-btn--idle rounded-xl py-2 px-6 text-lg font-bold transition-colors z-10 relative",
           canAfford && !isLoading
             ? "bg-sky-500 text-white hover:bg-sky-600"
             : "cursor-not-allowed bg-slate-200 text-slate-400",
