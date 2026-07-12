@@ -28,9 +28,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<DiscoverPage />} />
             <Route path="/course" element={<CoursePage />} />
-            <Route path="/course/how-to-play" element={<CourseHowToPlayPage />} />
             <Route path="/course/:unitId" element={<CourseUnitPage />} />
             <Route path="/course/:unitId/practice/:activityId" element={<CourseUnitPracticePage />} />
+            <Route path="/how-to-play" element={<CourseHowToPlayPage />} />
             <Route path="/dictionary" element={<DictionaryPage />} />
             <Route path="/assets" element={<AssetsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
