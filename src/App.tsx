@@ -11,6 +11,7 @@ import BookDetailPage from "./pages/BookDetailPage";
 import GamesPage from "./pages/GamesPage";
 import GameTopicPage from "./pages/GameTopicPage";
 import CoursePage from "./pages/CoursePage";
+import CourseHowToPlayPage from "./pages/CourseHowToPlayPage";
 import CourseUnitPage from "./pages/CourseUnitPage";
 import CourseUnitPracticePage from "./pages/CourseUnitPracticePage";
 import DictionaryPage from "./pages/DictionaryPage";
@@ -27,6 +28,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<DiscoverPage />} />
             <Route path="/course" element={<CoursePage />} />
+            <Route path="/course/how-to-play" element={<CourseHowToPlayPage />} />
             <Route path="/course/:unitId" element={<CourseUnitPage />} />
             <Route path="/course/:unitId/practice/:activityId" element={<CourseUnitPracticePage />} />
             <Route path="/dictionary" element={<DictionaryPage />} />
