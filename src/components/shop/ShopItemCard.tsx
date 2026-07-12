@@ -2,6 +2,7 @@ import { ShoppingCart } from "lucide-react";
 import { ASSETS } from "../../constants/images";
 import type { ShopItem } from "../../types/shop";
 import { cn } from "../../lib/utils";
+import Sky from "../cloud/Sky";
 
 type ShopItemCardProps = {
   item: ShopItem;
@@ -23,23 +24,16 @@ export function ShopItemCard({
   return (
     <article
       className={cn(
-        "rounded-full p-3 w-[20vw] h-[14vw] transition-all absolute text-center",    
-        !isOwned && "backdrop-blur-sm "    
+        "rounded-full p-3 w-[25vw] h-[20vw] transition-all absolute text-center",
       )}
       style={{
         top: item.position.y,
         left: item.position.x,
       }}
     >
+      {!isOwned && <Sky />}
       <div className={cn("relative mx-auto aspect-square w-full max-w-[120px]",
       )}>
-        {!isOwned && (
-          <img
-            src={item.imageUrl}
-            alt={item.name}
-            className="size-full rounded-xl object-contain"
-          />
-        )}
         
         {isOwned && (
           <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-sky-600 text-xs font-bold text-white">

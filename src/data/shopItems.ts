@@ -7,8 +7,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '60dvw',
-      x: '40dvw',
+      y: '60vw',
+      x: '40vw',
     }
   },
   {
@@ -17,8 +17,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '76dvw',
-      x: '40dvw',
+      y: '76vw',
+      x: '40vw',
     }
   },
   {
@@ -27,8 +27,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '78dvw',
-      x: '76dvw',
+      y: '78vw',
+      x: '76vw',
     }
   },
   {
@@ -37,8 +37,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 100,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '79dvw',
-      x: '4dvw',
+      y: '79vw',
+      x: '4vw',
     }
   },
   {
@@ -47,8 +47,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '97dvw',
-      x: '1dvw',
+      y: '97vw',
+      x: '1vw',
     }
   },
   {
@@ -57,8 +57,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '93dvw',
-      x: '20dvw',
+      y: '93vw',
+      x: '20vw',
     }
   },
   {
@@ -67,8 +67,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '93dvw',
-      x: '41dvw',
+      y: '93vw',
+      x: '41vw',
     }
   },
   {
@@ -77,8 +77,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '93dvw',
-      x: '64dvw',
+      y: '93vw',
+      x: '64vw',
     }
   },
   {
@@ -87,8 +87,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '110dvw',
-      x: '29dvw',
+      y: '110vw',
+      x: '29vw',
     }
   },
   {
@@ -97,8 +97,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '112dvw',
-      x: '62dvw',
+      y: '112vw',
+      x: '62vw',
     }
   },
   {
@@ -107,8 +107,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '61dvw',
-      x: '76dvw',
+      y: '61vw',
+      x: '76vw',
     }
   },
   {
@@ -117,8 +117,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 10,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '59dvw',
-      x: '1dvw',
+      y: '59vw',
+      x: '1vw',
     }
   },
   {
@@ -127,8 +127,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     price: 20,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '45dvw',
-      x: '12dvw',
+      y: '45vw',
+      x: '12vw',
     }
   },
   {
@@ -138,8 +138,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '41dvw',
-      x: '40dvw',
+      y: '41vw',
+      x: '40vw',
     }
   },
   {
@@ -149,38 +149,38 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '26dvw',
-      x: '77dvw',
+      y: '26vw',
+      x: '77vw',
     }
   },
   {
     id: "sheep", name: "Sheep", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '128dvw',
-      x: '22dvw',
+      y: '128vw',
+      x: '22vw',
     }
   },
   {
     id: "cow", name: "Cow", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '123dvw',
-      x: '1dvw',
+      y: '123vw',
+      x: '1vw',
     }
   },
   {
     id: "pig", name: "Pig", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '129dvw',
-      x: '43dvw',
+      y: '129vw',
+      x: '43vw',
     }
   },
   {
     id: "dog", name: "Dog", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '132dvw',
-      x: '64dvw',
+      y: '132vw',
+      x: '64vw',
     }
   },
   {
     id: "cat", name: "Cat", price: 10, imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png", position: {
-      y: '132dvw',
-      x: '78dvw',
+      y: '132vw',
+      x: '78vw',
     }
   },
   {
@@ -190,8 +190,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '7dvw',
-      x: '8dvw',
+      y: '7vw',
+      x: '8vw',
     },
   },
   {
@@ -201,8 +201,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '6dvw',
-      x: '40dvw',
+      y: '6vw',
+      x: '40vw',
     },
   },
   {
@@ -212,8 +212,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '7dvw',
-      x: '71dvw',
+      y: '7vw',
+      x: '71vw',
     },
   },
   {
@@ -223,8 +223,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '26dvw',
-      x: '7dvw',
+      y: '26vw',
+      x: '7vw',
     },
   },
   {
@@ -234,8 +234,8 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
     diamondPrice: 50,
     imageUrl: "https://luubinhan.github.io/KidStory/images/shop/bread_oven.png",
     position: {
-      y: '24dvw',
-      x: '48dvw',
+      y: '24vw',
+      x: '48vw',
     },
   },
 ] as const;
