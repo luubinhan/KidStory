@@ -5,7 +5,7 @@
 
 ## Summary
 
-Add a standalone parent/helper guide at `/course/how-to-play` that explains how the Wonder Farm course works: learning-path flow, rules for each practice activity, and the coins/diamonds/hints/shop reward system. English copy only. No in-app entry point in v1 (URL-only).
+Add a standalone parent/helper guide at `/how-to-play` that explains how the Wonder Farm course works: learning-path flow, rules for each practice activity, and the coins/diamonds/hints/shop reward system. English copy only. No in-app entry point in v1 (URL-only).
 
 ## Decisions
 
@@ -33,14 +33,14 @@ Rejected alternatives:
 ## Architecture
 
 ```
-src/App.tsx                              Route /course/how-to-play BEFORE /course/:unitId
+src/App.tsx                              Route /how-to-play (top-level)
 src/pages/CourseHowToPlayPage.tsx        Page layout, sections, CTA
 src/data/howToPlay.ts                    Flow steps, reward bullets, per-activity tips
 src/components/course/HowToSection.tsx   Optional: titled section wrapper
 src/components/course/ActivityRuleCard.tsx Optional: icon + label + tip row
 ```
 
-Route registration must place `/course/how-to-play` **before** `/course/:unitId` so `how-to-play` is not captured as a unit id.
+Top-level `/how-to-play` route — no collision with `/course/:unitId`.
 
 ### Data flow
 
@@ -97,8 +97,8 @@ None beyond normal React render. Static content only.
 ## Testing / verification
 
 - `npm run lint`
-- Manual: open `/course/how-to-play`, scroll all sections, CTA navigates to `/course`
-- Manual: confirm `/course/how-to-play` does not render `CourseUnitPage`
+- Manual: open `/how-to-play`, scroll all sections, CTA navigates to `/course`
+- Manual: confirm `/how-to-play` renders the guide page
 - No new `npx tsx` test scripts (no pure logic beyond constant interpolation)
 
 ## Out of scope (v1)

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a static English parent/helper guide at `/course/how-to-play` covering course unlock flow, all seven activities, and coins/diamonds/hints/shop rewards.
+**Goal:** Add a static English parent/helper guide at `/how-to-play` covering course unlock flow, all seven activities, and coins/diamonds/hints/shop rewards.
 
 **Architecture:** Register a dedicated route before `/course/:unitId`. One page component renders a long scroll of sections from `src/data/howToPlay.ts` plus `courseActivities` and reward constants from `src/types/userProgress.ts`. No progress context, no bottom nav, CTA links to `/course`.
 
@@ -18,7 +18,7 @@
 |------|----------------|
 | `src/data/howToPlay.ts` | Hero copy, flow steps, per-activity tips, section titles (no hardcoded reward numbers) |
 | `src/pages/CourseHowToPlayPage.tsx` | Page shell, sections, activity cards, rewards list, CTA |
-| `src/App.tsx` | Add `/course/how-to-play` route before `/course/:unitId` |
+| `src/App.tsx` | Add top-level `/how-to-play` route |
 | `src/components/course/index.ts` | No change unless optional extracts are added (YAGNI: keep in page) |
 
 ---
@@ -236,11 +236,11 @@ In `src/App.tsx`, add the import next to the other course pages:
 import CourseHowToPlayPage from "./pages/CourseHowToPlayPage";
 ```
 
-Inside `<Routes>`, place this route **immediately after** `/course` and **before** `/course/:unitId`:
+Inside `<Routes>`, register top-level `/how-to-play`:
 
 ```tsx
 <Route path="/course" element={<CoursePage />} />
-<Route path="/course/how-to-play" element={<CourseHowToPlayPage />} />
+<Route path="/how-to-play" element={<CourseHowToPlayPage />} />
 <Route path="/course/:unitId" element={<CourseUnitPage />} />
 ```
 
@@ -253,7 +253,7 @@ Expected: exit 0, no errors.
 
 - [ ] **Step 3: Manual smoke (dev server if available)**
 
-- Open `/course/how-to-play` — page renders hero, flow, 7 activities, rewards, CTA
+- Open `/how-to-play` — page renders hero, flow, 7 activities, rewards, CTA
 - Confirm it is **not** the unit “not found” page
 - Click “Start learning” / “Back to course” → `/course`
 
@@ -261,7 +261,7 @@ Expected: exit 0, no errors.
 
 ```bash
 git add src/App.tsx
-git commit -m "feat: route /course/how-to-play to how-to guide"
+git commit -m "feat: route /how-to-play to how-to guide"
 ```
 
 ---
