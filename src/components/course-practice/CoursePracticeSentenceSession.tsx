@@ -82,7 +82,7 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
         trailing={hintControl}
       />
       {sentence ? (
-        <div className="rounded-2xl min-h-[65vh] flex flex-col justify-center bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat px-4 py-20 md:p-8 shadow-md">
+        <div className="rounded-2xl min-h-[65vh] flex flex-col justify-center bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat px-4 py-20 md:p-8 rounded-2xl shadow-lg border-2 border-amber-600/40">
           <div className="flex flex-wrap items-start gap-2 gap-y-3 justify-center mb-12">
             <div className="bg-green-500 text-white border-green-700 scale-105 z-10 h-20 w-20 text-6xl font-kids rounded-3xl transition-all border-b-8 hover:-translate-y-1 active:scale-95">
               <IconVolumeButton
@@ -112,7 +112,7 @@ export function CoursePracticeSentenceSession({ sentences, sessionKey, unitId }:
             <div className="mt-6 space-y-4">
               <GameQuestionFooter isLast={isLast} onNext={handleNext} lastAction="next" />
             </div>
-          ) : null}
+          ) : <div className="h-[76px]" />}
         </div>
       ) : null}
     </div>

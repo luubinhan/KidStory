@@ -143,7 +143,7 @@ export function GameTopicPracticeSession({
               <div className="mt-6 space-y-4">
                 <GameQuestionFooter isLast={isLast} onNext={goNext} />
               </div>
-            ) : null}
+            ) : <div className="h-[76px]" />}
           </div>
         ) : null}
       </div>
@@ -189,7 +189,7 @@ export function GameTopicPracticeSession({
         />
 
         {q ? (
-          <div className="min-h-[65vh] flex flex-col justify-center  px-4 py-4 md:p-4 bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat">
+          <div className="min-h-[65vh] flex flex-col justify-center  px-4 py-4 md:p-4 bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat rounded-2xl shadow-lg border-2 border-amber-600/40">
             <div className="p-8">
               {q.image?.trim() ? (
                 <div className="mb-12 relative">
@@ -242,7 +242,7 @@ export function GameTopicPracticeSession({
                     lastAction={tracksCompletion ? "next" : "home"}
                   />
                 </div>
-              ) : null}
+              ) : <div className="h-[76px]" />}
             </div>
           </div>
         ) : null}
@@ -305,7 +305,7 @@ export function GameTopicPracticeSession({
         trailing={hintEnabled ? hintControl : undefined}
       />
       {q ? (
-        <div className="flex min-h-0 flex-1 flex-col bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat p-8 pt-12 shadow-lg">
+        <div className="flex min-h-0 flex-1 flex-col bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat p-8 pt-12 rounded-2xl shadow-lg border-2 border-amber-600/40">
           <div className="backdrop-blur-xs">
             <div className="shrink-0 space-y-4">
               {q.image ? <GameQuestionImage src={q.image} /> : null}
