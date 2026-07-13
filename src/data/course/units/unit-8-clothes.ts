@@ -20,8 +20,7 @@ export const unit8Clothes = {
     { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
     { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", image: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
     { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
-    
-    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg" },
+    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://dictionary.cambridge.org/vi/images/thumb/shoe_noun_002_33438.jpg?version=6.0.80" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
