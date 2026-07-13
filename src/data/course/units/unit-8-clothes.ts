@@ -19,7 +19,7 @@ export const unit8Clothes = {
     { id: "t-shirt", word: "t-shirt", audio: "/sounds/t_shirt.mp3", translation: "áo phông", image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png" },
     { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg" },
     { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", image: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png" },
-    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990" },
+    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://cdn.thewirecutter.com/wp-content/media/2025/10/BEST-SOCKS-SUB-02281-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp" },
     { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://dictionary.cambridge.org/vi/images/thumb/shoe_noun_002_33438.jpg?version=6.0.80" },
   ],
   practiceSentences: [
