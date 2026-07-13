@@ -2,6 +2,7 @@ import { Lightbulb } from "lucide-react";
 import { useUserProgress } from "../../contexts/UserProgressContext";
 import { COIN_HINT_COST } from "../../types/userProgress";
 import { cn } from "../../lib/utils";
+import { ASSETS } from "@/src/constants/images";
 
 type HintButtonProps = {
   onHint: () => void | Promise<void>;
@@ -29,7 +30,7 @@ export function HintButton({ onHint, className, disabled = false }: HintButtonPr
       aria-label={`Hint, costs ${COIN_HINT_COST} coin`}
     >
       <Lightbulb className="size-3.5" aria-hidden />
-      Hint (-{COIN_HINT_COST})
+      Hint <img src={ASSETS.coin} alt="coin" className="inline-block h-3" /> -{COIN_HINT_COST}
     </button>
   );
 }

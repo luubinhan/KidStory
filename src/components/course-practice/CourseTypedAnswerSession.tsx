@@ -93,8 +93,8 @@ export function CourseTypedAnswerSession({
     <div className="flex min-h-0 flex-1 flex-col">
       <McProgressHeader current={questionIndex + 1} total={total} trailing={hintControl} />
 
-      <div className="p-4 bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat md:p-6">
-        <div className="backdrop-blur-xs rounded-2xl p-8 mt-4">
+      <div className="p-4 bg-[url('/images/bg-card.webp')] bg-cover bg-no-repeat md:p-6 rounded-2xl shadow-lg border-2 border-amber-600/40">
+        <div className="rounded-2xl p-8 mt-4">
           <div className="mb-4 flex items-center justify-center gap-3">
             <p className="min-w-0 text-xl font-bold text-slate-800 md:text-2xl">{question.prompt}</p>
             <IconVolumeButton onClick={() => void playPrompt()} aria-label="Hear the question" />
