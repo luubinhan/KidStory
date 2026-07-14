@@ -17,6 +17,7 @@ import CourseUnitPracticePage from "./pages/CourseUnitPracticePage";
 import DictionaryPage from "./pages/DictionaryPage";
 import AssetsPage from "./pages/AssetsPage";
 import SettingsPage from "./pages/SettingsPage";
+import GamesV2Page from "./pages/GamesV2Page";
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/achievements" element={<Navigate to="/assets" replace />} />
             <Route path="/shop" element={<Navigate to="/assets" replace />} />
             <Route path="/games" element={<GamesPage />} />
+            <Route path="/games-v2" element={<GamesV2Page />} />
             <Route path="/games/:topicId" element={<GameTopicPage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
