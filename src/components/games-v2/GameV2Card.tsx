@@ -38,7 +38,7 @@ export function GameV2Card({ game, index }: GameV2CardProps) {
           )}
         </div>
 
-        <div className="flex flex-1 flex-col gap-3 p-5">
+        <div className="flex flex-1 flex-row justify-between align-center gap-3 p-5">
           <h2 className="text-xl font-bold text-slate-900">{game.name}</h2>
           <div className="mt-auto flex items-center gap-3 text-sm font-semibold text-slate-700">
             <span className="inline-flex items-center gap-1">

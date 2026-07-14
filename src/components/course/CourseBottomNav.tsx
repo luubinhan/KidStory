@@ -1,4 +1,4 @@
-import { BookOpen, Map, Search, Boxes } from "lucide-react";
+import { BookOpen, Map, Search, Boxes, Gamepad2 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
@@ -11,11 +11,11 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Map, to: "/course" },
-  { id: "study", label: "Explore", icon: BookOpen, to: "/course" },
+  { id: "course", label: "Home", icon: Map, to: "/course" },
+  { id: "games-v2", label: "Games", icon: Gamepad2, to: "/games-v2" },
   { id: "dictionary", label: "Dictionary", icon: Search, to: "/dictionary" },
   // { id: "games", label: "Games", icon: Gamepad2, to: "/games" },
-  { id: "achievements", label: "Assets", icon: Boxes, to: "/assets" },
+  { id: "assets", label: "Assets", icon: Boxes, to: "/assets" },
 ];
 
 export function CourseBottomNav() {
@@ -29,13 +29,7 @@ export function CourseBottomNav() {
       <div className="mx-auto flex gap-4 justify-center w-full max-w-lg ">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive =
-            (item.id === "study" &&
-              (pathname === "/course" || pathname.startsWith("/course/"))) ||
-            (item.id === "dictionary" && pathname === "/dictionary") ||
-            (item.id === "achievements" && pathname === "/assets") ||
-            (item.id === "games" &&
-              (pathname === "/games" || pathname.startsWith("/games/")));
+          const isActive = pathname.includes(item.to || "");
 
           const content = (
             <>
