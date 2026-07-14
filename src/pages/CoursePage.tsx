@@ -1,9 +1,11 @@
 import { courseProfile, courseUnits } from "../data/course";
 import {
   CourseBottomNav,
+  CourseHowToPlayFab,
   CoursePageTitle,
   LearningPath,
 } from "../components/course";
+
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { SettingsTrigger } from "../components/settings/SettingsTrigger";
 
@@ -22,6 +24,7 @@ export default function CoursePage() {
         </div>
         <LearningPath units={courseUnits} />
       </div>
+      <CourseHowToPlayFab />
       <CourseBottomNav />
     </div>
   );

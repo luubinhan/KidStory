@@ -1,6 +1,8 @@
-import { Check, Lock, Play } from "lucide-react";
+import { Check, Lock } from "lucide-react";
+import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import notificationBell from "../../assets/notification-bell.json";
 import type { CourseUnit, CourseUnitStatus } from "../../types/course";
 import { cn } from "../../lib/utils";
 
@@ -72,8 +74,10 @@ export function UnitCard({ unit, index, side, status, completedCount, totalCount
       ) : null}
 
       {isCurrent ? (
-        <span className="absolute -right-1 -top-3 text-xl" aria-hidden>
-          👦
+        <span className="absolute -right-8 -top-8 text-xl" aria-hidden>
+          <div className="mx-auto h-18 w-18">
+            <Lottie animationData={notificationBell} loop={true} className="h-full w-full" />
+          </div>
         </span>
       ) : null}
 
@@ -102,15 +106,6 @@ export function UnitCard({ unit, index, side, status, completedCount, totalCount
       {isLocked && (
         <p className="mt-2 text-[10px] font-semibold text-white">Locked</p>
       )}
-
-      {isCurrent ? (
-        <div className="mt-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">
-            <Play className="size-3 fill-white" aria-hidden />
-            Current
-          </span>
-        </div>
-      ) : null}
     </motion.div>
   );
 

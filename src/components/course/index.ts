@@ -1,5 +1,7 @@
 export { CourseBottomNav } from "./CourseBottomNav";
 export { CourseFeedbackFab } from "./CourseFeedbackFab";
+export { CourseHowToPlayFab } from "./CourseHowToPlayFab";
+
 export { CoursePageHeader } from "./CoursePageHeader";
 export { CoursePageTitle } from "./CoursePageTitle";
 export { DictionaryGrid } from "./DictionaryGrid";
