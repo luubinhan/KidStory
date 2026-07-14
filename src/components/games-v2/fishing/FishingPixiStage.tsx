@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Application, Assets, Sprite, TilingSprite, type Ticker } from "pixi.js";
 import pondUrl from "../../../assets/games/pond.webp";
 import waveOverlayUrl from "../../../assets/games/wave_overlay.png";
+import cursorUrl from "../../../assets/cursor.png";
 import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
 import { playCorrect, playWrong } from "./fxSystem";
@@ -212,5 +213,11 @@ export function FishingPixiStage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={hostRef} className="size-full" />;
+  return (
+    <div
+      ref={hostRef}
+      className="size-full"
+      style={{ cursor: `url(${cursorUrl}) 12 8, auto` }}
+    />
+  );
 }
