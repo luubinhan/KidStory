@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Application, type Ticker } from "pixi.js";
+import { Application, Assets, Sprite, type Ticker } from "pixi.js";
+import pondUrl from "../../../assets/games/pond.webp";
 import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
 import { playCorrect, playWrong } from "./fxSystem";
@@ -141,7 +142,7 @@ export function FishingPixiStage({
 
     async function setup(): Promise<void> {
       await app.init({
-        background: "#7dd3fc",
+        backgroundAlpha: 0,
         resizeTo: window,
         antialias: true,
         autoDensity: true,
@@ -152,6 +153,18 @@ export function FishingPixiStage({
         return;
       }
       hostEl?.appendChild(app.canvas);
+
+      const pondTexture = await Assets.load(pondUrl);
+      if (disposed) return;
+      const bg = new Sprite(pondTexture);
+      bg.label = "pond-bg";
+      bg.width = app.screen.width;
+      bg.height = app.screen.height;
+      app.stage.addChildAt(bg, 0);
+      app.renderer.on("resize", (w: number, h: number) => {
+        bg.width = w;
+        bg.height = h;
+      });
 
       await pool.warmTextures();
       if (disposed) return;

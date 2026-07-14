@@ -16,7 +16,7 @@ const FISH_DISPLAY_WIDTH = 96;
 
 const LABEL_STYLE = new TextStyle({
   fontFamily: "Arial, sans-serif",
-  fontSize: 16,
+  fontSize: 24,
   fontWeight: "800",
   fill: "#ffffff",
   stroke: { color: "#1e3a5f", width: 4, join: "round" },
@@ -50,7 +50,7 @@ export class FishPool {
     sprite.anchor.set(0.5);
 
     const label = new Text({ text: "", style: LABEL_STYLE });
-    label.anchor.set(0.5);
+    label.anchor.set(0.5, -1);
 
     const root = new Container();
     root.eventMode = "static";
