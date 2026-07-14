@@ -1,5 +1,6 @@
 import { courseActivities } from "../data/course-activities";
 import { courseUnits } from "../data/course";
+import { getGameV2 } from "../data/gamesV2";
 import { getShopItemById } from "../data/shopItems";
 import type { ShopItemId } from "../types/shop";
 import type { CourseActivityId, CourseUnit, CourseUnitStatus } from "../types/course";
@@ -204,6 +205,36 @@ export function onActivityComplete(
     unitBonusEarned,
     achievementUnlocked,
     achievementReward,
+  };
+}
+
+export function onGameV2Complete(
+  progress: UserProgressV1,
+  gameId: string,
+): ActivityRewardResult | null {
+  const game = getGameV2(gameId);
+  if (!game) return null;
+
+  const coinsEarned = game.coinReward;
+  const diamondsEarned = game.diamondReward;
+  const next: UserProgressV1 = {
+    ...progress,
+    coins: progress.coins + coinsEarned,
+    diamonds: progress.diamonds + diamondsEarned,
+    unitActivityCompletions: { ...progress.unitActivityCompletions },
+    unitBonusClaimed: { ...progress.unitBonusClaimed },
+    achievements: { ...progress.achievements },
+    inventory: { ...progress.inventory },
+  };
+
+  return {
+    progress: next,
+    coinsEarned,
+    diamondsEarned,
+    activityBonus: coinsEarned,
+    unitBonusEarned: 0,
+    achievementUnlocked: null,
+    achievementReward: 0,
   };
 }
 
