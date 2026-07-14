@@ -11,7 +11,7 @@ export default function FishingGamePage() {
   const poolWords = pool.map((item) => item.word.toUpperCase());
 
   return (
-    <div className="relative min-h-screen pb-24 bg-center bg-top bg-no-repeat bg-cover bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80"
+    <div className="relative min-h-screen bg-center bg-top bg-no-repeat bg-cover bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80"
     >
         {!canPlay ? (
           <div className="mt-8 rounded-2xl border-2 border-slate-100 bg-white p-8 text-center">
@@ -26,7 +26,7 @@ export default function FishingGamePage() {
         ) : null}
 
         {canPlay && session ? (
-          <div className="relative min-h-[100vh] overflow-hidden">
+          <div className="relative h-screen overflow-hidden">
             <div className="absolute right-0 left-0 flex flex-col items-center gap-2">
               <div className="flex size-32 items-center justify-center overflow-hidden rounded-full shadow-sm">
                 <img

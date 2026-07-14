@@ -142,7 +142,7 @@ export function FishingPixiStage({
     async function setup(): Promise<void> {
       await app.init({
         background: "#7dd3fc",
-        resizeTo: hostEl,
+        resizeTo: window,
         antialias: true,
         autoDensity: true,
         resolution: Math.min(window.devicePixelRatio || 1, 2),
@@ -151,7 +151,7 @@ export function FishingPixiStage({
         app.destroy(true, { children: true });
         return;
       }
-      hostEl.appendChild(app.canvas);
+      hostEl?.appendChild(app.canvas);
 
       await pool.warmTextures();
       if (disposed) return;
