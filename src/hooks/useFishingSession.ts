@@ -22,32 +22,38 @@ export function useFishingSession() {
   );
   const canPlay = pool.length >= FISHING_ROUND.minPoolSize;
 
+  const poolRef = useRef(pool);
+  poolRef.current = pool;
+
   const [session, setSession] = useState<FishingSessionState | null>(null);
   const [reward, setReward] = useState<ActivityRewardResult | null>(null);
   const awardedRef = useRef(false);
+  const runIdRef = useRef(0);
 
   useEffect(() => {
     if (!canPlay) {
+      runIdRef.current += 1;
       setSession(null);
+      awardedRef.current = false;
+      setReward(null);
       return;
     }
-    setSession(createInitialSession(pool));
-    awardedRef.current = false;
-    setReward(null);
-  }, [canPlay, pool]);
+    setSession((prev) => prev ?? createInitialSession(poolRef.current));
+  }, [canPlay]);
 
   useEffect(() => {
     if (!session || session.status !== "won" || awardedRef.current) return;
     awardedRef.current = true;
+    const runId = runIdRef.current;
     void completeGameV2("fishing").then((result) => {
-      if (result) setReward(result);
+      if (result && runIdRef.current === runId) setReward(result);
     });
   }, [session, completeGameV2]);
 
   const onFishTap = useCallback(
     (word: string) => {
       if (!session || session.status !== "playing") return { kind: "ignored" as const };
-      const result = applyFishTap(session, pool, word);
+      const result = applyFishTap(session, poolRef.current, word);
       if (result.kind === "wrong") {
         playFishingWrongSound();
         return result;
@@ -57,15 +63,16 @@ export function useFishingSession() {
       setSession(result.session);
       return result;
     },
-    [session, pool],
+    [session],
   );
 
   const restart = useCallback(() => {
     if (!canPlay) return;
+    runIdRef.current += 1;
     awardedRef.current = false;
     setReward(null);
-    setSession(createInitialSession(pool));
-  }, [canPlay, pool]);
+    setSession(createInitialSession(poolRef.current));
+  }, [canPlay]);
 
   return {
     pool,
