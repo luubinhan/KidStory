@@ -163,7 +163,7 @@ export function FishingPixiStage({
 
       // Pixi custom cursor (see https://pixijs.com/8.x/guides/components/events#custom-cursors)
       // Hotspot near tip (top-left of the arrow asset).
-      const customCursor = `url('${cursorUrl}') 0 0, auto`;
+      const customCursor = "url('https://luubinhan.github.io/KidStory/images/cursor.png'),auto";
       app.renderer.events.cursorStyles.default = customCursor;
       app.renderer.events.cursorStyles.pointer = customCursor;
       app.renderer.events.setCursor("default");
@@ -220,5 +220,5 @@ export function FishingPixiStage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={hostRef} className="size-full" />;
+  return <div ref={hostRef} style={{ cursor: `url(https://luubinhan.github.io/KidStory/images/cursor.png) 0 0, auto` }} className="size-full" />;
 }

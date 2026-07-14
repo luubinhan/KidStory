@@ -20,7 +20,7 @@ export const unit8Clothes = {
     { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", image: "https://blucheez.fashion/cdn/shop/collections/Pant_Banner.webp?v=1723349995&width=2500" },
     { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", image: "https://www.amantine.com/cdn/shop/articles/Types_of_Womens_Skirts_-_Amantine_1296x.jpg?v=1743002347" },
     { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://cdn.thewirecutter.com/wp-content/media/2025/10/BEST-SOCKS-SUB-02281-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp" },
-    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://dictionary.cambridge.org/vi/images/thumb/shoe_noun_002_33438.jpg?version=6.0.80" },
+    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://api.muji.com.vn/media/catalog/category/shoes_-_Desktop_Banner_.jpg" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
