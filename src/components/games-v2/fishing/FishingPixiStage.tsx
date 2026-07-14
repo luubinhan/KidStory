@@ -161,6 +161,13 @@ export function FishingPixiStage({
       }
       hostEl?.appendChild(app.canvas);
 
+      // Pixi custom cursor (see https://pixijs.com/8.x/guides/components/events#custom-cursors)
+      // Hotspot near tip (top-left of the arrow asset).
+      const customCursor = `url('${cursorUrl}') 0 0, auto`;
+      app.renderer.events.cursorStyles.default = customCursor;
+      app.renderer.events.cursorStyles.pointer = customCursor;
+      app.renderer.events.setCursor("default");
+
       const pondTexture = await Assets.load(pondUrl);
       if (disposed) return;
       const bg = new Sprite(pondTexture);
@@ -213,11 +220,5 @@ export function FishingPixiStage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <div
-      ref={hostRef}
-      className="size-full"
-      style={{ cursor: `url(${cursorUrl}) 12 8, auto` }}
-    />
-  );
+  return <div ref={hostRef} className="size-full" />;
 }
