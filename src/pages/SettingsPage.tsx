@@ -1,4 +1,4 @@
-import { CourseBottomNav } from "../components/course";
+import { CourseBottomNav, CourseHowToPlayFab } from "../components/course";
 import { DataBackupPanel } from "../components/settings/DataBackupPanel";
 
 export default function SettingsPage() {
@@ -17,6 +17,7 @@ export default function SettingsPage() {
         </section>
       </div>
       <CourseBottomNav />
+      <CourseHowToPlayFab />  
     </div>
   );
 }

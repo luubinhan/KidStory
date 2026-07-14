@@ -3,7 +3,7 @@ import { courseProfile } from "../data/course";
 import { courseDictionary, filterCourseDictionary } from "../data/course-dictionary";
 import {
   CourseBottomNav,
-  CoursePageHeader,
+  CourseHowToPlayFab,
   DictionaryGrid,
   DictionaryPageTitle,
   DictionarySearchField,
@@ -31,6 +31,7 @@ export default function DictionaryPage() {
         />
       </div>
       <CourseBottomNav />
+      <CourseHowToPlayFab />  
     </div>
   );
 }

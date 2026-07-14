@@ -8,7 +8,7 @@ import {
 import { getDictionaryEntriesByUnitId } from "../data/course-dictionary";
 import { getCourseUnitById } from "../data/course";
 import { useUserProgress } from "../contexts/UserProgressContext";
-import { CourseBottomNav } from "../components/course";
+import { CourseBottomNav, CourseHowToPlayFab } from "../components/course";
 import {
   CourseFlashcardsSession,
   CourseMatchingSession,
@@ -122,6 +122,7 @@ export default function CourseUnitPracticePage() {
         ) : null}
       </div>
       <CourseBottomNav />
+      <CourseHowToPlayFab />
     </div>
   );
 }

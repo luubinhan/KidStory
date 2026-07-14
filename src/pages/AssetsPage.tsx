@@ -1,4 +1,4 @@
-import { CourseBottomNav } from "../components/course";
+import { CourseBottomNav, CourseHowToPlayFab } from "../components/course";
 import { ShopItemCard } from "../components/shop/ShopItemCard";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { SHOP_ITEMS } from "../data/shopItems";
@@ -32,6 +32,7 @@ export default function AssetsPage() {
         </div>
       </div>
       <CourseBottomNav />
+      <CourseHowToPlayFab />
     </div>
   );
 }

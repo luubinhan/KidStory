@@ -1,7 +1,7 @@
 import { Navigate, useParams } from "react-router-dom";
 import { getCourseUnitById } from "../data/course";
 import { useUserProgress } from "../contexts/UserProgressContext";
-import { CourseBottomNav, UnitActivityList } from "../components/course";
+import { CourseBottomNav, CourseHowToPlayFab, UnitActivityList } from "../components/course";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { cn } from "../lib/utils";
 import { ArrowLeft } from "lucide-react";
@@ -31,6 +31,7 @@ export default function CourseUnitPage() {
           <p className="mt-2 text-slate-600">This lesson wasn't included in the journey.</p>
         </div>
         <CourseBottomNav />
+        <CourseHowToPlayFab />
       </div>
     );
   }
