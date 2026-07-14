@@ -5,7 +5,7 @@ const BOB_AMPLITUDE = 8;
 const MIN_SPEED = 40;
 const MAX_SPEED = 120;
 const Y_SPACING = 40;
-const Y_PADDING = 40;
+const Y_PADDING = 150;
 const SPAWN_ATTEMPTS = 12;
 
 function randomSpeed(): number {
