@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppPageHeader } from "../components/layout";
 
-export default function FishPondPage() {
+export default function FishingGamePage() {
   return (
     <div>
       <AppPageHeader />
@@ -12,16 +12,10 @@ export default function FishPondPage() {
         >
           Back to games
         </Link>
-
-        <h1 className="mb-2 text-3xl font-bold tracking-tight text-slate-900">
-          Fish Pond
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          Fishing Game
         </h1>
-        <p className="mb-8 text-slate-600">Coming soon</p>
-
-        {/* Future PixiJS mount point */}
-        <div className="flex min-h-[50vh] items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-100">
-          <p className="text-sm font-medium text-slate-500">Game area</p>
-        </div>
+        <p className="mt-2 text-slate-600">Loading…</p>
       </div>
     </div>
   );
