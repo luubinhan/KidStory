@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Application, Assets, Sprite, type Ticker } from "pixi.js";
+import { Application, Assets, Sprite, TilingSprite, type Ticker } from "pixi.js";
 import pondUrl from "../../../assets/games/pond.webp";
+import waveOverlayUrl from "../../../assets/games/wave_overlay.png";
 import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
 import { playCorrect, playWrong } from "./fxSystem";
@@ -94,6 +95,7 @@ export function FishingPixiStage({
     const pool = new FishPool(app.stage);
     const fish: PooledFish[] = [];
     let timeSec = 0;
+    let overlay: TilingSprite | null = null;
 
     function relabel(): void {
       relabelIdleFish(pool, fish, targetWordRef.current, vocabPoolRef.current);
@@ -138,6 +140,10 @@ export function FishingPixiStage({
       for (const f of fish) {
         updateSwim(f, dtSec, width, height, timeSec);
       }
+      if (overlay) {
+        overlay.tilePosition.x -= ticker.deltaTime * 0.5;
+        overlay.tilePosition.y -= ticker.deltaTime * 0.5;
+      }
     }
 
     async function setup(): Promise<void> {
@@ -164,7 +170,19 @@ export function FishingPixiStage({
       app.renderer.on("resize", (w: number, h: number) => {
         bg.width = w;
         bg.height = h;
+        if (overlay) { overlay.width = w; overlay.height = h; }
       });
+
+      const waveTex = await Assets.load(waveOverlayUrl);
+      if (disposed) return;
+
+      overlay = new TilingSprite({
+        texture: waveTex,
+        width: app.screen.width,
+        height: app.screen.height,
+      });
+      overlay.alpha = 0.45;
+      app.stage.addChildAt(overlay, 1); // above bg, below fish
 
       await pool.warmTextures();
       if (disposed) return;

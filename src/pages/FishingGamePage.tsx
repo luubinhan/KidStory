@@ -27,7 +27,7 @@ export default function FishingGamePage() {
 
         {canPlay && session ? (
           <div className="relative h-screen overflow-hidden">
-            <div className="absolute right-0 left-0 flex flex-col items-center gap-2">
+            <div className="absolute right-0 top-10 left-0 flex flex-col items-center gap-2">
               <div className="flex size-32 items-center justify-center overflow-hidden rounded-full shadow-sm">
                 <img
                   src={session.currentTarget.imageSrc}
