@@ -20,6 +20,7 @@ import {
   getUnitStatus,
   isUnitUnlocked,
   onActivityComplete,
+  onGameV2Complete,
   purchaseShopItem,
   spendCoins,
 } from "../lib/userProgressLogic";
@@ -38,6 +39,7 @@ type UserProgressContextValue = {
     unitId: string,
     activityId: CourseActivityId,
   ) => Promise<ActivityRewardResult | null>;
+  completeGameV2: (gameId: string) => Promise<ActivityRewardResult | null>;
   useHint: () => Promise<boolean>;
   canUseHint: boolean;
   buyShopItem: (itemId: ShopItemId) => Promise<boolean>;
@@ -107,6 +109,17 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
     [persist],
   );
 
+  const completeGameV2 = useCallback(
+    async (gameId: string): Promise<ActivityRewardResult | null> => {
+      const result = onGameV2Complete(progressRef.current, gameId);
+      if (!result) return null;
+
+      await persist(result.progress);
+      return result;
+    },
+    [persist],
+  );
+
   const useHint = useCallback(async (): Promise<boolean> => {
     const result = spendCoins(progressRef.current, COIN_HINT_COST);
     if (!result.success) return false;
@@ -134,6 +147,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       diamonds: progress.diamonds,
       reloadProgress,
       completeActivity,
+      completeGameV2,
       useHint,
       canUseHint: canAffordHint(progress),
       buyShopItem,
@@ -142,7 +156,16 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       isUnitAccessible: (unit) => isUnitUnlocked(unit, progress, progressOptions),
       getUnitProgress: (unit) => getUnitProgressInfo(unit, progress),
     }),
-    [progress, isLoading, reloadProgress, completeActivity, useHint, buyShopItem, progressOptions],
+    [
+      progress,
+      isLoading,
+      reloadProgress,
+      completeActivity,
+      completeGameV2,
+      useHint,
+      buyShopItem,
+      progressOptions,
+    ],
   );
 
   return (
