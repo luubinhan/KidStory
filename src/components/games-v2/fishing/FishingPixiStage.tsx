@@ -2,12 +2,13 @@ import { useEffect, useRef } from "react";
 import { Application, Assets, Sprite, TilingSprite, type Ticker } from "pixi.js";
 import pondUrl from "../../../assets/games/pond.webp";
 import waveOverlayUrl from "../../../assets/games/wave_overlay.png";
-import cursorUrl from "../../../assets/cursor.png";
 import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
 import { playCorrect, playWrong } from "./fxSystem";
 import { ensureExactlyOneTargetLabel } from "../../../lib/fishing/fishingSession";
 import { FISHING_ROUND, type FishingVocabItem } from "../../../types/fishing";
+import { addDisplacementEffect } from "./addDisplacementEffect";
+import { preload } from "./preload";
 
 type FishTapOutcome = {
   kind: "correct" | "wrong" | "ignored";
@@ -183,6 +184,7 @@ export function FishingPixiStage({
 
       const waveTex = await Assets.load(waveOverlayUrl);
       if (disposed) return;
+      addDisplacementEffect(app);
 
       overlay = new TilingSprite({
         texture: waveTex,
@@ -205,6 +207,7 @@ export function FishingPixiStage({
     }
 
     void setup();
+    void preload(); 
 
     return () => {
       disposed = true;
