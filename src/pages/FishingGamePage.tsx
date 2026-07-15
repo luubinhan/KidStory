@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import { FishingPixiStage } from "../components/games-v2/fishing/FishingPixiStage";
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
 import { useFishingSession } from "../hooks/useFishingSession";
@@ -41,13 +42,30 @@ export default function FishingGamePage() {
             </div>
             <div className="absolute top-10 right-10">
               <div className="liquidGlass brightness-120 p-1 flex items-center rounded-full shadow-sm backdrop-blur-md inset-shadow-sm inset-shadow-white/80 bg-white/30 border border-emerald-200/30 backdrop-saturate-150">
-                <div className="size-10 rounded-full flex items-center justify-center gap-1">
-                  <BucketIcon className="size-8" aria-hidden />
-                  <div className="absolute -top-1 -right-1 
-                  rounded-full bg-green-900 size-5 flex items-center justify-center text-lg 
-                  font-bold text-white">
-                    {session.correctCount}
-                  </div>
+                <div className="relative size-10 rounded-full flex items-center justify-center gap-1">
+                  <motion.div
+                    key={session.correctCount}
+                    initial={false}
+                    animate={
+                      session.correctCount > 0
+                        ? {
+                            rotate: [0, -14, 12, -10, 8, -4, 0],
+                            scale: [1, 1.12, 1],
+                          }
+                        : { rotate: 0, scale: 1 }
+                    }
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                  >
+                    <>
+                    <BucketIcon className="size-8" aria-hidden />
+                    
+                    <div className="absolute -top-1 -right-1 
+                    rounded-full bg-green-900 size-5 flex items-center justify-center text-lg 
+                    font-bold text-white">
+                      {session.correctCount}
+                    </div>
+                    </>
+                  </motion.div>
                 </div>
               </div>
             </div>
