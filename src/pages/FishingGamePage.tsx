@@ -3,6 +3,7 @@ import { FishingPixiStage } from "../components/games-v2/fishing/FishingPixiStag
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
 import { useFishingSession } from "../hooks/useFishingSession";
 import { CourseBottomNav } from "../components/course";
+import BucketIcon from "../assets/games/bucket-svgrepo-com.svg?react";
 
 export default function FishingGamePage() {
   const { pool, canPlay, session, reward, onFishTap, targetsNeeded, restart } =
@@ -37,9 +38,18 @@ export default function FishingGamePage() {
                     />
                 </div>
               </div>
-              <p className="text-lg font-bold text-slate-900">
-                {session.correctCount} / {targetsNeeded}
-              </p>
+            </div>
+            <div className="absolute top-10 right-10">
+              <div className="liquidGlass brightness-120 p-1 flex items-center rounded-full shadow-sm backdrop-blur-md inset-shadow-sm inset-shadow-white/80 bg-white/30 border border-emerald-200/30 backdrop-saturate-150">
+                <div className="size-10 rounded-full flex items-center justify-center gap-1">
+                  <BucketIcon className="size-8" aria-hidden />
+                  <div className="absolute -top-1 -right-1 
+                  rounded-full bg-green-900 size-5 flex items-center justify-center text-lg 
+                  font-bold text-white">
+                    {session.correctCount}
+                  </div>
+                </div>
+              </div>
             </div>
             <FishingPixiStage
               targetWord={session.currentTarget.word}
