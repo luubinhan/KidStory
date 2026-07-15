@@ -110,8 +110,9 @@ export function playCorrect(
     app,
     CORRECT_DURATION_MS,
     (progress) => {
-      const bounce = Math.sin(Math.min(1, progress * 1.8) * Math.PI);
+      const bounce = Math.sin(Math.min(1, progress * 1.2) * Math.PI);
       fish.root.scale.set(1 + bounce * (BOUNCE_SCALE - 1));
+      fish.root.alpha = 1 - progress * 0.6;
 
       if (sparkle) {
         sparkle.alpha = 1 - progress;

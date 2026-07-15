@@ -50,7 +50,7 @@ export function ShopItemCard({
           canAfford && !isLoading
             ? "bg-sky-500 text-white hover:bg-sky-600"
             : "cursor-not-allowed bg-slate-200 text-slate-400",
-          isOwned && "bg-transparent opacity-80 hover:opacity-100 hover:bg-transparent"
+          isOwned && "hidden hover:opacity-100 hover:bg-transparent"
         )}
       >
         <span className="flex items-center justify-center gap-1">
