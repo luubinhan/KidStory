@@ -28,12 +28,14 @@ export default function FishingGamePage() {
         {canPlay && session ? (
           <div className="relative h-screen overflow-hidden">
             <div className="absolute w-[200px] h-[230px] ml-auto mr-auto right-0 top-10 left-0 flex flex-col items-center gap-2">
-              <div className="flex size-32 items-center justify-center overflow-hidden rounded-full shadow-sm">
-                <img
-                  src={session.currentTarget.imageSrc}
-                  alt={session.currentTarget.word}
-                  className="size-full object-cover"
-                />
+              <div className="liquidGlass brightness-120 p-1 flex items-center rounded-full  shadow-sm backdrop-blur-md inset-shadow-sm inset-shadow-white/80 bg-white/30 border border-emerald-200/30 backdrop-saturate-150">
+                <div className="flex items-center overflow-hidden justify-center size-32 rounded-full">                
+                    <img
+                      src={session.currentTarget.imageSrc}
+                      alt={session.currentTarget.word}
+                      className="size-full object-cover"
+                    />
+                </div>
               </div>
               <p className="text-lg font-bold text-slate-900">
                 {session.correctCount} / {targetsNeeded}

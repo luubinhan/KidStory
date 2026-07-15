@@ -184,6 +184,8 @@ export function FishingPixiStage({
 
       const waveTex = await Assets.load(waveOverlayUrl);
       if (disposed) return;
+      await preload();
+      if (disposed) return;
       addDisplacementEffect(app);
 
       overlay = new TilingSprite({
@@ -207,7 +209,6 @@ export function FishingPixiStage({
     }
 
     void setup();
-    void preload(); 
 
     return () => {
       disposed = true;

@@ -2,6 +2,7 @@ import {
   Application,
   Container,
   Graphics,
+  Sprite,
   Text,
   TextStyle,
   type Ticker,
@@ -15,6 +16,8 @@ const WRONG_EDGE_MARGIN = 60;
 const SPLASH_FADE_MS = 300;
 const COIN_RISE_DISTANCE = 40;
 const BOUNCE_SCALE = 1.25;
+const COIN_ICON_SIZE = 22;
+const COIN_GAP = 4;
 
 const COIN_TEXT_STYLE = new TextStyle({
   fontFamily: "Arial, sans-serif",
@@ -61,12 +64,26 @@ function spawnSparkle(fish: PooledFish, parent: Container): Graphics {
   return sparkle;
 }
 
-function spawnCoinLabel(fish: PooledFish, parent: Container): Text {
-  const coinLabel = new Text({ text: "+1 Coin", style: COIN_TEXT_STYLE });
-  coinLabel.anchor.set(0.5);
-  coinLabel.position.set(fish.root.x, fish.root.y - 24);
-  parent.addChild(coinLabel);
-  return coinLabel;
+function spawnCoinLabel(fish: PooledFish, parent: Container): Container {
+  const group = new Container();
+
+  const plusOne = new Text({ text: "+1", style: COIN_TEXT_STYLE });
+  plusOne.anchor.set(0, 0.5);
+
+  const coin = Sprite.from("coin");
+  coin.anchor.set(0, 0.5);
+  coin.width = COIN_ICON_SIZE;
+  coin.height = COIN_ICON_SIZE;
+  coin.x = plusOne.width + COIN_GAP;
+
+  const totalWidth = coin.x + coin.width;
+  plusOne.x = -totalWidth / 2;
+  coin.x = plusOne.x + plusOne.width + COIN_GAP;
+
+  group.addChild(plusOne, coin);
+  group.position.set(fish.root.x, fish.root.y - 24);
+  parent.addChild(group);
+  return group;
 }
 
 function spawnSplash(fish: PooledFish, parent: Container): Graphics {
@@ -93,7 +110,7 @@ export function playCorrect(
     app,
     CORRECT_DURATION_MS,
     (progress) => {
-      const bounce = Math.sin(Math.min(1, progress * 1.6) * Math.PI);
+      const bounce = Math.sin(Math.min(1, progress * 1.8) * Math.PI);
       fish.root.scale.set(1 + bounce * (BOUNCE_SCALE - 1));
 
       if (sparkle) {
@@ -108,7 +125,7 @@ export function playCorrect(
     () => {
       fish.root.scale.set(1);
       sparkle?.destroy();
-      coinLabel?.destroy();
+      coinLabel?.destroy({ children: true });
       onDone();
     },
   );

@@ -156,6 +156,24 @@
   z-index: 1;
 }
 
+.liquidGlass {
+  position: relative;  
+}
+.liquidGlass::before {
+  content: "";
+  position: absolute;
+  inset: 0.25rem 0.5rem auto;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgb(255 255 255 / .8) 0%, rgb(255 255 255 / .2) 50%, rgb(255 255 255 / 0) 50%);
+  pointer-events: none;
+  left: 3px;
+  top: 2px;
+  right: 3px;
+  transform: rotate(45deg);
+  filter: blur(1px) brightness(115%);
+}
+
 .candy-glass-btn--idle {
   position: relative;
   cursor: pointer;
