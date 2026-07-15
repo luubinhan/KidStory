@@ -7,7 +7,7 @@ import { CourseBottomNav } from "../components/course";
 import BucketIcon from "../assets/games/bucket-svgrepo-com.svg?react";
 
 export default function FishingGamePage() {
-  const { pool, canPlay, session, reward, onFishTap, targetsNeeded, restart } =
+  const { pool, canPlay, session, reward, onFishTap, restart } =
     useFishingSession();
 
   const poolWords = pool.map((item) => item.word.toUpperCase());
@@ -16,13 +16,13 @@ export default function FishingGamePage() {
     <div className="relative min-h-screen bg-center bg-top bg-no-repeat bg-cover bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80"
     >
         {!canPlay ? (
-          <div className="mt-8 rounded-2xl border-2 border-slate-100 bg-white p-8 text-center">
+          <div className="p-8 text-center min-h-[90vh] flex flex-col items-center justify-center gap-4">
             <p className="text-slate-600">Unlock more course units to play.</p>
             <Link
-              to="/course"
+              to="/games-v2/fishing?unblock=all"
               className="mt-4 inline-flex items-center rounded-xl border-2 border-yellow-400 bg-yellow-50 px-5 py-2.5 text-sm font-semibold text-yellow-800 transition-colors hover:bg-yellow-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
             >
-              Go to course
+              or Unblock all units
             </Link>
           </div>
         ) : null}
