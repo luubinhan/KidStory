@@ -8,7 +8,7 @@ export const DOREAMON_SHOP_ITEMS = [
     id: "anywhere-door",
     name: "Cửa thần kỳ",
     price: 100,
-    diamondPrice: 50,
+    diamondPrice: 100,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
       y: "40vw",
@@ -18,7 +18,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "small-light",
     name: "Đèn pin thu nhỏ",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -29,7 +29,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "bamboo-copter",
     name: "Chong chóng tre",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -40,7 +40,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "big-light",
     name: "Đèn pin phóng đại",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -62,7 +62,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "4d-pocket",
     name: "Túi thần kỳ",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -73,7 +73,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "hypnosis-megaphone",
     name: "Loa thôi miên",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -84,7 +84,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "request-phone",
     name: "Điện thoại yêu cầu",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -95,7 +95,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "time-cloth",
     name: "Khăn trùm thời gian",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -106,7 +106,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "invisibility-cloak",
     name: "Áo choàng tàng hình",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -128,7 +128,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "time-tv",
     name: "TV thời gian",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -139,7 +139,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "cloud-maker",
     name: "Máy tạo mây",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -172,7 +172,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "copy-machine",
     name: "Máy sao chép",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -183,7 +183,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "time-stopwatch",
     name: "Đồng hồ ngừng thời gian",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -194,7 +194,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "paper-airplane",
     name: "Máy bay giấy thần kỳ",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -205,7 +205,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "morph-stick",
     name: "Gậy biến hình",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -216,7 +216,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "xray-glasses",
     name: "Kính nhìn xuyên tường",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -227,7 +227,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "food-maker",
     name: "Máy tạo thức ăn",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -238,7 +238,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "mini-helper-robot",
     name: "Robot giúp việc mini",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -249,7 +249,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "healing-music-box",
     name: "Hộp âm nhạc chữa lành",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -260,7 +260,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "house-capsule",
     name: "Viên nang ngôi nhà",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
@@ -271,7 +271,7 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "teleport-umbrella",
     name: "Ô dịch chuyển",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
