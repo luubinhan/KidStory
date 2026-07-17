@@ -70,6 +70,10 @@ export type DoreamonShopItem = {
   price: number;
   diamondPrice: number;
   imageUrl: string;
+  position: {
+    x: number | string;
+    y: number | string;
+  };
 };
 
 export type PurchasableItemId = ShopItemId | DoreamonShopItemId;

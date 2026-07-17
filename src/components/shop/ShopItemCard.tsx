@@ -1,11 +1,11 @@
 import { ShoppingCart } from "lucide-react";
 import { ASSETS } from "../../constants/images";
-import type { ShopItem } from "../../types/shop";
+import type { DoreamonShopItem, ShopItem } from "../../types/shop";
 import { cn } from "../../lib/utils";
 import Sky from "../cloud/Sky";
 
 type ShopItemCardProps = {
-  item: ShopItem;
+  item: ShopItem | DoreamonShopItem;
   quantity: number;
   canAfford: boolean;
   onBuy: () => void;

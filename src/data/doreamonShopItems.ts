@@ -10,6 +10,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "small-light",
@@ -17,6 +21,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "bamboo-copter",
@@ -24,6 +32,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "big-light",
@@ -31,6 +43,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "time-machine",
@@ -38,6 +54,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "4d-pocket",
@@ -45,6 +65,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "hypnosis-megaphone",
@@ -52,6 +76,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "request-phone",
@@ -59,6 +87,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "time-cloth",
@@ -66,6 +98,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "invisibility-cloak",
@@ -73,6 +109,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "memory-bread",
@@ -80,6 +120,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "time-tv",
@@ -87,6 +131,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "cloud-maker",
@@ -94,6 +142,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "auto-translator",
@@ -101,6 +153,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "strength-gloves",
@@ -108,6 +164,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "copy-machine",
@@ -115,6 +175,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "time-stopwatch",
@@ -122,6 +186,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "paper-airplane",
@@ -129,6 +197,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "morph-stick",
@@ -136,6 +208,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "xray-glasses",
@@ -143,6 +219,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "food-maker",
@@ -150,6 +230,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "mini-helper-robot",
@@ -157,6 +241,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "healing-music-box",
@@ -164,6 +252,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "house-capsule",
@@ -171,6 +263,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
   {
     id: "teleport-umbrella",
@@ -178,6 +274,10 @@ export const DOREAMON_SHOP_ITEMS = [
     price: 1,
     diamondPrice: 1,
     imageUrl: PLACEHOLDER_IMAGE,
+    position: {
+      y: 1,
+      x: 1,
+    },
   },
 ] as const satisfies readonly DoreamonShopItem[];
 
