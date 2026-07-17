@@ -1,7 +1,7 @@
 import { CourseBottomNav, CourseHowToPlayFab } from "../components/course";
-import { ShopItemCard } from "../components/shop/ShopItemCard";
+import { DoreamonShopItemCard } from "../components/shop/DoreamonShopItemCard";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
-import { SHOP_ITEMS } from "../data/shopItems";
+import { DOREAMON_SHOP_ITEMS } from "../data/doreamonShopItems";
 import { canAffordShopItem } from "../lib/userProgressLogic";
 import { useUserProgress } from "../contexts/UserProgressContext";
 import { Link } from "react-router";
@@ -20,8 +20,8 @@ export default function DoreamonShopPage() {
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-3">
-          {SHOP_ITEMS.map((item) => (
-            <ShopItemCard
+          {DOREAMON_SHOP_ITEMS.map((item) => (
+            <DoreamonShopItemCard
               key={item.id}
               item={item}
               quantity={getItemQuantity(item.id)}
