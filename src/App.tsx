@@ -18,6 +18,7 @@ import DictionaryPage from "./pages/DictionaryPage";
 import AssetsPage from "./pages/AssetsPage";
 import SettingsPage from "./pages/SettingsPage";
 import GamesV2Page from "./pages/GamesV2Page";
+import DoreamonShopPage from "./pages/DoreamonShopPage";
 import FishingGamePage from "./pages/FishingGamePage";
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/how-to-play" element={<CourseHowToPlayPage />} />
             <Route path="/dictionary" element={<DictionaryPage />} />
             <Route path="/assets" element={<AssetsPage />} />
+            <Route path="/doreamon-shop" element={<DoreamonShopPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/achievements" element={<Navigate to="/assets" replace />} />
             <Route path="/shop" element={<Navigate to="/assets" replace />} />

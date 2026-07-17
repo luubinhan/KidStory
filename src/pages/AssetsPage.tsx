@@ -4,6 +4,7 @@ import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { SHOP_ITEMS } from "../data/shopItems";
 import { canAffordShopItem } from "../lib/userProgressLogic";
 import { useUserProgress } from "../contexts/UserProgressContext";
+import { Link } from "react-router";
 
 export default function AssetsPage() {
   const { progress, isLoading, buyShopItem, getItemQuantity } = useUserProgress();
@@ -12,7 +13,9 @@ export default function AssetsPage() {
     <div className="relative min-h-[calc(100vw*3/2)] bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24 bg-center bg-top bg-[url(/map/assets.webp)] bg-size-[100vw_auto]">
       <div className="mx-auto max-w-lg px-4 py-6">
         <div className="flex items-center justify-between gap-4">
-          <div />
+          <div>
+            <Link className="cursor-pointer rounded-xl items-center px-2 py-2 transition-colors candy-glass-btn--idle" to="/doreamon-shop">Doreamon's Shop</Link>
+          </div>
           <CurrencyDisplay />
         </div>
 
