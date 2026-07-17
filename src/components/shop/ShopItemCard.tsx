@@ -35,11 +35,11 @@ export function ShopItemCard({
       <div className={cn("relative mx-auto aspect-square w-full max-w-[120px]",
       )}>
         
-        {isOwned && (
+        {/* {isOwned && (
           <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-sky-600 text-xs font-bold text-white">
             {quantity}
           </span>
-        )}
+        )} */}
       </div>
       <button
         type="button"
