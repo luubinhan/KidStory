@@ -1,8 +1,15 @@
 import { courseActivities } from "../data/course-activities";
 import { courseUnits } from "../data/course";
 import { getGameV2 } from "../data/gamesV2";
+import { getDoreamonShopItemById } from "../data/doreamonShopItems";
 import { getShopItemById } from "../data/shopItems";
-import type { ShopItemId } from "../types/shop";
+import type {
+  DoreamonShopItem,
+  DoreamonShopItemId,
+  PurchasableItemId,
+  ShopItem,
+  ShopItemId,
+} from "../types/shop";
 import type { CourseActivityId, CourseUnit, CourseUnitStatus } from "../types/course";
 import type {
   AchievementId,
@@ -270,12 +277,18 @@ export function normalizeInventory(
   return { ...inventory };
 }
 
-export function getItemQuantity(progress: UserProgressV1, itemId: ShopItemId): number {
+export function getPurchasableItemById(
+  id: PurchasableItemId,
+): ShopItem | DoreamonShopItem | undefined {
+  return getShopItemById(id as ShopItemId) ?? getDoreamonShopItemById(id as DoreamonShopItemId);
+}
+
+export function getItemQuantity(progress: UserProgressV1, itemId: PurchasableItemId): number {
   return progress.inventory[itemId] ?? 0;
 }
 
-export function canAffordShopItem(progress: UserProgressV1, itemId: ShopItemId): boolean {
-  const item = getShopItemById(itemId);
+export function canAffordShopItem(progress: UserProgressV1, itemId: PurchasableItemId): boolean {
+  const item = getPurchasableItemById(itemId);
   if (!item) return false;
   if (progress.coins < item.price) return false;
   const diamondCost = item.diamondPrice ?? 0;
@@ -284,11 +297,11 @@ export function canAffordShopItem(progress: UserProgressV1, itemId: ShopItemId):
 
 export function purchaseShopItem(
   progress: UserProgressV1,
-  itemId: ShopItemId,
+  itemId: PurchasableItemId,
 ):
   | { success: true; progress: UserProgressV1 }
   | { success: false; reason: "insufficient_coins" | "insufficient_diamonds" | "unknown_item" } {
-  const item = getShopItemById(itemId);
+  const item = getPurchasableItemById(itemId);
   if (!item) return { success: false, reason: "unknown_item" };
 
   const diamondCost = item.diamondPrice ?? 0;

@@ -1,9 +1,11 @@
+import { getDoreamonShopItemById } from "../data/doreamonShopItems";
 import { getShopItemById } from "../data/shopItems";
 import type { ShopItemId } from "../types/shop";
 import type { UserProgressV1 } from "../types/userProgress";
 import {
   getDefaultProgress,
   getItemQuantity,
+  getPurchasableItemById,
   normalizeInventory,
   purchaseShopItem,
 } from "./userProgressLogic";
@@ -101,5 +103,35 @@ if (unknown.success === false) {
 }
 
 assert(getShopItemById("cat")?.price === 10, "catalog lookup sanity check");
+
+assert(
+  getDoreamonShopItemById("anywhere-door")?.price === 1,
+  "Doraemon catalog price is 1",
+);
+assert(
+  getDoreamonShopItemById("anywhere-door")?.diamondPrice === 1,
+  "Doraemon catalog diamondPrice is 1",
+);
+assert(
+  getPurchasableItemById("anywhere-door")?.price === 1,
+  "unified lookup finds Doraemon item",
+);
+
+const doraBroke = { ...defaultProgress, coins: 0, diamonds: 1 };
+const doraBrokeBuy = purchaseShopItem(doraBroke, "anywhere-door");
+assert(!doraBrokeBuy.success, "Doraemon buy fails without coins");
+
+const doraNoDia = { ...defaultProgress, coins: 1, diamonds: 0 };
+const doraNoDiaBuy = purchaseShopItem(doraNoDia, "anywhere-door");
+assert(!doraNoDiaBuy.success, "Doraemon buy fails without diamonds");
+
+const doraOk = { ...defaultProgress, coins: 5, diamonds: 3 };
+const doraBuy = purchaseShopItem(doraOk, "anywhere-door");
+assert(doraBuy.success, "Doraemon buy succeeds with 1 coin + 1 diamond");
+if (doraBuy.success) {
+  assert(doraBuy.progress.coins === 4, "1 coin deducted for Doraemon item");
+  assert(doraBuy.progress.diamonds === 2, "1 diamond deducted for Doraemon item");
+  assert(getItemQuantity(doraBuy.progress, "anywhere-door") === 1, "Doraemon qty is 1");
+}
 
 console.log("shopLogic.test.ts: all passed");
