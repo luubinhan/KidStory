@@ -14,7 +14,7 @@ export default function AssetsPage() {
       <div className="mx-auto max-w-lg px-4 py-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <Link className="cursor-pointer rounded-xl items-center px-2 py-2 transition-colors candy-glass-btn--idle" to="/doreamon-shop">Doreamon's Shop</Link>
+            <Link className="flex relative z-1000 cursor-pointer rounded-xl items-center px-2 py-2 transition-colors candy-glass-btn--idle" to="/doreamon-shop">Doreamon's Shop</Link>
           </div>
           <CurrencyDisplay />
         </div>
