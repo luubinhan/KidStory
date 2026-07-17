@@ -51,12 +51,12 @@ export const DOREAMON_SHOP_ITEMS = [
   {
     id: "time-machine",
     name: "Cỗ máy thời gian",
-    price: 50,
+    price: 100,
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
       y: "40vw",
-      x: "2vw",
+      x: "73vw",
     },
   },
   {
@@ -66,7 +66,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "63vw",
       x: "18vw",
     },
   },
@@ -77,7 +77,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "63vw",
       x: "35vw",
     },
   },
@@ -88,7 +88,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "63vw",
       x: "53vw",
     },
   },
@@ -99,7 +99,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "63vw",
       x: "2vw",
     },
   },
@@ -110,8 +110,8 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
-      x: "18vw",
+      y: "63vw",
+      x: "73vw",
     },
   },
   {
@@ -121,7 +121,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "88vw",
       x: "35vw",
     },
   },
@@ -132,7 +132,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "88vw",
       x: "53vw",
     },
   },
@@ -143,7 +143,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "88vw",
       x: "2vw",
     },
   },
@@ -154,7 +154,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "88vw",
       x: "18vw",
     },
   },
@@ -165,8 +165,8 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
-      x: "35vw",
+      y: "88vw",
+      x: "73vw",
     },
   },
   {
@@ -176,7 +176,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "112vw",
       x: "53vw",
     },
   },
@@ -187,7 +187,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "112vw",
       x: "2vw",
     },
   },
@@ -198,7 +198,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "112vw",
       x: "18vw",
     },
   },
@@ -209,7 +209,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "112vw",
       x: "35vw",
     },
   },
@@ -220,8 +220,8 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
-      x: "53vw",
+      y: "112vw",
+      x: "73vw",
     },
   },
   {
@@ -231,7 +231,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "140vw",
       x: "2vw",
     },
   },
@@ -242,7 +242,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "140vw",
       x: "18vw",
     },
   },
@@ -253,7 +253,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "140vw",
       x: "35vw",
     },
   },
@@ -264,7 +264,7 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
+      y: "140vw",
       x: "53vw",
     },
   },
@@ -275,8 +275,8 @@ export const DOREAMON_SHOP_ITEMS = [
     diamondPrice: 50,
     imageUrl: PLACEHOLDER_IMAGE,
     position: {
-      y: "40vw",
-      x: "2vw",
+      y: "140vw",
+      x: "73vw",
     },
   },
 ] as const satisfies readonly DoreamonShopItem[];
