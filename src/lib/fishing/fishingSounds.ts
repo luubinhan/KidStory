@@ -1,6 +1,43 @@
+import coinUpUrl from "../../assets/sound/coin-up.mp3";
+import aquariumUrl from "../../assets/sound/aquarium-sound.mp3";
+
+const AMBIENT_VOLUME = 0.35;
+
+let ambientAudio: HTMLAudioElement | null = null;
+
 export function playFishingSuccessSound(): void {}
 export function playFishingWrongSound(): void {}
-export function playFishingCoinSound(): void {}
+
+export function playFishingCoinSound(): void {
+  if (typeof window === "undefined") return;
+  try {
+    const a = new Audio(coinUpUrl);
+    void a.play();
+  } catch {
+    // ignore missing or blocked playback
+  }
+}
+
 export function playFishingSplashSound(): void {}
-export function playFishingAmbientLoop(): void {}
-export function stopFishingAmbientLoop(): void {}
+
+export function playFishingAmbientLoop(): void {
+  if (typeof window === "undefined") return;
+  try {
+    if (!ambientAudio) {
+      ambientAudio = new Audio(aquariumUrl);
+      ambientAudio.loop = true;
+      ambientAudio.volume = AMBIENT_VOLUME;
+    }
+    if (ambientAudio.paused) {
+      void ambientAudio.play();
+    }
+  } catch {
+    // ignore missing or blocked playback
+  }
+}
+
+export function stopFishingAmbientLoop(): void {
+  if (!ambientAudio) return;
+  ambientAudio.pause();
+  ambientAudio.currentTime = 0;
+}

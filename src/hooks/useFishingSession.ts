@@ -6,7 +6,6 @@ import {
   createInitialSession,
 } from "../lib/fishing/fishingSession";
 import {
-  playFishingCoinSound,
   playFishingSuccessSound,
   playFishingWrongSound,
 } from "../lib/fishing/fishingSounds";
@@ -80,7 +79,9 @@ export function useFishingSession() {
   useEffect(() => {
     if (!target || autoPlayedRef.current) return;
     autoPlayedRef.current = true;
-    playWord();
+    setTimeout(() => {
+      playWord();
+    }, 1500);
   }, [target, playWord]);
 
   const onFishTap = useCallback(
@@ -92,7 +93,6 @@ export function useFishingSession() {
         return result;
       }
       playFishingSuccessSound();
-      playFishingCoinSound();
       setSession(result.session);
       return result;
     },

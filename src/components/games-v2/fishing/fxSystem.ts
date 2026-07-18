@@ -7,7 +7,10 @@ import {
   TextStyle,
   type Ticker,
 } from "pixi.js";
-import { playFishingSplashSound } from "../../../lib/fishing/fishingSounds";
+import {
+  playFishingCoinSound,
+  playFishingSplashSound,
+} from "../../../lib/fishing/fishingSounds";
 import type { PooledFish } from "./fishPool";
 
 const CORRECT_DURATION_MS = 700;
@@ -102,6 +105,7 @@ export function playCorrect(
   onDone: () => void,
 ): void {
   fish.busy = true;
+  playFishingCoinSound();
   const parent = fish.root.parent;
   const sparkle = parent ? spawnSparkle(fish, parent) : null;
   const coinLabel = parent ? spawnCoinLabel(fish, parent) : null;

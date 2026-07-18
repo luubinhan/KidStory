@@ -6,6 +6,10 @@ import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
 import { playCorrect, playWrong } from "./fxSystem";
 import { ensureExactlyOneTargetLabel } from "../../../lib/fishing/fishingSession";
+import {
+  playFishingAmbientLoop,
+  stopFishingAmbientLoop,
+} from "../../../lib/fishing/fishingSounds";
 import { FISHING_ROUND, type FishingVocabItem } from "../../../types/fishing";
 import { addDisplacementEffect } from "./addDisplacementEffect";
 import { preload } from "./preload";
@@ -98,6 +102,7 @@ export function FishingPixiStage({
     const fish: PooledFish[] = [];
     let timeSec = 0;
     let overlay: TilingSprite | null = null;
+    let unlockAmbient: (() => void) | null = null;
 
     function relabel(): void {
       relabelIdleFish(pool, fish, targetWordRef.current, vocabPoolRef.current);
@@ -205,6 +210,16 @@ export function FishingPixiStage({
       }
       relabel();
 
+      playFishingAmbientLoop();
+      unlockAmbient = () => {
+        playFishingAmbientLoop();
+        if (unlockAmbient) {
+          hostEl?.removeEventListener("pointerdown", unlockAmbient);
+          unlockAmbient = null;
+        }
+      };
+      hostEl?.addEventListener("pointerdown", unlockAmbient);
+
       app.ticker.add(tick);
     }
 
@@ -213,6 +228,11 @@ export function FishingPixiStage({
     return () => {
       disposed = true;
       relabelRef.current = null;
+      if (unlockAmbient) {
+        hostEl?.removeEventListener("pointerdown", unlockAmbient);
+        unlockAmbient = null;
+      }
+      stopFishingAmbientLoop();
       if (app.renderer) {
         app.ticker.remove(tick);
         for (const f of fish) {
