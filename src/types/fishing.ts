@@ -3,6 +3,7 @@ export type FishingVocabItem = {
   word: string;
   imageSrc: string;
   unitId: string;
+  audio?: string;
 };
 
 export const FISHING_ROUND = {

@@ -10,6 +10,7 @@ import {
   playFishingSuccessSound,
   playFishingWrongSound,
 } from "../lib/fishing/fishingSounds";
+import { playCourseAudio } from "../lib/playCourseAudio";
 import { FISHING_ROUND, type FishingSessionState } from "../types/fishing";
 import { useUserProgress } from "../contexts/UserProgressContext";
 import type { ActivityRewardResult } from "../types/userProgress";
@@ -29,6 +30,21 @@ export function useFishingSession() {
   const [reward, setReward] = useState<ActivityRewardResult | null>(null);
   const awardedRef = useRef(false);
   const runIdRef = useRef(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const autoPlayedRef = useRef(false);
+
+  const stopAudio = useCallback(() => {
+    const a = audioRef.current;
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
+    }
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }, []);
+
+  useEffect(() => () => stopAudio(), [stopAudio]);
 
   useEffect(() => {
     if (!canPlay) {
@@ -49,6 +65,23 @@ export function useFishingSession() {
       if (result && runIdRef.current === runId) setReward(result);
     });
   }, [session, completeGameV2]);
+
+  const target = session?.status === "playing" ? session.currentTarget : null;
+
+  const playWord = useCallback(() => {
+    if (!target) return;
+    void playCourseAudio(target.audio, target.word, audioRef, stopAudio);
+  }, [target, stopAudio]);
+
+  useEffect(() => {
+    autoPlayedRef.current = false;
+  }, [target?.id, session?.correctCount]);
+
+  useEffect(() => {
+    if (!target || autoPlayedRef.current) return;
+    autoPlayedRef.current = true;
+    playWord();
+  }, [target, playWord]);
 
   const onFishTap = useCallback(
     (word: string) => {
@@ -71,8 +104,9 @@ export function useFishingSession() {
     runIdRef.current += 1;
     awardedRef.current = false;
     setReward(null);
+    stopAudio();
     setSession(createInitialSession(poolRef.current));
-  }, [canPlay]);
+  }, [canPlay, stopAudio]);
 
   return {
     pool,

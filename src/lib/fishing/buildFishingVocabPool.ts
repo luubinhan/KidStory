@@ -16,6 +16,7 @@ export function buildFishingVocabPool(
         word: w.word,
         imageSrc,
         unitId: unit.id,
+        audio: w.audio,
       });
     }
   }
