@@ -1,0 +1,73 @@
+---
+description: Play vocabulary word audio with Cache API + blob URL caching, TTS fallback
+globs: src/lib/playCourseAudio.ts,src/lib/audioUrlCache.ts,src/lib/courseWordAudio.ts,src/lib/playGameQuestionStem.ts,src/hooks/useCourse*.ts,src/hooks/useGameTopic*.ts,src/components/course-practice/**/*.tsx,src/components/game-topic/**/*.tsx,src/components/course/**/*.tsx
+alwaysApply: false
+---
+
+# Word audio playback
+
+## Prefer helpers — do not invent new players
+
+| Need | Use |
+|------|-----|
+| Course word / option (`audio` + TTS fallback) | `playCourseAudio(audioUrl, ttsText, audioRef, stopPrior)` |
+| Game question stem (`audioUrl` or full/blank sentence TTS) | `playGameQuestionStem(q, audioRef, stopPrior, options?)` |
+| Resolve / warm cached MP3 | `resolveAudioSrc(url)` / `prefetchAudioUrls(urls)` |
+| Match unit word audio inside a sentence | `findWordAudioInSentence(text, words)` |
+| Book vocab / dictionary (TTS only, no MP3) | `speak(text, rate)` from `utils.ts` |
+
+Never call `new Audio(url)` or `fetch(audioUrl)` directly in hooks/components — always go through `resolveAudioSrc` so Cache API + in-memory blob URLs stay shared.
+
+## Cache layers (`audioUrlCache.ts`)
+
+1. **In-memory** `Map` — original URL → `blob:` object URL (instant replay)
+2. **In-flight dedupe** — parallel callers share one Promise per URL
+3. **Cache API** (`kidstory-audio-v1`) — persists blobs across sessions
+4. **Fallback** — on fetch/cache failure, return the original URL so playback can still try
+
+```ts
+const src = await resolveAudioSrc("/sounds/banana.mp3");
+const el = new Audio(src);
+await el.play();
+```
+
+Warm ahead of need: `prefetchAudioUrls(words.map((w) => w.audio).filter(Boolean))`.
+
+## Session hook pattern
+
+```tsx
+const audioRef = useRef<HTMLAudioElement | null>(null);
+
+const stopAudio = useCallback(() => {
+  const a = audioRef.current;
+  if (a) {
+    a.pause();
+    a.currentTime = 0;
+  }
+  window.speechSynthesis?.cancel();
+}, []);
+
+useEffect(() => () => stopAudio(), [stopAudio]);
+
+const playWord = useCallback(() => {
+  if (!word) return;
+  void playCourseAudio(word.audio, word.word, audioRef, stopAudio);
+}, [word, stopAudio]);
+```
+
+- Always `stopPrior` before starting new audio (MP3 or TTS)
+- Fire-and-forget with `void playCourseAudio(...)` from click/effects
+- Cleanup on unmount via `stopAudio`
+- After `speechSynthesis.cancel()`, defer TTS with `queueMicrotask` (already inside `playCourseAudio`) — Chromium often drops same-turn `speak()`
+
+## Data
+
+- Course words: optional `audio: "/sounds/<word>.mp3"` under `public/sounds/`
+- Spell/MC questions: optional `audioUrl` (same path style)
+- Prefer MP3 when the file exists; TTS (`rate ≈ 0.92`) is the automatic fallback
+
+## Don't
+
+- Duplicate Cache API / blob URL logic outside `audioUrlCache.ts`
+- Skip `stopAudio` when advancing cards/questions (overlapping speech)
+- Use `speak()` for course practice when `word.audio` may exist — use `playCourseAudio`

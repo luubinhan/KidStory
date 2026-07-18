@@ -117,5 +117,6 @@ Standalone quiz topics registered in `src/data/games.ts`. Questions use `GameQue
 | `.cursor/rules/radix-ui.mdc` | Radix UI component patterns |
 | `.cursor/rules/course-data.mdc` | Course unit / activity data |
 | `.cursor/rules/practice-sessions.mdc` | Practice hooks and session components |
+| `.cursor/rules/word-audio.mdc` | Word/MP3 playback + audio URL caching |
 | `.cursor/skills/kidstory-game-question-data/` | Adding game quiz questions |
 | `docs/superpowers/` | Design specs and implementation plans (historical reference) |
