@@ -52,7 +52,7 @@ export function LearningPath({ units }: LearningPathProps) {
 
       <div className="relative flex flex-col">
 
-        <div className="absolute -right-[94px] top-[470px]" aria-hidden>
+        <div className="max-md:hidden absolute -right-[94px] top-[470px]" aria-hidden>
           <div className="mx-auto h-32 w-32">
             <Lottie animationData={frog} loop={true} className="h-full w-full" />
           </div>

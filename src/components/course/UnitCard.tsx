@@ -2,7 +2,7 @@ import { Check, Lock } from "lucide-react";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import notificationBell from "../../assets/dog.json";
+import notificationBell from "../../assets/moody-dog.json";
 import type { CourseUnit, CourseUnitStatus } from "../../types/course";
 import { cn } from "../../lib/utils";
 
@@ -74,8 +74,8 @@ export function UnitCard({ unit, index, side, status, completedCount, totalCount
       ) : null}
 
       {isCurrent ? (
-        <span className="absolute -left-[62px] top-26px] text-xl z-10" aria-hidden>
-          <div className="mx-auto h-18 w-18">
+        <span className="absolute left-[20px] -top-[97px] text-xl z-10" aria-hidden>
+          <div className="mx-auto h-30 w-30">
             <Lottie animationData={notificationBell} loop={true} className="h-full w-full" />
           </div>
         </span>
