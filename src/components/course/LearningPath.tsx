@@ -7,6 +7,7 @@ import { LearningPathConnector } from "./LearningPathConnector";
 import { UnitCard } from "./UnitCard";
 
 import frog from "../../assets/frog.json";
+import mario from "../../assets/mario.json";
 
 type LearningPathProps = {
   units: readonly CourseUnit[];
@@ -55,6 +56,11 @@ export function LearningPath({ units }: LearningPathProps) {
         <div className="max-md:hidden absolute -right-[94px] top-[470px]" aria-hidden>
           <div className="mx-auto h-32 w-32">
             <Lottie animationData={frog} loop={true} className="h-full w-full" />
+          </div>
+        </div>
+        <div className="max-md:hidden absolute -left-[188px] top-[515px]" aria-hidden>
+          <div className="mx-auto h-50 w-50">
+            <Lottie animationData={mario} loop={true} className="h-full w-full" />
           </div>
         </div>
         {units.map((unit, index) => {
