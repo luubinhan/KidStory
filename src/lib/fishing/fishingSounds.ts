@@ -1,12 +1,26 @@
 import coinUpUrl from "../../assets/sound/coin-up.mp3";
 import aquariumUrl from "../../assets/sound/aquarium-sound.mp3";
+import fishSplashUrl from "../../assets/sound/fish-jumping-splash.mp3";
+import { prefetchAudioUrls, resolveAudioSrc } from "../audioUrlCache";
 
 const AMBIENT_VOLUME = 0.35;
 
 let ambientAudio: HTMLAudioElement | null = null;
 
 export function playFishingSuccessSound(): void {}
-export function playFishingWrongSound(): void {}
+
+export function playFishingWrongSound(): void {
+  if (typeof window === "undefined") return;
+  void (async () => {
+    try {
+      const src = await resolveAudioSrc(fishSplashUrl);
+      const a = new Audio(src);
+      await a.play();
+    } catch {
+      // ignore missing or blocked playback
+    }
+  })();
+}
 
 export function playFishingCoinSound(): void {
   if (typeof window === "undefined") return;
@@ -22,6 +36,7 @@ export function playFishingSplashSound(): void {}
 
 export function playFishingAmbientLoop(): void {
   if (typeof window === "undefined") return;
+  prefetchAudioUrls([fishSplashUrl, coinUpUrl, aquariumUrl]);
   try {
     if (!ambientAudio) {
       ambientAudio = new Audio(aquariumUrl);
