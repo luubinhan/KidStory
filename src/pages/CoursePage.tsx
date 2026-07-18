@@ -1,4 +1,3 @@
-import Lottie from "lottie-react";
 import { courseProfile, courseUnits } from "../data/course";
 import {
   CourseBottomNav,
@@ -9,7 +8,6 @@ import {
 
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { SettingsTrigger } from "../components/settings/SettingsTrigger";
-import frog from "../assets/frog.json";
 
 export default function CoursePage() {
   return (
@@ -25,11 +23,6 @@ export default function CoursePage() {
           </div>
         </div>
         <LearningPath units={courseUnits} />
-        <div className="absolute right-[26vw] top-[61vw]" aria-hidden>
-          <div className="mx-auto h-32 w-32">
-            <Lottie animationData={frog} loop={true} className="h-full w-full" />
-          </div>
-        </div>
       </div>
       <CourseHowToPlayFab />
       <CourseBottomNav />

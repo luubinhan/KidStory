@@ -1,9 +1,12 @@
 import { useLayoutEffect, useRef } from "react";
+import Lottie from "lottie-react";
 import type { CourseUnit } from "../../types/course";
 import { useUserProgress } from "../../contexts/UserProgressContext";
 import { cn } from "../../lib/utils";
 import { LearningPathConnector } from "./LearningPathConnector";
 import { UnitCard } from "./UnitCard";
+
+import frog from "../../assets/frog.json";
 
 type LearningPathProps = {
   units: readonly CourseUnit[];
@@ -48,6 +51,12 @@ export function LearningPath({ units }: LearningPathProps) {
       />
 
       <div className="relative flex flex-col">
+
+        <div className="absolute -right-[94px] top-[470px]" aria-hidden>
+          <div className="mx-auto h-32 w-32">
+            <Lottie animationData={frog} loop={true} className="h-full w-full" />
+          </div>
+        </div>
         {units.map((unit, index) => {
           const status = getUnitStatus(unit);
           const progress = getUnitProgress(unit);

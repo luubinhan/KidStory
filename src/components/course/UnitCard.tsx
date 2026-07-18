@@ -2,7 +2,7 @@ import { Check, Lock } from "lucide-react";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import notificationBell from "../../assets/notification-bell.json";
+import notificationBell from "../../assets/dog.json";
 import type { CourseUnit, CourseUnitStatus } from "../../types/course";
 import { cn } from "../../lib/utils";
 
@@ -54,7 +54,7 @@ export function UnitCard({ unit, index, side, status, completedCount, totalCount
       animate={{ opacity: isLocked ? 0.55 : 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
       className={cn(
-        "relative w-[11.5rem] rounded-2xl p-3.5 backdrop-blur-lg bg-sky-100/20 shadow-sm inset-shadow-xs inset-shadow-white/80",
+        "relative z-100 w-[11.5rem] rounded-2xl p-3.5 backdrop-blur-lg bg-sky-100/20 shadow-sm inset-shadow-xs inset-shadow-white/80",
         isCurrent && "border-sky-400 ring-2 ring-sky-200 bg-white shadow-md border-2",
         isCompleted && "backdrop-opacity-10 border-none border-2",
         isLocked && "grayscale",
@@ -74,7 +74,7 @@ export function UnitCard({ unit, index, side, status, completedCount, totalCount
       ) : null}
 
       {isCurrent ? (
-        <span className="absolute -right-8 -top-8 text-xl" aria-hidden>
+        <span className="absolute -left-[62px] top-26px] text-xl z-10" aria-hidden>
           <div className="mx-auto h-18 w-18">
             <Lottie animationData={notificationBell} loop={true} className="h-full w-full" />
           </div>
