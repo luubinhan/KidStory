@@ -4,7 +4,7 @@ import pondUrl from "../../../assets/games/pond.webp";
 import waveOverlayUrl from "../../../assets/games/wave_overlay.png";
 import { FishPool, type PooledFish } from "./fishPool";
 import { updateSwim, randomizeSpawn } from "./swimSystem";
-import { playCorrect, playWrong } from "./fxSystem";
+import { playCorrect, playShockwave, playWrong } from "./fxSystem";
 import { ensureExactlyOneTargetLabel } from "../../../lib/fishing/fishingSession";
 import {
   playFishingAmbientLoop,
@@ -113,6 +113,8 @@ export function FishingPixiStage({
       if (!enabledRef.current || target.busy) return;
       const result = onFishTapRef.current(target.word);
       if (result.kind === "ignored") return;
+
+      playShockwave(app, target.root.x, target.root.y);
 
       const finishTap = () => {
         fish.splice(fish.indexOf(target), 1);

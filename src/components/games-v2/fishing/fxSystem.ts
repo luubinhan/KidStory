@@ -5,8 +5,10 @@ import {
   Sprite,
   Text,
   TextStyle,
+  type Filter,
   type Ticker,
 } from "pixi.js";
+import { ShockwaveFilter } from "pixi-filters/shockwave";
 import {
   playFishingCoinSound,
   playFishingSplashSound,
@@ -22,6 +24,11 @@ const BOUNCE_SCALE = 1.25;
 const COIN_ICON_SIZE = 30;
 const COIN_ICON_WIDTH = 48;
 const COIN_GAP = 4;
+const SHOCKWAVE_DURATION_MS = 700;
+const SHOCKWAVE_RADIUS = 280;
+const SHOCKWAVE_SPEED = 450;
+const SHOCKWAVE_AMPLITUDE = 28;
+const SHOCKWAVE_WAVELENGTH = 100;
 
 const COIN_TEXT_STYLE = new TextStyle({
   fontFamily: "Arial, sans-serif",
@@ -167,4 +174,46 @@ export function playWrong(
     }
   };
   app.ticker.add(tick);
+}
+
+function appendStageFilter(app: Application, filter: Filter): void {
+  const current = app.stage.filters;
+  app.stage.filters = current ? [...current, filter] : [filter];
+}
+
+function removeStageFilter(app: Application, filter: Filter): void {
+  const current = app.stage.filters;
+  if (!current) return;
+  const next = current.filter((f) => f !== filter);
+  app.stage.filters = next.length > 0 ? next : null;
+}
+
+/** Ripples the pond from a tap point via a stage-level ShockwaveFilter. */
+export function playShockwave(
+  app: Application,
+  centerX: number,
+  centerY: number,
+): void {
+  const shockwave = new ShockwaveFilter({
+    center: { x: centerX, y: centerY },
+    amplitude: SHOCKWAVE_AMPLITUDE,
+    wavelength: SHOCKWAVE_WAVELENGTH,
+    speed: SHOCKWAVE_SPEED,
+    radius: SHOCKWAVE_RADIUS,
+    brightness: 1.1,
+    time: 0,
+  });
+  appendStageFilter(app, shockwave);
+
+  runForDuration(
+    app,
+    SHOCKWAVE_DURATION_MS,
+    (progress) => {
+      shockwave.time = (progress * SHOCKWAVE_DURATION_MS) / 1000;
+    },
+    () => {
+      removeStageFilter(app, shockwave);
+      shockwave.destroy();
+    },
+  );
 }
