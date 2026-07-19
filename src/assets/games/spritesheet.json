@@ -1,0 +1,876 @@
+{
+    "frames": {
+        "ate-1.png": {
+            "frame": {
+                "x": 5,
+                "y": 5,
+                "w": 138,
+                "h": 137
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 138,
+                "h": 137
+            },
+            "sourceSize": {
+                "w": 138,
+                "h": 137
+            }
+        },
+        "ate-2.png": {
+            "frame": {
+                "x": 153,
+                "y": 5,
+                "w": 135,
+                "h": 137
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 135,
+                "h": 137
+            },
+            "sourceSize": {
+                "w": 135,
+                "h": 137
+            }
+        },
+        "ate-3.png": {
+            "frame": {
+                "x": 298,
+                "y": 5,
+                "w": 131,
+                "h": 134
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 131,
+                "h": 134
+            },
+            "sourceSize": {
+                "w": 131,
+                "h": 134
+            }
+        },
+        "ate-4.png": {
+            "frame": {
+                "x": 439,
+                "y": 5,
+                "w": 133,
+                "h": 133
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 133,
+                "h": 133
+            },
+            "sourceSize": {
+                "w": 133,
+                "h": 133
+            }
+        },
+        "boring-1.png": {
+            "frame": {
+                "x": 582,
+                "y": 5,
+                "w": 129,
+                "h": 133
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 129,
+                "h": 133
+            },
+            "sourceSize": {
+                "w": 129,
+                "h": 133
+            }
+        },
+        "boring-2.png": {
+            "frame": {
+                "x": 721,
+                "y": 5,
+                "w": 142,
+                "h": 134
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 142,
+                "h": 134
+            },
+            "sourceSize": {
+                "w": 142,
+                "h": 134
+            }
+        },
+        "boring-3.png": {
+            "frame": {
+                "x": 873,
+                "y": 5,
+                "w": 124,
+                "h": 139
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 124,
+                "h": 139
+            },
+            "sourceSize": {
+                "w": 124,
+                "h": 139
+            }
+        },
+        "eat-1.png": {
+            "frame": {
+                "x": 298,
+                "y": 149,
+                "w": 137,
+                "h": 151
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 151
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 151
+            }
+        },
+        "eat-2.png": {
+            "frame": {
+                "x": 5,
+                "y": 154,
+                "w": 144,
+                "h": 156
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 144,
+                "h": 156
+            },
+            "sourceSize": {
+                "w": 144,
+                "h": 156
+            }
+        },
+        "eat-3.png": {
+            "frame": {
+                "x": 445,
+                "y": 154,
+                "w": 147,
+                "h": 145
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 147,
+                "h": 145
+            },
+            "sourceSize": {
+                "w": 147,
+                "h": 145
+            }
+        },
+        "eat-4.png": {
+            "frame": {
+                "x": 602,
+                "y": 149,
+                "w": 141,
+                "h": 151
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 141,
+                "h": 151
+            },
+            "sourceSize": {
+                "w": 141,
+                "h": 151
+            }
+        },
+        "eat-5.png": {
+            "frame": {
+                "x": 753,
+                "y": 154,
+                "w": 147,
+                "h": 150
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 147,
+                "h": 150
+            },
+            "sourceSize": {
+                "w": 147,
+                "h": 150
+            }
+        },
+        "eat-6.png": {
+            "frame": {
+                "x": 159,
+                "y": 314,
+                "w": 137,
+                "h": 144
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 144
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 144
+            }
+        },
+        "eating-1.png": {
+            "frame": {
+                "x": 306,
+                "y": 314,
+                "w": 139,
+                "h": 141
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 139,
+                "h": 141
+            },
+            "sourceSize": {
+                "w": 139,
+                "h": 141
+            }
+        },
+        "eating-2.png": {
+            "frame": {
+                "x": 455,
+                "y": 314,
+                "w": 141,
+                "h": 141
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 141,
+                "h": 141
+            },
+            "sourceSize": {
+                "w": 141,
+                "h": 141
+            }
+        },
+        "eating-3.png": {
+            "frame": {
+                "x": 606,
+                "y": 314,
+                "w": 137,
+                "h": 143
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 143
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 143
+            }
+        },
+        "hungry-1.png": {
+            "frame": {
+                "x": 753,
+                "y": 314,
+                "w": 139,
+                "h": 155
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 139,
+                "h": 155
+            },
+            "sourceSize": {
+                "w": 139,
+                "h": 155
+            }
+        },
+        "hungry-2-1.png": {
+            "frame": {
+                "x": 5,
+                "y": 479,
+                "w": 142,
+                "h": 157
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 142,
+                "h": 157
+            },
+            "sourceSize": {
+                "w": 142,
+                "h": 157
+            }
+        },
+        "hungry-2-2.png": {
+            "frame": {
+                "x": 157,
+                "y": 479,
+                "w": 142,
+                "h": 159
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 142,
+                "h": 159
+            },
+            "sourceSize": {
+                "w": 142,
+                "h": 159
+            }
+        },
+        "hungry-2-3.png": {
+            "frame": {
+                "x": 309,
+                "y": 479,
+                "w": 137,
+                "h": 155
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 155
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 155
+            }
+        },
+        "hungry-2-4.png": {
+            "frame": {
+                "x": 456,
+                "y": 479,
+                "w": 130,
+                "h": 145
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 130,
+                "h": 145
+            },
+            "sourceSize": {
+                "w": 130,
+                "h": 145
+            }
+        },
+        "hungry-2-5.png": {
+            "frame": {
+                "x": 596,
+                "y": 479,
+                "w": 133,
+                "h": 145
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 133,
+                "h": 145
+            },
+            "sourceSize": {
+                "w": 133,
+                "h": 145
+            }
+        },
+        "hungry-2.png": {
+            "frame": {
+                "x": 739,
+                "y": 479,
+                "w": 141,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 141,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 141,
+                "h": 158
+            }
+        },
+        "hungry-3.png": {
+            "frame": {
+                "x": 5,
+                "y": 647,
+                "w": 141,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 141,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 141,
+                "h": 158
+            }
+        },
+        "hungry-4.png": {
+            "frame": {
+                "x": 309,
+                "y": 647,
+                "w": 143,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 143,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 143,
+                "h": 158
+            }
+        },
+        "hungry-5.png": {
+            "frame": {
+                "x": 462,
+                "y": 647,
+                "w": 140,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 140,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 140,
+                "h": 158
+            }
+        },
+        "idle-1.png": {
+            "frame": {
+                "x": 612,
+                "y": 647,
+                "w": 148,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 148,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 148,
+                "h": 158
+            }
+        },
+        "idle-10.png": {
+            "frame": {
+                "x": 159,
+                "y": 154,
+                "w": 125,
+                "h": 139
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 125,
+                "h": 139
+            },
+            "sourceSize": {
+                "w": 125,
+                "h": 139
+            }
+        },
+        "idle-11.png": {
+            "frame": {
+                "x": 770,
+                "y": 647,
+                "w": 126,
+                "h": 141
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 126,
+                "h": 141
+            },
+            "sourceSize": {
+                "w": 126,
+                "h": 141
+            }
+        },
+        "idle-2.png": {
+            "frame": {
+                "x": 770,
+                "y": 798,
+                "w": 149,
+                "h": 161
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 149,
+                "h": 161
+            },
+            "sourceSize": {
+                "w": 149,
+                "h": 161
+            }
+        },
+        "idle-3.png": {
+            "frame": {
+                "x": 1007,
+                "y": 5,
+                "w": 147,
+                "h": 159
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 147,
+                "h": 159
+            },
+            "sourceSize": {
+                "w": 147,
+                "h": 159
+            }
+        },
+        "idle-4.png": {
+            "frame": {
+                "x": 910,
+                "y": 174,
+                "w": 148,
+                "h": 162
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 148,
+                "h": 162
+            },
+            "sourceSize": {
+                "w": 148,
+                "h": 162
+            }
+        },
+        "idle-5.png": {
+            "frame": {
+                "x": 902,
+                "y": 346,
+                "w": 154,
+                "h": 158
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 154,
+                "h": 158
+            },
+            "sourceSize": {
+                "w": 154,
+                "h": 158
+            }
+        },
+        "idle-6.png": {
+            "frame": {
+                "x": 906,
+                "y": 514,
+                "w": 151,
+                "h": 157
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 151,
+                "h": 157
+            },
+            "sourceSize": {
+                "w": 151,
+                "h": 157
+            }
+        },
+        "idle-7.png": {
+            "frame": {
+                "x": 929,
+                "y": 681,
+                "w": 152,
+                "h": 159
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 152,
+                "h": 159
+            },
+            "sourceSize": {
+                "w": 152,
+                "h": 159
+            }
+        },
+        "idle-8.png": {
+            "frame": {
+                "x": 5,
+                "y": 850,
+                "w": 153,
+                "h": 159
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 153,
+                "h": 159
+            },
+            "sourceSize": {
+                "w": 153,
+                "h": 159
+            }
+        },
+        "idle-9.png": {
+            "frame": {
+                "x": 156,
+                "y": 681,
+                "w": 132,
+                "h": 150
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 132,
+                "h": 150
+            },
+            "sourceSize": {
+                "w": 132,
+                "h": 150
+            }
+        },
+        "sad-1.png": {
+            "frame": {
+                "x": 168,
+                "y": 850,
+                "w": 138,
+                "h": 130
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 138,
+                "h": 130
+            },
+            "sourceSize": {
+                "w": 138,
+                "h": 130
+            }
+        },
+        "sad-2.png": {
+            "frame": {
+                "x": 316,
+                "y": 850,
+                "w": 129,
+                "h": 131
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 129,
+                "h": 131
+            },
+            "sourceSize": {
+                "w": 129,
+                "h": 131
+            }
+        },
+        "sad-3.png": {
+            "frame": {
+                "x": 455,
+                "y": 850,
+                "w": 135,
+                "h": 130
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 135,
+                "h": 130
+            },
+            "sourceSize": {
+                "w": 135,
+                "h": 130
+            }
+        },
+        "sad-4.png": {
+            "frame": {
+                "x": 600,
+                "y": 850,
+                "w": 137,
+                "h": 128
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 128
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 128
+            }
+        },
+        "sad-5.png": {
+            "frame": {
+                "x": 929,
+                "y": 850,
+                "w": 130,
+                "h": 138
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 130,
+                "h": 138
+            },
+            "sourceSize": {
+                "w": 130,
+                "h": 138
+            }
+        },
+        "sad-6.png": {
+            "frame": {
+                "x": 168,
+                "y": 998,
+                "w": 123,
+                "h": 131
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 123,
+                "h": 131
+            },
+            "sourceSize": {
+                "w": 123,
+                "h": 131
+            }
+        }
+    },
+    "meta": {
+        "app": "https://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "spritesheet.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1159,
+            "h": 1134
+        },
+        "scale": "1",
+        "comment": "Created with TexturePacker Online (free version)\nhttps://www.codeandweb.com/texturepacker-online\n\nTexturePacker desktop offers better support for Pixi and Phaser with sprite trimming, better packing algorithms, hardware texture compression, and PNG optimization.\nTry TexturePacker desktop: https://www.codeandweb.com/texturepacker"
+    }
+}
