@@ -19,7 +19,8 @@ const WRONG_EDGE_MARGIN = 60;
 const SPLASH_FADE_MS = 300;
 const COIN_RISE_DISTANCE = 40;
 const BOUNCE_SCALE = 1.25;
-const COIN_ICON_SIZE = 22;
+const COIN_ICON_SIZE = 30;
+const COIN_ICON_WIDTH = 48;
 const COIN_GAP = 4;
 
 const COIN_TEXT_STYLE = new TextStyle({
@@ -75,7 +76,7 @@ function spawnCoinLabel(fish: PooledFish, parent: Container): Container {
 
   const coin = Sprite.from("coin");
   coin.anchor.set(0, 0.5);
-  coin.width = COIN_ICON_SIZE;
+  coin.width = COIN_ICON_WIDTH;
   coin.height = COIN_ICON_SIZE;
   coin.x = plusOne.width + COIN_GAP;
 
