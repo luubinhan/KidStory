@@ -4,6 +4,7 @@
  */
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { UserProgressProvider } from "./contexts/UserProgressContext";
 import { CourseFeedbackFab } from "./components/course";
 import DiscoverPage from "./pages/DiscoverPage";
@@ -47,6 +48,26 @@ export default function App() {
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
           <CourseFeedbackFab />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+              success: {
+                style: {
+                  background: "#ecfdf5",
+                  border: "1px solid #86efac",
+                  color: "#166534",
+                },
+              },
+              error: {
+                style: {
+                  background: "#fef2f2",
+                  border: "1px solid #fca5a5",
+                  color: "#991b1b",
+                },
+              },
+            }}
+          />
         </div>
       </UserProgressProvider>
     </Router>

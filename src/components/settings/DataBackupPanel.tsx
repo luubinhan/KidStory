@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Download, Upload } from "lucide-react";
+import { toast } from "react-hot-toast";
 import { useUserProgress } from "../../contexts/UserProgressContext";
 import {
   exportDatabase,
@@ -18,21 +19,16 @@ type DataBackupPanelProps = {
 export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
   const { reloadProgress } = useUserProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [status, setStatus] = useState<{
-    type: "success" | "error";
-    message: string;
-  } | null>(null);
   const [busy, setBusy] = useState(false);
 
   const handleExport = async () => {
-    setStatus(null);
     setBusy(true);
     try {
       const blob = await exportDatabase();
       downloadBlob(blob, formatBackupFilename());
-      setStatus({ type: "success", message: "Exported backup successfully." });
+      toast.success("Exported backup successfully.");
     } catch {
-      setStatus({ type: "error", message: "Export failed. Try again." });
+      toast.error("Export failed. Try again.");
     } finally {
       setBusy(false);
     }
@@ -49,18 +45,17 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
 
     if (!window.confirm(IMPORT_CONFIRM_MESSAGE)) return;
 
-    setStatus(null);
     setBusy(true);
     try {
       await importDatabase(file);
       await reloadProgress();
-      setStatus({ type: "success", message: "Imported data successfully." });
+      toast.success("Imported data successfully.");
     } catch (err) {
       const message =
         err instanceof Error && err.message.includes("Expected database")
           ? "Invalid file."
           : "Import failed. Try again.";
-      setStatus({ type: "error", message });
+      toast.error(message);
     } finally {
       setBusy(false);
     }
@@ -105,19 +100,6 @@ export function DataBackupPanel({ compact = false }: DataBackupPanelProps) {
           onChange={(e) => void handleFileChange(e)}
         />
       </div>
-
-      {status && (
-        <p
-          className={
-            status.type === "success"
-              ? "text-sm font-medium text-emerald-600"
-              : "text-sm font-medium text-red-600"
-          }
-          role="status"
-        >
-          {status.message}
-        </p>
-      )}
     </div>
   );
 }
