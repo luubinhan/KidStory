@@ -16,11 +16,13 @@ import {
 import type { PooledFish } from "./fishPool";
 
 const CORRECT_DURATION_MS = 700;
+const BUCKET_INSET_X = 56;
+const BUCKET_INSET_Y = 56;
+const CATCH_END_SCALE = 0.25;
 const WRONG_TIMEOUT_MS = 800;
 const WRONG_EDGE_MARGIN = 60;
 const SPLASH_FADE_MS = 300;
 const COIN_RISE_DISTANCE = 40;
-const BOUNCE_SCALE = 1.25;
 const COIN_ICON_SIZE = 30;
 const COIN_ICON_WIDTH = 48;
 const COIN_GAP = 4;
@@ -106,7 +108,7 @@ function spawnSplash(fish: PooledFish, parent: Container): Graphics {
   return splash;
 }
 
-/** Plays the correct-tap celebration (bounce + sparkle + floating coin) then calls `onDone`. */
+/** Flies the caught fish into the top-right bucket (sparkle + coin), then calls `onDone`. */
 export function playCorrect(
   fish: PooledFish,
   app: Application,
@@ -118,20 +120,26 @@ export function playCorrect(
   const sparkle = parent ? spawnSparkle(fish, parent) : null;
   const coinLabel = parent ? spawnCoinLabel(fish, parent) : null;
 
+  const startX = fish.root.x;
+  const startY = fish.root.y;
+  const endX = app.screen.width - BUCKET_INSET_X;
+  const endY = BUCKET_INSET_Y;
+
   runForDuration(
     app,
     CORRECT_DURATION_MS,
     (progress) => {
-      const bounce = Math.sin(Math.min(1, progress * 1.2) * Math.PI);
-      fish.root.scale.set(1 + bounce * (BOUNCE_SCALE - 1));
-      fish.root.alpha = 1 - progress * 0.6;
+      const t = easeOutQuad(progress);
+      fish.root.x = startX + (endX - startX) * t;
+      fish.root.y = startY + (endY - startY) * t;
+      fish.root.scale.set(1 + (CATCH_END_SCALE - 1) * t);
 
       if (sparkle) {
         sparkle.alpha = 1 - progress;
         sparkle.scale.set(1 + progress * 0.6);
       }
       if (coinLabel) {
-        coinLabel.y = fish.root.y - 24 - easeOutQuad(progress) * COIN_RISE_DISTANCE;
+        coinLabel.y = startY - 24 - easeOutQuad(progress) * COIN_RISE_DISTANCE;
         coinLabel.alpha = 1 - progress;
       }
     },
@@ -161,6 +169,7 @@ export function playWrong(
   let elapsed = 0;
   const tick = (ticker: Ticker) => {
     elapsed += ticker.deltaMS;
+    fish.root.x += fish.vx * (ticker.deltaMS / 1000);
     if (splash) {
       splash.alpha = Math.max(0, 1 - elapsed / SPLASH_FADE_MS);
     }

@@ -147,6 +147,7 @@ export function FishingPixiStage({
       const width = app.screen.width;
       const height = app.screen.height;
       for (const f of fish) {
+        if (f.busy) continue;
         updateSwim(f, dtSec, width, height, timeSec);
       }
       if (overlay) {
