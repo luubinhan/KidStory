@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
 import { HungryDogPixiStage } from "../components/games-v2/hungry-dog/HungryDogPixiStage";
+import { McProgressHeader } from "../components/game-topic";
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
 import { useHungryDogSession } from "../hooks/useHungryDogSession";
 import { useUserProgress } from "../contexts/UserProgressContext";
@@ -41,6 +42,13 @@ export default function HungryDogGamePage() {
         <div className="relative h-screen overflow-hidden">
           {lesson.status === "playing" ? (
             <>
+              <div className="absolute top-10 left-10 z-10 w-48">
+                <McProgressHeader
+                  current={lesson.correctCount}
+                  total={targetsNeeded}
+                />
+              </div>
+
               <button
                 type="button"
                 onClick={playWord}
@@ -86,8 +94,6 @@ export default function HungryDogGamePage() {
                 choices={lesson.round.choices}
                 puppyBaseAnim={puppyBaseAnim}
                 enabled={!busy}
-                correctCount={lesson.correctCount}
-                targetsNeeded={targetsNeeded}
                 onDrop={onDrop}
                 onBusyChange={setBusy}
                 coinTarget={coinTarget}

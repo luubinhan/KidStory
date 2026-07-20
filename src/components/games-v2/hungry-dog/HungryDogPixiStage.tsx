@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
-import { Application } from "pixi.js";
+import { Application, Assets, Sprite } from "pixi.js";
 import type { HungryDogVocabItem, LessonState, PuppyAnim } from "../../../types/hungryDog";
 import { HUNGRY_DOG_TIMINGS } from "./timings";
 import { delayMs, playCoinFly, triggerEffect } from "./fxSystem";
-import { preloadHungryDogAssets } from "./preload";
+import { HUNGRY_DOG_BG_ALIAS, preloadHungryDogAssets } from "./preload";
 import { createPuppyController, type PuppyController } from "./puppyController";
 import { createWordCards, type WordCardDragSystem } from "./wordCardDrag";
-import { createLessonProgressBar, type LessonProgressBar } from "./progressBar";
 
 type DropOutcome =
   | { kind: "ignored" }
@@ -17,8 +16,6 @@ type HungryDogPixiStageProps = {
   choices: readonly HungryDogVocabItem[];
   puppyBaseAnim: PuppyAnim;
   enabled: boolean;
-  correctCount: number;
-  targetsNeeded: number;
   onDrop: (word: string) => DropOutcome;
   onBusyChange?: (busy: boolean) => void;
   coinTarget?: { x: number; y: number };
@@ -29,8 +26,6 @@ export function HungryDogPixiStage({
   choices,
   puppyBaseAnim: _puppyBaseAnim,
   enabled,
-  correctCount,
-  targetsNeeded,
   onDrop,
   onBusyChange,
   coinTarget,
@@ -41,19 +36,14 @@ export function HungryDogPixiStage({
   const onDropRef = useRef(onDrop);
   const onBusyChangeRef = useRef(onBusyChange);
   const coinTargetRef = useRef(coinTarget);
-  const correctCountRef = useRef(correctCount);
-  const targetsNeededRef = useRef(targetsNeeded);
   const puppyRef = useRef<PuppyController | null>(null);
   const cardsRef = useRef<WordCardDragSystem | null>(null);
-  const progressRef = useRef<LessonProgressBar | null>(null);
 
   choicesRef.current = choices;
   enabledRef.current = enabled;
   onDropRef.current = onDrop;
   onBusyChangeRef.current = onBusyChange;
   coinTargetRef.current = coinTarget;
-  correctCountRef.current = correctCount;
-  targetsNeededRef.current = targetsNeeded;
 
   useEffect(() => {
     const hostEl = hostRef.current;
@@ -66,8 +56,6 @@ export function HungryDogPixiStage({
       // Only destroy after init — calling destroy before renderer exists
       // throws `_cancelResize is not a function` (ResizePlugin not wired yet).
       if (!app.renderer) return;
-      progressRef.current?.destroy();
-      progressRef.current = null;
       cardsRef.current?.destroy();
       cardsRef.current = null;
       puppyRef.current?.destroy();
@@ -97,10 +85,12 @@ export function HungryDogPixiStage({
         return;
       }
 
-      const progress = createLessonProgressBar();
-      progressRef.current = progress;
-      progress.setProgress(correctCountRef.current, targetsNeededRef.current);
-      app.stage.addChild(progress.root);
+      const bg = new Sprite(Assets.get(HUNGRY_DOG_BG_ALIAS));
+      bg.label = "dog-bg";
+      bg.zIndex = -1;
+      bg.width = app.screen.width;
+      bg.height = app.screen.height;
+      app.stage.addChild(bg);
 
       const puppy = createPuppyController(app.stage);
       puppyRef.current = puppy;
@@ -153,10 +143,6 @@ export function HungryDogPixiStage({
             playCoinFly(cx, cy, target.x, target.y, app.stage, app);
           }
           await delayMs(app, HUNGRY_DOG_TIMINGS.happyMs + HUNGRY_DOG_TIMINGS.advanceDelayMs);
-          progressRef.current?.setProgress(
-            result.lesson.correctCount,
-            targetsNeededRef.current,
-          );
           // Use lesson from applyDrop — choicesRef may still be stale until React re-renders
           if (result.lesson.status === "playing") {
             choicesRef.current = result.lesson.round.choices;
@@ -174,10 +160,11 @@ export function HungryDogPixiStage({
       function layout(): void {
         const w = app.screen.width;
         const h = app.screen.height;
-        puppy.root.position.set(w / 2, h * 0.48);
+        bg.width = w;
+        bg.height = h;
+        puppy.root.position.set(w / 2, h * 0.48 + 100);
         puppy.root.scale.set(Math.min(w / 400, 1.2));
         cards?.layout(w, h);
-        progress.layout(w);
       }
 
       layout();
@@ -193,10 +180,6 @@ export function HungryDogPixiStage({
   useEffect(() => {
     cardsRef.current?.setEnabled(enabled);
   }, [enabled]);
-
-  useEffect(() => {
-    progressRef.current?.setProgress(correctCount, targetsNeeded);
-  }, [correctCount, targetsNeeded]);
 
   return (
     <div

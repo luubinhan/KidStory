@@ -1,9 +1,11 @@
 import { Assets, Spritesheet, Texture, type SpritesheetData } from "pixi.js";
+import dogBgUrl from "../../../assets/games/dog-bg.webp";
 import spritesheetData from "../../../assets/games/spritesheet.json";
 import spritesheetPng from "../../../assets/games/spritesheet.png";
 import { ASSETS } from "../../../constants/images";
 
 export const HUNGRY_DOG_SHEET_ALIAS = "hungryDogSheet";
+export const HUNGRY_DOG_BG_ALIAS = "hungryDogBg";
 
 /**
  * Vite imports JSON as a parsed object (not a URL). Pixi Assets.load expects a
@@ -11,7 +13,10 @@ export const HUNGRY_DOG_SHEET_ALIAS = "hungryDogSheet";
  * manually with the imported atlas data.
  */
 export async function preloadHungryDogAssets(): Promise<void> {
-  await Assets.load({ alias: "coin", src: ASSETS.coin });
+  await Assets.load([
+    { alias: "coin", src: ASSETS.coin },
+    { alias: HUNGRY_DOG_BG_ALIAS, src: dogBgUrl },
+  ]);
 
   if (Assets.cache.has(HUNGRY_DOG_SHEET_ALIAS)) return;
 
