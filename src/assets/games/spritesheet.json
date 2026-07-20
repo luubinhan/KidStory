@@ -661,6 +661,46 @@
                 "h": 159
             }
         },
+        "idle-8.png": {
+            "frame": {
+                "x": 5,
+                "y": 850,
+                "w": 153,
+                "h": 159
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 153,
+                "h": 159
+            },
+            "sourceSize": {
+                "w": 153,
+                "h": 159
+            }
+        },
+        "idle-9.png": {
+            "frame": {
+                "x": 156,
+                "y": 681,
+                "w": 132,
+                "h": 150
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 132,
+                "h": 150
+            },
+            "sourceSize": {
+                "w": 132,
+                "h": 150
+            }
+        },
         "sad-1.png": {
             "frame": {
                 "x": 168,

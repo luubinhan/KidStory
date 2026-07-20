@@ -83,6 +83,47 @@ function tweenPosition(
   });
 }
 
+/** Fly into mouth: move + shrink + fade to alpha 0.2. */
+function tweenIntoMouth(
+  app: Application,
+  target: Container,
+  toX: number,
+  toY: number,
+): Promise<void> {
+  const fromX = target.x;
+  const fromY = target.y;
+  const fromScale = target.scale.x;
+  const fromAlpha = target.alpha;
+  const toScale = HUNGRY_DOG_TIMINGS.cardEatScale;
+  const toAlpha = HUNGRY_DOG_TIMINGS.cardEatAlpha;
+  const durationMs = HUNGRY_DOG_TIMINGS.cardEatMs;
+
+  return new Promise((resolve) => {
+    let elapsed = 0;
+    const tick = () => {
+      elapsed += app.ticker.deltaMS;
+      const t = Math.min(1, elapsed / durationMs);
+      const e = easeOutQuad(t);
+      target.x = fromX + (toX - fromX) * e;
+      target.y = fromY + (toY - fromY) * e;
+      const scale = fromScale + (toScale - fromScale) * e;
+      target.scale.set(scale);
+      target.alpha = fromAlpha + (toAlpha - fromAlpha) * e;
+      if (t >= 1) {
+        app.ticker.remove(tick);
+        resolve();
+      }
+    };
+    app.ticker.add(tick);
+  });
+}
+
+function resetCardTransform(target: Container): void {
+  target.scale.set(1);
+  target.alpha = 1;
+  target.visible = true;
+}
+
 export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
   const { app, stage, getMouthBounds, onCardDrop, onDragStart, onDragCancel } = opts;
   const slots: CardSlot[] = [];
@@ -173,20 +214,19 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
       dropInFlight = true;
       const word = slot.item.word;
       try {
-        // Eat motion first, then resolve round — so updateChoices isn't undone by hide.
-        await tweenPosition(
+        // Eat motion: shrink + fade into mouth, then resolve round.
+        await tweenIntoMouth(
           app,
           root,
           mouth.x + mouth.width / 2,
           mouth.y + mouth.height / 2,
-          HUNGRY_DOG_TIMINGS.cardSnapBackMs,
         );
         root.visible = false;
 
         const result = await onCardDrop(word);
 
         if (result === "ignored" || result === "wrong") {
-          root.visible = true;
+          resetCardTransform(root);
           await tweenPosition(app, root, slot.homeX, slot.homeY, HUNGRY_DOG_TIMINGS.cardSnapBackMs);
         }
         // correct: onCardDrop already called updateChoices with the next round
@@ -246,7 +286,7 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
         const item = shuffled[index];
         if (!item) return;
         setCardVisual(slot, item);
-        slot.root.visible = true;
+        resetCardTransform(slot.root);
         if (!slot.dragging) {
           slot.root.x = slot.homeX;
           slot.root.y = slot.homeY;
