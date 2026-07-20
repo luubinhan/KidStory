@@ -1,27 +1,37 @@
 import {
+  Assets,
   Container,
   FederatedPointerEvent,
-  Graphics,
   Rectangle,
+  Sprite,
   Text,
   TextStyle,
   type Application,
 } from "pixi.js";
 import type { HungryDogVocabItem } from "../../../types/hungryDog";
+import { HUNGRY_DOG_TRAY_ALIAS } from "./preload";
 import { HUNGRY_DOG_TIMINGS } from "./timings";
 
-const CARD_WIDTH = 120;
-const CARD_HEIGHT = 52;
-const CARD_RADIUS = 14;
-const CARD_GAP = 16;
+/** Tray target width; height follows texture aspect. */
+export const WORD_CARD_WIDTH = 100;
+const TRAY_NATIVE_W = 117;
+const TRAY_NATIVE_H = 91;
+const TRAY_SCALE = WORD_CARD_WIDTH / TRAY_NATIVE_W;
+const TRAY_H = TRAY_NATIVE_H * TRAY_SCALE;
+const LABEL_GAP = 6;
+const LABEL_H = 22;
+/** Tray + word label stacked; used for row Y layout. */
+export const WORD_CARD_HEIGHT = TRAY_H + LABEL_GAP + LABEL_H;
+export const WORD_CARD_GAP = 20;
 /** Clear fixed CourseBottomNav (~80px) so cards stay clickable. */
-const BOTTOM_SAFE_PX = 110;
+export const WORD_CARD_BOTTOM_SAFE_PX = 110;
 
 const CARD_STYLE = new TextStyle({
   fontFamily: "Arial, sans-serif",
-  fontSize: 18,
+  fontSize: 26,
   fontWeight: "800",
   fill: "#1e293b",
+  stroke: { color: "#ffffff", width: 4 },
 });
 
 type CardSlot = {
@@ -141,24 +151,27 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
     const root = new Container();
     root.eventMode = "static";
     root.cursor = "pointer";
+    // Origin at tray center; label sits above tray.
     root.hitArea = new Rectangle(
-      -CARD_WIDTH / 2,
-      -CARD_HEIGHT / 2,
-      CARD_WIDTH,
-      CARD_HEIGHT,
+      -WORD_CARD_WIDTH / 2,
+      -TRAY_H / 2 - LABEL_GAP - LABEL_H,
+      WORD_CARD_WIDTH,
+      WORD_CARD_HEIGHT,
     );
 
-    const bg = new Graphics();
-    bg.roundRect(-CARD_WIDTH / 2, -CARD_HEIGHT / 2, CARD_WIDTH, CARD_HEIGHT, CARD_RADIUS);
-    bg.fill({ color: 0xffffff, alpha: 0.95 });
-    bg.stroke({ color: 0xfbbf24, width: 3 });
-    bg.eventMode = "none";
+    const tray = new Sprite(Assets.get(HUNGRY_DOG_TRAY_ALIAS));
+    tray.label = "word-tray";
+    tray.anchor.set(0.5);
+    tray.scale.set(TRAY_SCALE);
+    tray.eventMode = "none";
 
     const label = new Text({ text: "", style: CARD_STYLE });
     label.anchor.set(0.5);
+    // label.y = -TRAY_H / 2 - LABEL_GAP - LABEL_H / 2;
+    label.y = TRAY_H / 3;
     label.eventMode = "none";
 
-    root.addChild(bg, label);
+    root.addChild(tray, label);
     stage.addChild(root);
 
     const slot: CardSlot = {
@@ -178,6 +191,8 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
       event.stopPropagation();
       slot.dragging = true;
       root.zIndex = 10;
+      root.scale.set(0.4);
+      root.alpha = 0.7;
       const pos = event.global;
       dragOffsetX = root.x - pos.x;
       dragOffsetY = root.y - pos.y;
@@ -207,6 +222,7 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
 
       if (!overMouth || !enabled) {
         onDragCancel?.();
+        resetCardTransform(root);
         await tweenPosition(app, root, slot.homeX, slot.homeY, HUNGRY_DOG_TIMINGS.cardSnapBackMs);
         return;
       }
@@ -256,12 +272,13 @@ export function createWordCards(opts: CreateWordCardsOpts): WordCardDragSystem {
   function layoutSlots(width: number, height: number) {
     stageWidth = width;
     stageHeight = height;
-    const totalWidth = 4 * CARD_WIDTH + 3 * CARD_GAP;
-    const startX = width / 2 - totalWidth / 2 + CARD_WIDTH / 2;
-    const y = height - CARD_HEIGHT / 2 - BOTTOM_SAFE_PX;
+    const totalWidth = 4 * WORD_CARD_WIDTH + 3 * WORD_CARD_GAP;
+    const startX = width / 2 - totalWidth / 2 + WORD_CARD_WIDTH / 2;
+    // Root origin = tray center; clear bottom nav from tray bottom.
+    const y = height - TRAY_H / 2 - WORD_CARD_BOTTOM_SAFE_PX;
 
     slots.forEach((slot, index) => {
-      slot.homeX = startX + index * (CARD_WIDTH + CARD_GAP);
+      slot.homeX = startX + index * (WORD_CARD_WIDTH + WORD_CARD_GAP);
       slot.homeY = y;
       if (!slot.dragging) {
         slot.root.x = slot.homeX;
