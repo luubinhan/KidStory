@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react";
-import { Application, Assets, Sprite } from "pixi.js";
+import { GodrayFilter } from "pixi-filters/godray";
+import { Application, Assets, Rectangle, Sprite, type Ticker } from "pixi.js";
 import type { HungryDogVocabItem, LessonState, PuppyAnim } from "../../../types/hungryDog";
 import { HUNGRY_DOG_TIMINGS } from "./timings";
 import { delayMs, playCoinFly, triggerEffect } from "./fxSystem";
 import { HUNGRY_DOG_BG_ALIAS, preloadHungryDogAssets } from "./preload";
 import { createPuppyController, type PuppyController } from "./puppyController";
 import { createWordCards, type WordCardDragSystem } from "./wordCardDrag";
+
+const GODRAY_CENTER_X = 0.05;
+const GODRAY_CENTER_Y = 0.02;
+const GODRAY_TIME_STEP = 0.01;
 
 type DropOutcome =
   | { kind: "ignored" }
@@ -51,11 +56,16 @@ export function HungryDogPixiStage({
 
     let disposed = false;
     const app = new Application();
+    let tickGodray: ((ticker: Ticker) => void) | null = null;
 
     function destroyApp(): void {
       // Only destroy after init — calling destroy before renderer exists
       // throws `_cancelResize is not a function` (ResizePlugin not wired yet).
       if (!app.renderer) return;
+      if (tickGodray) {
+        app.ticker.remove(tickGodray);
+        tickGodray = null;
+      }
       cardsRef.current?.destroy();
       cardsRef.current = null;
       puppyRef.current?.destroy();
@@ -90,6 +100,22 @@ export function HungryDogPixiStage({
       bg.zIndex = -1;
       bg.width = app.screen.width;
       bg.height = app.screen.height;
+      const godray = new GodrayFilter({
+        parallel: false,
+        center: {
+          x: app.screen.width * GODRAY_CENTER_X,
+          y: app.screen.height * GODRAY_CENTER_Y,
+        },
+        gain: 0.35,
+        alpha: 0.45,
+        lacunarity: 2.5,
+      });
+      bg.filters = [godray];
+      bg.filterArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
+      tickGodray = (ticker) => {
+        godray.time += GODRAY_TIME_STEP * ticker.deltaTime;
+      };
+      app.ticker.add(tickGodray);
       app.stage.addChild(bg);
 
       const puppy = createPuppyController(app.stage);
@@ -162,6 +188,8 @@ export function HungryDogPixiStage({
         const h = app.screen.height;
         bg.width = w;
         bg.height = h;
+        bg.filterArea = new Rectangle(0, 0, w, h);
+        godray.center = { x: w * GODRAY_CENTER_X, y: h * GODRAY_CENTER_Y };
         puppy.root.position.set(w / 2, h * 0.48 + 100);
         puppy.root.scale.set(Math.min(w / 400, 1.2));
         cards?.layout(w, h);
