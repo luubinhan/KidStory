@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { GodrayFilter } from "pixi-filters/godray";
-import { Application, Assets, Rectangle, Sprite, type Ticker } from "pixi.js";
+import { Application, Assets, Container, Rectangle, Sprite, type Ticker } from "pixi.js";
 import type { HungryDogVocabItem, LessonState, PuppyAnim } from "../../../types/hungryDog";
 import { HUNGRY_DOG_TIMINGS } from "./timings";
 import { delayMs, playCoinFly, triggerEffect } from "./fxSystem";
@@ -8,9 +8,11 @@ import { HUNGRY_DOG_BG_ALIAS, preloadHungryDogAssets } from "./preload";
 import { createPuppyController, type PuppyController } from "./puppyController";
 import { createWordCards, type WordCardDragSystem } from "./wordCardDrag";
 
-const GODRAY_CENTER_X = 0.05;
-const GODRAY_CENTER_Y = 0.02;
-const GODRAY_TIME_STEP = 0.01;
+const GODRAY_CENTER_X = 0.08;
+const GODRAY_CENTER_Y = 0.05;
+const GODRAY_TIME_STEP = 0.008;
+const GODRAY_GAIN = 0.22;
+const GODRAY_ALPHA = 0.28;
 
 type DropOutcome =
   | { kind: "ignored" }
@@ -87,6 +89,9 @@ export function HungryDogPixiStage({
       }
 
       hostEl.appendChild(app.canvas);
+      app.canvas.style.display = "block";
+      app.canvas.style.width = "100%";
+      app.canvas.style.height = "100%";
       app.stage.sortableChildren = true;
 
       await preloadHungryDogAssets();
@@ -95,28 +100,34 @@ export function HungryDogPixiStage({
         return;
       }
 
+      // Screen-sized layer so GodrayFilter/filterArea never clip a cover-offset sprite.
+      const bgLayer = new Container();
+      bgLayer.label = "dog-bg-layer";
+      bgLayer.zIndex = -1;
+
       const bg = new Sprite(Assets.get(HUNGRY_DOG_BG_ALIAS));
       bg.label = "dog-bg";
-      bg.zIndex = -1;
       bg.width = app.screen.width;
       bg.height = app.screen.height;
+      bgLayer.addChild(bg);
+
       const godray = new GodrayFilter({
         parallel: false,
         center: {
           x: app.screen.width * GODRAY_CENTER_X,
           y: app.screen.height * GODRAY_CENTER_Y,
         },
-        gain: 0.35,
-        alpha: 0.45,
-        lacunarity: 2.5,
+        gain: GODRAY_GAIN,
+        alpha: GODRAY_ALPHA,
+        lacunarity: 2.2,
       });
-      bg.filters = [godray];
-      bg.filterArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
+      bgLayer.filterArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
+      bgLayer.filters = [godray];
       tickGodray = (ticker) => {
         godray.time += GODRAY_TIME_STEP * ticker.deltaTime;
       };
       app.ticker.add(tickGodray);
-      app.stage.addChild(bg);
+      app.stage.addChild(bgLayer);
 
       const puppy = createPuppyController(app.stage);
       puppyRef.current = puppy;
@@ -188,7 +199,8 @@ export function HungryDogPixiStage({
         const h = app.screen.height;
         bg.width = w;
         bg.height = h;
-        bg.filterArea = new Rectangle(0, 0, w, h);
+        bg.position.set(0, 0);
+        bgLayer.filterArea = new Rectangle(0, 0, w, h);
         godray.center = { x: w * GODRAY_CENTER_X, y: h * GODRAY_CENTER_Y };
         puppy.root.position.set(w / 2, h * 0.48 + 100);
         puppy.root.scale.set(Math.min(w / 400, 1.2));
