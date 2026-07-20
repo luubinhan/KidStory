@@ -18,9 +18,10 @@ import {
   type PuppyAnim,
 } from "../types/hungryDog";
 import { useUserProgress } from "../contexts/UserProgressContext";
+import type { ActivityRewardResult } from "../types/userProgress";
 
 export function useHungryDogSession() {
-  const { isUnitAccessible, addCoins } = useUserProgress();
+  const { isUnitAccessible, addCoins, completeGameV2 } = useUserProgress();
   const pool = useMemo(
     () => buildFishingVocabPool(courseUnits, isUnitAccessible),
     [isUnitAccessible],
@@ -31,7 +32,9 @@ export function useHungryDogSession() {
   poolRef.current = pool;
 
   const [lesson, setLesson] = useState<LessonState | null>(null);
+  const [reward, setReward] = useState<ActivityRewardResult | null>(null);
   const [lastEatAt, setLastEatAtState] = useState<number | null>(() => getLastEatAt());
+  const awardedRef = useRef(false);
   const runIdRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const autoPlayedRef = useRef(false);
@@ -53,10 +56,21 @@ export function useHungryDogSession() {
     if (!canPlay) {
       runIdRef.current += 1;
       setLesson(null);
+      awardedRef.current = false;
+      setReward(null);
       return;
     }
     setLesson((prev) => prev ?? createInitialLesson(poolRef.current));
   }, [canPlay]);
+
+  useEffect(() => {
+    if (!lesson || lesson.status !== "complete" || awardedRef.current) return;
+    awardedRef.current = true;
+    const runId = runIdRef.current;
+    void completeGameV2("hungry-dog").then((result) => {
+      if (result && runIdRef.current === runId) setReward(result);
+    });
+  }, [lesson, completeGameV2]);
 
   const target = lesson?.status === "playing" ? lesson.round.target : null;
 
@@ -107,6 +121,8 @@ export function useHungryDogSession() {
   const restart = useCallback(() => {
     if (!canPlay) return;
     runIdRef.current += 1;
+    awardedRef.current = false;
+    setReward(null);
     stopAudio();
     setLesson(createInitialLesson(poolRef.current));
   }, [canPlay, stopAudio]);
@@ -115,6 +131,7 @@ export function useHungryDogSession() {
     pool,
     canPlay,
     lesson,
+    reward,
     puppyBaseAnim,
     onDrop,
     restart,

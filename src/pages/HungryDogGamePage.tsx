@@ -11,10 +11,17 @@ import { ASSETS } from "../constants/images";
 
 export default function HungryDogGamePage() {
   const { coins } = useUserProgress();
-  const { canPlay, lesson, puppyBaseAnim, onDrop, restart, playWord, targetsNeeded } =
+  const { canPlay, lesson, reward, puppyBaseAnim, onDrop, restart, playWord, targetsNeeded } =
     useHungryDogSession();
   const [busy, setBusy] = useState(false);
+  const [stageKey, setStageKey] = useState(0);
   const coinRef = useRef<HTMLDivElement | null>(null);
+
+  const handleRestart = () => {
+    restart();
+    setBusy(false);
+    setStageKey((k) => k + 1);
+  };
 
   const coinTarget =
     typeof window !== "undefined" && coinRef.current
@@ -40,6 +47,16 @@ export default function HungryDogGamePage() {
 
       {canPlay && lesson ? (
         <div className="relative h-screen overflow-hidden">
+          <HungryDogPixiStage
+            key={stageKey}
+            choices={lesson.round.choices}
+            puppyBaseAnim={puppyBaseAnim}
+            enabled={lesson.status === "playing" && !busy}
+            onDrop={onDrop}
+            onBusyChange={setBusy}
+            coinTarget={coinTarget}
+          />
+
           {lesson.status === "playing" ? (
             <>
               <div className="absolute top-10 left-10 z-10 w-48">
@@ -85,35 +102,22 @@ export default function HungryDogGamePage() {
                       }
                       transition={{ duration: 0.45, ease: "easeOut" }}
                     />
-                    <span className="text-lg font-bold text-slate-800">{coins}</span>
+                    <span className="text-lg font-bold text-slate-800 text-shadow-2xs text-shadow-white">{coins}</span>
                   </div>
                 </div>
               </div>
-
-              <HungryDogPixiStage
-                choices={lesson.round.choices}
-                puppyBaseAnim={puppyBaseAnim}
-                enabled={!busy}
-                onDrop={onDrop}
-                onBusyChange={setBusy}
-                coinTarget={coinTarget}
-              />
             </>
           ) : null}
 
           {lesson.status === "complete" ? (
             <div className="absolute inset-0 flex items-center justify-center bg-sky-900/40 p-4 z-20">
               <div className="w-full max-w-md rounded-2xl backdrop-blur-xs shadow-xl bg-sky-100/20 inset-shadow-white/80 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] inset-shadow-xs inset-shadow-white/8">
-                <ActivityEndShell reward={null}>
+                <ActivityEndShell reward={reward}>
                   <h2 className="text-2xl font-bold text-white">Great job!</h2>
-                  <p className="mt-2 text-white/90">
-                    You fed the puppy {lesson.correctCount} words and earned{" "}
-                    {lesson.sessionCoins} coins!
-                  </p>
                   <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                     <button
                       type="button"
-                      onClick={restart}
+                      onClick={handleRestart}
                       className="cursor-pointer inline-flex items-center rounded-xl border-2 border-yellow-400 bg-yellow-50 px-5 py-2.5 text-sm font-semibold text-yellow-800 transition-colors hover:bg-yellow-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
                     >
                       Play again

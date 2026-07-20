@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 type Particle = {
   x: number;
@@ -20,8 +21,12 @@ export function Confetti() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
     const particles: Particle[] = [];
     const colors = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"];
@@ -63,8 +68,14 @@ export function Confetti() {
     };
 
     draw();
-    return () => cancelAnimationFrame(animationFrame);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-50" aria-hidden />;
+  return createPortal(
+    <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-50" aria-hidden />,
+    document.body,
+  );
 }
