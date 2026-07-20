@@ -28,7 +28,7 @@ export const WORD_CARD_BOTTOM_SAFE_PX = 110;
 
 const CARD_STYLE = new TextStyle({
   fontFamily: "Arial, sans-serif",
-  fontSize: 26,
+  fontSize: 20,
   fontWeight: "800",
   fill: "#1e293b",
   stroke: { color: "#ffffff", width: 4 },

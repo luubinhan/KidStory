@@ -23,11 +23,11 @@ export function Progress({
       value={value}
       max={max}
       aria-label={ariaLabel}
-      className={cn("h-2 w-full overflow-hidden rounded-full bg-gray-200/20", className)}
+      className={cn("h-2 w-full overflow-hidden rounded-full brightness-120 shadow-sm backdrop-blur-md inset-shadow-sm inset-shadow-white/80 bg-white/30 border border-emerald-200/30 backdrop-saturate-150", className)}
     >
       <ProgressPrimitive.Indicator
         className={cn(
-          "h-full bg-green-400 transition-transform duration-300 ease-out",
+          "h-full bg-linear-to-r from-green-600 to-green-500 transition-transform duration-300 ease-out rounded-xs inset-shadow-xs inset-shadow-black/20 ring ring-white/90",
           indicatorClassName,
         )}
         style={{ transform: `translateX(-${100 - percent}%)` }}
