@@ -1,5 +1,6 @@
 import { courseUnits } from "../data/course";
 import {
+  addCoins,
   getDefaultProgress,
   getUnitStatus,
   isUnitUnlocked,
@@ -31,5 +32,9 @@ for (const unit of courseUnits) {
 }
 
 assert(defaultProgress.coins === 0, "coins unchanged after status checks");
+
+const withCoins = addCoins(defaultProgress, 3);
+assert(withCoins.coins === 3, "addCoins increments balance");
+assert(addCoins(withCoins, 1).coins === 4, "addCoins stacks");
 
 console.log("userProgressLogic.test.ts: all passed");

@@ -19,6 +19,7 @@ import {
   getUnitProgressInfo,
   getUnitStatus,
   isUnitUnlocked,
+  addCoins,
   onActivityComplete,
   onGameV2Complete,
   purchaseShopItem,
@@ -40,6 +41,7 @@ type UserProgressContextValue = {
     activityId: CourseActivityId,
   ) => Promise<ActivityRewardResult | null>;
   completeGameV2: (gameId: string) => Promise<ActivityRewardResult | null>;
+  addCoins: (amount: number) => Promise<void>;
   useHint: () => Promise<boolean>;
   canUseHint: boolean;
   buyShopItem: (itemId: PurchasableItemId) => Promise<boolean>;
@@ -120,6 +122,14 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
     [persist],
   );
 
+  const addCoinsToProgress = useCallback(
+    async (amount: number): Promise<void> => {
+      const next = addCoins(progressRef.current, amount);
+      await persist(next);
+    },
+    [persist],
+  );
+
   const useHint = useCallback(async (): Promise<boolean> => {
     const result = spendCoins(progressRef.current, COIN_HINT_COST);
     if (!result.success) return false;
@@ -148,6 +158,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       reloadProgress,
       completeActivity,
       completeGameV2,
+      addCoins: addCoinsToProgress,
       useHint,
       canUseHint: canAffordHint(progress),
       buyShopItem,
@@ -162,6 +173,7 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
       reloadProgress,
       completeActivity,
       completeGameV2,
+      addCoinsToProgress,
       useHint,
       buyShopItem,
       progressOptions,

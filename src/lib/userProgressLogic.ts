@@ -245,6 +245,14 @@ export function onGameV2Complete(
   };
 }
 
+export function addCoins(progress: UserProgressV1, amount: number): UserProgressV1 {
+  if (amount <= 0) return progress;
+  return {
+    ...progress,
+    coins: progress.coins + amount,
+  };
+}
+
 export function spendCoins(
   progress: UserProgressV1,
   amount: number,

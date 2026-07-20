@@ -340,7 +340,7 @@
                 "h": 155
             }
         },
-        "hungry-2-1.png": {
+        "ready-1.png": {
             "frame": {
                 "x": 5,
                 "y": 479,
@@ -360,7 +360,7 @@
                 "h": 157
             }
         },
-        "hungry-2-2.png": {
+        "ready-2.png": {
             "frame": {
                 "x": 157,
                 "y": 479,
@@ -380,7 +380,7 @@
                 "h": 159
             }
         },
-        "hungry-2-3.png": {
+        "ready-3.png": {
             "frame": {
                 "x": 309,
                 "y": 479,
@@ -400,7 +400,7 @@
                 "h": 155
             }
         },
-        "hungry-2-4.png": {
+        "ready-4.png": {
             "frame": {
                 "x": 456,
                 "y": 479,
@@ -420,7 +420,7 @@
                 "h": 145
             }
         },
-        "hungry-2-5.png": {
+        "ready-5.png": {
             "frame": {
                 "x": 596,
                 "y": 479,
@@ -540,46 +540,7 @@
                 "h": 158
             }
         },
-        "idle-10.png": {
-            "frame": {
-                "x": 159,
-                "y": 154,
-                "w": 125,
-                "h": 139
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 125,
-                "h": 139
-            },
-            "sourceSize": {
-                "w": 125,
-                "h": 139
-            }
-        },
-        "idle-11.png": {
-            "frame": {
-                "x": 770,
-                "y": 647,
-                "w": 126,
-                "h": 141
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 126,
-                "h": 141
-            },
-            "sourceSize": {
-                "w": 126,
-                "h": 141
-            }
-        },
+        
         "idle-2.png": {
             "frame": {
                 "x": 770,
@@ -698,46 +659,6 @@
             "sourceSize": {
                 "w": 152,
                 "h": 159
-            }
-        },
-        "idle-8.png": {
-            "frame": {
-                "x": 5,
-                "y": 850,
-                "w": 153,
-                "h": 159
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 153,
-                "h": 159
-            },
-            "sourceSize": {
-                "w": 153,
-                "h": 159
-            }
-        },
-        "idle-9.png": {
-            "frame": {
-                "x": 156,
-                "y": 681,
-                "w": 132,
-                "h": 150
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 132,
-                "h": 150
-            },
-            "sourceSize": {
-                "w": 132,
-                "h": 150
             }
         },
         "sad-1.png": {
