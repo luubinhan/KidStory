@@ -15,7 +15,7 @@ export const gamesV2 = [
     path: "/games-v2/hungry-dog",
     coinReward: 50,
     diamondReward: 50,
-    thumbnailSrc: 'https://luubinhan.github.io/KidStory/images/fishing-cover.jpg'
+    thumbnailSrc: 'https://luubinhan.github.io/KidStory/images/hungry-dog-cover.jpg'
   },
 ] as const satisfies readonly GameV2[];
 
