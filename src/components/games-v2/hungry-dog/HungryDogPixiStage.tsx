@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
-import { Application, Assets, Sprite, type Ticker } from "pixi.js";
+import { Application, Assets, Sprite } from "pixi.js";
 import type { HungryDogVocabItem, LessonState, PuppyAnim } from "../../../types/hungryDog";
+import {
+  playHungryDogAmbientLoop,
+  stopHungryDogAmbientLoop,
+} from "../../../lib/hungry-dog/hungryDogSounds";
 import { HUNGRY_DOG_TIMINGS } from "./timings";
 import { delayMs, playCoinFly, triggerEffect } from "./fxSystem";
 import { HUNGRY_DOG_BG_ALIAS, preloadHungryDogAssets } from "./preload";
@@ -51,6 +55,7 @@ export function HungryDogPixiStage({
 
     let disposed = false;
     const app = new Application();
+    let unlockAmbient: (() => void) | null = null;
 
     function destroyApp(): void {
       // Only destroy after init — calling destroy before renderer exists
@@ -174,10 +179,30 @@ export function HungryDogPixiStage({
 
       layout();
       app.renderer.on("resize", layout);
+
+      if (disposed) {
+        destroyApp();
+        return;
+      }
+
+      playHungryDogAmbientLoop();
+      unlockAmbient = () => {
+        playHungryDogAmbientLoop();
+        if (unlockAmbient) {
+          hostEl.removeEventListener("pointerdown", unlockAmbient);
+          unlockAmbient = null;
+        }
+      };
+      hostEl.addEventListener("pointerdown", unlockAmbient);
     })();
 
     return () => {
       disposed = true;
+      if (unlockAmbient) {
+        hostEl.removeEventListener("pointerdown", unlockAmbient);
+        unlockAmbient = null;
+      }
+      stopHungryDogAmbientLoop();
       destroyApp();
     };
   }, []);
