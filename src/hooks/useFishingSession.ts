@@ -15,11 +15,8 @@ import { useUserProgress } from "../contexts/UserProgressContext";
 import type { ActivityRewardResult } from "../types/userProgress";
 
 export function useFishingSession() {
-  const { isUnitAccessible, completeGameV2 } = useUserProgress();
-  const pool = useMemo(
-    () => buildFishingVocabPool(gameUnits, isUnitAccessible),
-    [isUnitAccessible],
-  );
+  const { completeGameV2 } = useUserProgress();
+  const pool = useMemo(() => buildFishingVocabPool(gameUnits), []);
   const canPlay = pool.length >= FISHING_ROUND.minPoolSize;
 
   const poolRef = useRef(pool);

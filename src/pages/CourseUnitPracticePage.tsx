@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   getCourseActivity,
   getCourseActivityBackgroundUrl,
@@ -7,7 +7,6 @@ import {
 } from "../data/course-activities";
 import { getDictionaryEntriesByUnitId } from "../data/course-dictionary";
 import { getCourseUnitById } from "../data/course";
-import { useUserProgress } from "../contexts/UserProgressContext";
 import { CourseBottomNav, CourseHowToPlayFab } from "../components/course";
 import {
   CourseFlashcardsSession,
@@ -27,7 +26,6 @@ const imageBgClass = "bg-center bg-top bg-no-repeat bg-cover";
 
 export default function CourseUnitPracticePage() {
   const { unitId, activityId } = useParams<{ unitId: string; activityId: string }>();
-  const { isUnitAccessible, isLoading } = useUserProgress();
   const unit = unitId ? getCourseUnitById(unitId) : undefined;
   const activity =
     activityId && isCourseActivityId(activityId) ? getCourseActivity(activityId) : undefined;
@@ -49,10 +47,6 @@ export default function CourseUnitPracticePage() {
         <CourseBottomNav />
       </div>
     );
-  }
-
-  if (!isLoading && !isUnitAccessible(unit)) {
-    return <Navigate to="/course" replace />;
   }
 
   const dictionaryEntries = getDictionaryEntriesByUnitId(unit.id);

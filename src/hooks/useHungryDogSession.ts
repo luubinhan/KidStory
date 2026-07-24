@@ -21,11 +21,8 @@ import { useUserProgress } from "../contexts/UserProgressContext";
 import type { ActivityRewardResult } from "../types/userProgress";
 
 export function useHungryDogSession() {
-  const { isUnitAccessible, addCoins, completeGameV2 } = useUserProgress();
-  const pool = useMemo(
-    () => buildFishingVocabPool(gameUnits, isUnitAccessible),
-    [isUnitAccessible],
-  );
+  const { addCoins, completeGameV2 } = useUserProgress();
+  const pool = useMemo(() => buildFishingVocabPool(gameUnits), []);
   const canPlay = pool.length >= HUNGRY_DOG_ROUND.minPoolSize;
 
   const poolRef = useRef(pool);

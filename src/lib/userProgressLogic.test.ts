@@ -3,7 +3,6 @@ import {
   addCoins,
   getDefaultProgress,
   getUnitStatus,
-  isUnitUnlocked,
 } from "./userProgressLogic";
 
 function assert(condition: boolean, label: string) {
@@ -12,22 +11,25 @@ function assert(condition: boolean, label: string) {
 
 const defaultProgress = getDefaultProgress();
 
-assert(isUnitUnlocked(courseUnits[0], defaultProgress), "unit 1 unlocked by default");
-assert(!isUnitUnlocked(courseUnits[1], defaultProgress), "unit 2 locked with default progress");
 assert(
-  getUnitStatus(courseUnits[1], defaultProgress) === "locked",
-  "unit 2 status locked with default progress",
+  ["available", "current", "completed"].includes(
+    getUnitStatus(courseUnits[0], defaultProgress),
+  ),
+  "unit 1 status is one of available/current/completed",
+);
+assert(
+  ["available", "current", "completed"].includes(
+    getUnitStatus(courseUnits[1], defaultProgress),
+  ),
+  "unit 2 status is one of available/current/completed",
 );
 
-const allUnlockedOptions = { allUnitsUnlocked: true };
 for (const unit of courseUnits) {
   assert(
-    isUnitUnlocked(unit, defaultProgress, allUnlockedOptions),
-    `unit ${unit.unitNumber} unlocked with allUnitsUnlocked`,
-  );
-  assert(
-    getUnitStatus(unit, defaultProgress, allUnlockedOptions) !== "locked",
-    `unit ${unit.unitNumber} status not locked with allUnitsUnlocked`,
+    ["available", "current", "completed"].includes(
+      getUnitStatus(unit, defaultProgress),
+    ),
+    `unit ${unit.unitNumber} status is one of available/current/completed`,
   );
 }
 

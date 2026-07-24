@@ -43,16 +43,13 @@ const units = [
   ]),
 ];
 
-const poolAll = buildFishingVocabPool(units, () => true);
-assert.equal(poolAll.length, 2, "keeps only words with images");
-assert.equal(poolAll[0]?.word, "cat");
-assert.equal(poolAll[0]?.imageSrc, "https://example.com/cat.jpg");
-assert.equal(poolAll[0]?.audio, "/sounds/cat.mp3");
-assert.equal(poolAll[0]?.unitId, "unit-1");
-assert.equal(poolAll[1]?.audio, undefined);
-
-const poolLocked = buildFishingVocabPool(units, (u) => u.id === "unit-1");
-assert.equal(poolLocked.length, 1, "respects unlock predicate");
-assert.equal(poolLocked[0]?.id, "cat");
+const pool = buildFishingVocabPool(units);
+assert.equal(pool.length, 2, "keeps only words with images");
+assert.equal(pool[0]?.word, "cat");
+assert.equal(pool[0]?.imageSrc, "https://example.com/cat.jpg");
+assert.equal(pool[0]?.audio, "/sounds/cat.mp3");
+assert.equal(pool[0]?.unitId, "unit-1");
+assert.equal(pool[1]?.audio, undefined);
+assert.equal(pool[1]?.id, "dog");
 
 console.log("buildFishingVocabPool.test.ts: ok");

@@ -72,45 +72,17 @@ export function getUnitProgressInfo(unit: CourseUnit, progress: UserProgressV1):
   };
 }
 
-export function getUnitByNumber(unitNumber: number): CourseUnit | undefined {
-  return courseUnits.find((unit) => unit.unitNumber === unitNumber);
-}
-
-export type ProgressOptions = {
-  allUnitsUnlocked?: boolean;
-};
-
-export function isUnitUnlocked(
-  unit: CourseUnit,
-  progress: UserProgressV1,
-  options?: ProgressOptions,
-): boolean {
-  if (options?.allUnitsUnlocked) return true;
-  if (unit.unitNumber === 1) return true;
-
-  const previousUnit = getUnitByNumber(unit.unitNumber - 1);
-  if (!previousUnit) return true;
-
-  return getUnitProgressInfo(previousUnit, progress).isAtLeastHalf;
-}
-
 export function getUnitsAtLeastHalfComplete(progress: UserProgressV1): number {
   return courseUnits.filter((unit) => getUnitProgressInfo(unit, progress).isAtLeastHalf).length;
 }
 
 export function deriveUnitStatuses(
   progress: UserProgressV1,
-  options?: ProgressOptions,
 ): Map<string, CourseUnitStatus> {
   const statuses = new Map<string, CourseUnitStatus>();
   let currentAssigned = false;
 
   for (const unit of courseUnits) {
-    if (!isUnitUnlocked(unit, progress, options)) {
-      statuses.set(unit.id, "locked");
-      continue;
-    }
-
     const { isFullyComplete } = getUnitProgressInfo(unit, progress);
     if (isFullyComplete) {
       statuses.set(unit.id, "completed");
@@ -131,14 +103,11 @@ export function deriveUnitStatuses(
 export function getUnitStatus(
   unit: CourseUnit,
   progress: UserProgressV1,
-  options?: ProgressOptions,
 ): CourseUnitStatus {
-  if (!isUnitUnlocked(unit, progress, options)) return "locked";
-
   const { isFullyComplete } = getUnitProgressInfo(unit, progress);
   if (isFullyComplete) return "completed";
 
-  const statuses = deriveUnitStatuses(progress, options);
+  const statuses = deriveUnitStatuses(progress);
   return statuses.get(unit.id) ?? "current";
 }
 

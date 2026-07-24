@@ -7,27 +7,14 @@ import { CourseBottomNav } from "../components/course";
 import BucketIcon from "../assets/games/bucket-svgrepo-com.svg?react";
 
 export default function FishingGamePage() {
-  const { pool, canPlay, session, reward, onFishTap, restart } =
-    useFishingSession();
+  const { pool, session, reward, onFishTap, restart } = useFishingSession();
 
   const poolWords = pool.map((item) => item.word.toUpperCase());
 
   return (
     <div className="relative min-h-screen bg-center bg-top bg-no-repeat bg-cover bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80"
     >
-        {!canPlay ? (
-          <div className="p-8 text-center min-h-[90vh] flex flex-col items-center justify-center gap-4">
-            <p className="text-slate-600">Unlock more course units to play.</p>
-            <Link
-              to="/games-v2/fishing?unblock=all"
-              className="mt-4 inline-flex items-center rounded-xl border-2 border-yellow-400 bg-yellow-50 px-5 py-2.5 text-sm font-semibold text-yellow-800 transition-colors hover:bg-yellow-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
-            >
-              or Unblock all units
-            </Link>
-          </div>
-        ) : null}
-
-        {canPlay && session ? (
+        {session ? (
           <div className="relative h-screen overflow-hidden">
             <div className="absolute w-[200px] h-[230px] ml-auto mr-auto right-0 top-10 left-0 flex flex-col items-center gap-2">
               <div className="liquidGlass brightness-120 p-1 flex items-center rounded-full  shadow-sm backdrop-blur-md inset-shadow-sm inset-shadow-white/80 bg-white/30 border border-emerald-200/30 backdrop-saturate-150">

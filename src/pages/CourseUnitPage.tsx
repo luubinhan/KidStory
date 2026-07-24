@@ -1,6 +1,5 @@
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getCourseUnitById } from "../data/course";
-import { useUserProgress } from "../contexts/UserProgressContext";
 import { CourseBottomNav, CourseHowToPlayFab, UnitActivityList } from "../components/course";
 import { CurrencyDisplay } from "../components/progress/CurrencyDisplay";
 import { cn } from "../lib/utils";
@@ -14,7 +13,6 @@ const imageBgClass = "bg-center bg-top bg-no-repeat bg-cover";
 export default function CourseUnitPage() {
   const { unitId } = useParams<{ unitId: string }>();
   const unit = unitId ? getCourseUnitById(unitId) : undefined;
-  const { isUnitAccessible, isLoading } = useUserProgress();
 
   if (!unit) {
     return (
@@ -34,10 +32,6 @@ export default function CourseUnitPage() {
         <CourseHowToPlayFab />
       </div>
     );
-  }
-
-  if (!isLoading && !isUnitAccessible(unit)) {
-    return <Navigate to="/course" replace />;
   }
 
   const Icon = unit.icon;
