@@ -31,6 +31,11 @@ export const courseUnits: readonly CourseUnit[] = [
   unit9WeatherWords,
   unit10WhatsThat,
 ];
+export const gameUnits: readonly CourseUnit[] = [
+  unit8Clothes,
+  unit9WeatherWords,
+  unit10WhatsThat,
+];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {
   return courseUnits.find((unit) => unit.id === unitId);

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { courseUnits } from "../data/course";
+import { gameUnits } from "../data/course";
 import { buildFishingVocabPool } from "../lib/fishing/buildFishingVocabPool";
 import { createInitialLesson, applyDrop } from "../lib/hungry-dog/hungryDogSession";
 import {
@@ -23,7 +23,7 @@ import type { ActivityRewardResult } from "../types/userProgress";
 export function useHungryDogSession() {
   const { isUnitAccessible, addCoins, completeGameV2 } = useUserProgress();
   const pool = useMemo(
-    () => buildFishingVocabPool(courseUnits, isUnitAccessible),
+    () => buildFishingVocabPool(gameUnits, isUnitAccessible),
     [isUnitAccessible],
   );
   const canPlay = pool.length >= HUNGRY_DOG_ROUND.minPoolSize;
