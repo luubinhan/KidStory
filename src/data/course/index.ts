@@ -32,8 +32,7 @@ export const courseUnits: readonly CourseUnit[] = [
   unit10WhatsThat,
 ];
 export const gameUnits: readonly CourseUnit[] = [
-  unit8Clothes,
-  unit9WeatherWords,
+  
   unit10WhatsThat,
 ];
 

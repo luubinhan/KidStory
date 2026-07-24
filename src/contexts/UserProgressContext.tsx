@@ -62,11 +62,11 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
   progressRef.current = progress;
 
   useEffect(() => {
-    /* if (searchParams.get("unblock") === "all") { */
+    if (searchParams.get("unblock") === "all") {
       activateUnblockAll();
       setAllUnitsUnlocked(true);
-    /* } */
-  }, []);
+    }
+  }, [searchParams]);
 
   const progressOptions = useMemo(
     () => (allUnitsUnlocked ? { allUnitsUnlocked: true as const } : undefined),
