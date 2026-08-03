@@ -74,7 +74,7 @@ export function useGameTopicSpellQuestion(
     const key = `spell:${topicId}:${q.id}`;
     if (lastSpellInitialStemKey === key) return;
     lastSpellInitialStemKey = key;
-    void playGameQuestionStem(q, audioRef, stopAudio);
+    void playGameQuestionStem(q, audioRef, stopAudio, { includeAnswer: true });
   }, [topicId, q, stopAudio]);
 
   useEffect(() => {
