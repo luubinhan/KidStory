@@ -37,7 +37,7 @@ export const unit10WhatsThat = {
     {
       id: "robot",
       audio: "/sounds/robot.mp3",
-      word: "robot", translation: "rô-bốt", image: "https://cdnphoto.dantri.com.vn/uHtnBZ3OfHWLxdY2J8cR8hoDBFc=/thumb_w/1470/2026/02/13/robot-hinh-nguoi-1770989346079.jpg"
+      word: "robot", translation: "rô-bốt", image: "https://cdn2.tuoitre.vn/thumb_w/730/471584752817336320/2026/6/7/edit-robot-1780798455727552819811.png"
     },
     {
       id: "marker",
