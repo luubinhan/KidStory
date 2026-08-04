@@ -34,7 +34,7 @@ const units = [
       id: "cat",
       word: "cat",
       image: "https://example.com/cat.jpg",
-      audio: "/sounds/cat.mp3",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/cat.mp3",
     },
     { id: "hi", word: "hi" },
   ]),
@@ -47,7 +47,7 @@ const pool = buildFishingVocabPool(units);
 assert.equal(pool.length, 2, "keeps only words with images");
 assert.equal(pool[0]?.word, "cat");
 assert.equal(pool[0]?.imageSrc, "https://example.com/cat.jpg");
-assert.equal(pool[0]?.audio, "/sounds/cat.mp3");
+assert.equal(pool[0]?.audio, "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/cat.mp3");
 assert.equal(pool[0]?.unitId, "unit-1");
 assert.equal(pool[1]?.audio, undefined);
 assert.equal(pool[1]?.id, "dog");

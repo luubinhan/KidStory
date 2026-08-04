@@ -1,5 +1,5 @@
 /** Served from `public/sounds/` (Vite root URL). */
-const CELEBRATION_AUDIO_URL = "/sounds/win-sound.mp3";
+const CELEBRATION_AUDIO_URL = "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/win-sound.mp3";
 
 export function playCelebrationSound(): void {
   if (!CELEBRATION_AUDIO_URL || typeof window === "undefined") return;

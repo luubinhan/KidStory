@@ -26,7 +26,7 @@ Never call `new Audio(url)` or `fetch(audioUrl)` directly in hooks/components �
 4. **Fallback** — on fetch/cache failure, return the original URL so playback can still try
 
 ```ts
-const src = await resolveAudioSrc("/sounds/banana.mp3");
+const src = await resolveAudioSrc("https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/banana.mp3");
 const el = new Audio(src);
 await el.play();
 ```
@@ -62,7 +62,7 @@ const playWord = useCallback(() => {
 
 ## Data
 
-- Course words: optional `audio: "/sounds/<word>.mp3"` under `public/sounds/`
+- Course words: optional `audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/<word>.mp3"` under `public/sounds/`
 - Spell/MC questions: optional `audioUrl` (same path style)
 - Prefer MP3 when the file exists; TTS (`rate ≈ 0.92`) is the automatic fallback
 

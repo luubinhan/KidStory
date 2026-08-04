@@ -13,14 +13,14 @@ export const unit8Clothes = {
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [
-    { id: "hat", word: "hat", audio: "/sounds/hat.mp3", translation: "mũ", image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg" },
-    { id: "shorts", word: "shorts", audio: "/sounds/shorts.mp3", translation: "quần short", image: "https://www.32degrees.com/cdn/shop/files/stretchwoven_hero_banner_desktop_1866x950_twilltech7in_short.jpg?format=pjpg&v=1781192730&width=2000" },
-    { id: "dress", word: "dress", audio: "/sounds/dress.mp3", translation: "váy", image: "https://www.betsyandadam.com/cdn/shop/files/BetsyAndAdam-LateSummerRefresh-HeroDesktop2.jpg?v=1782410646&width=3000" },
-    { id: "t-shirt", word: "t-shirt", audio: "/sounds/t_shirt.mp3", translation: "áo phông", image: "https://images.twinkl.co.uk/tw1n/image/private/s--QFW6VJOG--/e_sharpen:100,q_auto:eco,w_1260/image_repo/aa/19/T-T-22352-Blank-Colourful-T-Shirt-Cut-Outs.avif" },
-    { id: "pants", word: "pants", audio: "/sounds/pants.mp3", translation: "quần dài", image: "https://blucheez.fashion/cdn/shop/collections/Pant_Banner.webp?v=1723349995&width=2500" },
-    { id: "skirt", word: "skirt", audio: "/sounds/skirt.mp3", translation: "váy", image: "https://www.amantine.com/cdn/shop/articles/Types_of_Womens_Skirts_-_Amantine_1296x.jpg?v=1743002347" },
-    { id: "socks", word: "socks", audio: "/sounds/sock.mp3", translation: "tất", image: "https://cdn.thewirecutter.com/wp-content/media/2025/10/BEST-SOCKS-SUB-02281-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp" },
-    { id: "shoes", word: "shoes", audio: "/sounds/shoe.mp3", translation: "đôi giày", image: "https://api.muji.com.vn/media/catalog/category/shoes_-_Desktop_Banner_.jpg" },
+    { id: "hat", word: "hat", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/hat.mp3", translation: "mũ", image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg" },
+    { id: "shorts", word: "shorts", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shorts.mp3", translation: "quần short", image: "https://www.32degrees.com/cdn/shop/files/stretchwoven_hero_banner_desktop_1866x950_twilltech7in_short.jpg?format=pjpg&v=1781192730&width=2000" },
+    { id: "dress", word: "dress", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/dress.mp3", translation: "váy", image: "https://www.betsyandadam.com/cdn/shop/files/BetsyAndAdam-LateSummerRefresh-HeroDesktop2.jpg?v=1782410646&width=3000" },
+    { id: "t-shirt", word: "t-shirt", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/t_shirt.mp3", translation: "áo phông", image: "https://images.twinkl.co.uk/tw1n/image/private/s--QFW6VJOG--/e_sharpen:100,q_auto:eco,w_1260/image_repo/aa/19/T-T-22352-Blank-Colourful-T-Shirt-Cut-Outs.avif" },
+    { id: "pants", word: "pants", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/pants.mp3", translation: "quần dài", image: "https://blucheez.fashion/cdn/shop/collections/Pant_Banner.webp?v=1723349995&width=2500" },
+    { id: "skirt", word: "skirt", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/skirt.mp3", translation: "váy", image: "https://www.amantine.com/cdn/shop/articles/Types_of_Womens_Skirts_-_Amantine_1296x.jpg?v=1743002347" },
+    { id: "socks", word: "socks", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sock.mp3", translation: "tất", image: "https://cdn.thewirecutter.com/wp-content/media/2025/10/BEST-SOCKS-SUB-02281-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp" },
+    { id: "shoes", word: "shoes", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shoe.mp3", translation: "đôi giày", image: "https://api.muji.com.vn/media/catalog/category/shoes_-_Desktop_Banner_.jpg" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
@@ -77,7 +77,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "hat",
       image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg",
-      audioUrl: "/sounds/hat.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/hat.mp3",
     },
     {
       id: "unit-8-ta-2",
@@ -86,7 +86,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "shorts",
       image: "https://www.aftco.com/cdn/shop/files/M136-DUSK-1.jpg?v=1772816339&width=700&format=webp",
-      audioUrl: "/sounds/shorts.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shorts.mp3",
     },
     {
       id: "unit-8-ta-3",
@@ -95,7 +95,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "dress",
       image: "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=1800&filter=packshot",
-      audioUrl: "/sounds/dress.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/dress.mp3",
     },
     {
       id: "unit-8-ta-4",
@@ -104,7 +104,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "t-shirt",
       image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/513f73c9dcbfe623100b9ccea74b392b/t/s/tsn231454.1.png",
-      audioUrl: "/sounds/t_shirt.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/t_shirt.mp3",
     },
     {
       id: "unit-8-ta-5",
@@ -113,7 +113,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "pants",
       image: "https://owen.cdn.vccloud.vn/media/catalog/product/cache/01755127bd64f5dde3182fd2f139143a/q/r/qrt263043.1.jpg",
-      audioUrl: "/sounds/pants.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/pants.mp3",
     },
     {
       id: "unit-8-ta-6",
@@ -122,7 +122,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "skirt",
       image: "https://ecochic.vn/wp-content/uploads/2024/08/Vay-Ecochic-Lux-Skirt-Than.png",
-      audioUrl: "/sounds/skirt.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/skirt.mp3",
     },
     {
       id: "unit-8-ta-7",
@@ -131,7 +131,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "socks",
       image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990",
-      audioUrl: "/sounds/sock.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sock.mp3",
     },
     {
       id: "unit-8-ta-8",
@@ -140,7 +140,7 @@ export const unit8Clothes = {
       textAfter: ".",
       answer: "shoes",
       image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg",
-      audioUrl: "/sounds/shoe.mp3",
+      audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shoe.mp3",
     },
   ],
 } satisfies CourseUnit;
