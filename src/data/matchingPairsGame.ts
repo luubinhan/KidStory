@@ -5,7 +5,7 @@ export type MatchingPairsWord = {
   image: string;
 };
 
-export const MATCHING_PAIRS_COUNT = 10;
+export const MATCHING_PAIRS_COUNT = 5;
 
 export const matchingPairsWords = [
   {

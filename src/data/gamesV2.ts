@@ -23,7 +23,7 @@ export const gamesV2 = [
     name: "Matching Pairs",
     path: "/games-v2/matching-pairs",
     coinReward: 20,
-    diamondReward: 0,
+    diamondReward: 10,
     thumbnailSrc: IMAGES_ACTIVITIES.matching,
   },
 ] as const satisfies readonly GameV2[];
