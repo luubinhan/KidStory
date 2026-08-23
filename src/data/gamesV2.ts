@@ -1,4 +1,5 @@
 import type { GameV2 } from "../types/gameV2";
+import { IMAGES_ACTIVITIES } from "../constants/images";
 
 export const gamesV2 = [
   {
@@ -7,7 +8,7 @@ export const gamesV2 = [
     path: "/games-v2/fishing",
     coinReward: 50,
     diamondReward: 50,
-    thumbnailSrc: 'https://luubinhan.github.io/KidStory/images/fishing-cover.jpg'
+    thumbnailSrc: "https://luubinhan.github.io/KidStory/images/fishing-cover.jpg",
   },
   {
     id: "hungry-dog",
@@ -15,7 +16,15 @@ export const gamesV2 = [
     path: "/games-v2/hungry-dog",
     coinReward: 5,
     diamondReward: 0,
-    thumbnailSrc: 'https://luubinhan.github.io/KidStory/images/hungry-dog-cover.jpg'
+    thumbnailSrc: "https://luubinhan.github.io/KidStory/images/hungry-dog-cover.jpg",
+  },
+  {
+    id: "matching-pairs",
+    name: "Matching Pairs",
+    path: "/games-v2/matching-pairs",
+    coinReward: 20,
+    diamondReward: 0,
+    thumbnailSrc: IMAGES_ACTIVITIES.matching,
   },
 ] as const satisfies readonly GameV2[];
 

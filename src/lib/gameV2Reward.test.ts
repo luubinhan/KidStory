@@ -16,4 +16,9 @@ assert.equal(again!.progress.coins, before.coins + 100);
 const missing = onGameV2Complete(before, "nope");
 assert.equal(missing, null);
 
+const matching = onGameV2Complete(getDefaultProgress(), "matching-pairs");
+assert.ok(matching, "matching-pairs catalog returns result");
+assert.equal(matching!.coinsEarned, 20);
+assert.equal(matching!.diamondsEarned, 0);
+
 console.log("gameV2Reward.test.ts: ok");
