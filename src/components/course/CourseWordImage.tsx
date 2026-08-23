@@ -19,7 +19,7 @@ export function CourseWordImage({
     return (
       <span
         className={cn(
-          "flex size-24 items-center justify-center rounded-xl font-semibold text-4xl",
+          "flex size-32 items-center justify-center rounded-xl font-semibold text-4xl",
           fallbackClassName,
         )}
         aria-hidden
@@ -33,7 +33,7 @@ export function CourseWordImage({
     <img
       src={image}
       alt={alt}
-      className={cn("size-32 rounded-xl object-cover", className)}
+      className={cn("size-48 rounded-xl object-cover", className)}
     />
   );
 }

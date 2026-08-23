@@ -4,6 +4,7 @@ import { MatchingCard } from "../components/course-practice/MatchingCard";
 import { CourseBottomNav } from "../components/course";
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
 import { useMatchingPairsSession } from "../hooks/useMatchingPairsSession";
+import { IMAGES_ACTIVITIES } from "../constants/images";
 
 export default function MatchingPairsGamePage() {
   const {
@@ -40,14 +41,16 @@ export default function MatchingPairsGamePage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24">
+    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24"
+    style={{ backgroundImage: `url(${IMAGES_ACTIVITIES.matching})` }}
+    >
       {!canPlay ? (
-        <p className="mx-auto mt-12 max-w-md rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
+        <p className="mx-auto mt-12 max-w-lg rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
           Not enough words to play matching yet.
         </p>
       ) : sessionPhase === "summary" ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-sky-900/40 p-4">
-          <div className="w-full max-w-md rounded-2xl bg-sky-100/20 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-xl backdrop-blur-xs inset-shadow-white/80">
+          <div className="w-full max-w-lg rounded-2xl bg-sky-100/20 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-xl backdrop-blur-xs inset-shadow-white/80">
             <ActivityEndShell reward={reward}>
               <h2 className="text-2xl font-bold text-white">Great job!</h2>
               <p className="mt-2 text-sm font-semibold text-white/90">
@@ -72,7 +75,7 @@ export default function MatchingPairsGamePage() {
           </div>
         </div>
       ) : (
-        <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-6">
+        <div className="mx-auto flex max-w-8xl flex-col px-4 py-6">
           <div className="grid min-h-0 flex-1 grid-cols-5 content-start gap-2 sm:gap-3">
             {cards.map((card) => {
               const entry = entryMap.get(card.pairId);
