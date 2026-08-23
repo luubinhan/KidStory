@@ -6,7 +6,6 @@ import {
   GameQuestionStem,
   GameSentenceWordStrip,
   GameSpellLetterStrip,
-  GameTopicBreadcrumb,
   IconVolumeButton,
   McProgressHeader,
 } from "./index";
@@ -25,7 +24,6 @@ type GameTopicPracticeSessionProps = {
   topic: GameTopic;
   topicId: string;
   mode: GameTopicPracticeMode;
-  showGameBreadcrumb?: boolean;
   unitId?: string;
   activityId?: CourseActivityId;
 };
@@ -34,7 +32,6 @@ export function GameTopicPracticeSession({
   topic,
   topicId,
   mode,
-  showGameBreadcrumb = false,
   unitId,
   activityId,
 }: GameTopicPracticeSessionProps) {
@@ -94,14 +91,6 @@ export function GameTopicPracticeSession({
 
     return (
       <div className="max-w-4xl mx-auto py-2">
-        {showGameBreadcrumb ? (
-          <GameTopicBreadcrumb
-            topicTitle={topic.title}
-            questionIndex={questionIndex}
-            questionCount={questions.length}
-          />
-        ) : null}
-
         {q ? (
           <div className="rounded-2xl border-2 border-slate-100 bg-white px-4 py-20 md:p-8 shadow-md">
             {q.image ? (
@@ -175,13 +164,6 @@ export function GameTopicPracticeSession({
 
     return (
       <div className="max-w-4xl mx-auto py-2">
-        {showGameBreadcrumb ? (
-          <GameTopicBreadcrumb
-            topicTitle={topic.title}
-            questionIndex={questionIndex}
-            questionCount={questions.length}
-          />
-        ) : null}
         <McProgressHeader
           current={questionIndex + 1}
           total={questions.length}
@@ -291,14 +273,6 @@ export function GameTopicPracticeSession({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      {showGameBreadcrumb ? (
-        <GameTopicBreadcrumb
-          topicTitle={topic.title}
-          questionIndex={questionIndex}
-          questionCount={questions.length}
-        />
-      ) : null}
-
       <McProgressHeader
         current={questionIndex + 1}
         total={questions.length}

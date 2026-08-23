@@ -1,5 +1,5 @@
 /**
- * Static quiz content for vocabulary games by topic.
+ * Quiz question shape used by course MC/spell practice.
  */
 
 export interface GameQuestion {

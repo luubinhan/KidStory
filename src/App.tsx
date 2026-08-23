@@ -9,8 +9,6 @@ import { UserProgressProvider } from "./contexts/UserProgressContext";
 import { CourseFeedbackFab } from "./components/course";
 import DiscoverPage from "./pages/DiscoverPage";
 import BookDetailPage from "./pages/BookDetailPage";
-import GamesPage from "./pages/GamesPage";
-import GameTopicPage from "./pages/GameTopicPage";
 import CoursePage from "./pages/CoursePage";
 import CourseHowToPlayPage from "./pages/CourseHowToPlayPage";
 import CourseUnitPage from "./pages/CourseUnitPage";
@@ -42,11 +40,11 @@ export default function App() {
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/achievements" element={<Navigate to="/assets" replace />} />
             <Route path="/shop" element={<Navigate to="/assets" replace />} />
-            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games" element={<Navigate to="/games-v2" replace />} />
+            <Route path="/games/:topicId" element={<Navigate to="/games-v2" replace />} />
             <Route path="/games-v2" element={<GamesV2Page />} />
             <Route path="/games-v2/fishing" element={<FishingGamePage />} />
             <Route path="/games-v2/hungry-dog" element={<HungryDogGamePage />} />
-            <Route path="/games/:topicId" element={<GameTopicPage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
           <CourseFeedbackFab />

@@ -50,8 +50,8 @@ src/
 | `/course/:unitId` | Unit detail + activity list |
 | `/course/:unitId/practice/:activityId` | Practice session |
 | `/dictionary` | Cross-unit vocabulary search |
-| `/games` | Game topic list |
-| `/games/:topicId` | Standalone game session |
+| `/games`, `/games/:topicId` | Redirect to `/games-v2` |
+| `/games-v2` | Mini-games hub |
 | `/assets` | Shop / farm assets (also `/shop`, `/achievements` redirect here) |
 | `/settings` | Settings + data backup |
 
@@ -70,9 +70,9 @@ Each book lives in its own folder under `src/data/<slug>/`. Register new books i
 
 When adding course content, use `satisfies CourseUnit` and follow ID patterns like `unit-1-mc-1`, `unit-1-s-1`.
 
-### Games (`src/types/game.ts`, `src/data/games/`)
+### Games (`src/types/gameV2.ts`, `src/data/gamesV2.ts`)
 
-Standalone quiz topics registered in `src/data/games.ts`. Questions use `GameQuestion` (blank sentence + four options). For adding questions, use the project skill at `.cursor/skills/kidstory-game-question-data/SKILL.md`.
+Mini-games hub at `/games-v2` (Fishing, Hungry Dog). `GameQuestion` / `GameTopic` in `src/types/game.ts` are course practice shapes — MC items live on each unit as `multipleChoiceQuestions`. For adding MC questions, use `.cursor/skills/kidstory-game-question-data/SKILL.md`.
 
 ### User progress (`src/types/userProgress.ts`, `src/lib/userProgress*.ts`)
 

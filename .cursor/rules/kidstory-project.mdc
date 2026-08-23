@@ -29,6 +29,6 @@ React 19, TypeScript, Vite, Tailwind v4, react-router-dom, Dexie (IndexedDB). Se
 
 - Routes: `src/App.tsx`
 - Course registry: `src/data/course/index.ts`
-- Game topics: `src/data/games.ts`
+- Mini-games catalog: `src/data/gamesV2.ts`
 - Books: `src/data/books.ts`
 - Practice router: `src/pages/CourseUnitPracticePage.tsx`
