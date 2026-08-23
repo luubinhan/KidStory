@@ -20,6 +20,7 @@ import GamesV2Page from "./pages/GamesV2Page";
 import DoreamonShopPage from "./pages/DoreamonShopPage";
 import FishingGamePage from "./pages/FishingGamePage";
 import HungryDogGamePage from "./pages/HungryDogGamePage";
+import MatchingPairsGamePage from "./pages/MatchingPairsGamePage";
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/games-v2" element={<GamesV2Page />} />
             <Route path="/games-v2/fishing" element={<FishingGamePage />} />
             <Route path="/games-v2/hungry-dog" element={<HungryDogGamePage />} />
+            <Route path="/games-v2/matching-pairs" element={<MatchingPairsGamePage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
           <CourseFeedbackFab />

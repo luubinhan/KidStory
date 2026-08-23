@@ -52,6 +52,7 @@ src/
 | `/dictionary` | Cross-unit vocabulary search |
 | `/games`, `/games/:topicId` | Redirect to `/games-v2` |
 | `/games-v2` | Mini-games hub |
+| `/games-v2/matching-pairs` | Matching pairs flip game |
 | `/assets` | Shop / farm assets (also `/shop`, `/achievements` redirect here) |
 | `/settings` | Settings + data backup |
 
