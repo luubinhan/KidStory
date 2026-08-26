@@ -22,10 +22,10 @@ export function usePicturePuzzleSession() {
   const [item, setItem] = useState<PicturePuzzleItem | undefined>(() => nextItem());
   const [puzzle, setPuzzle] = useState<PicturePuzzleState>(() => createPuzzle());
   const [reward, setReward] = useState<ActivityRewardResult | null>(null);
+  const [runCounter, setRunCounter] = useState(0);
   const awardedRef = useRef(false);
   const runIdRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const autoPlayedRef = useRef(false);
 
   const canPlay = Boolean(item);
   const isComplete = isSolved(puzzle.board);
@@ -49,17 +49,12 @@ export function usePicturePuzzleSession() {
   }, [item, stopAudio]);
 
   useEffect(() => {
-    autoPlayedRef.current = false;
-  }, [item?.id]);
-
-  useEffect(() => {
-    if (!item || autoPlayedRef.current) return;
-    autoPlayedRef.current = true;
+    if (!item) return;
     const id = window.setTimeout(() => {
       playWord();
     }, 200);
     return () => window.clearTimeout(id);
-  }, [item, playWord]);
+  }, [runCounter, item, playWord]);
 
   useEffect(() => {
     if (!isComplete || awardedRef.current) return;
@@ -79,8 +74,8 @@ export function usePicturePuzzleSession() {
 
   const restart = useCallback(() => {
     runIdRef.current += 1;
+    setRunCounter((c) => c + 1);
     awardedRef.current = false;
-    autoPlayedRef.current = false;
     setReward(null);
     setItem(nextItem());
     setPuzzle(createPuzzle());
