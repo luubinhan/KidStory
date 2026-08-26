@@ -26,6 +26,14 @@ export const gamesV2 = [
     diamondReward: 10,
     thumbnailSrc: IMAGES_ACTIVITIES.matching,
   },
+  {
+    id: "picture-puzzle",
+    name: "Picture Puzzle",
+    path: "/games-v2/picture-puzzle",
+    coinReward: 5,
+    diamondReward: 1,
+    thumbnailSrc: IMAGES_ACTIVITIES.flashcards,
+  },
 ] as const satisfies readonly GameV2[];
 
 export function getGameV2(id: string): GameV2 | undefined {

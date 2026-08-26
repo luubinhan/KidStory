@@ -19,6 +19,11 @@ assert.equal(missing, null);
 const matching = onGameV2Complete(getDefaultProgress(), "matching-pairs");
 assert.ok(matching, "matching-pairs catalog returns result");
 assert.equal(matching!.coinsEarned, 20);
-assert.equal(matching!.diamondsEarned, 0);
+assert.equal(matching!.diamondsEarned, 10);
+
+const puzzle = onGameV2Complete(getDefaultProgress(), "picture-puzzle");
+assert.ok(puzzle, "picture-puzzle catalog returns result");
+assert.equal(puzzle!.coinsEarned, 5);
+assert.equal(puzzle!.diamondsEarned, 1);
 
 console.log("gameV2Reward.test.ts: ok");
