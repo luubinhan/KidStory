@@ -60,7 +60,7 @@ function DraggableTile({
       type="button"
       ref={setNodeRef}
       className={cn(
-        "size-full cursor-grab touch-manipulation overflow-hidden rounded-lg border-2 border-white shadow-sm active:cursor-grabbing",
+        "relative size-full cursor-grab touch-manipulation overflow-hidden rounded-lg border-2 border-white shadow-sm active:cursor-grabbing",
         isDragging && "z-10 opacity-90 shadow-lg",
         disabled && "cursor-default opacity-80",
       )}

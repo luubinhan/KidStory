@@ -7,21 +7,21 @@ export type PicturePuzzleItem = {
 
 export const picturePuzzleItems = [
   {
-    id: "banana",
-    word: "banana",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/1280px-Banana-Single.jpg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/banana.mp3",
+    id: "sunny",
+    word: "sunny",
+    image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757659533373/35611f19.jpg",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sunny.mp3",
   },
   {
-    id: "cherry",
-    word: "cherry",
-    image: "https://media.istockphoto.com/id/506627545/photo/cherry-isolated-on-white-background.jpg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/cherry.mp3",
+    id: "windy",
+    word: "windy",
+    image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757668025838/989a7fb8.jpg",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/windy.mp3",
   },
   {
-    id: "hat",
-    word: "hat",
-    image: "https://sixhats.ca/cdn/shop/files/Charcoal_range_patch_frontside_view.jpg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/hat.mp3",
+    id: "snowy",
+    word: "snowy",
+    image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757665825163/3c9f2e7e.jpg",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/snowy.mp3",
   },
 ] as const satisfies readonly PicturePuzzleItem[];
