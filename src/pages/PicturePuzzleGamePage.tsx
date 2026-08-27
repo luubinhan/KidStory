@@ -41,8 +41,8 @@ export default function PicturePuzzleGamePage() {
 
   return (
     <div
-      className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24"
-      style={{ backgroundImage: `url(${IMAGES_ACTIVITIES.flashcards})` }}
+      className="relative bg-center min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24"
+      style={{ backgroundImage: `url(${IMAGES_ACTIVITIES["complete-sentence"]})` }}
     >
       {!canPlay || !item ? (
         <p className="mx-auto mt-12 max-w-lg rounded-2xl border-2 border-white bg-white p-6 text-center text-slate-500 shadow-md">
