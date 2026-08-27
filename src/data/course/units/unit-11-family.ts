@@ -7,7 +7,6 @@ export const unit11Family = {
   unitNumber: 11,
   title: "Family",
   subtitle: "",
-  status: "current",
   icon: Users,
   youtubeVideoId: "FHaObkHEkHQ",
   backgroundUrl: BG_UNITS["bg-unit-11"],
