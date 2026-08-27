@@ -13,10 +13,10 @@ export const picturePuzzleItems = [
     audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sunny.mp3",
   },
   {
-    id: "windy",
-    word: "windy",
-    image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757668025838/989a7fb8.jpg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/windy.mp3",
+    id: "table",
+    word: "table",
+    image: "https://megafurniture.sg/cdn/shop/articles/table-types-guide-find-the-perfect-table-for-your-home-megafurniture_315f2df9-35e7-4c23-a620-e8a6b72f0156.jpg",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/table.mp3",
   },
   {
     id: "tablet",
