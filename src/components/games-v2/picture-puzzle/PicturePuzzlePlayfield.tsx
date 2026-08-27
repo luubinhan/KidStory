@@ -120,7 +120,7 @@ function PlayfieldBody({
       <div
         ref={setTrayRef}
         className={cn(
-          "flex absolute left-0 top-0 bottom-[70px] w-[120px] gap-1 overflow-y-auto flex-wrap justify-center items-start rounded-md border-2 border-dashed border-slate-200 bg-white/60 p-3",
+          "flex absolute left-0 top-0 bottom-[70px] w-[120px] gap-1 flex-wrap justify-center items-start rounded-md border-2 border-dashed border-slate-200 bg-white/60 p-3",
           trayOver && "border-yellow-400 bg-yellow-50",
         )}
       >
