@@ -9,6 +9,7 @@ import { unit7IsHeATeacher } from "./units/unit-7-is-he-a-teacher";
 import { unit8Clothes } from "./units/unit-8-clothes";
 import { unit9WeatherWords } from "./units/unit-9-weather-words";
 import { unit10WhatsThat } from "./units/unit-10-whats-that";
+import { unit11Family } from "./units/unit-11-family";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -30,9 +31,9 @@ export const courseUnits: readonly CourseUnit[] = [
   unit8Clothes,
   unit9WeatherWords,
   unit10WhatsThat,
+  unit11Family,
 ];
 export const gameUnits: readonly CourseUnit[] = [
-  
   unit10WhatsThat,
 ];
 
