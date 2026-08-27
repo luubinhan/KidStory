@@ -7,10 +7,10 @@ export type PicturePuzzleItem = {
 
 export const picturePuzzleItems = [
   {
-    id: "sunny",
-    word: "sunny",
-    image: "https://voca-land.sgp1.cdn.digitaloceanspaces.com/0/1757659533373/35611f19.jpg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sunny.mp3",
+    id: "parents",
+    word: "parents",
+    image: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/images/puzzle/parents.jpeg",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/parents.mp3",
   },
   {
     id: "table",
