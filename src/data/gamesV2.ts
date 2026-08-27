@@ -32,7 +32,7 @@ export const gamesV2 = [
     path: "/games-v2/picture-puzzle",
     coinReward: 5,
     diamondReward: 1,
-    thumbnailSrc: IMAGES_ACTIVITIES["complete-sentence"],
+    thumbnailSrc: "https://luubinhan.github.io/KidStory/images/thumbnail.jpg",
   },
 ] as const satisfies readonly GameV2[];
 

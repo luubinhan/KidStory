@@ -76,7 +76,7 @@ export default function PicturePuzzleGamePage() {
           )}
           <div className="mx-auto flex max-w-full flex-col px-4 py-6">
           <div className="mb-4 flex items-center justify-center gap-3">
-            <p className="text-3xl font-bold capitalize text-slate-900">{item.word}</p>
+            <p className="text-3xl font-bold capitalize text-white">{item.word}</p>
             <IconVolumeButton aria-label={`Play ${item.word}`} onClick={playWord} />
           </div>
           <PicturePuzzlePlayfield

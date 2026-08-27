@@ -91,7 +91,7 @@ function Slot({
     <div
       ref={setNodeRef}
       className={cn(
-        "aspect-square rounded-md border-2 border-dashed border-slate-300 bg-white/70",
+        "aspect-square rounded-md border-1 border-dashed border-slate-300/20 backdrop-blur-xs",
         isOver && "border-yellow-400 bg-yellow-50",
       )}
     >
@@ -120,7 +120,7 @@ function PlayfieldBody({
       <div
         ref={setTrayRef}
         className={cn(
-          "flex absolute left-0 top-0 bottom-[70px] w-[120px] gap-1 flex-wrap justify-center items-start rounded-md border-2 border-dashed border-slate-200 bg-white/60 p-3",
+          "flex absolute left-0 top-0 bottom-[70px] w-[120px] gap-1 flex-wrap justify-center items-start p-3 backdrop-blur-2xs bg-sky-100/20 shadow-sm inset-shadow-xs inset-shadow-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.06)]",
           trayOver && "border-yellow-400 bg-yellow-50",
         )}
       >
