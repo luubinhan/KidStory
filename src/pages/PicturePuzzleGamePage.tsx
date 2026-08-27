@@ -51,13 +51,10 @@ export default function PicturePuzzleGamePage() {
       ) : (
         <>
           {sessionPhase === "summary" && (
-            <div className="absolute inset-0 z-20 flex items-center justify-center bg-sky-900/40 p-4">
-              <div className="w-full max-w-lg rounded-2xl bg-sky-100/20 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-xl backdrop-blur-xs inset-shadow-white/80">
+            <div className="absolute inset-0 z-20 flex items-center justify-center  p-4">
+              <div className="w-full max-w-lg rounded-2xl px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-xl backdrop-blur-xs inset-shadow-white/80">
                 <ActivityEndShell reward={reward}>
                   <h2 className="text-2xl font-bold text-white">Great job!</h2>
-                  <p className="mt-2 text-sm font-semibold text-white/90">
-                    You built the picture for {item.word}
-                  </p>
                   <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                     <button
                       type="button"
