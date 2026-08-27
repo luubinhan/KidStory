@@ -1,5 +1,6 @@
 import { Users } from "lucide-react";
 import type { CourseUnit } from "../../../types/course";
+import { BG_UNITS } from "@/src/constants/images";
 
 export const unit11Family = {
   id: "unit-11",
@@ -9,6 +10,7 @@ export const unit11Family = {
   status: "current",
   icon: Users,
   youtubeVideoId: "FHaObkHEkHQ",
+  backgroundUrl: BG_UNITS["bg-unit-11"],
   iconBgClass: "bg-violet-100",
   iconColorClass: "text-violet-600",
   words: [
