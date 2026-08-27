@@ -9,7 +9,7 @@ export const unit11Family = {
   subtitle: "",
   icon: Users,
   youtubeVideoId: "FHaObkHEkHQ",
-  backgroundUrl: BG_UNITS["bg-unit-11"],
+  backgroundUrl: BG_UNITS["bg-unit-2"],
   iconColorClass: "text-violet-600",
   words: [
     {
