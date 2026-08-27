@@ -12,12 +12,24 @@ export const unit11Family = {
   iconBgClass: "bg-violet-100",
   iconColorClass: "text-violet-600",
   words: [
-    { id: "grandfather",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/grandfather.mp3",
-       word: "grandfather", translation: "ông", image: "" },
-    { id: "grandmother",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/grandmother.mp3",
-      word: "grandmother", translation: "bà", image: "" },
+    {
+      id: "grandfather",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/grandfather.mp3",
+      word: "grandfather",
+      translation: "ông",
+      image:
+        "https://img.magnific.com/free-vector/grandfather-grandson-bonding-time_1308-166888.jpg",
+    },
+    {
+      id: "grandmother",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/grandmother.mp3",
+      word: "grandmother",
+      translation: "bà",
+      image:
+        "https://bognabialecka.pl/wp-content/uploads/2025/08/saint-grandmother-1024x683.jpg",
+    },
     {
       id: "father",
       audio:
@@ -45,35 +57,58 @@ export const unit11Family = {
       image:
         "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/images/puzzle/parents.jpeg",
     },
-    { id: "aunt",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/aunt.mp3",
-      word: "aunt", translation: "dì / cô / bác gái", image: "" },
+    {
+      id: "aunt",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/aunt.mp3",
+      word: "aunt",
+      translation: "dì / cô / bác gái",
+      image:
+        "https://www.thoughtco.com/thmb/cB3WuMN553wi2Rhp0yEO0hNDKFY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/toddler-and-her-aunt-puffing-out-their-cheeks-456343003-59c6f4d00d327a001148e3ed.jpg",
+    },
     {
       id: "brother",
       word: "brother",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/brother.mp3",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/brother.mp3",
       translation: "anh trai / em trai",
-      image: "",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQunITOVTg82ZDvvv19V7WKCx7BlP3oNPQCQZh8Nplrq-XNHB6Sh8nOhU0&s=10",
     },
     {
       id: "sister",
       word: "sister",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sister.mp3",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sister.mp3",
       translation: "chị gái / em gái",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6GK9WzvBInh43ZEhoinsPA7Knu8HwjKMdq6YyKV-yU4IfZToBobhQ6a0&s=10",
+    },
+    {
+      id: "me",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/me.mp3",
+      word: "me",
+      translation: "tôi",
       image: "",
     },
-    { id: "me",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/me.mp3",
-      word: "me", translation: "tôi", image: "" },
-    { id: "uncle",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/uncle.mp3",
-      word: "uncle", translation: "chú / bác / cậu", image: "" },
+    {
+      id: "uncle",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/uncle.mp3",
+      word: "uncle",
+      translation: "chú / bác / cậu",
+      image:
+        "https://yourhomework.net/yhw/f/yhw-voca/2023/08/1/202308180535454271019.jpg",
+    },
     {
       id: "cousin",
       word: "cousin",
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/cousin.mp3",
+      audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/cousin.mp3",
       translation: "anh em họ / họ hàng",
-      image: "",
+      image:
+        "https://www.shutterstock.com/image-vector/cartoon-illustration-cousins-day-celebration-260nw-2645049659.jpg",
     },
   ],
   practiceSentences: [
