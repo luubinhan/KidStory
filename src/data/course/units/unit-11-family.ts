@@ -11,7 +11,6 @@ export const unit11Family = {
   icon: Users,
   youtubeVideoId: "FHaObkHEkHQ",
   backgroundUrl: BG_UNITS["bg-unit-11"],
-  iconBgClass: "bg-violet-100",
   iconColorClass: "text-violet-600",
   words: [
     {
