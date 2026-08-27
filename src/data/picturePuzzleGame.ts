@@ -15,7 +15,7 @@ export const picturePuzzleItems = [
   {
     id: "table",
     word: "table",
-    image: "https://megafurniture.sg/cdn/shop/articles/table-types-guide-find-the-perfect-table-for-your-home-megafurniture_315f2df9-35e7-4c23-a620-e8a6b72f0156.jpg",
+    image: "https://www.ldoceonline.com/media/english/illustration/dining_room_table.jpg",
     audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/table.mp3",
   },
   {
