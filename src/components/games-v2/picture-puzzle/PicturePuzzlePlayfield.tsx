@@ -91,7 +91,7 @@ function Slot({
     <div
       ref={setNodeRef}
       className={cn(
-        "aspect-square rounded-lg border-2 border-dashed border-slate-300 bg-white/70",
+        "aspect-square rounded-md border-2 border-dashed border-slate-300 bg-white/70",
         isOver && "border-yellow-400 bg-yellow-50",
       )}
     >
@@ -116,8 +116,21 @@ function PlayfieldBody({
   const { setNodeRef: setTrayRef, isOver: trayOver } = useDroppable({ id: "tray" });
 
   return (
-    <>
-      <div className="mx-auto grid w-full max-w-md grid-cols-3 gap-2">
+    <div>
+      <div
+        ref={setTrayRef}
+        className={cn(
+          "flex absolute left-0 top-0 bottom-[70px] w-[120px] gap-1 overflow-y-auto flex-wrap justify-center items-start rounded-md border-2 border-dashed border-slate-200 bg-white/60 p-3",
+          trayOver && "border-yellow-400 bg-yellow-50",
+        )}
+      >
+        {tray.map((tileId) => (
+          <div key={`tray-${tileId}`} className="size-18">
+            <DraggableTile tileId={tileId} imageSrc={imageSrc} disabled={disabled} />
+          </div>
+        ))}
+      </div>
+      <div className="grid max-w-xl mx-auto  grid-cols-3">
         {board.map((tileId, index) => (
           <Slot
             key={`slot-${index}`}
@@ -128,20 +141,8 @@ function PlayfieldBody({
           />
         ))}
       </div>
-      <div
-        ref={setTrayRef}
-        className={cn(
-          "mt-6 flex min-h-24 flex-wrap justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-200 bg-white/60 p-3",
-          trayOver && "border-yellow-400 bg-yellow-50",
-        )}
-      >
-        {tray.map((tileId) => (
-          <div key={`tray-${tileId}`} className="size-20 sm:size-24">
-            <DraggableTile tileId={tileId} imageSrc={imageSrc} disabled={disabled} />
-          </div>
-        ))}
-      </div>
-    </>
+      
+    </div>
   );
 }
 
