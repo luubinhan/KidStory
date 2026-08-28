@@ -65,7 +65,7 @@ export const unit11Family = {
       word: "aunt",
       translation: "dì / cô / bác gái",
       image:
-        "https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649571266156/3b1f1b752ecc87ef144f000eff60ce186f72ed6b69f91a775fca476d2753be8c.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7HSguBMHbmbwLuZmpmXbKzHmlH13FEOIaYOHvlDYYrnNxqgVzhrPPGlh_&s=10",
     },
     {
       id: "brother",
