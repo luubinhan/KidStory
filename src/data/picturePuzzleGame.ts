@@ -36,4 +36,10 @@ export const picturePuzzleItems = [
     image: "https://bognabialecka.pl/wp-content/uploads/2025/08/saint-grandmother-1024x683.jpg",
     audio: "",
   },
+  {
+    id: "duck",
+    word: "duck",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4PAYxurW1SzeIZOi3WWtLPumfOTSD4aGhtBymnI8Njg&s=10",
+    audio: "",
+  },
 ] as const satisfies readonly PicturePuzzleItem[];
