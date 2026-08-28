@@ -11,6 +11,7 @@ export const unit11Family = {
   youtubeVideoId: "FHaObkHEkHQ",
   backgroundUrl: BG_UNITS["bg-unit-2"],
   iconColorClass: "text-violet-600",
+  iconBgClass: "bg-violet-100",
   words: [
     {
       id: "grandfather",
@@ -64,7 +65,7 @@ export const unit11Family = {
       word: "aunt",
       translation: "dì / cô / bác gái",
       image:
-        "https://www.thoughtco.com/thmb/cB3WuMN553wi2Rhp0yEO0hNDKFY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/toddler-and-her-aunt-puffing-out-their-cheeks-456343003-59c6f4d00d327a001148e3ed.jpg",
+        "https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649571266156/3b1f1b752ecc87ef144f000eff60ce186f72ed6b69f91a775fca476d2753be8c.jpg",
     },
     {
       id: "brother",
@@ -83,14 +84,6 @@ export const unit11Family = {
       translation: "chị gái / em gái",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6GK9WzvBInh43ZEhoinsPA7Knu8HwjKMdq6YyKV-yU4IfZToBobhQ6a0&s=10",
-    },
-    {
-      id: "me",
-      audio:
-        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/me.mp3",
-      word: "me",
-      translation: "tôi",
-      image: "",
     },
     {
       id: "uncle",
