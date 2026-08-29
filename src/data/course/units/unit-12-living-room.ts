@@ -1,6 +1,7 @@
 import { Armchair } from "lucide-react";
+import { BG_UNITS } from "../../../constants/images";
+
 import type { CourseUnit } from "../../../types/course";
-import { BG_UNITS } from "@/src/constants/images";
 
 export const unit12LivingRoom = {
   id: "unit-12",
@@ -10,7 +11,7 @@ export const unit12LivingRoom = {
   status: "current",
   icon: Armchair,
   youtubeVideoId: "6dDzBGPcnJM",
-  backgroundUrl: BG_UNITS["bg-unit-3"],
+  backgroundUrl: BG_UNITS["bg-unit-11"],
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [

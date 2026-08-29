@@ -1,6 +1,6 @@
 import { Bike } from "lucide-react";
 import type { CourseUnit } from "../../../types/course";
-import { BG_UNITS } from "@/src/constants/images";
+import { BG_UNITS } from "../../../constants/images";
 
 export const unit10WhatsThat = {
   id: "unit-10",
