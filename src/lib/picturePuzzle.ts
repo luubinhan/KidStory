@@ -94,3 +94,16 @@ export function pickPicturePuzzleItem<T>(
   const index = Math.min(items.length - 1, Math.floor(random() * items.length));
   return items[index];
 }
+
+export function hasBoardProgress(board: PicturePuzzleBoard): boolean {
+  return board.some((cell) => cell !== null);
+}
+
+export function shouldConfirmSwitch(
+  board: PicturePuzzleBoard,
+  fromId: string,
+  toId: string,
+): boolean {
+  if (fromId === toId) return false;
+  return hasBoardProgress(board);
+}

@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import {
   applyDrag,
   createPuzzle,
+  hasBoardProgress,
   isSolved,
   pickPicturePuzzleItem,
+  shouldConfirmSwitch,
   tileBackgroundPosition,
 } from "./picturePuzzle";
 
@@ -67,5 +69,22 @@ assert.deepEqual(tileBackgroundPosition(8), { xPercent: 100, yPercent: 100 });
 assert.equal(pickPicturePuzzleItem([], () => 0), undefined);
 assert.equal(pickPicturePuzzleItem(["a", "b", "c"], () => 0), "a");
 assert.equal(pickPicturePuzzleItem(["a", "b", "c"], () => 0.99), "c");
+
+assert.equal(hasBoardProgress(emptyBoard), false);
+assert.equal(
+  hasBoardProgress([0, null, null, null, null, null, null, null, null]),
+  true,
+);
+
+assert.equal(shouldConfirmSwitch(emptyBoard, "a", "b"), false);
+assert.equal(shouldConfirmSwitch(emptyBoard, "a", "a"), false);
+assert.equal(
+  shouldConfirmSwitch([0, null, null, null, null, null, null, null, null], "a", "a"),
+  false,
+);
+assert.equal(
+  shouldConfirmSwitch([0, null, null, null, null, null, null, null, null], "a", "b"),
+  true,
+);
 
 console.log("picturePuzzle.test.ts: ok");
