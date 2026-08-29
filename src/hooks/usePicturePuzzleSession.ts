@@ -6,6 +6,7 @@ import {
   createPuzzle,
   isSolved,
   pickPicturePuzzleItem,
+  shouldConfirmSwitch,
   type DragSource,
   type DragTarget,
   type PicturePuzzleState,
@@ -23,6 +24,7 @@ export function usePicturePuzzleSession() {
   const [puzzle, setPuzzle] = useState<PicturePuzzleState>(() => createPuzzle());
   const [reward, setReward] = useState<ActivityRewardResult | null>(null);
   const [runCounter, setRunCounter] = useState(0);
+  const [pendingSelectId, setPendingSelectId] = useState<string | null>(null);
   const awardedRef = useRef(false);
   const runIdRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -82,6 +84,48 @@ export function usePicturePuzzleSession() {
     stopAudio();
   }, [stopAudio]);
 
+  const applySwitch = useCallback(
+    (next: PicturePuzzleItem) => {
+      runIdRef.current += 1;
+      setRunCounter((c) => c + 1);
+      awardedRef.current = false;
+      setReward(null);
+      setItem(next);
+      setPuzzle(createPuzzle());
+      setPendingSelectId(null);
+      stopAudio();
+    },
+    [stopAudio],
+  );
+
+  const selectItem = useCallback(
+    (id: string) => {
+      if (!item || id === item.id) return;
+      const next = picturePuzzleItems.find((row) => row.id === id);
+      if (!next) return;
+      if (shouldConfirmSwitch(puzzle.board, item.id, id)) {
+        setPendingSelectId(id);
+        return;
+      }
+      applySwitch(next);
+    },
+    [item, puzzle.board, applySwitch],
+  );
+
+  const confirmPendingSelect = useCallback(() => {
+    if (!pendingSelectId) return;
+    const next = picturePuzzleItems.find((row) => row.id === pendingSelectId);
+    if (!next) {
+      setPendingSelectId(null);
+      return;
+    }
+    applySwitch(next);
+  }, [pendingSelectId, applySwitch]);
+
+  const cancelPendingSelect = useCallback(() => {
+    setPendingSelectId(null);
+  }, []);
+
   return {
     canPlay,
     item,
@@ -92,5 +136,10 @@ export function usePicturePuzzleSession() {
     playWord,
     onDrag,
     restart,
+    items: picturePuzzleItems,
+    pendingSelectId,
+    selectItem,
+    confirmPendingSelect,
+    cancelPendingSelect,
   };
 }

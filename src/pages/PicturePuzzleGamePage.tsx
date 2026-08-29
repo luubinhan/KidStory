@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CourseBottomNav } from "../components/course";
+import { PicturePuzzleItemPicker } from "../components/games-v2/picture-puzzle/PicturePuzzleItemPicker";
 import { PicturePuzzlePlayfield } from "../components/games-v2/picture-puzzle/PicturePuzzlePlayfield";
 import { IconVolumeButton } from "../components/game-topic/IconVolumeButton";
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
+import { AlertDialog } from "../components/ui";
 import { IMAGES_ACTIVITIES } from "../constants/images";
 import { usePicturePuzzleSession } from "../hooks/usePicturePuzzleSession";
 
@@ -18,6 +20,11 @@ export default function PicturePuzzleGamePage() {
     playWord,
     onDrag,
     restart,
+    items,
+    pendingSelectId,
+    selectItem,
+    confirmPendingSelect,
+    cancelPendingSelect,
   } = usePicturePuzzleSession();
 
   const [sessionPhase, setSessionPhase] = useState<"playing" | "summary">("playing");
@@ -38,6 +45,8 @@ export default function PicturePuzzleGamePage() {
     restart();
     setSessionPhase("playing");
   };
+
+  const pickerDisabled = sessionPhase === "summary";
 
   return (
     <div
@@ -74,19 +83,50 @@ export default function PicturePuzzleGamePage() {
               </div>
             </div>
           )}
-          <div className="mx-auto flex max-w-full flex-col px-4 py-6">
-          <div className="mb-4 flex items-center justify-center gap-3">
-            <p className="text-3xl font-bold capitalize text-white">{item.word}</p>
-            <IconVolumeButton aria-label={`Play ${item.word}`} onClick={playWord} />
+          <div className="mx-auto flex max-w-full flex-col px-4 py-6 md:flex-row md:items-start md:gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="mb-4 flex items-center justify-center gap-3">
+                <p className="text-3xl font-bold capitalize text-white">{item.word}</p>
+                <IconVolumeButton aria-label={`Play ${item.word}`} onClick={playWord} />
+              </div>
+              <div className="mb-4 md:hidden">
+                <PicturePuzzleItemPicker
+                  items={items}
+                  selectedId={item.id}
+                  disabled={pickerDisabled}
+                  orientation="horizontal"
+                  onSelect={selectItem}
+                />
+              </div>
+              <PicturePuzzlePlayfield
+                imageSrc={item.image}
+                board={board}
+                tray={tray}
+                disabled={isComplete}
+                onDrag={onDrag}
+              />
+            </div>
+            <aside className="sticky top-4 hidden w-32 shrink-0 md:block">
+              <PicturePuzzleItemPicker
+                items={items}
+                selectedId={item.id}
+                disabled={pickerDisabled}
+                orientation="vertical"
+                onSelect={selectItem}
+              />
+            </aside>
           </div>
-          <PicturePuzzlePlayfield
-            imageSrc={item.image}
-            board={board}
-            tray={tray}
-            disabled={isComplete}
-            onDrag={onDrag}
+          <AlertDialog
+            open={pendingSelectId !== null}
+            onOpenChange={(open) => {
+              if (!open) cancelPendingSelect();
+            }}
+            title="Switch picture?"
+            description="You will lose this puzzle."
+            cancelLabel="Cancel"
+            actionLabel="Switch"
+            onAction={confirmPendingSelect}
           />
-          </div>
         </>
       )}
       <CourseBottomNav />
