@@ -42,4 +42,16 @@ export const picturePuzzleItems = [
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4PAYxurW1SzeIZOi3WWtLPumfOTSD4aGhtBymnI8Njg&s=10",
     audio: "",
   },
+  {
+    id: "sofa",
+    word: "sofa",
+    image: "https://made4home.com.vn/assets/media/2024/08/living-room-japandi-interior-design2-2.jpg",
+    audio: "",
+  },
+  {
+    id: "bed",
+    word: "bed",
+    image: "https://gohome.vn/wp-content/uploads/2025/09/gh11019.png",
+    audio: "",
+  },
 ] as const satisfies readonly PicturePuzzleItem[];

@@ -14,14 +14,41 @@ export const unit12LivingRoom = {
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",
   words: [
-    { id: "bed", word: "bed", translation: "cái giường", image: "" },
-    { id: "sofa", word: "sofa", translation: "ghế sofa", image: "" },
-    { id: "tv", word: "TV", translation: "tivi", image: "" },
-    { id: "shower", word: "shower", translation: "vòi tắm", image: "" },
-    { id: "sink", word: "sink", translation: "bồn rửa", image: "" },
-    { id: "lamp", word: "lamp", translation: "đèn", image: "" },
-    { id: "table", word: "table", translation: "cái bàn", image: "" },
-    { id: "wall", word: "wall", translation: "bức tường", image: "" },
+    {
+      id: "bed",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/bed.mp3",
+      word: "bed", translation: "cái giường", image: "https://gohome.vn/wp-content/uploads/2025/09/gh11019.png"
+    },
+    {
+      id: "sofa",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sofa.mp3",
+      word: "sofa", translation: "ghế sofa", image: "https://made4home.com.vn/assets/media/2024/08/living-room-japandi-interior-design2-2.jpg"
+    },
+    { id: "tv", word: "TV", translation: "tivi", image: "https://images-na.ssl-images-amazon.com/images/I/81pieXC63IL.jpg" },
+    {
+      id: "shower",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shower.mp3",
+      word: "shower", translation: "vòi tắm", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkBez3b9RiItiwoOBV1R_WV7emNd3N47gJePyfZYiQ2Pna3aS2vLrYaPP&s=10"
+    },
+    {
+      id: "sink",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sink.mp3",
+      word: "sink", translation: "bồn rửa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmB7zWMtd77kNyDKy47w-aBF_2uLOywxGF2FMtkn_BjmiINSqAoKHjUlQ&s=10"
+    },
+    {
+      id: "lamp",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/lamp.mp3",
+      word: "lamp", translation: "đèn", image: "https://img.magnific.com/free-psd/collection-modern-pendant-lamps-table-lamp_191095-77667.jpg?semt=ais_hybrid&w=740&q=80"
+    },
+    {
+      id: "table",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/table.mp3", word: "table", translation: "cái bàn", image: "https://www.ldoceonline.com/media/english/illustration/dining_room_table.jpg"
+    },
+    {
+      id: "wall",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/wall.mp3",
+      word: "wall", translation: "bức tường", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWLiympXMXy5zwDA94GuBVJ8zgbBZXaAVYldQdFypClyjrRoIMWYESkGVi&s=10"
+    },
   ],
   practiceSentences: [
     { id: "unit-12-s-1", text: "the lamp is on the table" },
