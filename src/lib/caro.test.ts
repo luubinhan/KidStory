@@ -233,17 +233,22 @@ const noUndoAfterWin = undo(wonState);
 assert.equal(noUndoAfterWin.status, "won");
 assert.equal(noUndoAfterWin.board[5][5], "X");
 
+function patternPlayer(r: number, c: number): CaroPlayer {
+  const inFours = c % 5 < 4;
+  if (r % 2 === 0) return inFours ? "X" : "O";
+  return inFours ? "O" : "X";
+}
+
 const lastRow = CARO_SIZE - 1;
-const lastCol = CARO_SIZE - 2;
+const lastCol = CARO_SIZE - 1;
 const board = emptyBoard();
 for (let r = 0; r < CARO_SIZE; r++) {
   for (let c = 0; c < CARO_SIZE; c++) {
     if (r === lastRow && c === lastCol) continue;
-    board[r][c] = (Math.floor(r / 4) + Math.floor(c / 4)) % 2 === 0 ? "X" : "O";
+    board[r][c] = patternPlayer(r, c);
   }
 }
-const lastPlayer =
-  (Math.floor(lastRow / 4) + Math.floor(lastCol / 4)) % 2 === 0 ? "X" : "O";
+const lastPlayer = patternPlayer(lastRow, lastCol);
 const almostFull: CaroState = {
   board,
   turn: lastPlayer,
