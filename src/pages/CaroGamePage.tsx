@@ -79,12 +79,6 @@ export default function CaroGamePage() {
               >
                 New game
               </button>
-              <Link
-                to="/games-v2"
-                className="inline-flex items-center rounded-xl border-2 border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800"
-              >
-                Back to games
-              </Link>
             </div>
           </div>
         </div>
