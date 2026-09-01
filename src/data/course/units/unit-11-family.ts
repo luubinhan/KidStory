@@ -52,7 +52,7 @@ export const unit11Family = {
     {
       id: "parents",
       audio:
-        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/parents.mp3",
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/parent.mp3",
       word: "parents",
       translation: "cha mẹ",
       image:

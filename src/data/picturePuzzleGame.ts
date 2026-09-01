@@ -10,7 +10,7 @@ export const picturePuzzleItems = [
     id: "parents",
     word: "parents",
     image: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/images/puzzle/parents.jpeg",
-    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/parents.mp3",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/parent.mp3",
   },
   {
     id: "table",
