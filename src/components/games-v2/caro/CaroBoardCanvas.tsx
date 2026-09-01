@@ -117,6 +117,21 @@ export function CaroBoardCanvas({
     ctx.stroke();
     const wins = winKey(winLine);
     const stoneSize = CELL - STONE_PAD * 2;
+
+    if (winLine.length >= 2) {
+      const first = winLine[0]!;
+      const last = winLine[winLine.length - 1]!;
+      ctx.save();
+      ctx.strokeStyle = "#facc15";
+      ctx.lineWidth = Math.max(6, 10 / scale);
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(first.col * CELL + CELL / 2, first.row * CELL + CELL / 2);
+      ctx.lineTo(last.col * CELL + CELL / 2, last.row * CELL + CELL / 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
     for (let row = 0; row < CARO_SIZE; row++) {
       for (let col = 0; col < CARO_SIZE; col++) {
         const cell = board[row][col];
@@ -127,10 +142,11 @@ export function CaroBoardCanvas({
         const cy = row * CELL + CELL / 2;
         const highlight = wins.has(`${row},${col}`);
         if (highlight) {
-          ctx.beginPath();
-          ctx.arc(cx, cy, CELL * 0.42, 0, Math.PI * 2);
-          ctx.fillStyle = cell === "X" ? "rgba(59, 130, 246, 0.45)" : "rgba(245, 158, 11, 0.45)";
-          ctx.fill();
+          ctx.fillStyle = "rgba(250, 204, 21, 0.55)";
+          ctx.fillRect(col * CELL, row * CELL, CELL, CELL);
+          ctx.strokeStyle = "#eab308";
+          ctx.lineWidth = Math.max(2, 3 / scale);
+          ctx.strokeRect(col * CELL + 1, row * CELL + 1, CELL - 2, CELL - 2);
         }
         const img = stonesRef.current[cell];
         if (img?.complete && img.naturalWidth > 0) {
@@ -182,6 +198,28 @@ export function CaroBoardCanvas({
   useEffect(() => {
     drawRef.current();
   }, [board, winLine, lastMove]);
+
+  useEffect(() => {
+    if (winLine.length < 2) return;
+    const wrap = wrapRef.current;
+    if (!wrap || wrap.clientWidth < 1 || wrap.clientHeight < 1) return;
+    const mid = winLine[Math.floor(winLine.length / 2)]!;
+    const cssW = wrap.clientWidth;
+    const cssH = wrap.clientHeight;
+    const scale = Math.max(cameraRef.current.scale, Math.min(cssW, cssH) / (12 * CELL));
+    const focusX = mid.col * CELL + CELL / 2;
+    const focusY = mid.row * CELL + CELL / 2;
+    cameraRef.current = clampCamera(
+      {
+        scale,
+        panX: cssW / 2 - focusX * scale,
+        panY: cssH / 2 - focusY * scale,
+      },
+      cssW,
+      cssH,
+    );
+    drawRef.current();
+  }, [winLine, clampCamera]);
 
   const eventPoint = (e: PointerEvent, canvas: HTMLCanvasElement) => {
     const rect = canvas.getBoundingClientRect();

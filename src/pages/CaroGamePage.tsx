@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { CaroBoardCanvas } from "../components/games-v2/caro/CaroBoardCanvas";
 import { CourseBottomNav } from "../components/course";
 import { AlertDialog } from "../components/ui";
@@ -10,8 +9,27 @@ import { CRYSTAL_SRC } from "../components/games-v2/caro/CaroBoardCanvas";
 export default function CaroGamePage() {
   const { state, place, undo, restart, canUndo } = useCaroSession();
   const [confirmNew, setConfirmNew] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+  const completionHandledRef = useRef(false);
   const playing = state.status === "playing";
   const turnSrc = CRYSTAL_SRC[state.turn];
+
+  useEffect(() => {
+    if (state.status === "playing") {
+      completionHandledRef.current = false;
+      setShowSummary(false);
+      return;
+    }
+    if (completionHandledRef.current) return;
+    completionHandledRef.current = true;
+    const id = window.setTimeout(() => setShowSummary(true), 900);
+    return () => window.clearTimeout(id);
+  }, [state.status]);
+
+  const handleRestart = () => {
+    restart();
+    setShowSummary(false);
+  };
 
   return (
     <div
@@ -60,7 +78,7 @@ export default function CaroGamePage() {
           </button>
         </div>
       </div>
-      {state.status !== "playing" && (
+      {showSummary && state.status !== "playing" && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-sky-900/40 p-4">
           <div className="w-full max-w-sm rounded-2xl border-2 border-white bg-white p-6 text-center shadow-xl">
             {state.status === "draw" ? (
@@ -74,7 +92,7 @@ export default function CaroGamePage() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
-                onClick={restart}
+                onClick={handleRestart}
                 className="inline-flex cursor-pointer items-center rounded-xl border-2 border-yellow-400 bg-yellow-50 px-5 py-2.5 text-sm font-semibold text-yellow-800"
               >
                 New game
@@ -91,7 +109,7 @@ export default function CaroGamePage() {
         cancelLabel="Cancel"
         actionLabel="New game"
         onAction={() => {
-          restart();
+          handleRestart();
           setConfirmNew(false);
         }}
       />
