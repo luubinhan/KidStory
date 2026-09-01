@@ -26,4 +26,10 @@ assert.ok(puzzle, "picture-puzzle catalog returns result");
 assert.equal(puzzle!.coinsEarned, 5);
 assert.equal(puzzle!.diamondsEarned, 1);
 
+const caro = onGameV2Complete(getDefaultProgress(), "caro");
+assert.ok(caro, "caro catalog returns result");
+assert.equal(caro!.coinsEarned, 0);
+assert.equal(caro!.diamondsEarned, 0);
+assert.equal(caro!.progress.coins, getDefaultProgress().coins);
+
 console.log("gameV2Reward.test.ts: ok");
