@@ -5,6 +5,12 @@ import { cn } from "../../../lib/utils";
 const CELL = 32;
 const BOARD_PX = CARO_SIZE * CELL;
 const TAP_SLOP = 10;
+const STONE_PAD = 2;
+
+export const CRYSTAL_SRC = {
+  X: `${import.meta.env.BASE_URL}images/crystal-blue.png`,
+  O: `${import.meta.env.BASE_URL}images/crystal-yellow.png`,
+} as const;
 
 type CaroBoardCanvasProps = {
   board: CaroCell[][];
@@ -44,6 +50,10 @@ export function CaroBoardCanvas({
 
   const drawRef = useRef<() => void>(() => {});
   const didInitCameraRef = useRef(false);
+  const stonesRef = useRef<{ X: HTMLImageElement | null; O: HTMLImageElement | null }>({
+    X: null,
+    O: null,
+  });
 
   const clampCamera = useCallback((cam: Camera, cssW: number, cssH: number): Camera => {
     const minScale = Math.min(cssW / BOARD_PX, cssH / BOARD_PX) * 0.95;
@@ -88,7 +98,7 @@ export function CaroBoardCanvas({
     const { panX, panY, scale } = cameraRef.current;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cssW, cssH);
-    ctx.fillStyle = "#f8fafc";
+    ctx.fillStyle = "transparent";
     ctx.fillRect(0, 0, cssW, cssH);
     ctx.save();
     ctx.translate(panX, panY);
@@ -106,18 +116,31 @@ export function CaroBoardCanvas({
     }
     ctx.stroke();
     const wins = winKey(winLine);
+    const stoneSize = CELL - STONE_PAD * 2;
     for (let row = 0; row < CARO_SIZE; row++) {
       for (let col = 0; col < CARO_SIZE; col++) {
         const cell = board[row][col];
         if (!cell) continue;
+        const x = col * CELL + STONE_PAD;
+        const y = row * CELL + STONE_PAD;
         const cx = col * CELL + CELL / 2;
         const cy = row * CELL + CELL / 2;
         const highlight = wins.has(`${row},${col}`);
-        ctx.beginPath();
-        ctx.arc(cx, cy, CELL * 0.36, 0, Math.PI * 2);
-        ctx.fillStyle = cell === "X" ? "#0f172a" : "#dc2626";
-        if (highlight) ctx.fillStyle = cell === "X" ? "#1d4ed8" : "#f59e0b";
-        ctx.fill();
+        if (highlight) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, CELL * 0.42, 0, Math.PI * 2);
+          ctx.fillStyle = cell === "X" ? "rgba(59, 130, 246, 0.45)" : "rgba(245, 158, 11, 0.45)";
+          ctx.fill();
+        }
+        const img = stonesRef.current[cell];
+        if (img?.complete && img.naturalWidth > 0) {
+          ctx.drawImage(img, x, y, stoneSize, stoneSize);
+        } else {
+          ctx.beginPath();
+          ctx.arc(cx, cy, CELL * 0.36, 0, Math.PI * 2);
+          ctx.fillStyle = cell === "X" ? "#2563eb" : "#f59e0b";
+          ctx.fill();
+        }
       }
     }
     if (lastMove) {
@@ -127,6 +150,25 @@ export function CaroBoardCanvas({
     }
     ctx.restore();
   };
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadStone = (player: "X" | "O") => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = CRYSTAL_SRC[player];
+      img.onload = () => {
+        if (cancelled) return;
+        stonesRef.current[player] = img;
+        drawRef.current();
+      };
+    };
+    loadStone("X");
+    loadStone("O");
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -278,7 +320,7 @@ export function CaroBoardCanvas({
   }, [clampCamera, disabled]);
 
   return (
-    <div ref={wrapRef} className={cn("h-[min(70vh,36rem)] w-full overflow-hidden rounded-2xl border-2 border-white shadow-md")}>
+    <div ref={wrapRef} className={cn("h-[min(70vh,36rem)] w-full overflow-hidden rounded-2xl shadow-md")}>
       <canvas ref={canvasRef} className="block size-full touch-none" />
     </div>
   );
