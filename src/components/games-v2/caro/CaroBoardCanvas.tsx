@@ -358,7 +358,7 @@ export function CaroBoardCanvas({
   }, [clampCamera, disabled]);
 
   return (
-    <div ref={wrapRef} className={cn("h-[min(70vh,36rem)] w-full overflow-hidden rounded-2xl shadow-md")}>
+    <div ref={wrapRef} className={cn("h-90vh w-full overflow-hidden rounded-2xl shadow-md")}>
       <canvas ref={canvasRef} className="block size-full touch-none" />
     </div>
   );

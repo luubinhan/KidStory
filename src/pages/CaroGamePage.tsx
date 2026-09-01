@@ -37,7 +37,7 @@ export default function CaroGamePage() {
       style={{ backgroundImage: `url(${IMAGES_ACTIVITIES["sentence"]})` }}
     >
       <div className="mx-auto flex w-full flex-col gap-4 px-4 py-6">
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           {state.status === "draw" ? (
             <p className="text-2xl font-bold text-white drop-shadow">Draw</p>
           ) : (
@@ -52,6 +52,24 @@ export default function CaroGamePage() {
               ) : null}
             </div>
           )}
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={undo}
+              disabled={!canUndo}
+              className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Undo
+            </button>
+            <button
+              type="button"
+              onClick={() => setConfirmNew(true)}
+              className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              New game
+            </button>
+          </div>  
         </div>
         <CaroBoardCanvas
           board={state.board}
@@ -60,26 +78,10 @@ export default function CaroGamePage() {
           disabled={!playing}
           onPlace={place}
         />
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={undo}
-            disabled={!canUndo}
-            className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Undo
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirmNew(true)}
-            className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            New game
-          </button>
-        </div>
+       
       </div>
       {showSummary && state.status !== "playing" && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-sky-900/40 p-4">
+        <div className="absolute inset-0 z-20 flex items-center justify-center p-4">
           <div className="w-full max-w-sm rounded-2xl border-2 border-white bg-white p-6 text-center shadow-xl">
             {state.status === "draw" ? (
               <h2 className="text-2xl font-bold text-slate-900">Draw</h2>
