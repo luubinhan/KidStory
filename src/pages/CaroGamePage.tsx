@@ -37,7 +37,7 @@ export default function CaroGamePage() {
           <button
             type="button"
             onClick={() => setConfirmNew(true)}
-            className="inline-flex cursor-pointer items-center rounded-xl border-2 border-yellow-400 bg-yellow-50 px-4 py-2 text-sm font-semibold text-yellow-800"
+            className="inline-flex cursor-pointer items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
           >
             New game
           </button>
