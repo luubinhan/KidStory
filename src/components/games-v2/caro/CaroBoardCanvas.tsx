@@ -43,6 +43,7 @@ export function CaroBoardCanvas({
   onPlaceRef.current = onPlace;
 
   const drawRef = useRef<() => void>(() => {});
+  const didInitCameraRef = useRef(false);
 
   const clampCamera = useCallback((cam: Camera, cssW: number, cssH: number): Camera => {
     const minScale = Math.min(cssW / BOARD_PX, cssH / BOARD_PX) * 0.95;
@@ -69,7 +70,21 @@ export function CaroBoardCanvas({
     canvas.style.height = `${cssH}px`;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    cameraRef.current = clampCamera(cameraRef.current, cssW, cssH);
+    if (!didInitCameraRef.current) {
+      const scale = Math.min(cssW, cssH) / (14 * CELL);
+      cameraRef.current = clampCamera(
+        {
+          scale,
+          panX: cssW / 2 - (BOARD_PX * scale) / 2,
+          panY: cssH / 2 - (BOARD_PX * scale) / 2,
+        },
+        cssW,
+        cssH,
+      );
+      didInitCameraRef.current = true;
+    } else {
+      cameraRef.current = clampCamera(cameraRef.current, cssW, cssH);
+    }
     const { panX, panY, scale } = cameraRef.current;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cssW, cssH);
@@ -116,23 +131,11 @@ export function CaroBoardCanvas({
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
-    const cssW = wrap.clientWidth;
-    const cssH = wrap.clientHeight;
-    const scale = Math.min(cssW, cssH) / (14 * CELL);
-    cameraRef.current = clampCamera(
-      {
-        scale,
-        panX: cssW / 2 - (BOARD_PX * scale) / 2,
-        panY: cssH / 2 - (BOARD_PX * scale) / 2,
-      },
-      cssW,
-      cssH,
-    );
     drawRef.current();
     const ro = new ResizeObserver(() => drawRef.current());
     ro.observe(wrap);
     return () => ro.disconnect();
-  }, [clampCamera]);
+  }, []);
 
   useEffect(() => {
     drawRef.current();
