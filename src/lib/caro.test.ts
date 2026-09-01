@@ -154,9 +154,8 @@ const fiveBothO = place(
   20,
   15,
 );
-assert.equal(fiveBothO.status, "playing", "five blocked by opponent both sides");
-assert.equal(fiveBothO.winLine.length, 0);
-assert.equal(fiveBothO.turn, "O");
+assert.equal(fiveBothO.status, "won", "five blocked by opponent both sides still wins");
+assert.equal(fiveBothO.winLine.length, 5);
 
 const fiveEdgeBlocked = place(
   withCells(
@@ -172,7 +171,8 @@ const fiveEdgeBlocked = place(
   0,
   0,
 );
-assert.equal(fiveEdgeBlocked.status, "playing", "five on edge + opponent inner end");
+assert.equal(fiveEdgeBlocked.status, "won", "five on edge + opponent inner end still wins");
+assert.equal(fiveEdgeBlocked.winLine.length, 5);
 
 const fiveEdgeOpen = place(
   withCells(

@@ -41,11 +41,6 @@ function isBoardFull(board: CaroCell[][]): boolean {
   return true;
 }
 
-function isBlocked(board: CaroCell[][], row: number, col: number, opponent: CaroPlayer): boolean {
-  if (!inBounds(row, col)) return true;
-  return board[row][col] === opponent;
-}
-
 function collectRun(
   board: CaroCell[][],
   row: number,
@@ -74,16 +69,9 @@ function collectRun(
 }
 
 function winLineAt(board: CaroCell[][], row: number, col: number, player: CaroPlayer): CaroPoint[] {
-  const opponent = opponentOf(player);
   for (const [dr, dc] of AXES) {
     const run = collectRun(board, row, col, dr, dc, player);
-    const n = run.length;
-    const first = run[0];
-    const last = run[n - 1];
-    const beforeBlocked = isBlocked(board, first.row - dr, first.col - dc, opponent);
-    const afterBlocked = isBlocked(board, last.row + dr, last.col + dc, opponent);
-    if (n >= 6) return run;
-    if (n === 5 && !(beforeBlocked && afterBlocked)) return run;
+    if (run.length >= 5) return run;
   }
   return [];
 }
