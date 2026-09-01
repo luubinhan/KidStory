@@ -34,7 +34,8 @@ export const picturePuzzleItems = [
     id: "grandmother",
     word: "grandmother",
     image: "https://bognabialecka.pl/wp-content/uploads/2025/08/saint-grandmother-1024x683.jpg",
-    audio: "",
+    audio:
+        "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/grandmother.mp3",
   },
   {
     id: "duck",
@@ -46,12 +47,12 @@ export const picturePuzzleItems = [
     id: "sofa",
     word: "sofa",
     image: "https://made4home.com.vn/assets/media/2024/08/living-room-japandi-interior-design2-2.jpg",
-    audio: "",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sofa.mp3",
   },
   {
     id: "bed",
     word: "bed",
     image: "https://gohome.vn/wp-content/uploads/2025/09/gh11019.png",
-    audio: "",
+    audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/bed.mp3",
   },
 ] as const satisfies readonly PicturePuzzleItem[];
