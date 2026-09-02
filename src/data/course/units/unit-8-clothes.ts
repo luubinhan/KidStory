@@ -20,7 +20,7 @@ export const unit8Clothes = {
     { id: "pants", word: "pants", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/pants.mp3", translation: "quần dài", image: "https://blucheez.fashion/cdn/shop/collections/Pant_Banner.webp?v=1723349995&width=2500" },
     { id: "skirt", word: "skirt", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/skirt.mp3", translation: "váy", image: "https://www.amantine.com/cdn/shop/articles/Types_of_Womens_Skirts_-_Amantine_1296x.jpg?v=1743002347" },
     { id: "socks", word: "socks", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sock.mp3", translation: "tất", image: "https://cdn.thewirecutter.com/wp-content/media/2025/10/BEST-SOCKS-SUB-02281-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp" },
-    { id: "shoes", word: "shoes", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shoe.mp3", translation: "đôi giày", image: "https://api.muji.com.vn/media/catalog/category/shoes_-_Desktop_Banner_.jpg" },
+    { id: "shoes", word: "shoes", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shoe.mp3", translation: "đôi giày", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW3DfG80E6GuksXUrS2TtMXjaijmn5IXsTXn9ZNOZsNA&s=10" },
   ],
   practiceSentences: [
     { id: "unit-8-s-1", text: "these are shoes" },
@@ -139,7 +139,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "shoes",
-      image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/03/giay-the-thao-new-balance-2002r-iconic-shoes-brown-mau-nau-size-41-6601225da651c-25032024140605.jpg",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW3DfG80E6GuksXUrS2TtMXjaijmn5IXsTXn9ZNOZsNA&s=10",
       audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/shoe.mp3",
     },
   ],
