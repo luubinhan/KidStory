@@ -40,6 +40,7 @@ export const gamesV2 = [
     path: "/games-v2/caro",
     coinReward: 0,
     diamondReward: 0,
+    thumbnailSrc: "https://luubinhan.github.io/KidStory/images/caro-cover.jpg",
   },
 ] as const satisfies readonly GameV2[];
 
