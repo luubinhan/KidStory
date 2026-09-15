@@ -44,7 +44,7 @@ export const gamesV2 = [
   },
   {
     id: "crane",
-    name: "Letter Crane",
+    name: "Pacman",
     path: "/games-v2/crane",
     coinReward: 0,
     diamondReward: 10,
