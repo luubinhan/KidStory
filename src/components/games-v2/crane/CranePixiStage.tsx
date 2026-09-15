@@ -5,8 +5,10 @@ import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
 
 const HUD_TOP = 180;
 const SLOT_AREA = 200;
-const TIP_SIZE = 28;
-const LETTER_GAP = 48;
+const CELL = 72;
+const MOVE_MS = 180;
+const PAC_RADIUS = CELL * 0.38;
+const MOUTH_IDLE = 0.25;
 
 type CranePixiStageProps = {
   word: string;
@@ -19,6 +21,8 @@ type CranePixiStageProps = {
 type FieldLetter = {
   char: string;
   text: Text;
+  col: number;
+  row: number;
 };
 
 type Tween = {
@@ -30,17 +34,43 @@ type Tween = {
   elapsed: number;
 };
 
-function aabbOverlap(
-  ax: number,
-  ay: number,
-  aw: number,
-  ah: number,
-  bx: number,
-  by: number,
-  bw: number,
-  bh: number,
-): boolean {
-  return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+type MoveTween = {
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+  dirX: number;
+  dirY: number;
+  elapsed: number;
+};
+
+type Grid = {
+  cols: number;
+  rows: number;
+  originX: number;
+  originY: number;
+  cell: number;
+};
+
+function easeOutQuad(t: number): number {
+  return 1 - (1 - t) * (1 - t);
+}
+
+function facingFromKey(key: string): number | null {
+  if (key === "ArrowRight") return 0;
+  if (key === "ArrowDown") return Math.PI / 2;
+  if (key === "ArrowLeft") return Math.PI;
+  if (key === "ArrowUp") return -Math.PI / 2;
+  return null;
+}
+
+function drawPacman(g: Graphics, radius: number, mouthHalf: number): void {
+  g.clear();
+  g.moveTo(0, 0)
+    .arc(0, 0, radius, mouthHalf, Math.PI * 2 - mouthHalf)
+    .closePath()
+    .fill({ color: 0xffcc00 })
+    .stroke({ width: 2, color: 0xeab308, alignment: 1 });
 }
 
 function slotCenters(
@@ -57,6 +87,37 @@ function slotCenters(
     x: startX + i * (slotW + gap),
     y,
   }));
+}
+
+function playfield(width: number, height: number) {
+  return {
+    minX: 24,
+    maxX: width - 24,
+    minY: HUD_TOP,
+    maxY: height - SLOT_AREA - 16,
+  };
+}
+
+function makeGrid(width: number, height: number): Grid {
+  const area = playfield(width, height);
+  const cols = Math.max(4, Math.floor((area.maxX - area.minX) / CELL));
+  const rows = Math.max(4, Math.floor((area.maxY - area.minY) / CELL));
+  const gridW = cols * CELL;
+  const gridH = rows * CELL;
+  return {
+    cols,
+    rows,
+    originX: area.minX + (area.maxX - area.minX - gridW) / 2,
+    originY: area.minY + (area.maxY - area.minY - gridH) / 2,
+    cell: CELL,
+  };
+}
+
+function cellCenter(grid: Grid, col: number, row: number): { x: number; y: number } {
+  return {
+    x: grid.originX + (col + 0.5) * grid.cell,
+    y: grid.originY + (row + 0.5) * grid.cell,
+  };
 }
 
 export function CranePixiStage({
@@ -80,13 +141,20 @@ export function CranePixiStage({
 
     let disposed = false;
     const app = new Application();
-    const keys = new Set<string>();
+    const held = new Set<string>();
     let busy = false;
     let tween: Tween | null = null;
+    let moveTween: MoveTween | null = null;
     const letters: FieldLetter[] = [];
     const slotGfx: Graphics[] = [];
     const slotTexts: Text[] = [];
+    const gridGfx = new Graphics();
     const hook = new Container();
+    const body = new Graphics();
+    let grid = makeGrid(800, 600);
+    let hookCol = 0;
+    let hookRow = 0;
+    let facing = 0;
     const letterStyle = {
       fontFamily: "Arial, sans-serif",
       fontSize: 36,
@@ -99,13 +167,31 @@ export function CranePixiStage({
       app.destroy(true, { children: true });
     }
 
-    function playfield(width: number, height: number) {
-      return {
-        minX: 24,
-        maxX: width - 24,
-        minY: HUD_TOP,
-        maxY: height - SLOT_AREA - 16,
-      };
+    function drawGrid(): void {
+      gridGfx.clear();
+      for (let row = 0; row < grid.rows; row++) {
+        for (let col = 0; col < grid.cols; col++) {
+          gridGfx
+            .rect(
+              grid.originX + col * grid.cell,
+              grid.originY + row * grid.cell,
+              grid.cell,
+              grid.cell,
+            )
+            .stroke({ width: 1, color: 0x94a3b8, alpha: 0.45 });
+        }
+      }
+    }
+
+    function snapHook(): void {
+      hookCol = Math.min(grid.cols - 1, Math.max(0, hookCol));
+      hookRow = Math.min(grid.rows - 1, Math.max(0, hookRow));
+      const pos = cellCenter(grid, hookCol, hookRow);
+      hook.position.set(pos.x, pos.y);
+      hook.scale.set(1);
+      hook.rotation = facing;
+      drawPacman(body, PAC_RADIUS, MOUTH_IDLE);
+      moveTween = null;
     }
 
     function layoutSlots(width: number, height: number): void {
@@ -125,33 +211,34 @@ export function CranePixiStage({
       }
     }
 
-    function scatterLetters(width: number, height: number): void {
-      const area = playfield(width, height);
-      const placed: { x: number; y: number }[] = [];
+    function placeLettersOnGrid(): void {
+      const occupied = new Set<string>(["0,0"]);
+      const free: { col: number; row: number }[] = [];
+      for (let row = 0; row < grid.rows; row++) {
+        for (let col = 0; col < grid.cols; col++) {
+          const key = `${col},${row}`;
+          if (!occupied.has(key)) free.push({ col, row });
+        }
+      }
+      for (let i = free.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [free[i], free[j]] = [free[j]!, free[i]!];
+      }
+      letters.forEach((item, index) => {
+        const cell = free[index] ?? { col: 0, row: 0 };
+        item.col = cell.col;
+        item.row = cell.row;
+        const pos = cellCenter(grid, item.col, item.row);
+        item.text.position.set(pos.x, pos.y);
+      });
+    }
+
+    function syncLetterPositions(): void {
       for (const item of letters) {
-        let x = (area.minX + area.maxX) / 2;
-        let y = (area.minY + area.maxY) / 2;
-        let found = false;
-        for (let attempt = 0; attempt < 20; attempt++) {
-          const tx = area.minX + Math.random() * (area.maxX - area.minX);
-          const ty = area.minY + Math.random() * (area.maxY - area.minY);
-          const ok = placed.every(
-            (p) => Math.hypot(p.x - tx, p.y - ty) >= LETTER_GAP,
-          );
-          if (!ok) continue;
-          x = tx;
-          y = ty;
-          found = true;
-          break;
-        }
-        if (!found && placed.length > 0) {
-          const col = placed.length % 4;
-          const row = Math.floor(placed.length / 4);
-          x = area.minX + 40 + col * LETTER_GAP;
-          y = area.minY + 40 + row * LETTER_GAP;
-        }
-        item.text.position.set(x, y);
-        placed.push({ x, y });
+        item.col = Math.min(grid.cols - 1, Math.max(0, item.col));
+        item.row = Math.min(grid.rows - 1, Math.max(0, item.row));
+        const pos = cellCenter(grid, item.col, item.row);
+        item.text.position.set(pos.x, pos.y);
       }
     }
 
@@ -160,79 +247,100 @@ export function CranePixiStage({
       return slotCenters(width, height, slotsRef.current.length)[index] ?? null;
     }
 
-    function tick(ticker: Ticker): void {
-      const width = app.screen.width;
-      const height = app.screen.height;
-      const dt = ticker.deltaMS / 1000;
+    function tryGrab(): void {
+      if (busy || moveTween || !enabledRef.current) return;
+      const expected = nextLetter(slotsRef.current);
+      if (!expected) return;
+      const item = letters.find(
+        (letter) =>
+          letter.col === hookCol &&
+          letter.row === hookRow &&
+          normalizeCraneWord(letter.char) === expected,
+      );
+      if (!item) return;
+      const dest = firstEmptyCenter(app.screen.width, app.screen.height);
+      if (!dest) return;
+      busy = true;
+      tween = {
+        letter: item,
+        startX: item.text.x,
+        startY: item.text.y,
+        endX: dest.x,
+        endY: dest.y,
+        elapsed: 0,
+      };
+    }
 
+    function step(key: string): void {
+      if (!enabledRef.current || busy || moveTween) return;
+      let nextCol = hookCol;
+      let nextRow = hookRow;
+      if (key === "ArrowLeft") nextCol -= 1;
+      else if (key === "ArrowRight") nextCol += 1;
+      else if (key === "ArrowUp") nextRow -= 1;
+      else if (key === "ArrowDown") nextRow += 1;
+      else return;
+      const nextFacing = facingFromKey(key);
+      if (nextFacing !== null) facing = nextFacing;
+      hook.rotation = facing;
+      nextCol = Math.min(grid.cols - 1, Math.max(0, nextCol));
+      nextRow = Math.min(grid.rows - 1, Math.max(0, nextRow));
+      if (nextCol === hookCol && nextRow === hookRow) return;
+      const from = cellCenter(grid, hookCol, hookRow);
+      const to = cellCenter(grid, nextCol, nextRow);
+      moveTween = {
+        startX: hook.x || from.x,
+        startY: hook.y || from.y,
+        endX: to.x,
+        endY: to.y,
+        dirX: nextCol - hookCol,
+        dirY: nextRow - hookRow,
+        elapsed: 0,
+      };
+      hookCol = nextCol;
+      hookRow = nextRow;
+    }
+
+    function tick(ticker: Ticker): void {
       for (let i = 0; i < slotTexts.length; i++) {
         const slot = slotsRef.current[i];
         const label = slotTexts[i];
         if (slot && label) label.text = slot.filled ? slot.letter : "";
       }
 
-      if (tween) {
-        tween.elapsed += ticker.deltaMS;
-        const t = Math.min(1, tween.elapsed / CRANE_ROUND.flyToSlotMs);
-        tween.letter.text.x = tween.startX + (tween.endX - tween.startX) * t;
-        tween.letter.text.y = tween.startY + (tween.endY - tween.startY) * t;
+      if (moveTween) {
+        moveTween.elapsed += ticker.deltaMS;
+        const t = Math.min(1, moveTween.elapsed / MOVE_MS);
+        const e = easeOutQuad(t);
+        hook.x = moveTween.startX + (moveTween.endX - moveTween.startX) * e;
+        hook.y = moveTween.startY + (moveTween.endY - moveTween.startY) * e;
+        hook.rotation = facing;
+        drawPacman(body, PAC_RADIUS, 0.1 + 0.6 * Math.sin(t * Math.PI));
         if (t >= 1) {
-          const char = tween.letter.char;
-          app.stage.removeChild(tween.letter.text);
-          tween.letter.text.destroy();
-          const idx = letters.indexOf(tween.letter);
-          if (idx !== -1) letters.splice(idx, 1);
-          tween = null;
-          busy = false;
-          onGrabRef.current(char);
+          hook.position.set(moveTween.endX, moveTween.endY);
+          hook.scale.set(1);
+          hook.rotation = facing;
+          drawPacman(body, PAC_RADIUS, MOUTH_IDLE);
+          moveTween = null;
+          tryGrab();
         }
         return;
       }
 
-      if (!enabledRef.current || busy) return;
-
-      let vx = 0;
-      let vy = 0;
-      if (keys.has("ArrowLeft")) vx -= 1;
-      if (keys.has("ArrowRight")) vx += 1;
-      if (keys.has("ArrowUp")) vy -= 1;
-      if (keys.has("ArrowDown")) vy += 1;
-      if (vx !== 0 && vy !== 0) {
-        vx *= Math.SQRT1_2;
-        vy *= Math.SQRT1_2;
-      }
-      const speed = CRANE_ROUND.speedPxPerSec;
-      hook.x += vx * speed * dt;
-      hook.y += vy * speed * dt;
-      const area = playfield(width, height);
-      hook.x = Math.min(area.maxX, Math.max(area.minX, hook.x));
-      hook.y = Math.min(area.maxY, Math.max(area.minY, hook.y));
-
-      const expected = nextLetter(slotsRef.current);
-      if (!expected) return;
-      const tipX = hook.x - TIP_SIZE / 2;
-      const tipY = hook.y - TIP_SIZE / 2;
-      for (const item of letters) {
-        if (normalizeCraneWord(item.char) !== expected) continue;
-        const b = item.text.getBounds();
-        if (
-          !aabbOverlap(tipX, tipY, TIP_SIZE, TIP_SIZE, b.x, b.y, b.width, b.height)
-        ) {
-          continue;
-        }
-        const dest = firstEmptyCenter(width, height);
-        if (!dest) return;
-        busy = true;
-        tween = {
-          letter: item,
-          startX: item.text.x,
-          startY: item.text.y,
-          endX: dest.x,
-          endY: dest.y,
-          elapsed: 0,
-        };
-        return;
-      }
+      if (!tween) return;
+      tween.elapsed += ticker.deltaMS;
+      const t = Math.min(1, tween.elapsed / CRANE_ROUND.flyToSlotMs);
+      tween.letter.text.x = tween.startX + (tween.endX - tween.startX) * t;
+      tween.letter.text.y = tween.startY + (tween.endY - tween.startY) * t;
+      if (t < 1) return;
+      const char = tween.letter.char;
+      app.stage.removeChild(tween.letter.text);
+      tween.letter.text.destroy();
+      const idx = letters.indexOf(tween.letter);
+      if (idx !== -1) letters.splice(idx, 1);
+      tween = null;
+      busy = false;
+      onGrabRef.current(char);
     }
 
     function onKeyDown(event: KeyboardEvent): void {
@@ -244,12 +352,14 @@ export function CranePixiStage({
       ) {
         return;
       }
-      if (enabledRef.current && !busy) event.preventDefault();
-      keys.add(event.key);
+      if (enabledRef.current) event.preventDefault();
+      if (event.repeat || held.has(event.key)) return;
+      held.add(event.key);
+      step(event.key);
     }
 
     function onKeyUp(event: KeyboardEvent): void {
-      keys.delete(event.key);
+      held.delete(event.key);
     }
 
     void (async () => {
@@ -269,26 +379,26 @@ export function CranePixiStage({
       app.canvas.style.display = "block";
       app.canvas.style.width = "100%";
       app.canvas.style.height = "100%";
+      app.stage.sortableChildren = true;
 
-      const arm = new Graphics();
-      arm
-        .rect(-48, -6, 48, 12)
-        .fill(0x111111)
-        .rect(-48, -54, 12, 48)
-        .fill(0x111111)
-        .circle(-42, -62, 10)
-        .fill(0xc4c4c4);
-      hook.addChild(arm);
-      hook.position.set(app.screen.width * 0.25, app.screen.height * 0.4);
+      gridGfx.zIndex = 0;
+      app.stage.addChild(gridGfx);
+
+      drawPacman(body, PAC_RADIUS, MOUTH_IDLE);
+      hook.addChild(body);
+      hook.zIndex = 3;
+      hook.rotation = facing;
       app.stage.addChild(hook);
 
       for (const slot of slotsRef.current) {
         const g = new Graphics();
+        g.zIndex = 1;
         const t = new Text({
           text: slot.filled ? slot.letter : "",
           style: letterStyle,
         });
         t.anchor.set(0.5);
+        t.zIndex = 1;
         slotGfx.push(g);
         slotTexts.push(t);
         app.stage.addChild(g);
@@ -298,20 +408,27 @@ export function CranePixiStage({
       for (const char of fieldLetters) {
         const text = new Text({ text: char, style: letterStyle });
         text.anchor.set(0.5);
+        text.zIndex = 2;
         app.stage.addChild(text);
-        letters.push({ char, text });
+        letters.push({ char, text, col: 0, row: 0 });
       }
 
+      function layout(): void {
+        grid = makeGrid(app.screen.width, app.screen.height);
+        drawGrid();
+        layoutSlots(app.screen.width, app.screen.height);
+        snapHook();
+        syncLetterPositions();
+      }
+
+      grid = makeGrid(app.screen.width, app.screen.height);
+      drawGrid();
       layoutSlots(app.screen.width, app.screen.height);
-      scatterLetters(app.screen.width, app.screen.height);
+      placeLettersOnGrid();
+      snapHook();
 
       app.ticker.add(tick);
-      app.renderer.on("resize", () => {
-        layoutSlots(app.screen.width, app.screen.height);
-        const area = playfield(app.screen.width, app.screen.height);
-        hook.x = Math.min(area.maxX, Math.max(area.minX, hook.x));
-        hook.y = Math.min(area.maxY, Math.max(area.minY, hook.y));
-      });
+      app.renderer.on("resize", layout);
 
       window.addEventListener("keydown", onKeyDown);
       window.addEventListener("keyup", onKeyUp);
