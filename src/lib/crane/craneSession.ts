@@ -20,8 +20,8 @@ export function filterCraneWords(
   return pool.filter((item) => isCraneWord(item.word));
 }
 
-export function hintCountForWord(word: string): number {
-  return normalizeCraneWord(word).length >= 4 ? 2 : 1;
+export function hintCountForWord(_word: string): number {
+  return 0;
 }
 
 export function nextLetter(slots: readonly CraneSlot[]): string | null {
@@ -56,12 +56,11 @@ export function createRound(
       : pool;
   const target = pickItem(candidates.length > 0 ? candidates : pool, random);
   const word = normalizeCraneWord(target.word);
-  const hintCount = hintCountForWord(word);
-  const slots: CraneSlot[] = [...word].map((letter, index) => ({
+  const slots: CraneSlot[] = [...word].map((letter) => ({
     letter,
-    filled: index < hintCount,
+    filled: false,
   }));
-  const fieldLetters = shuffle([...word.slice(hintCount)], random);
+  const fieldLetters = shuffle([...word], random);
   return {
     status: "playing",
     round: { target, word, slots, fieldLetters },

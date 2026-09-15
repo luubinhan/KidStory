@@ -35,8 +35,8 @@ assert.deepEqual(
   ["1", "4"],
 );
 
-assert.equal(hintCountForWord("cat"), 1);
-assert.equal(hintCountForWord("garden"), 2);
+assert.equal(hintCountForWord("cat"), 0);
+assert.equal(hintCountForWord("garden"), 0);
 
 const garden = createRound([vocab("g", "Garden")], undefined, () => 0);
 assert.equal(garden.status, "playing");
@@ -47,19 +47,21 @@ assert.deepEqual(
 );
 assert.deepEqual(
   garden.round.slots.map((s) => s.filled),
-  [true, true, false, false, false, false],
+  [false, false, false, false, false, false],
 );
-assert.deepEqual([...garden.round.fieldLetters].sort(), ["d", "e", "n", "r"]);
-assert.equal(nextLetter(garden.round.slots), "r");
+assert.deepEqual([...garden.round.fieldLetters].sort(), ["a", "d", "e", "g", "n", "r"]);
+assert.equal(nextLetter(garden.round.slots), "g");
 
 const wrong = applyGrab(garden, "x");
 assert.equal(wrong, garden);
-assert.equal(nextLetter(wrong.round.slots), "r");
+assert.equal(nextLetter(wrong.round.slots), "g");
 
-const afterR = applyGrab(garden, "R");
-assert.equal(nextLetter(afterR.round.slots), "d");
-assert.equal(afterR.round.slots[2]?.filled, true);
+const afterG = applyGrab(garden, "G");
+assert.equal(nextLetter(afterG.round.slots), "a");
+assert.equal(afterG.round.slots[0]?.filled, true);
 
+const afterA = applyGrab(afterG, "a");
+const afterR = applyGrab(afterA, "r");
 const afterD = applyGrab(afterR, "d");
 const afterE = applyGrab(afterD, "e");
 const afterN = applyGrab(afterE, "n");
@@ -70,10 +72,12 @@ assert.equal(applyGrab(afterN, "n"), afterN);
 const happy = createRound([vocab("h", "happy")], undefined, () => 0);
 assert.deepEqual(
   happy.round.slots.map((s) => s.filled),
-  [true, true, false, false, false],
+  [false, false, false, false, false],
 );
-assert.deepEqual([...happy.round.fieldLetters].sort(), ["p", "p", "y"]);
-const afterP1 = applyGrab(happy, "p");
+assert.deepEqual([...happy.round.fieldLetters].sort(), ["a", "h", "p", "p", "y"]);
+const afterH = applyGrab(happy, "h");
+const afterHa = applyGrab(afterH, "a");
+const afterP1 = applyGrab(afterHa, "p");
 const afterP2 = applyGrab(afterP1, "p");
 const afterY = applyGrab(afterP2, "y");
 assert.equal(afterY.status, "complete");

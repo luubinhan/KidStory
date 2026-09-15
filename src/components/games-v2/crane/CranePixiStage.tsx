@@ -72,7 +72,7 @@ function drawPacman(g: Graphics, radius: number, mouthHalf: number): void {
     .fill({ color: 0xffcc00 })
     .stroke({ width: 2, color: 0xeab308, alignment: 1 });
   g.circle(-radius * 0.18, -radius * 0.42, radius * 0.18).fill({ color: 0xffffff });
-  g.circle(radius * 0.04, -radius * 0.42, radius * 0.09).fill({ color: 0x1e293b });
+  g.circle(radius * -.09, -radius * 0.42, radius * 0.09).fill({ color: 0x1e293b });
 }
 
 function slotCenters(
