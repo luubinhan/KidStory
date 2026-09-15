@@ -42,6 +42,13 @@ export const gamesV2 = [
     diamondReward: 0,
     thumbnailSrc: "https://luubinhan.github.io/KidStory/images/caro-cover.jpg",
   },
+  {
+    id: "crane",
+    name: "Letter Crane",
+    path: "/games-v2/crane",
+    coinReward: 0,
+    diamondReward: 10,
+  },
 ] as const satisfies readonly GameV2[];
 
 export function getGameV2(id: string): GameV2 | undefined {

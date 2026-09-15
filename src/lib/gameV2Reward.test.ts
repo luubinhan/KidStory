@@ -32,4 +32,11 @@ assert.equal(caro!.coinsEarned, 0);
 assert.equal(caro!.diamondsEarned, 0);
 assert.equal(caro!.progress.coins, getDefaultProgress().coins);
 
+const crane = onGameV2Complete(getDefaultProgress(), "crane");
+assert.ok(crane, "crane catalog returns result");
+assert.equal(crane!.coinsEarned, 0);
+assert.equal(crane!.diamondsEarned, 10);
+assert.equal(crane!.progress.diamonds, getDefaultProgress().diamonds + 10);
+assert.equal(crane!.progress.coins, getDefaultProgress().coins);
+
 console.log("gameV2Reward.test.ts: ok");
