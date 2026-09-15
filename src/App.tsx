@@ -23,6 +23,7 @@ import HungryDogGamePage from "./pages/HungryDogGamePage";
 import MatchingPairsGamePage from "./pages/MatchingPairsGamePage";
 import PicturePuzzleGamePage from "./pages/PicturePuzzleGamePage";
 import CaroGamePage from "./pages/CaroGamePage";
+import CraneGamePage from "./pages/CraneGamePage";
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -51,6 +52,7 @@ export default function App() {
             <Route path="/games-v2/matching-pairs" element={<MatchingPairsGamePage />} />
             <Route path="/games-v2/picture-puzzle" element={<PicturePuzzleGamePage />} />
             <Route path="/games-v2/caro" element={<CaroGamePage />} />
+            <Route path="/games-v2/crane" element={<CraneGamePage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />
           </Routes>
           <CourseFeedbackFab />
