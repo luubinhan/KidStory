@@ -4,7 +4,7 @@ import { nextLetter, normalizeCraneWord } from "../../../lib/crane/craneSession"
 import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
 
 const HUD_TOP = 180;
-const SLOT_AREA = 100;
+const SLOT_AREA = 200;
 const TIP_SIZE = 28;
 const LETTER_GAP = 48;
 
@@ -52,7 +52,7 @@ function slotCenters(
   const gap = 10;
   const total = count * slotW + (count - 1) * gap;
   const startX = (width - total) / 2 + slotW / 2;
-  const y = height - SLOT_AREA / 2;
+  const y = height - 130;
   return Array.from({ length: count }, (_, i) => ({
     x: startX + i * (slotW + gap),
     y,
