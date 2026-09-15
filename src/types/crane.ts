@@ -6,9 +6,10 @@ export const CRANE_ROUND = {
   speedPxPerSec: 280,
   flyToSlotMs: 280,
   minPoolSize: 1,
+  bombCount: 3,
 } as const;
 
-export type CraneStatus = "playing" | "complete";
+export type CraneStatus = "playing" | "complete" | "failed";
 
 export type CraneSlot = {
   letter: string;

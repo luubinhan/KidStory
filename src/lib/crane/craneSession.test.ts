@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import type { FishingVocabItem } from "../../types/fishing";
+import { CRANE_ROUND } from "../../types/crane";
 import {
+  applyBoom,
   applyGrab,
   createRound,
   filterCraneWords,
@@ -91,5 +93,14 @@ assert.equal(again.status, "playing");
 const two = [vocab("a", "cat"), vocab("b", "dog")];
 const picked = createRound(two, "a", () => 0.99);
 assert.equal(picked.round.target.id, "b");
+
+assert.equal(CRANE_ROUND.bombCount, 3);
+
+const boomPlaying = applyBoom(garden);
+assert.equal(boomPlaying.status, "failed");
+assert.deepEqual(boomPlaying.round.slots, garden.round.slots);
+assert.equal(applyBoom(boomPlaying), boomPlaying);
+assert.equal(applyGrab(boomPlaying, "g"), boomPlaying);
+assert.equal(applyBoom(afterN), afterN);
 
 console.log("craneSession.test.ts: ok");

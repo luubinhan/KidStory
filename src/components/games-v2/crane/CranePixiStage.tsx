@@ -1,5 +1,15 @@
 import { useEffect, useRef } from "react";
-import { Application, Container, Graphics, Text, type Ticker } from "pixi.js";
+import {
+  Application,
+  Assets,
+  Container,
+  Graphics,
+  Sprite,
+  Text,
+  type Texture,
+  type Ticker,
+} from "pixi.js";
+import bombUrl from "../../../assets/games/bom.png";
 import { nextLetter, normalizeCraneWord } from "../../../lib/crane/craneSession";
 import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
 
@@ -9,6 +19,7 @@ const CELL = 72;
 const MOVE_MS = 180;
 const PAC_RADIUS = CELL * 0.38;
 const MOUTH_IDLE = 0.25;
+const BOMB_SIZE = CELL * 0.7;
 
 type CranePixiStageProps = {
   word: string;
@@ -16,11 +27,18 @@ type CranePixiStageProps = {
   fieldLetters: readonly string[];
   enabled: boolean;
   onGrab: (letter: string) => void;
+  onBoom: () => void;
 };
 
 type FieldLetter = {
   char: string;
   text: Text;
+  col: number;
+  row: number;
+};
+
+type FieldBomb = {
+  sprite: Sprite;
   col: number;
   row: number;
 };
@@ -128,14 +146,17 @@ export function CranePixiStage({
   fieldLetters,
   enabled,
   onGrab,
+  onBoom,
 }: CranePixiStageProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const slotsRef = useRef(slots);
   const enabledRef = useRef(enabled);
   const onGrabRef = useRef(onGrab);
+  const onBoomRef = useRef(onBoom);
   slotsRef.current = slots;
   enabledRef.current = enabled;
   onGrabRef.current = onGrab;
+  onBoomRef.current = onBoom;
 
   useEffect(() => {
     const hostEl = hostRef.current;
@@ -148,6 +169,7 @@ export function CranePixiStage({
     let tween: Tween | null = null;
     let moveTween: MoveTween | null = null;
     const letters: FieldLetter[] = [];
+    const bombs: FieldBomb[] = [];
     const slotGfx: Graphics[] = [];
     const slotTexts: Text[] = [];
     const gridGfx = new Graphics();
@@ -213,7 +235,7 @@ export function CranePixiStage({
       }
     }
 
-    function placeLettersOnGrid(): void {
+    function placeLettersOnGrid(bombTexture: Texture | null): void {
       const occupied = new Set<string>(["0,0"]);
       const free: { col: number; row: number }[] = [];
       for (let row = 0; row < grid.rows; row++) {
@@ -233,6 +255,27 @@ export function CranePixiStage({
         const pos = cellCenter(grid, item.col, item.row);
         item.text.position.set(pos.x, pos.y);
       });
+      if (!bombTexture) return;
+      const start = letters.length;
+      const count = Math.min(
+        CRANE_ROUND.bombCount,
+        Math.max(0, free.length - start),
+      );
+      for (let i = 0; i < count; i++) {
+        const cell = free[start + i];
+        if (!cell) break;
+        const sprite = new Sprite({
+          texture: bombTexture,
+          anchor: 0.5,
+          zIndex: 2,
+        });
+        sprite.width = BOMB_SIZE;
+        sprite.height = BOMB_SIZE;
+        const pos = cellCenter(grid, cell.col, cell.row);
+        sprite.position.set(pos.x, pos.y);
+        app.stage.addChild(sprite);
+        bombs.push({ sprite, col: cell.col, row: cell.row });
+      }
     }
 
     function syncLetterPositions(): void {
@@ -242,6 +285,21 @@ export function CranePixiStage({
         const pos = cellCenter(grid, item.col, item.row);
         item.text.position.set(pos.x, pos.y);
       }
+    }
+
+    function syncBombPositions(): void {
+      for (const bomb of bombs) {
+        bomb.col = Math.min(grid.cols - 1, Math.max(0, bomb.col));
+        bomb.row = Math.min(grid.rows - 1, Math.max(0, bomb.row));
+        const pos = cellCenter(grid, bomb.col, bomb.row);
+        bomb.sprite.position.set(pos.x, pos.y);
+      }
+    }
+
+    function hitBomb(): boolean {
+      return bombs.some(
+        (bomb) => bomb.col === hookCol && bomb.row === hookRow,
+      );
     }
 
     function firstEmptyCenter(width: number, height: number) {
@@ -324,6 +382,11 @@ export function CranePixiStage({
           hook.rotation = facing;
           drawPacman(body, PAC_RADIUS, MOUTH_IDLE);
           moveTween = null;
+          if (hitBomb()) {
+            busy = true;
+            onBoomRef.current();
+            return;
+          }
           tryGrab();
         }
         return;
@@ -377,6 +440,20 @@ export function CranePixiStage({
         return;
       }
 
+      let bombTexture: Texture | null = null;
+      try {
+        bombTexture = await Assets.load<Texture>(bombUrl, {
+          strategy: "retry",
+          retryCount: 1,
+        });
+      } catch {
+        bombTexture = null;
+      }
+      if (disposed) {
+        destroyApp();
+        return;
+      }
+
       hostEl.appendChild(app.canvas);
       app.canvas.style.display = "block";
       app.canvas.style.width = "100%";
@@ -421,12 +498,13 @@ export function CranePixiStage({
         layoutSlots(app.screen.width, app.screen.height);
         snapHook();
         syncLetterPositions();
+        syncBombPositions();
       }
 
       grid = makeGrid(app.screen.width, app.screen.height);
       drawGrid();
       layoutSlots(app.screen.width, app.screen.height);
-      placeLettersOnGrid();
+      placeLettersOnGrid(bombTexture);
       snapHook();
 
       app.ticker.add(tick);

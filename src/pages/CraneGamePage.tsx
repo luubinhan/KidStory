@@ -8,7 +8,8 @@ import { getGameV2 } from "../data/gamesV2";
 import { ASSETS } from "../constants/images";
 
 export default function CraneGamePage() {
-  const { canPlay, state, reward, onGrab, restart, playWord } = useCraneSession();
+  const { canPlay, state, reward, onGrab, onBoom, restart, playWord } =
+    useCraneSession();
   const [stageKey, setStageKey] = useState(0);
   const game = getGameV2("crane");
   const diamondReward = game?.diamondReward ?? 10;
@@ -34,6 +35,7 @@ export default function CraneGamePage() {
             fieldLetters={state.round.fieldLetters}
             enabled={playing}
             onGrab={onGrab}
+            onBoom={onBoom}
           />
 
           {playing ? (
@@ -63,11 +65,15 @@ export default function CraneGamePage() {
             </>
           ) : null}
 
-          {state.status === "complete" ? (
+          {state.status === "complete" || state.status === "failed" ? (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-sky-900/40 p-4">
               <div className="w-full max-w-md rounded-2xl bg-sky-100/20 px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-xl backdrop-blur-xs inset-shadow-white/80">
-                <ActivityEndShell reward={reward}>
-                  <h2 className="text-2xl font-bold text-white">Great job!</h2>
+                <ActivityEndShell
+                  reward={state.status === "complete" ? reward : null}
+                >
+                  <h2 className="text-2xl font-bold text-white">
+                    {state.status === "complete" ? "Great job!" : "Boom!"}
+                  </h2>
                   <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                     <button
                       type="button"

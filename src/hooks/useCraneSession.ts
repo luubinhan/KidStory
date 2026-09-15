@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gameUnits } from "../data/course";
 import { buildFishingVocabPool } from "../lib/fishing/buildFishingVocabPool";
 import {
+  applyBoom,
   applyGrab,
   createRound,
   filterCraneWords,
@@ -87,6 +88,10 @@ export function useCraneSession() {
     setState((prev) => (prev ? applyGrab(prev, letter) : prev));
   }, []);
 
+  const onBoom = useCallback(() => {
+    setState((prev) => (prev ? applyBoom(prev) : prev));
+  }, []);
+
   const restart = useCallback(() => {
     if (!canPlay) return;
     runIdRef.current += 1;
@@ -103,6 +108,7 @@ export function useCraneSession() {
     state,
     reward,
     onGrab,
+    onBoom,
     restart,
     playWord,
   };

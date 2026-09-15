@@ -82,3 +82,8 @@ export function applyGrab(state: CraneState, letter: string): CraneState {
     round: { ...state.round, slots },
   };
 }
+
+export function applyBoom(state: CraneState): CraneState {
+  if (state.status !== "playing") return state;
+  return { ...state, status: "failed" };
+}
