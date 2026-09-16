@@ -26,4 +26,5 @@ export type CraneRound = {
 export type CraneState = {
   status: CraneStatus;
   round: CraneRound;
+  rewardLeft: number;
 };

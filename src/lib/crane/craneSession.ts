@@ -64,6 +64,7 @@ export function createRound(
   return {
     status: "playing",
     round: { target, word, slots, fieldLetters },
+    rewardLeft: word.length,
   };
 }
 
@@ -80,10 +81,16 @@ export function applyGrab(state: CraneState, letter: string): CraneState {
   return {
     status: complete ? "complete" : "playing",
     round: { ...state.round, slots },
+    rewardLeft: state.rewardLeft,
   };
 }
 
 export function applyBoom(state: CraneState): CraneState {
   if (state.status !== "playing") return state;
   return { ...state, status: "failed" };
+}
+
+export function applyWrongCell(state: CraneState): CraneState {
+  if (state.status !== "playing" || state.rewardLeft <= 0) return state;
+  return { ...state, rewardLeft: state.rewardLeft - 1 };
 }

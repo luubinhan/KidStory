@@ -4,6 +4,7 @@ import { CRANE_ROUND } from "../../types/crane";
 import {
   applyBoom,
   applyGrab,
+  applyWrongCell,
   createRound,
   filterCraneWords,
   hintCountForWord,
@@ -53,6 +54,7 @@ assert.deepEqual(
 );
 assert.deepEqual([...garden.round.fieldLetters].sort(), ["a", "d", "e", "g", "n", "r"]);
 assert.equal(nextLetter(garden.round.slots), "g");
+assert.equal(garden.rewardLeft, 6);
 
 const wrong = applyGrab(garden, "x");
 assert.equal(wrong, garden);
@@ -61,6 +63,7 @@ assert.equal(nextLetter(wrong.round.slots), "g");
 const afterG = applyGrab(garden, "G");
 assert.equal(nextLetter(afterG.round.slots), "a");
 assert.equal(afterG.round.slots[0]?.filled, true);
+assert.equal(afterG.rewardLeft, 6);
 
 const afterA = applyGrab(afterG, "a");
 const afterR = applyGrab(afterA, "r");
@@ -89,6 +92,8 @@ const first = createRound(only, undefined, () => 0);
 const again = createRound(only, first.round.target.id, () => 0);
 assert.equal(again.round.word, "cat");
 assert.equal(again.status, "playing");
+assert.equal(first.rewardLeft, 3);
+assert.equal(again.rewardLeft, 3);
 
 const two = [vocab("a", "cat"), vocab("b", "dog")];
 const picked = createRound(two, "a", () => 0.99);
@@ -102,5 +107,25 @@ assert.deepEqual(boomPlaying.round.slots, garden.round.slots);
 assert.equal(applyBoom(boomPlaying), boomPlaying);
 assert.equal(applyGrab(boomPlaying, "g"), boomPlaying);
 assert.equal(applyBoom(afterN), afterN);
+
+const miss1 = applyWrongCell(garden);
+assert.equal(miss1.rewardLeft, 5);
+assert.equal(nextLetter(miss1.round.slots), "g");
+assert.deepEqual(
+  miss1.round.slots.map((s) => s.filled),
+  garden.round.slots.map((s) => s.filled),
+);
+const miss2 = applyWrongCell(miss1);
+assert.equal(miss2.rewardLeft, 4);
+
+const catRound = createRound([vocab("c", "cat")], undefined, () => 0);
+assert.equal(catRound.rewardLeft, 3);
+const cat0 = applyWrongCell(applyWrongCell(applyWrongCell(catRound)));
+assert.equal(cat0.rewardLeft, 0);
+assert.equal(applyWrongCell(cat0), cat0);
+
+assert.equal(applyWrongCell(afterN), afterN);
+assert.equal(applyWrongCell(boomPlaying), boomPlaying);
+assert.equal(boomPlaying.rewardLeft, 6);
 
 console.log("craneSession.test.ts: ok");
