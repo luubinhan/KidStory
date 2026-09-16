@@ -28,6 +28,7 @@ type CranePixiStageProps = {
   enabled: boolean;
   onGrab: (letter: string) => void;
   onBoom: () => void;
+  onWrongCell: () => void;
 };
 
 type FieldLetter = {
@@ -147,16 +148,19 @@ export function CranePixiStage({
   enabled,
   onGrab,
   onBoom,
+  onWrongCell,
 }: CranePixiStageProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const slotsRef = useRef(slots);
   const enabledRef = useRef(enabled);
   const onGrabRef = useRef(onGrab);
   const onBoomRef = useRef(onBoom);
+  const onWrongCellRef = useRef(onWrongCell);
   slotsRef.current = slots;
   enabledRef.current = enabled;
   onGrabRef.current = onGrab;
   onBoomRef.current = onBoom;
+  onWrongCellRef.current = onWrongCell;
 
   useEffect(() => {
     const hostEl = hostRef.current;
@@ -387,7 +391,17 @@ export function CranePixiStage({
             onBoomRef.current();
             return;
           }
-          tryGrab();
+          if (busy || !enabledRef.current) return;
+          const expected = nextLetter(slotsRef.current);
+          const item = letters.find(
+            (letter) => letter.col === hookCol && letter.row === hookRow,
+          );
+          if (!item || !expected) return;
+          if (normalizeCraneWord(item.char) === expected) {
+            tryGrab();
+            return;
+          }
+          onWrongCellRef.current();
         }
         return;
       }

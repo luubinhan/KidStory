@@ -33,6 +33,7 @@ export default function CraneGamePage() {
             enabled={playing}
             onGrab={onGrab}
             onBoom={onBoom}
+            onWrongCell={onWrongCell}
           />
 
           {playing ? (
