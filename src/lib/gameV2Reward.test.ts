@@ -39,4 +39,27 @@ assert.equal(crane!.diamondsEarned, 10);
 assert.equal(crane!.progress.diamonds, getDefaultProgress().diamonds + 10);
 assert.equal(crane!.progress.coins, getDefaultProgress().coins);
 
+const craneOverride = onGameV2Complete(getDefaultProgress(), "crane", {
+  diamondsEarned: 4,
+});
+assert.ok(craneOverride, "crane override returns result");
+assert.equal(craneOverride!.diamondsEarned, 4);
+assert.equal(
+  craneOverride!.progress.diamonds,
+  getDefaultProgress().diamonds + 4,
+);
+assert.equal(craneOverride!.coinsEarned, 0);
+
+const craneZero = onGameV2Complete(getDefaultProgress(), "crane", {
+  diamondsEarned: 0,
+});
+assert.equal(craneZero!.diamondsEarned, 0);
+assert.equal(craneZero!.progress.diamonds, getDefaultProgress().diamonds);
+
+const craneNeg = onGameV2Complete(getDefaultProgress(), "crane", {
+  diamondsEarned: -3,
+});
+assert.equal(craneNeg!.diamondsEarned, 0);
+assert.equal(craneNeg!.progress.diamonds, getDefaultProgress().diamonds);
+
 console.log("gameV2Reward.test.ts: ok");

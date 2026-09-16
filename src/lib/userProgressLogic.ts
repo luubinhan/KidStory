@@ -187,12 +187,14 @@ export function onActivityComplete(
 export function onGameV2Complete(
   progress: UserProgressV1,
   gameId: string,
+  options?: { diamondsEarned?: number },
 ): ActivityRewardResult | null {
   const game = getGameV2(gameId);
   if (!game) return null;
 
   const coinsEarned = game.coinReward;
-  const diamondsEarned = game.diamondReward;
+  const raw = options?.diamondsEarned ?? game.diamondReward;
+  const diamondsEarned = Math.max(0, raw);
   const next: UserProgressV1 = {
     ...progress,
     coins: progress.coins + coinsEarned,

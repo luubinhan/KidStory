@@ -37,7 +37,10 @@ type UserProgressContextValue = {
     unitId: string,
     activityId: CourseActivityId,
   ) => Promise<ActivityRewardResult | null>;
-  completeGameV2: (gameId: string) => Promise<ActivityRewardResult | null>;
+  completeGameV2: (
+    gameId: string,
+    options?: { diamondsEarned?: number },
+  ) => Promise<ActivityRewardResult | null>;
   addCoins: (amount: number) => Promise<void>;
   useHint: () => Promise<boolean>;
   canUseHint: boolean;
@@ -94,8 +97,11 @@ export function UserProgressProvider({ children }: { children: ReactNode }) {
   );
 
   const completeGameV2 = useCallback(
-    async (gameId: string): Promise<ActivityRewardResult | null> => {
-      const result = onGameV2Complete(progressRef.current, gameId);
+    async (
+      gameId: string,
+      options?: { diamondsEarned?: number },
+    ): Promise<ActivityRewardResult | null> => {
+      const result = onGameV2Complete(progressRef.current, gameId, options);
       if (!result) return null;
 
       await persist(result.progress);
