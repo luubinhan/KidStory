@@ -4,6 +4,7 @@ import { buildFishingVocabPool } from "../lib/fishing/buildFishingVocabPool";
 import {
   applyBoom,
   applyGrab,
+  applyWrongCell,
   createRound,
   filterCraneWords,
 } from "../lib/crane/craneSession";
@@ -58,9 +59,11 @@ export function useCraneSession() {
     if (!state || state.status !== "complete" || awardedRef.current) return;
     awardedRef.current = true;
     const runId = runIdRef.current;
-    void completeGameV2("crane").then((result) => {
-      if (result && runIdRef.current === runId) setReward(result);
-    });
+    void completeGameV2("crane", { diamondsEarned: state.rewardLeft }).then(
+      (result) => {
+        if (result && runIdRef.current === runId) setReward(result);
+      },
+    );
   }, [state, completeGameV2]);
 
   const target =
@@ -92,6 +95,10 @@ export function useCraneSession() {
     setState((prev) => (prev ? applyBoom(prev) : prev));
   }, []);
 
+  const onWrongCell = useCallback(() => {
+    setState((prev) => (prev ? applyWrongCell(prev) : prev));
+  }, []);
+
   const restart = useCallback(() => {
     if (!canPlay) return;
     runIdRef.current += 1;
@@ -109,6 +116,7 @@ export function useCraneSession() {
     reward,
     onGrab,
     onBoom,
+    onWrongCell,
     restart,
     playWord,
   };

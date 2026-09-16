@@ -4,15 +4,12 @@ import { CranePixiStage } from "../components/games-v2/crane/CranePixiStage";
 import { CourseBottomNav } from "../components/course";
 import { ActivityEndShell } from "../components/progress/ActivityEndShell";
 import { useCraneSession } from "../hooks/useCraneSession";
-import { getGameV2 } from "../data/gamesV2";
 import { ASSETS } from "../constants/images";
 
 export default function CraneGamePage() {
-  const { canPlay, state, reward, onGrab, onBoom, restart, playWord } =
+  const { canPlay, state, reward, onGrab, onBoom, onWrongCell, restart, playWord } =
     useCraneSession();
   const [stageKey, setStageKey] = useState(0);
-  const game = getGameV2("crane");
-  const diamondReward = game?.diamondReward ?? 10;
   const playing = state?.status === "playing";
 
   const handleRestart = () => {
@@ -59,7 +56,7 @@ export default function CraneGamePage() {
               <div className="absolute top-10 right-10 z-10 text-sm font-semibold text-slate-500">
                 <span className="inline-flex items-center gap-1.5">
                   <img src={ASSETS.diamond} alt="" className="h-6" aria-hidden />
-                  {diamondReward} diamonds
+                  {state.rewardLeft} diamonds
                 </span>
               </div>
             </>
