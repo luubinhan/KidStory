@@ -560,7 +560,7 @@ export function CranePixiStage({
               SLOT_H,
               8,
             )
-            .fill({ color: 0x0f172a, alpha: 0.5 });
+            .fill({ color: 0x0f172a, alpha: 0.7 });
           bg = new Graphics()
             .roundRect(-SLOT_W / 2, -SLOT_H / 2, SLOT_W, SLOT_H, 8)
             .fill(0xd6d3d1);
