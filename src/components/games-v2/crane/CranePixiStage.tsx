@@ -9,6 +9,7 @@ import {
   type Texture,
   type Ticker,
 } from "pixi.js";
+import bgPacmanUrl from "../../../assets/games/bg-pacman.webp";
 import bombUrl from "../../../assets/games/bom.png";
 import { nextLetter, normalizeCraneWord } from "../../../lib/crane/craneSession";
 import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
@@ -454,15 +455,16 @@ export function CranePixiStage({
         return;
       }
 
-      let bombTexture: Texture | null = null;
-      try {
-        bombTexture = await Assets.load<Texture>(bombUrl, {
+      const [bgTexture, bombTexture] = await Promise.all([
+        Assets.load<Texture>(bgPacmanUrl, {
           strategy: "retry",
           retryCount: 1,
-        });
-      } catch {
-        bombTexture = null;
-      }
+        }).catch(() => null),
+        Assets.load<Texture>(bombUrl, {
+          strategy: "retry",
+          retryCount: 1,
+        }).catch(() => null),
+      ]);
       if (disposed) {
         destroyApp();
         return;
@@ -473,6 +475,26 @@ export function CranePixiStage({
       app.canvas.style.width = "100%";
       app.canvas.style.height = "100%";
       app.stage.sortableChildren = true;
+
+      const bg = bgTexture
+        ? new Sprite({
+            texture: bgTexture,
+            label: "crane-bg",
+            anchor: 0.5,
+            zIndex: -1,
+          })
+        : null;
+      if (bg) app.stage.addChild(bg);
+
+      function layoutBackground(): void {
+        if (!bg) return;
+        const tw = bg.texture.width;
+        const th = bg.texture.height;
+        if (!tw || !th) return;
+        const scale = Math.max(app.screen.width / tw, app.screen.height / th);
+        bg.scale.set(scale);
+        bg.position.set(app.screen.width / 2, app.screen.height / 2);
+      }
 
       gridGfx.zIndex = 0;
       app.stage.addChild(gridGfx);
@@ -507,6 +529,7 @@ export function CranePixiStage({
       }
 
       function layout(): void {
+        layoutBackground();
         grid = makeGrid(app.screen.width, app.screen.height);
         drawGrid();
         layoutSlots(app.screen.width, app.screen.height);
@@ -515,6 +538,7 @@ export function CranePixiStage({
         syncBombPositions();
       }
 
+      layoutBackground();
       grid = makeGrid(app.screen.width, app.screen.height);
       drawGrid();
       layoutSlots(app.screen.width, app.screen.height);
