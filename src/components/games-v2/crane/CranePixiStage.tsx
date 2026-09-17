@@ -11,11 +11,17 @@ import {
 } from "pixi.js";
 import bgPacmanUrl from "../../../assets/games/bg-pacman.webp";
 import bombUrl from "../../../assets/games/bom.png";
+import stoneUrl from "../../../assets/stone.png";
 import { nextLetter, normalizeCraneWord } from "../../../lib/crane/craneSession";
 import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
 
 const HUD_TOP = 180;
 const SLOT_AREA = 200;
+const SLOT_W = 80;
+const SLOT_H = 80;
+const SLOT_GAP = 14;
+const SLOT_SHADOW_OX = 4;
+const SLOT_SHADOW_OY = 4;
 const CELL = 72;
 const MOVE_MS = 180;
 const PAC_RADIUS = CELL * 0.38;
@@ -100,13 +106,11 @@ function slotCenters(
   height: number,
   count: number,
 ): { x: number; y: number }[] {
-  const slotW = 52;
-  const gap = 10;
-  const total = count * slotW + (count - 1) * gap;
-  const startX = (width - total) / 2 + slotW / 2;
+  const total = count * SLOT_W + (count - 1) * SLOT_GAP;
+  const startX = (width - total) / 2 + SLOT_W / 2;
   const y = height - 130;
   return Array.from({ length: count }, (_, i) => ({
-    x: startX + i * (slotW + gap),
+    x: startX + i * (SLOT_W + SLOT_GAP),
     y,
   }));
 }
@@ -175,7 +179,7 @@ export function CranePixiStage({
     let moveTween: MoveTween | null = null;
     const letters: FieldLetter[] = [];
     const bombs: FieldBomb[] = [];
-    const slotGfx: Graphics[] = [];
+    const slotNodes: Container[] = [];
     const slotTexts: Text[] = [];
     const gridGfx = new Graphics();
     const hook = new Container();
@@ -198,6 +202,14 @@ export function CranePixiStage({
 
     function drawGrid(): void {
       gridGfx.clear();
+      gridGfx
+        .rect(
+          grid.originX,
+          grid.originY,
+          grid.cols * grid.cell,
+          grid.rows * grid.cell,
+        )
+        .fill({ color: 0xffffff, alpha: 0.4 });
       for (let row = 0; row < grid.rows; row++) {
         for (let col = 0; col < grid.cols; col++) {
           gridGfx
@@ -225,18 +237,14 @@ export function CranePixiStage({
 
     function layoutSlots(width: number, height: number): void {
       const centers = slotCenters(width, height, slotsRef.current.length);
-      const slotW = 52;
-      const slotH = 56;
       for (let i = 0; i < slotsRef.current.length; i++) {
-        const g = slotGfx[i];
+        const node = slotNodes[i];
         const t = slotTexts[i];
         const c = centers[i];
-        if (!g || !t || !c) continue;
-        g.clear();
-        g.roundRect(c.x - slotW / 2, c.y - slotH / 2, slotW, slotH, 8).fill(0xd6d3d1);
+        if (!node || !t || !c) continue;
+        node.position.set(c.x, c.y);
         const slot = slotsRef.current[i];
         t.text = slot?.filled ? slot.letter : "";
-        t.position.set(c.x, c.y);
       }
     }
 
@@ -455,12 +463,16 @@ export function CranePixiStage({
         return;
       }
 
-      const [bgTexture, bombTexture] = await Promise.all([
+      const [bgTexture, bombTexture, stoneTexture] = await Promise.all([
         Assets.load<Texture>(bgPacmanUrl, {
           strategy: "retry",
           retryCount: 1,
         }).catch(() => null),
         Assets.load<Texture>(bombUrl, {
+          strategy: "retry",
+          retryCount: 1,
+        }).catch(() => null),
+        Assets.load<Texture>(stoneUrl, {
           strategy: "retry",
           retryCount: 1,
         }).catch(() => null),
@@ -506,18 +518,53 @@ export function CranePixiStage({
       app.stage.addChild(hook);
 
       for (const slot of slotsRef.current) {
-        const g = new Graphics();
-        g.zIndex = 1;
+        const node = new Container({ label: "crane-slot", zIndex: 1 });
+        let shadow: Sprite | Graphics;
+        let bg: Sprite | Graphics;
+        if (stoneTexture) {
+          shadow = new Sprite({
+            texture: stoneTexture,
+            anchor: 0.5,
+            tint: 0x0f172a,
+            alpha: 0.5,
+            label: "crane-slot-shadow",
+          });
+          shadow.width = SLOT_W;
+          shadow.height = SLOT_H;
+          shadow.position.set(SLOT_SHADOW_OX, SLOT_SHADOW_OY);
+          bg = new Sprite({
+            texture: stoneTexture,
+            anchor: 0.5,
+            label: "crane-slot-face",
+          });
+          bg.width = SLOT_W;
+          bg.height = SLOT_H;
+        } else {
+          shadow = new Graphics()
+            .roundRect(
+              -SLOT_W / 2 + SLOT_SHADOW_OX,
+              -SLOT_H / 2 + SLOT_SHADOW_OY,
+              SLOT_W,
+              SLOT_H,
+              8,
+            )
+            .fill({ color: 0x0f172a, alpha: 0.5 });
+          bg = new Graphics()
+            .roundRect(-SLOT_W / 2, -SLOT_H / 2, SLOT_W, SLOT_H, 8)
+            .fill(0xd6d3d1);
+        }
         const t = new Text({
           text: slot.filled ? slot.letter : "",
           style: letterStyle,
         });
         t.anchor.set(0.5);
-        t.zIndex = 1;
-        slotGfx.push(g);
+        const groundShadow = new Graphics()
+          .ellipse(SLOT_SHADOW_OX, SLOT_H / 2 - 4, SLOT_W * 0.44, 14)
+          .fill({ color: 0x0f172a, alpha: 0.42 });
+        node.addChild(groundShadow, shadow, bg, t);
+        slotNodes.push(node);
         slotTexts.push(t);
-        app.stage.addChild(g);
-        app.stage.addChild(t);
+        app.stage.addChild(node);
       }
 
       for (const char of fieldLetters) {

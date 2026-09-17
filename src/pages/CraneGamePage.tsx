@@ -55,9 +55,9 @@ export default function CraneGamePage() {
                 </div>
               </button>
               <div className="absolute top-10 right-10 z-10 text-sm font-semibold text-slate-500">
-                <span className="inline-flex items-center gap-1.5">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1 font-bold text-sky-800">
                   <img src={ASSETS.diamond} alt="" className="h-6" aria-hidden />
-                  {state.rewardLeft} diamonds
+                  {state.rewardLeft}
                 </span>
               </div>
             </>
