@@ -216,7 +216,7 @@ export function CranePixiStage({
           grid.cols * grid.cell,
           grid.rows * grid.cell,
         )
-        .fill({ color: 0xffffff, alpha: 0.4 });
+        .fill({ color: 0xffffff, alpha: 0.7 });
       for (let row = 0; row < grid.rows; row++) {
         for (let col = 0; col < grid.cols; col++) {
           gridGfx
@@ -560,7 +560,7 @@ export function CranePixiStage({
               SLOT_H,
               8,
             )
-            .fill({ color: 0x0f172a, alpha: 0.7 });
+            .fill({ color: 0x0f172a, alpha: 0.5 });
           bg = new Graphics()
             .roundRect(-SLOT_W / 2, -SLOT_H / 2, SLOT_W, SLOT_H, 8)
             .fill(0xd6d3d1);
