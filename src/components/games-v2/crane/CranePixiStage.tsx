@@ -12,6 +12,13 @@ import {
 import bgPacmanUrl from "../../../assets/games/bg-pacman.webp";
 import bombUrl from "../../../assets/games/bom.png";
 import stoneUrl from "../../../assets/stone.png";
+import {
+  playCraneBoomSound,
+  playCraneCorrectSound,
+  playCraneStepSound,
+  playCraneWrongSound,
+  prefetchCraneSounds,
+} from "../../../lib/crane/craneSounds";
 import { nextLetter, normalizeCraneWord } from "../../../lib/crane/craneSession";
 import { CRANE_ROUND, type CraneSlot } from "../../../types/crane";
 
@@ -372,6 +379,7 @@ export function CranePixiStage({
       };
       hookCol = nextCol;
       hookRow = nextRow;
+      playCraneStepSound();
     }
 
     function tick(ticker: Ticker): void {
@@ -397,6 +405,7 @@ export function CranePixiStage({
           moveTween = null;
           if (hitBomb()) {
             busy = true;
+            playCraneBoomSound();
             onBoomRef.current();
             return;
           }
@@ -407,9 +416,11 @@ export function CranePixiStage({
           );
           if (!item || !expected) return;
           if (normalizeCraneWord(item.char) === expected) {
+            playCraneCorrectSound();
             tryGrab();
             return;
           }
+          playCraneWrongSound();
           onWrongCellRef.current();
         }
         return;
@@ -451,6 +462,7 @@ export function CranePixiStage({
     }
 
     void (async () => {
+      prefetchCraneSounds();
       await app.init({
         backgroundAlpha: 0,
         resizeTo: window,
