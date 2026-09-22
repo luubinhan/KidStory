@@ -48,6 +48,7 @@ export const gamesV2 = [
     path: "/games-v2/crane",
     coinReward: 0,
     diamondReward: 10,
+    thumbnailSrc: "https://luubinhan.github.io/KidStory/images/cover-pacman.jpg",
   },
 ] as const satisfies readonly GameV2[];
 
