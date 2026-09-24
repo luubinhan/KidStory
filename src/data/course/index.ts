@@ -12,6 +12,7 @@ import { unit10WhatsThat } from "./units/unit-10-whats-that";
 import { unit11Family } from "./units/unit-11-family";
 import { unit12LivingRoom } from "./units/unit-12-living-room";
 import { unit13RoomsInHouse } from "./units/unit-13-rooms-in-house";
+import { unit14AroundTown } from "./units/unit-14-around-town";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -36,12 +37,14 @@ export const courseUnits: readonly CourseUnit[] = [
   unit11Family,
   unit12LivingRoom,
   unit13RoomsInHouse,
+  unit14AroundTown,
 ];
 export const gameUnits: readonly CourseUnit[] = [
   unit10WhatsThat,
   unit11Family,
   unit12LivingRoom,
   unit13RoomsInHouse,
+  unit14AroundTown,
 ];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {
