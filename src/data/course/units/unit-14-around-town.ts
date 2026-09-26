@@ -12,7 +12,9 @@ export const unit14AroundTown = {
   iconBgClass: "bg-emerald-100",
   iconColorClass: "text-emerald-600",
   words: [
-    { id: "school", word: "school", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/school.mp3", translation: "trường học", image: "https://dictionary.cambridge.org/vi/images/full/school_noun_002_32354.jpg?version=6.0.83" },
+    { id: "school", word: "school", 
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/school.mp3", translation: "trường học", 
+      image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/12/390983_vna_potal_xa_hoi_hoa_gop_phan_phat_trien_giao_duc_tai_long_an_7718016.jpg" },
     { id: "park", word: "park", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/park.mp3", translation: "công viên", image: "https://app-api.glodival.vn/storage/4/images/nghia-do-park-1756952513RgFVp.jpg" },
     { id: "zoo", word: "zoo", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/zoo.mp3", translation: "sở thú", image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/16/393820_84.jpg" },
     { id: "store", word: "store", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/store.mp3", translation: "cửa hàng", image: "https://image.vietnix.vn/wp-content/uploads/2022/08/grocery-store.webp" },

@@ -40,6 +40,13 @@ export default function CraneGamePage() {
             <>
               <button
                 type="button"
+                onClick={handleRestart}
+                className="absolute top-10 left-4 z-10 inline-flex cursor-pointer items-center rounded-full border-2 border-white bg-white/80 px-4 py-2 text-sm font-bold text-slate-800 shadow-sm backdrop-blur-md"
+              >
+                New game
+              </button>
+              <button
+                type="button"
                 onClick={playWord}
                 className="absolute top-10 right-0 left-0 z-10 mx-auto flex h-[230px] w-[200px] flex-col items-center gap-2"
                 aria-label={`Play word ${state.round.target.word}`}
