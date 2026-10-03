@@ -1,0 +1,75 @@
+import { Box } from "lucide-react";
+import type { CourseUnit } from "../../../types/course";
+
+export const unit15Prepositions = {
+  id: "unit-15",
+  unitNumber: 15,
+  title: "Prepositions",
+  subtitle: "",
+  status: "current",
+  icon: Box,
+  youtubeVideoId: "niPyVnC6W5g",
+  iconBgClass: "bg-amber-100",
+  iconColorClass: "text-amber-600",
+  words: [
+    { id: "on", word: "on", translation: "ở trên" },
+    { id: "in", word: "in", translation: "ở trong" },
+    { id: "under", word: "under", translation: "ở dưới" },
+    { id: "behind", word: "behind", translation: "ở phía sau" },
+    { id: "between", word: "between", translation: "ở giữa" },
+    { id: "near", word: "near", translation: "ở gần" },
+    { id: "opposite", word: "opposite", translation: "đối diện" },
+    { id: "in-front-of", word: "in front of", translation: "ở phía trước" },
+    { id: "next-to", word: "next to", translation: "ở bên cạnh" },
+  ],
+  practiceSentences: [
+    { id: "unit-15-s-1", text: "the book is on the table" },
+    { id: "unit-15-s-2", text: "the ball is in the box" },
+    { id: "unit-15-s-3", text: "my house is opposite the school" },
+  ],
+  multipleChoiceQuestions: [
+    {
+      id: "unit-15-mc-1",
+      textBefore: "The book is ___ the table.",
+      textAfter: "",
+      options: ["on", "in", "under", "behind"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-15-mc-2",
+      textBefore: "The ball is ___ the box.",
+      textAfter: "",
+      options: ["in", "on", "near", "behind"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-15-mc-3",
+      textBefore: "The cat is ___ the chair.",
+      textAfter: "",
+      options: ["under", "between", "opposite", "near"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-15-mc-4",
+      textBefore: "My house is ___ the school.",
+      textAfter: "",
+      options: ["opposite", "behind", "next to", "in front of"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-15-mc-5",
+      textBefore: "The ball is ___ the box and the bag.",
+      textAfter: "",
+      options: ["between", "near", "on", "behind"],
+      correctIndex: 0,
+    },
+    {
+      id: "unit-15-mc-6",
+      textBefore: "The school is ___ the park.",
+      textAfter: "",
+      options: ["next to", "under", "in", "on"],
+      correctIndex: 0,
+    },
+  ],
+  typedAnswerQuestions: [],
+} satisfies CourseUnit;

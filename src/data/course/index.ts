@@ -13,6 +13,7 @@ import { unit11Family } from "./units/unit-11-family";
 import { unit12LivingRoom } from "./units/unit-12-living-room";
 import { unit13RoomsInHouse } from "./units/unit-13-rooms-in-house";
 import { unit14AroundTown } from "./units/unit-14-around-town";
+import { unit15Prepositions } from "./units/unit-15-prepositions";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -38,6 +39,7 @@ export const courseUnits: readonly CourseUnit[] = [
   unit12LivingRoom,
   unit13RoomsInHouse,
   unit14AroundTown,
+  unit15Prepositions,
 ];
 export const gameUnits: readonly CourseUnit[] = [
   unit10WhatsThat,
