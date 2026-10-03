@@ -42,11 +42,11 @@ export const courseUnits: readonly CourseUnit[] = [
   unit15Prepositions,
 ];
 export const gameUnits: readonly CourseUnit[] = [
-  unit10WhatsThat,
   unit11Family,
   unit12LivingRoom,
   unit13RoomsInHouse,
   unit14AroundTown,
+  unit15Prepositions,
 ];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {
