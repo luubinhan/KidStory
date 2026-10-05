@@ -33,7 +33,7 @@ export function CourseBottomNav() {
           const content = (
             <>
               <Icon className="size-5 shrink-0" aria-hidden />
-              <span className="text-center text-[11px] font-semibold leading-tight">
+              <span className="max-lg:hidden text-center text-[11px] font-semibold leading-tight">
                 {item.label}
               </span>
             </>

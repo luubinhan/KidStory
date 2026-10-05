@@ -36,7 +36,7 @@ export default function CaroGamePage() {
       className="relative min-h-screen bg-gradient-to-b from-sky-50 via-sky-50 to-blue-100/80 pb-24 bg-center bg-top bg-no-repeat bg-cover"
       style={{ backgroundImage: `url(${IMAGES_ACTIVITIES["sentence"]})` }}
     >
-      <div className="mx-auto flex w-full flex-col gap-4 px-4 py-6">
+      <div className="mx-auto flex w-full max-xl:h-screen max-xl:py-2 flex-col gap-4 px-4 py-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {state.status === "draw" ? (
             <p className="text-2xl font-bold text-white drop-shadow">Draw</p>
