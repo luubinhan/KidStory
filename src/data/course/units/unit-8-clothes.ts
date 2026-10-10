@@ -130,7 +130,7 @@ export const unit8Clothes = {
       textBefore: "These are ",
       textAfter: ".",
       answer: "socks",
-      image: "https://www.technosport.in/cdn/shop/files/A201_1.jpg?v=1752220141&width=990",
+      image: "https://www.stormtech.ca/cdn/shop/products/SMX-1_Black.jpg",
       audioUrl: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/sock.mp3",
     },
     {
