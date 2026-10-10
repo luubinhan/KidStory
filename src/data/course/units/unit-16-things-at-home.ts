@@ -9,7 +9,7 @@ export const unit16ThingsAtHome = {
     subtitle: "",
     status: "current",
     icon: House,
-    backgroundUrl: BG_UNITS["bg-unit-4"],
+    backgroundUrl: BG_UNITS["bg-unit-15"],
     youtubeVideoId: "wf5ZL2k5PLo",
     iconBgClass: "bg-sky-100",
     iconColorClass: "text-sky-600",
