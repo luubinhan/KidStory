@@ -1,4 +1,5 @@
 import { Box } from "lucide-react";
+import { BG_UNITS } from "@/src/constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit15Prepositions = {
@@ -8,6 +9,7 @@ export const unit15Prepositions = {
   subtitle: "",
   status: "current",
   icon: Box,
+  backgroundUrl: BG_UNITS["bg-unit-3"],
   youtubeVideoId: "niPyVnC6W5g",
   iconBgClass: "bg-amber-100",
   iconColorClass: "text-amber-600",

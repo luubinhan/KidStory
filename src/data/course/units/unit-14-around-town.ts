@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { BG_UNITS } from "@/src/constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit14AroundTown = {
@@ -9,18 +10,54 @@ export const unit14AroundTown = {
   status: "current",
   icon: MapPin,
   youtubeVideoId: "EfD2k9beP-4",
+  backgroundUrl: BG_UNITS["bg-unit-2"],
   iconBgClass: "bg-emerald-100",
   iconColorClass: "text-emerald-600",
   words: [
-    { id: "school", word: "school", 
-      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/school.mp3", translation: "trường học", 
-      image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/12/390983_vna_potal_xa_hoi_hoa_gop_phan_phat_trien_giao_duc_tai_long_an_7718016.jpg" },
-    { id: "park", word: "park", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/park.mp3", translation: "công viên", image: "https://app-api.glodival.vn/storage/4/images/nghia-do-park-1756952513RgFVp.jpg" },
-    { id: "zoo", word: "zoo", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/zoo.mp3", translation: "sở thú", image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/16/393820_84.jpg" },
-    { id: "store", word: "store", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/store.mp3", translation: "cửa hàng", image: "https://image.vietnix.vn/wp-content/uploads/2022/08/grocery-store.webp" },
-    { id: "library", word: "library", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/library.mp3", translation: "thư viện", image: "https://www.vietnambooking.com/wp-content/uploads/2017/03/tin-tuc-thu-vien-lon-nhat-the-gioi-10-3-2017.jpg" },
-    { id: "restaurant", word: "restaurant", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/restaurant.mp3", translation: "nhà hàng", image: "https://statics.vincom.com.vn/xu-huong/nha-hang-da-nang/crystal-jade.png" },
-    { id: "street", word: "street", audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/street.mp3", translation: "đường phố", image: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/29/914509/Duong-Pho.jpg" },
+    {
+      id: "school",
+      word: "school",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/school.mp3", translation: "trường học",
+      image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/12/390983_vna_potal_xa_hoi_hoa_gop_phan_phat_trien_giao_duc_tai_long_an_7718016.jpg"
+    },
+    {
+      id: "park",
+      word: "park",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/park.mp3", translation: "công viên", image: "https://app-api.glodival.vn/storage/4/images/nghia-do-park-1756952513RgFVp.jpg"
+    },
+    {
+      id: "zoo",
+      word: "zoo",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/zoo.mp3", translation: "sở thú", image: "https://image.vietnamnews.vn/uploadvnnews/Article/2024/12/16/393820_84.jpg"
+    },
+    {
+      id: "store",
+      word: "store",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/store.mp3", 
+      translation: "cửa hàng", 
+      image: "https://image.vietnix.vn/wp-content/uploads/2022/08/grocery-store.webp"
+    },
+    {
+      id: "library",
+      word: "library",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/library.mp3", 
+      translation: "thư viện", 
+      image: "https://www.vietnambooking.com/wp-content/uploads/2017/03/tin-tuc-thu-vien-lon-nhat-the-gioi-10-3-2017.jpg"
+    },
+    {
+      id: "restaurant",
+      word: "restaurant",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/restaurant.mp3", 
+      translation: "nhà hàng", 
+      image: "https://statics.vincom.com.vn/xu-huong/nha-hang-da-nang/crystal-jade.png"
+    },
+    {
+      id: "street",
+      word: "street",
+      audio: "https://github.com/luubinhan/KidStory/raw/refs/heads/main/public/sounds/street.mp3", 
+      translation: "đường phố", 
+      image: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/29/914509/Duong-Pho.jpg"
+    },
   ],
   practiceSentences: [
     { id: "unit-14-s-1", text: "let's go to the park" },

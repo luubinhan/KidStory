@@ -1,4 +1,5 @@
 import { House } from "lucide-react";
+import { BG_UNITS } from "@/src/constants/images";
 import type { CourseUnit } from "../../../types/course";
 
 export const unit16ThingsAtHome = {
@@ -8,6 +9,7 @@ export const unit16ThingsAtHome = {
     subtitle: "",
     status: "current",
     icon: House,
+    backgroundUrl: BG_UNITS["bg-unit-4"],
     youtubeVideoId: "wf5ZL2k5PLo",
     iconBgClass: "bg-sky-100",
     iconColorClass: "text-sky-600",
