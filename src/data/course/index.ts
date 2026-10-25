@@ -16,6 +16,7 @@ import { unit14AroundTown } from "./units/unit-14-around-town";
 import { unit15Prepositions } from "./units/unit-15-prepositions";
 import { unit16ThingsAtHome } from "./units/unit-16-things-at-home";
 import { unit17WhatAreTheyDoing } from "./units/unit-17-what-are-they-doing";
+import { unit18WhatAreTheyWearing } from "./units/unit-18-what-are-they-wearing";
 
 export const courseProfile: CourseProfile = {
   name: "Khả Như",
@@ -44,6 +45,7 @@ export const courseUnits: readonly CourseUnit[] = [
   unit15Prepositions,
   unit16ThingsAtHome,
   unit17WhatAreTheyDoing,
+  unit18WhatAreTheyWearing,
 ];
 export const gameUnits: readonly CourseUnit[] = [
   unit11Family,
@@ -53,6 +55,7 @@ export const gameUnits: readonly CourseUnit[] = [
   unit15Prepositions,
   unit16ThingsAtHome,
   unit17WhatAreTheyDoing,
+  unit18WhatAreTheyWearing,
 ];
 
 export function getCourseUnitById(unitId: string): CourseUnit | undefined {
